@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OX ",
+    "XOX",
+    " XO"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana_ingot"
+    },
+    "O": {
+      "item" : "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_shears"
+  }
+}

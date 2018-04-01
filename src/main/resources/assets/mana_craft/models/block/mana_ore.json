@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "mana_craft:blocks/mana_ore"
+  }
+}

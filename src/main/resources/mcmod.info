@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mana_craft",
+  "name": "ManaCraft",
+  "description": "Mana is everywhere!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Yaossg"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

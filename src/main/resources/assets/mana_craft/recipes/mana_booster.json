@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "EFE",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "X": {
+      "item": "mana_craft:mana"
+    },
+    "F": {
+      "item": "mana_craft:machine_frame"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_booster"
+  }
+}

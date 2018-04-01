@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_booster"
+    },
+    "title": {
+      "translate": "advancement.boost.title"
+    },
+    "description": {
+      "translate": "advancement.boost.description"
+    }
+  },
+  "parent": "mana_craft:mana_craft/encharge",
+  "criteria": {
+    "booster": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mana_craft:mana_booster"
+          }
+        ]
+      }
+    }
+  }
+}

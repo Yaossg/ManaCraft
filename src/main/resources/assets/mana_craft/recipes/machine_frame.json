@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XGX",
+    "GSG",
+    "XGX"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana_ingot"
+    },
+    "G": {
+      "item": "mana_craft:mana_glass"
+    },
+    "S": {
+      "item" : "mana_craft:mana_shears"
+    }
+  },
+  "result": {
+    "item": "mana_craft:machine_frame"
+  }
+}

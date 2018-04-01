@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "S S"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana_ingot"
+    },
+    "S": {
+      "item" : "mana_craft:mana_shears"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_helmet"
+  }
+}

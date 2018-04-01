@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_ingot"
+    },
+    "title": {
+      "translate": "advancement.shiny_mana.title"
+    },
+    "description": {
+      "translate": "advancement.shiny_mana.description"
+    }
+  },
+  "parent": "mana_craft:mana_craft/root",
+  "criteria": {
+    "shiny_mana": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mana_craft:mana_ingot"
+          }
+        ]
+      }
+    }
+  }
+}

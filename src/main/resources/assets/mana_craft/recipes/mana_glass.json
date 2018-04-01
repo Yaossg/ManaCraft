@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XNX",
+    "NGN",
+    "XNX"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "N": {
+      "item": "mana_craft:mana_nugget"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_glass"
+  }
+}

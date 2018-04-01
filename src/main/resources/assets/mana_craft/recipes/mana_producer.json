@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XFX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana_apple"
+    },
+    "F": {
+      "item": "mana_craft:machine_frame"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_producer"
+  }
+}

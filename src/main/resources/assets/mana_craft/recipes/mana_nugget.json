@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XGX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana"
+    },
+    "G": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_nugget"
+  }
+}

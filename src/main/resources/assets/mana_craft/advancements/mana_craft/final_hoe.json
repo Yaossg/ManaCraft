@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_hoe"
+    },
+    "title": {
+      "translate": "advancement.final_hoe.title"
+    },
+    "description": {
+      "translate": "advancement.final_hoe.description"
+    },
+    "frame": "challenge"
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "parent": "mana_craft:mana_craft/strange_shears",
+  "criteria": {
+    "final_hoe": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

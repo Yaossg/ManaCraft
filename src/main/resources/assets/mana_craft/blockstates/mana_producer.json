@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "orientable",
+    "textures": {
+      "top": "mana_craft:blocks/machine_frame",
+      "side": "mana_craft:blocks/machine_frame"
+    }
+  },
+  "variants": {
+    "inventory": [{
+      "textures": { "front": "mana_craft:blocks/mana_producer" }
+    }],
+    "working": {
+      "true": { "textures": { "front": "mana_craft:blocks/active_mana_producer" } },
+      "false": { "textures": { "front": "mana_craft:blocks/mana_producer" } }
+    },
+    "facing": {
+      "east": { "y": 90, "uvlock": true },
+      "north": {},
+      "south": { "y": 180, "uvlock": true },
+      "west": { "y": 270, "uvlock": true }
+    }
+  }
+}

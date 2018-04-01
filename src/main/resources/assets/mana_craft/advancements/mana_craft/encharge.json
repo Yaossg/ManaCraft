@@ -1,0 +1,23 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_producer"
+    },
+    "title": {
+      "translate": "advancement.encharge.title"
+    },
+    "description": {
+      "translate": "advancement.encharge.description"
+    },
+    "frame": "goal"
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "parent": "mana_craft:mana_craft/strange_shears",
+  "criteria": {
+    "encharge": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

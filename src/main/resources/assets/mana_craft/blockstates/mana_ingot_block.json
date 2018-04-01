@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "normal": {
+      "model": "mana_craft:mana_ingot_block"
+    }
+  }
+}

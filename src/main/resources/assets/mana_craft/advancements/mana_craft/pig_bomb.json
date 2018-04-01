@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_apple"
+    },
+    "title": {
+      "translate": "advancement.pig_bomb.title"
+    },
+    "description": {
+      "translate": "advancement.pig_bomb.description"
+    },
+    "frame": "challenge"
+  },
+  "rewards": {
+    "experience": 1000
+  },
+  "parent": "mana_craft:mana_craft/shiny_mana",
+  "hidden": true,
+  "criteria": {
+    "pig_bomb": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

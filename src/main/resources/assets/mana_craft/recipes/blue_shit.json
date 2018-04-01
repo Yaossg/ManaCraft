@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "MCM",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:dye",
+      "data": 12
+    },
+    "M": {
+      "item": "mana_craft:mana"
+    },
+    "C": {
+      "item": "minecraft:dye",
+      "data": 3
+    }
+  },
+  "result": {
+    "item": "mana_craft:blue_shit",
+    "count": 12
+  }
+}
