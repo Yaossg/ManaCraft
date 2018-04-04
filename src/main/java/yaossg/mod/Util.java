@@ -36,16 +36,12 @@ public class Util {
     public static float getLightLevel(int level) {
         return level / 16f;
     }
-    public static void register(Item item, String name) {
-        ForgeRegistries.ITEMS.register(item.setRegistryName(name));
+    public static void register(Item item) {
+        ForgeRegistries.ITEMS.register(item);
     }
-    public static void register(Block block, String name) {
-        ForgeRegistries.BLOCKS.register(block.setRegistryName(name));
+    public static void register(Block block) {
+        ForgeRegistries.BLOCKS.register(block);
         ForgeRegistries.ITEMS.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
-    }
-    public static void register(Block block, Item item, String name) {
-        ForgeRegistries.BLOCKS.register(block.setRegistryName(name));
-        ForgeRegistries.ITEMS.register(item.setRegistryName(block.getRegistryName()));
     }
 
     public static void loadModel(Item item) {

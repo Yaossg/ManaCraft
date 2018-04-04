@@ -12,7 +12,6 @@ public class Config {
         load();
     }
     public static void load() {
-
         String key, comment;
 
         key = "PES";

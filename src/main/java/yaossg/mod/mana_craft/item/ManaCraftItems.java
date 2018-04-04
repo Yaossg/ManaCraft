@@ -10,42 +10,48 @@ import yaossg.mod.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 
 public class ManaCraftItems {
-    public static class ItemBase extends Item {{
-        this.setCreativeTab(ManaCraft.tabMana);
-    }}
-    public static final Item itemBlueShit = new ItemBase().setUnlocalizedName("blue_shit");
-    public static final Item itemMana = new ItemBase().setUnlocalizedName("mana");
-    public static final Item itemManaIngot = new ItemBase().setUnlocalizedName("mana_ingot");
-    public static final Item itemManaNugget = new ItemBase().setUnlocalizedName("mana_nugget");
-    public static final Item itemManaApple = new ItemManaApple();
-    public static final Item itemManaSword = new ItemManaTool.ItemManaSword();
-    public static final Item itemManaPickaxe = new ItemManaTool.ItemManaPickaxe();
-    public static final Item itemManaAxe = new ItemManaTool.ItemManaAxe();
-    public static final Item itemManaShovel = new ItemManaTool.ItemManaShovel();
-    public static final Item itemManaHoe = new ItemManaTool.ItemManaHoe();
-    public static final Item itemManaShears = new ItemManaTool.ItemManaShears();
-    public static final Item itemManaHelmet = new ItemManaArmor(EntityEquipmentSlot.HEAD).setUnlocalizedName("mana_helmet");
-    public static final Item itemManaChestplate = new ItemManaArmor(EntityEquipmentSlot.CHEST).setUnlocalizedName("mana_chestplate");
-    public static final Item itemManaLeggings = new ItemManaArmor(EntityEquipmentSlot.LEGS).setUnlocalizedName("mana_leggings");
-    public static final Item itemManaBoots = new ItemManaArmor(EntityEquipmentSlot.FEET).setUnlocalizedName("mana_boots");
+
+    private static Item newItem(String name) {
+        return nameAs(new Item(), name);
+    }
+    private static Item nameAs(Item item, String name) {
+        return item.setCreativeTab(ManaCraft.tabMana).setUnlocalizedName(name).setRegistryName(name);
+    }
+
+    public static final Item itemBlueShit = newItem("blue_shit");
+    public static final Item itemMana = newItem("mana");
+    public static final Item itemManaIngot = newItem("mana_ingot");
+    public static final Item itemManaNugget = newItem("mana_nugget");
+    public static final Item itemManaApple = nameAs(new ItemManaApple(), "mana_apple");
+    public static final Item itemManaSword = nameAs(new ItemManaTool.ItemManaSword(), "mana_sword");
+    public static final Item itemManaPickaxe = nameAs(new ItemManaTool.ItemManaPickaxe(), "mana_pickaxe");
+    public static final Item itemManaAxe = nameAs(new ItemManaTool.ItemManaAxe(), "mana_axe");
+    public static final Item itemManaShovel = nameAs(new ItemManaTool.ItemManaShovel(), "mana_shovel");
+    public static final Item itemManaHoe = nameAs(new ItemManaTool.ItemManaHoe(), "mana_hoe");
+    public static final Item itemManaShears = nameAs(new ItemManaTool.ItemManaShears(), "mana_shears");
+    public static final Item itemManaHelmet = nameAs(new ItemManaArmor(EntityEquipmentSlot.HEAD),"mana_helmet");
+    public static final Item itemManaChestplate = nameAs(new ItemManaArmor(EntityEquipmentSlot.CHEST),"mana_chestplate");
+    public static final Item itemManaLeggings = nameAs(new ItemManaArmor(EntityEquipmentSlot.LEGS),"mana_leggings");
+    public static final Item itemManaBoots = nameAs(new ItemManaArmor(EntityEquipmentSlot.FEET),"mana_boots");
 
     public static void init() {
-        Util.register(itemBlueShit,"blue_shit");
+        Util.register(itemBlueShit);
+        Util.register(itemMana);
+        Util.register(itemManaIngot);
+        Util.register(itemManaNugget);
+        Util.register(itemManaApple);
+        Util.register(itemManaSword);
+        Util.register(itemManaPickaxe);
+        Util.register(itemManaAxe);
+        Util.register(itemManaShovel);
+        Util.register(itemManaHoe);
+        Util.register(itemManaShears);
+        Util.register(itemManaHelmet);
+        Util.register(itemManaChestplate);
+        Util.register(itemManaLeggings);
+        Util.register(itemManaBoots);
+
         OreDictionary.registerOre("dyeLightBlue", itemBlueShit);
-        Util.register(itemMana, "mana");
-        Util.register(itemManaIngot, "mana_ingot");
-        Util.register(itemManaNugget, "mana_nugget");
-        Util.register(itemManaApple, "mana_apple");
-        Util.register(itemManaSword, "mana_sword");
-        Util.register(itemManaPickaxe, "mana_pickaxe");
-        Util.register(itemManaAxe, "mana_axe");
-        Util.register(itemManaShovel, "mana_shovel");
-        Util.register(itemManaHoe, "mana_hoe");
-        Util.register(itemManaShears, "mana_shears");
-        Util.register(itemManaHelmet, "mana_helmet");
-        Util.register(itemManaChestplate, "mana_chestplate");
-        Util.register(itemManaLeggings, "mana_leggings");
-        Util.register(itemManaBoots, "mana_boots");
 
     }
     @SideOnly(Side.CLIENT)
@@ -66,5 +72,7 @@ public class ManaCraftItems {
         Util.loadModel(itemManaLeggings);
         Util.loadModel(itemManaBoots);
     }
+
+
 
 }

@@ -1,5 +1,6 @@
 package yaossg.mod.mana_craft.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,21 +13,18 @@ import yaossg.mod.mana_craft.item.ManaCraftItems;
 
 import java.util.Random;
 
-public class BlockManaOre extends BlockBase {
+public class BlockManaOre extends Block {
     public BlockManaOre() {
-        super(Material.ROCK, SoundType.STONE, 7, Util.IRON_PICKAXE);
-        this.setCreativeTab(ManaCraft.tabMana);
+        super(Material.ROCK);
+        this.setSoundType(SoundType.STONE);
+        this.setHarvestLevel("pickaxe",  Util.STONE_PICKAXE);
+        this.setLightLevel(Util.getLightLevel(7));
         this.setHardness(3);
-        setUnlocalizedName("mana_ore");
     }
 
     @Override
     public int quantityDroppedWithBonus(int fortune, Random random) {
-        if(fortune == 0) {
-            return 5 + random.nextInt(4); //5-8
-        } else {
-            return 5 + fortune + random.nextInt(3 + fortune * 2);
-        }
+        return 5 + fortune + random.nextInt(4 + fortune * 2);
     }
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {

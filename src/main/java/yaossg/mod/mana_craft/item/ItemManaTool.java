@@ -13,8 +13,6 @@ public interface ItemManaTool {
     class ItemManaSword extends ItemSword implements ItemManaTool {
         public ItemManaSword() {
             super(manaToolMaterial);
-            this.setCreativeTab(ManaCraft.tabMana);
-            setUnlocalizedName("mana_sword");
         }
         @Override
         public int getMaxManaDropOnBreak() {
@@ -25,8 +23,6 @@ public interface ItemManaTool {
     class ItemManaPickaxe extends ItemPickaxe implements ItemManaTool {
         public ItemManaPickaxe() {
             super(manaToolMaterial);
-            this.setCreativeTab(ManaCraft.tabMana);
-            setUnlocalizedName("mana_pickaxe");
         }
         @Override
         public int getMaxManaDropOnBreak() {
@@ -37,8 +33,6 @@ public interface ItemManaTool {
     class ItemManaAxe extends ItemAxe implements ItemManaTool {
         public ItemManaAxe() {
             super(manaToolMaterial, 12, -2.8f);
-            this.setCreativeTab(ManaCraft.tabMana);
-            setUnlocalizedName("mana_axe");
         }
         @Override
         public int getMaxManaDropOnBreak() {
@@ -49,8 +43,6 @@ public interface ItemManaTool {
     class ItemManaShovel extends ItemSpade implements ItemManaTool {
         public ItemManaShovel() {
             super(manaToolMaterial);
-            this.setCreativeTab(ManaCraft.tabMana);
-            setUnlocalizedName("mana_shovel");
         }
         @Override
         public int getMaxManaDropOnBreak() {
@@ -61,8 +53,6 @@ public interface ItemManaTool {
     class ItemManaHoe extends ItemHoe implements ItemManaTool {
         public ItemManaHoe() {
             super(manaToolMaterial);
-            this.setCreativeTab(ManaCraft.tabMana);
-            setUnlocalizedName("mana_hoe");
         }
         @Override
         public int getMaxManaDropOnBreak() {
@@ -74,8 +64,6 @@ public interface ItemManaTool {
         public ItemManaShears() {
             this.setMaxStackSize(1);
             this.setMaxDamage(288);
-            this.setCreativeTab(ManaCraft.tabMana);
-            setUnlocalizedName("mana_shears");
         }
 
         @Override

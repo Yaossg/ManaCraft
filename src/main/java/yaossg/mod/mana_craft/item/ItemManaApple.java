@@ -23,10 +23,7 @@ public class ItemManaApple extends ItemFood {
     public ItemManaApple()
     {
         super(6,1.0f,false);
-        this.setCreativeTab(ManaCraft.tabMana);
         this.setAlwaysEdible();
-        this.setUnlocalizedName("mana_apple");
-
     }
 
     @Override

@@ -12,6 +12,5 @@ public class ItemManaArmor extends ItemArmor {
             10, new int[] {3, 6, 5, 2}, 32, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f);
     public ItemManaArmor(EntityEquipmentSlot slot) {
         super(manaArmorMaterial, manaArmorMaterial.ordinal(), slot);
-        this.setCreativeTab(ManaCraft.tabMana);
     }
 }

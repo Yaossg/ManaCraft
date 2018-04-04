@@ -81,10 +81,8 @@ public class BlockManaProducer extends BlockContainer {
     }
     public BlockManaProducer() {
         super(Material.IRON);
-        this.setUnlocalizedName("mana_producer");
         this.setHardness(3);
         this.setLightLevel(Util.getLightLevel(11));
-        this.setCreativeTab(ManaCraft.tabMana);
         this.setHarvestLevel("pickaxe", Util.IRON_PICKAXE);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(WORKING, Boolean.FALSE));

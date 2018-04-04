@@ -4,40 +4,50 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import yaossg.mod.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 
 public class ManaCraftBlocks {
-    public static final Block blockMana = new BlockBase(Material.ROCK, SoundType.STONE, Util.IRON_PICKAXE, 8).setHardness(4).setUnlocalizedName("mana_block");
-    public static final Block blockManaIngot = new BlockBase(Material.ROCK, SoundType.STONE, Util.IRON_PICKAXE, 10).setHardness(5).setUnlocalizedName("mana_ingot_block");
-    public static final Block blockManaIngotOre = new BlockBase(Material.ROCK, SoundType.STONE, Util.IRON_PICKAXE, 9).setHardness(4).setUnlocalizedName("mana_ingot_ore");
-    public static final Block blockMachineFrame = new BlockBase(Material.IRON, SoundType.STONE, Util.IRON_PICKAXE, 11).setHardness(5).setUnlocalizedName("machine_frame");
-    public static final Block blockManaGlass = new BlockGlass(Material.GLASS, false)
-        {{ setSoundType(SoundType.GLASS);setHarvestLevel("pickaxe", Util.STONE_PICKAXE); }}
-        .setCreativeTab(ManaCraft.tabMana)
-        .setLightLevel(Util.getLightLevel(9))
-        .setHardness(2)
-        .setUnlocalizedName("mana_glass");
 
+    public static Block newBlock(Material material, SoundType sound, String name) {
+        return nameAs(new Block(material){{setSoundType(sound);}}, name);
+    }
+    public static Block newBlock(Material material, SoundType sound, int pickaxe, String name) {
+        return nameAs(new Block(material){{setSoundType(sound);setHarvestLevel("pickaxe", pickaxe);}}, name);
+    }
 
-    public static final Block blockManaOre = new BlockManaOre();
-    public static final Block blockManaProducer = new BlockManaProducer();
-    public static final Block blockManaBooster = new BlockManaBooster();
+    public static Block nameAs(Block block, String name) {
+        return block.setCreativeTab(ManaCraft.tabMana).setUnlocalizedName(name).setRegistryName(name);
+    }
+
+    public static final Block blockMana = newBlock(Material.ROCK, SoundType.STONE, Util.STONE_PICKAXE, "mana_block")
+            .setHardness(5).setLightLevel(Util.getLightLevel(7));
+    public static final Block blockManaIngot = newBlock(Material.ROCK, SoundType.STONE, Util.IRON_PICKAXE, "mana_ingot_block")
+            .setHardness(6).setLightLevel(Util.getLightLevel(10));
+    public static final Block blockManaIngotOre = newBlock(Material.ROCK, SoundType.STONE, Util.IRON_PICKAXE, "mana_ingot_ore")
+            .setHardness(4).setLightLevel(Util.getLightLevel(5));
+    public static final Block blockMachineFrame = newBlock(Material.IRON, SoundType.STONE, Util.IRON_PICKAXE, "machine_frame")
+            .setHardness(5).setLightLevel(Util.getLightLevel(8));
+
+    public static final Block blockManaGlass = nameAs(new BlockGlass(Material.GLASS, false)
+        {{ setSoundType(SoundType.GLASS);setHarvestLevel("pickaxe", Util.STONE_PICKAXE); }}, "mana_glass")
+        .setLightLevel(Util.getLightLevel(9)).setHardness(2);
+
+    public static final Block blockManaOre = nameAs(new BlockManaOre(), "mana_ore");
+    public static final Block blockManaProducer = nameAs(new BlockManaProducer(), "mana_producer");
+    public static final Block blockManaBooster = nameAs(new BlockManaBooster(), "mana_booster");
 
     public static void init() {
-        Util.register(blockManaIngot, "mana_ingot_block");
-        Util.register(blockManaOre, "mana_ore");
-        Util.register(blockManaIngotOre, "mana_ingot_ore");
-        Util.register(blockMana,"mana_block");
-        Util.register(blockManaGlass,"mana_glass");
-        Util.register(blockManaProducer, "mana_producer");
-        Util.register(blockManaBooster, "mana_booster");
-        Util.register(blockMachineFrame, "machine_frame");
+        Util.register(blockManaIngot);
+        Util.register(blockManaOre);
+        Util.register(blockManaIngotOre);
+        Util.register(blockMana);
+        Util.register(blockManaGlass);
+        Util.register(blockManaProducer);
+        Util.register(blockManaBooster);
+        Util.register(blockMachineFrame);
     }
     @SideOnly(Side.CLIENT)
     public static void clientInit() {
@@ -50,4 +60,5 @@ public class ManaCraftBlocks {
         Util.loadModel(blockManaBooster);
         Util.loadModel(blockMachineFrame);
     }
+
 }

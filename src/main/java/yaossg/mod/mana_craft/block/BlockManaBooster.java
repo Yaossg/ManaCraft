@@ -30,10 +30,8 @@ public class BlockManaBooster extends BlockContainer {
 
     public BlockManaBooster() {
         super(Material.IRON);
-        this.setUnlocalizedName("mana_booster");
         this.setHardness(3);
         this.setLightLevel(Util.getLightLevel(9));
-        this.setCreativeTab(ManaCraft.tabMana);
         this.setHarvestLevel("pickaxe", Util.IRON_PICKAXE);
         this.setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }
