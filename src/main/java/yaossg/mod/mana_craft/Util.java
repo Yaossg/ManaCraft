@@ -1,4 +1,4 @@
-package yaossg.mod;
+package yaossg.mod.mana_craft;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.advancements.Advancement;
@@ -28,7 +28,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class Util {
-    public static final Random rand = new Random();
     public static final int WOODEN_PICKAXE = 0;
     public static final int STONE_PICKAXE = 1;
     public static final int IRON_PICKAXE = 2;

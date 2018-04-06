@@ -2,11 +2,10 @@ package yaossg.mod.mana_craft.item;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import yaossg.mod.Util;
+import yaossg.mod.mana_craft.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 
 public class ManaCraftItems {

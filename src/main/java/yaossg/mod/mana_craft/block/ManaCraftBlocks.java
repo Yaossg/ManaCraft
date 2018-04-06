@@ -6,7 +6,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import yaossg.mod.Util;
+import yaossg.mod.mana_craft.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 
 public class ManaCraftBlocks {

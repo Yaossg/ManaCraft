@@ -12,9 +12,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import yaossg.mod.Util;
+import yaossg.mod.mana_craft.Util;
 import yaossg.mod.mana_craft.Config;
-import yaossg.mod.mana_craft.ManaCraft;
 
 import java.util.Random;
 

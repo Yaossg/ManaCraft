@@ -48,7 +48,7 @@ public class GUIContainerManaProducer extends GuiContainer
 
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
         ContainerManaProducer self = (ContainerManaProducer)this.inventorySlots;
-        int textureWidth = (int) Math.ceil(22.0 * self.work_time / self.total_work_time);
+        int textureWidth = ((int) Math.ceil(22.0 * self.work_time / self.total_work_time)) % 24;
         this.drawTexturedModalRect(offsetX + 87, offsetY + 36, 177, 0, textureWidth, 17);
 
     }

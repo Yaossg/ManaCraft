@@ -3,10 +3,11 @@ package yaossg.mod.mana_craft.item;
 import net.minecraft.item.*;
 import net.minecraftforge.common.util.EnumHelper;
 import yaossg.mod.mana_craft.ManaCraft;
+import yaossg.mod.mana_craft.Util;
 
 public interface ItemManaTool {
      Item.ToolMaterial manaToolMaterial
-            = EnumHelper.addToolMaterial("MANA",3, 256,6, 3, 32 );
+            = EnumHelper.addToolMaterial("MANA", Util.DIAMOND_PICKAXE, 256, 6, 3, 32 ).setRepairItem(new ItemStack(ManaCraftItems.itemManaIngot));
 
     int getMaxManaDropOnBreak();
 

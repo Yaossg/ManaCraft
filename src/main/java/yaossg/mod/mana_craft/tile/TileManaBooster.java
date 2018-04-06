@@ -1,6 +1,7 @@
 package yaossg.mod.mana_craft.tile;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -11,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import yaossg.mod.mana_craft.Config;
 import yaossg.mod.mana_craft.block.BlockManaProducer;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
@@ -100,15 +102,15 @@ public class TileManaBooster extends TileEntity implements ITickable {
         if (!world.isRemote) {
             IBlockState state = this.getWorld().getBlockState(pos);
             if(burn_time > 0) {
-                if(flip = !flip)
+                if((flip = !flip) && world.getBlockState(pos.up()).getBlock().equals(Blocks.AIR))
                 {
                     --burn_time;
                     BlockManaProducer.SavedData.get(world).list.stream()
                             .filter(pos0 -> pos.distanceSq(pos0) <= 9 && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(WORKING))
                             .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
-                            .limit(3).forEach( tile -> {
+                            .limit(Config.limit).forEach(tile -> {
                                 tile.work_time += burn_level;
-                                burn_time -= 2;
+                                burn_time -= 3;
                             });
                 }
             } else {

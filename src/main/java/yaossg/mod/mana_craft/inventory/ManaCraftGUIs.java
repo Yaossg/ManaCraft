@@ -18,18 +18,14 @@ import java.util.function.Function;
 public class ManaCraftGUIs implements IGuiHandler {
 
     public enum GUIs {
-        mana_producer(1, ContainerManaProducer::new, GUIContainerManaProducer::new),
-        mana_booster(2, ContainerManaBooster::new, GUIContainerManaBooster::new);
-        int id;
+        NULL((player, tileEntity) -> null, container -> null),
+        ManaProducer(ContainerManaProducer::new, GUIContainerManaProducer::new),
+        ManaBooster(ContainerManaBooster::new, GUIContainerManaBooster::new);
         BiFunction<EntityPlayer, TileEntity, Container> container;
         Function<Container, GuiContainer> client;
-        GUIs(int id, BiFunction<EntityPlayer, TileEntity, Container> container, Function<Container, GuiContainer> client) {
-            this.id = id;
+        GUIs(BiFunction<EntityPlayer, TileEntity, Container> container, Function<Container, GuiContainer> client) {
             this.container = container;
             this.client = client;
-        }
-        public int getId() {
-            return id;
         }
         public Container getServer(EntityPlayer player, World world, BlockPos pos) {
             return container.apply(player, world.getTileEntity(pos));
@@ -39,14 +35,14 @@ public class ManaCraftGUIs implements IGuiHandler {
         }
         public static Container matchServer(int id, EntityPlayer player, World world, BlockPos pos) {
             return Arrays.stream(GUIs.values())
-                    .filter(gui -> gui.getId() == id)
+                    .filter(gui -> gui.ordinal() == id)
                     .map(gui -> gui.getServer(player, world, pos))
                     .findAny().orElse(null);
         }
 
         public static GuiContainer matchClient(int id, EntityPlayer player, World world, BlockPos pos) {
             return Arrays.stream(GUIs.values())
-                    .filter(gui -> gui.getId() == id)
+                    .filter(gui -> gui.ordinal() == id)
                     .map(gui -> gui.getClient(gui.getServer(player, world, pos)))
                     .findAny().orElse(null);
         }

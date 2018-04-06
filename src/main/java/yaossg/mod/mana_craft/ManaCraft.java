@@ -17,7 +17,7 @@ public class ManaCraft
 {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
-    public static final String VERSION = "1.0.0";
+    public static final String VERSION = "1.1.0";
 
     @SidedProxy(clientSide = "yaossg.mod.mana_craft.proxy.ClientProxy",
             serverSide = "yaossg.mod.mana_craft.proxy.CommonProxy")
@@ -25,17 +25,15 @@ public class ManaCraft
 
     @Instance(ManaCraft.MODID)
     public static ManaCraft instance;
-    private Logger logger;
-    public Logger getLogger() {
-        return logger;
-    }
 
-    public static Logger LOGGER; // same as instance.getLogger()
+    public static Logger LOGGER = null;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        LOGGER = logger = event.getModLog();
+        LOGGER = event.getModLog();
+        LOGGER.info(NAME + " v" + VERSION + "is loading");
+        LOGGER.warn("The mod is still unstable and in early development, There are lots of bugs to fix and ideas to add");
         proxy.preInit(event);
     }
 
