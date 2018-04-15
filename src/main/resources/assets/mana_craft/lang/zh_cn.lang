@@ -1,5 +1,5 @@
 ﻿
-itemGroup.mana=魔能
+itemGroup.mana_craft.mana=魔能
 item.blue_shit.name=蓝翔
 item.mana.name=魔能
 item.mana_ingot.name=魔能金锭
@@ -15,6 +15,8 @@ item.mana_chestplate.name=魔能胸甲
 item.mana_leggings.name=魔能护腿
 item.mana_boots.name=魔能靴子
 item.mana_apple.name=魔能苹果
+item.mana_ball.name=魔能球
+item.mana_wand.name=魔能法杖
 tile.mana_ore.name=魔能矿
 tile.mana_ingot_ore.name=魔能金矿
 tile.mana_block.name=魔能块

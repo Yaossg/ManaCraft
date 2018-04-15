@@ -1,5 +1,5 @@
 ﻿
-itemGroup.mana=Mana
+itemGroup.mana_craft.mana=Mana
 item.blue_shit.name=Blue Shit
 item.mana.name=Mana
 item.mana_ingot.name=Mana Gold Ingot
@@ -15,6 +15,8 @@ item.mana_chestplate.name=Mana Chestplate
 item.mana_leggings.name=Mana Leggings
 item.mana_boots.name=Mana Boots
 item.mana_apple.name=Mana Apple
+item.mana_ball.name=Mana Ball
+item.mana_wand.name=Mana Wand
 tile.mana_ore.name=Mana Ore
 tile.mana_ingot_ore.name=Mana Gold Ore
 tile.mana_block.name=Mana Block

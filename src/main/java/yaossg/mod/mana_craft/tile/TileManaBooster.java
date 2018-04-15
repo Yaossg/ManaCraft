@@ -1,10 +1,12 @@
 package yaossg.mod.mana_craft.tile;
 
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +22,6 @@ import yaossg.mod.mana_craft.item.ManaCraftItems;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import static yaossg.mod.mana_craft.block.BlockManaBooster.BURNING;
 import static yaossg.mod.mana_craft.block.BlockManaProducer.WORKING;
@@ -92,6 +93,7 @@ public class TileManaBooster extends TileEntity implements ITickable {
     private static final List<Burning> burnings = Arrays.asList(
             Burning.of(ManaCraftItems.itemMana, 20,500),
             Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 100, 1000),
+            Burning.of(ManaCraftItems.itemManaBall, 125, 800),
             Burning.of(ManaCraftItems.itemManaNugget, 150, 1000),
             Burning.of(ManaCraftItems.itemManaIngot, 1000, 1500),
             Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 7500, 2000)
@@ -101,36 +103,54 @@ public class TileManaBooster extends TileEntity implements ITickable {
     public void update() {
         if (!world.isRemote) {
             IBlockState state = this.getWorld().getBlockState(pos);
-            if(burn_time > 0) {
-                if((flip = !flip) && world.getBlockState(pos.up()).getBlock().equals(Blocks.AIR))
-                {
-                    --burn_time;
-                    BlockManaProducer.SavedData.get(world).list.stream()
-                            .filter(pos0 -> pos.distanceSq(pos0) <= 9 && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(WORKING))
-                            .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
-                            .limit(Config.limit).forEach(tile -> {
-                                tile.work_time += burn_level;
-                                burn_time -= 3;
-                            });
-                }
-            } else {
-                Item item = fuel.getStackInSlot(0).getItem();
-                int index = -1;
-                for (int i = 0; i < burnings.size(); ++i) {
-                    if (burnings.get(i).getItem() == item) {
-                        index = i;
-                        break;
+            if(world.canSeeSky(pos.up())) {
+                if (burn_time > 0) {
+                    if (flip = !flip) {
+                        --burn_time;
+                        for(EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings())
+                        {
+                            TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
+                            if(tileEntity instanceof TileEntityFurnace) {
+                                TileEntityFurnace furnace = (TileEntityFurnace) tileEntity;
+                                if(furnace.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.WEST).getStackInSlot(0).isEmpty()) {
+                                    furnace.setField(2, Math.min(furnace.getField(2) + burn_level / 20, furnace.getCookTime(ItemStack.EMPTY) - 1));
+                                    BlockFurnace.setState(furnace.isBurning(), world, furnace.getPos());
+                                    furnace.setField(0, 2);
+                                    furnace.setField(1, 2);
+                                    burn_time -= 6;
+                                }
+                            }
+                        }
+
+                        BlockManaProducer.SavedData.get(world).list.stream()
+                                .filter(pos0 -> pos.distanceSq(pos0) <= 9 && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(WORKING))
+                                .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
+                                .limit(Config.limit).forEach(tile -> {
+                            tile.work_time += burn_level;
+                            burn_time -= 3;
+                        });
+                    }
+                } else {
+                    Item item = fuel.getStackInSlot(0).getItem();
+                    int index = -1;
+                    for (int i = 0; i < burnings.size(); ++i) {
+                        if (burnings.get(i).getItem() == item) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1) {
+                        this.getWorld().setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
+                        total_burn_time = burn_time = burnings.get(index).getBurnTime();
+                        burn_level = burnings.get(index).getBurnLevel();
+                        fuel.extractItem(0, 1, false);
+                        this.markDirty();
+                    } else {
+                        this.getWorld().setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
                     }
                 }
-                if (index != -1) {
-                    this.getWorld().setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
-                    total_burn_time = burn_time = burnings.get(index).getBurnTime();
-                    burn_level = burnings.get(index).getBurnLevel();
-                    fuel.extractItem(0, 1, false);
-                    this.markDirty();
-                } else {
-                    this.getWorld().setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
-                }
+            } else {
+                this.getWorld().setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
             }
         }
     }

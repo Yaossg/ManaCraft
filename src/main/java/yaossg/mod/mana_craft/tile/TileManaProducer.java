@@ -11,6 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeSwamp;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -58,16 +59,15 @@ public class TileManaProducer extends TileEntity implements ITickable {
         EnumFacing facing = world.getBlockState(pos).getValue(FACING);
         return world.getBlockState(pos.down()).getBlock().equals(ManaCraftBlocks.blockManaIngot)
                 && world.getBlockState(pos.up()).getBlock().equals(ManaCraftBlocks.blockManaGlass)
-                && world.getBlockState(pos.offset(facing)).getBlock().equals(Blocks.AIR)
+                && world.isAirBlock(pos.offset(facing))
                 && world.getBlockState(pos.offset(facing.rotateY())).getBlock().equals(ManaCraftBlocks.blockManaGlass)
                 && world.getBlockState(pos.offset(facing.rotateY().rotateY())).getBlock().equals(ManaCraftBlocks.blockManaGlass)
                 && world.getBlockState(pos.offset(facing.rotateY().rotateY().rotateY())).getBlock().equals(ManaCraftBlocks.blockManaGlass)
 
-                && world.getBlockState(pos.up(2)).getBlock().equals(Blocks.AIR)
-                && world.getBlockState(pos.offset(facing, 2)).getBlock().equals(Blocks.AIR)
-                && world.getBlockState(pos.offset(facing.rotateY(), 2)).getBlock().equals(Blocks.AIR)
-                && world.getBlockState(pos.offset(facing.rotateY().rotateY(), 2)).getBlock().equals(Blocks.AIR)
-                && world.getBlockState(pos.offset(facing.rotateY().rotateY().rotateY(), 2)).getBlock().equals(Blocks.AIR)
+                && world.isAirBlock(pos.offset(facing, 2))
+                && world.isAirBlock(pos.offset(facing.rotateY(), 2))
+                && world.isAirBlock(pos.offset(facing.rotateY().rotateY(), 2))
+                && world.isAirBlock(pos.offset(facing.rotateY().rotateY().rotateY(), 2))
 
                 && world.getBlockState(pos.add(1, -1, 0)).getBlock().equals(ManaCraftBlocks.blockMana)
                 && world.getBlockState(pos.add(0, -1, 1)).getBlock().equals(ManaCraftBlocks.blockMana)
@@ -87,7 +87,18 @@ public class TileManaProducer extends TileEntity implements ITickable {
                 && world.getBlockState(pos.add(1, -1, 1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
                 && world.getBlockState(pos.add(-1, -1, 1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
                 && world.getBlockState(pos.add(-1, -1, -1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
-                && world.getBlockState(pos.add(1, -1, -1)).getBlock().equals(ManaCraftBlocks.blockManaIngot);
+                && world.getBlockState(pos.add(1, -1, -1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
+
+                && world.canSeeSky(pos.up(2))
+                && world.canSeeSky(pos.add(1, 2, 0))
+                && world.canSeeSky(pos.add(-1, 2, 0))
+                && world.canSeeSky(pos.add(0, 2, 1))
+                && world.canSeeSky(pos.add(0, 2, -1))
+                && world.canSeeSky(pos.add(1, 2, 1))
+                && world.canSeeSky(pos.add(-1, 2, 1))
+                && world.canSeeSky(pos.add(1, 2, -1))
+                && world.canSeeSky(pos.add(-1, 2, -1))
+                && world.canSeeSky(pos.offset(facing, 2));
     }
     public interface Recipe {
         ItemStack[] getInput();
@@ -166,6 +177,14 @@ public class TileManaProducer extends TileEntity implements ITickable {
         return null;
     }
 
+    void copyToInput(ItemStackHandler handler) {
+        for (int i = 0; i < input.getSlots(); ++i)
+            if(i < handler.getSlots())
+                input.setStackInSlot(i, handler.getStackInSlot(i));
+            else
+                input.setStackInSlot(i, ItemStack.EMPTY);
+    }
+
     @Override
     public void update() {
         if (!world.isRemote)
@@ -185,25 +204,20 @@ public class TileManaProducer extends TileEntity implements ITickable {
                             - (world.getWorldInfo().isRaining() ? 2 : 0)
                             + (world.getWorldInfo().isThundering() ? 5 : 0)
                             + (int)((world.getBiome(pos).getRainfall() * 0.5f + 0.2f) * 8);
-
+                    copyToInput(sorted());
                     if ((work_time += step) >= total_work_time) {
                         this.work_time -= current.getWorkTime();
                         ItemStackHandler temp = sorted();
                         for (int i = 0; i < temp.getSlots(); ++i) {
                             temp.extractItem(i, current.getInput()[i].getCount(),false);
                         }
-                        for (int i = 0; i < input.getSlots(); ++i) {
-                            if(i < temp.getSlots())
-                                input.setStackInSlot(i, temp.getStackInSlot(i));
-                            else
-                                input.setStackInSlot(i, ItemStack.EMPTY);
-                        }
+                        copyToInput(temp);
                         output.insertItem(0, current.getOutput().copy(), false);
                         this.markDirty();
                     }
                 } else {
                     if (work_time > 0)
-                        work_time -= 16;
+                        work_time -= 24;
                     if(work_time < 0)
                         work_time = 0;
                     world.setBlockState(pos, state.withProperty(BlockManaProducer.WORKING, Boolean.FALSE));

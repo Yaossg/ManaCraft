@@ -1,22 +1,23 @@
 package yaossg.mod.mana_craft.item;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.common.util.EnumHelper;
-import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.Util;
+
 
 public interface ItemManaTool {
      Item.ToolMaterial manaToolMaterial
             = EnumHelper.addToolMaterial("MANA", Util.DIAMOND_PICKAXE, 256, 6, 3, 32 ).setRepairItem(new ItemStack(ManaCraftItems.itemManaIngot));
 
-    int getMaxManaDropOnBreak();
-
+    int getManaValue();
     class ItemManaSword extends ItemSword implements ItemManaTool {
         public ItemManaSword() {
             super(manaToolMaterial);
         }
         @Override
-        public int getMaxManaDropOnBreak() {
+        public int getManaValue() {
             return 8;
         }
     }
@@ -26,7 +27,7 @@ public interface ItemManaTool {
             super(manaToolMaterial);
         }
         @Override
-        public int getMaxManaDropOnBreak() {
+        public int getManaValue() {
             return 13;
         }
     }
@@ -36,7 +37,7 @@ public interface ItemManaTool {
             super(manaToolMaterial, 12, -2.8f);
         }
         @Override
-        public int getMaxManaDropOnBreak() {
+        public int getManaValue() {
             return 17;
         }
     }
@@ -46,7 +47,7 @@ public interface ItemManaTool {
             super(manaToolMaterial);
         }
         @Override
-        public int getMaxManaDropOnBreak() {
+        public int getManaValue() {
             return 3;
         }
     }
@@ -56,7 +57,7 @@ public interface ItemManaTool {
             super(manaToolMaterial);
         }
         @Override
-        public int getMaxManaDropOnBreak() {
+        public int getManaValue() {
             return 7;
         }
     }
@@ -68,7 +69,7 @@ public interface ItemManaTool {
         }
 
         @Override
-        public int getMaxManaDropOnBreak() {
+        public int getManaValue() {
             return 6;
         }
     }

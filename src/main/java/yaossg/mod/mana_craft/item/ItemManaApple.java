@@ -8,6 +8,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -43,7 +44,7 @@ public class ItemManaApple extends ItemFood {
     private static final Random random = new Random();
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-        if(target instanceof EntityPig && hand == EnumHand.MAIN_HAND && Config.PES > 0) {
+        if(target instanceof EntityPig && Config.PES > 0 && Config.PEA) {
             if(playerIn.getServer() != null)
                 playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.pig"));
             EntityPig pig = (EntityPig) target;

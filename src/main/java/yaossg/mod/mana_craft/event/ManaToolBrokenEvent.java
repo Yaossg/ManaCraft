@@ -24,7 +24,7 @@ public class ManaToolBrokenEvent {
         if(item instanceof ItemManaTool) {
             EntityPlayer player = event.getEntityPlayer();
             Block.spawnAsEntity(player.getEntityWorld(), player.getPosition(), new ItemStack(ManaCraftItems.itemMana,
-                    1 + random.nextInt(((ItemManaTool) item).getMaxManaDropOnBreak() - 1)));
+                    1 + random.nextInt(((ItemManaTool) item).getManaValue() - 1)));
         }
     }
 }
