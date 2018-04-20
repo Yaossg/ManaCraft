@@ -1,4 +1,4 @@
-package yaossg.mod.mana_craft;
+package yaossg.mod.mana_craft.config;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class Config {
     public static Configuration config;
     //defaults
-    public static int PES = 20;
+    public static int bomb_size = 20;
     public static boolean PEA = true;
     public static boolean MBI = true;
     public static int limit = 3;
@@ -29,16 +29,16 @@ public class Config {
     public static void load() {
         String key, comment;
 
-        key = "PES";
-        comment = "Pig Explosion Size (disabled if not positive)";
-        PES = config.get(Configuration.CATEGORY_GENERAL, key, PES, comment).getInt();
+        key = "bomb_size";
+        comment = "Bomb Size (disabled if not positive)";
+        bomb_size = config.get(Configuration.CATEGORY_GENERAL, key, bomb_size, comment).getInt();
 
         key = "PEA";
-        comment = "true if pigs eat Mana Apples (requires PES > 0)";
+        comment = "true if pigs eat Mana Apples (requires bomb_size > 0)";
         PEA = config.get(Configuration.CATEGORY_GENERAL, key, PEA, comment).getBoolean();
 
         key = "MBI";
-        comment = "true if Mana Ball invokes pigs (requires PES > 0)";
+        comment = "true if Mana Ball invokes pigs (requires bomb_size > 0)";
         MBI = config.get(Configuration.CATEGORY_GENERAL, key, MBI, comment).getBoolean();
 
         key = "limit";

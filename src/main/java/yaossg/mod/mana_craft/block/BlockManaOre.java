@@ -16,8 +16,8 @@ public class BlockManaOre extends Block {
     public BlockManaOre() {
         super(Material.ROCK);
         this.setSoundType(SoundType.STONE);
-        this.setHarvestLevel("pickaxe",  Util.STONE_PICKAXE);
-        this.setLightLevel(Util.getLightLevel(7));
+        this.setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
+        this.setLightLevel(Util.lightAt(7));
         this.setHardness(3);
     }
 

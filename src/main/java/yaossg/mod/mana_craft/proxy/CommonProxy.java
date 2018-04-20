@@ -5,7 +5,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import yaossg.mod.mana_craft.Config;
+import net.minecraftforge.oredict.OreDictionary;
+import yaossg.mod.mana_craft.config.Config;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.entity.ManaCraftEntities;
 import yaossg.mod.mana_craft.event.ManaCraftEvents;
@@ -27,11 +28,15 @@ public class CommonProxy
         ManaCraftEntities.init();
         ManaCraftWorldGens.init();
         addSmelting();
+        addOreDictionary();
     }
     public static void addSmelting() {
         GameRegistry.addSmelting(ManaCraftBlocks.blockManaOre, new ItemStack(ManaCraftItems.itemMana, 4), 0.6f);
         GameRegistry.addSmelting(ManaCraftBlocks.blockManaIngotOre, new ItemStack(ManaCraftItems.itemManaIngot), 0.4f);
         GameRegistry.addSmelting(ManaCraftBlocks.blockMana, new ItemStack(ManaCraftItems.itemManaBall), 0.2f);
+    }
+    public static void addOreDictionary() {
+        OreDictionary.registerOre("dyeLightBlue", ManaCraftItems.itemBlueShit);
     }
     public void init(FMLInitializationEvent event)
     {

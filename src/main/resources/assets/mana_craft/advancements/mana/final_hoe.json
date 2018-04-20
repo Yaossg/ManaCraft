@@ -14,7 +14,7 @@
   "rewards": {
     "experience": 100
   },
-  "parent": "mana_craft:mana_craft/strange_shears",
+  "parent": "mana_craft:mana/strange_shears",
   "criteria": {
     "final_hoe": {
       "trigger": "minecraft:impossible"

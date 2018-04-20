@@ -79,11 +79,12 @@ public class BlockManaProducer extends BlockContainer {
             return (SavedData) data;
         }
     }
+
     public BlockManaProducer() {
         super(Material.IRON);
         this.setHardness(3);
-        this.setLightLevel(Util.getLightLevel(11));
-        this.setHarvestLevel("pickaxe", Util.IRON_PICKAXE);
+        this.setLightLevel(Util.lightAt(11));
+        this.setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(WORKING, Boolean.FALSE));
     }
@@ -139,7 +140,7 @@ public class BlockManaProducer extends BlockContainer {
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         SavedData.get(worldIn).add(pos);
         if(((TileManaProducer)worldIn.getTileEntity(pos)).checkCharged()) {
-            Util.giveManaCraftAdvancement(placer, "encharge");
+            ManaCraft.giveAdvancement(placer, "encharge");
         }
 
     }

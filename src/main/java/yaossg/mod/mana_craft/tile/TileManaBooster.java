@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import yaossg.mod.mana_craft.Config;
+import yaossg.mod.mana_craft.config.Config;
 import yaossg.mod.mana_craft.block.BlockManaProducer;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
@@ -91,12 +91,15 @@ public class TileManaBooster extends TileEntity implements ITickable {
     }
 
     private static final List<Burning> burnings = Arrays.asList(
-            Burning.of(ManaCraftItems.itemMana, 20,500),
-            Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 100, 1000),
-            Burning.of(ManaCraftItems.itemManaBall, 125, 800),
-            Burning.of(ManaCraftItems.itemManaNugget, 150, 1000),
-            Burning.of(ManaCraftItems.itemManaIngot, 1000, 1500),
-            Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 7500, 2000)
+            Burning.of(ManaCraftItems.itemMana, 20,200),
+            Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 100, 360),
+            Burning.of(ManaCraftItems.itemManaBall, 108, 360),
+            Burning.of(ManaCraftItems.itemManaApple, 888, 360),
+            Burning.of(ManaCraftItems.itemManaNugget, 500, 400),
+            Burning.of(ManaCraftItems.itemManaIngot, 4000, 450),
+            Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 12960, 1250),
+            Burning.of(ManaCraftItems.itemManaCoal, 400, 800),
+            Burning.of(ManaCraftItems.itemManaDiamond, 14400, 1600)
     );
     boolean flip = false;
     @Override
@@ -112,13 +115,9 @@ public class TileManaBooster extends TileEntity implements ITickable {
                             TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
                             if(tileEntity instanceof TileEntityFurnace) {
                                 TileEntityFurnace furnace = (TileEntityFurnace) tileEntity;
-                                if(furnace.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.WEST).getStackInSlot(0).isEmpty()) {
-                                    furnace.setField(2, Math.min(furnace.getField(2) + burn_level / 20, furnace.getCookTime(ItemStack.EMPTY) - 1));
-                                    BlockFurnace.setState(furnace.isBurning(), world, furnace.getPos());
-                                    furnace.setField(0, 2);
-                                    furnace.setField(1, 2);
-                                    burn_time -= 6;
-                                }
+                                furnace.setField(2, Math.min(furnace.getField(2) + burn_level / 20, furnace.getCookTime(ItemStack.EMPTY) - 1));
+                                BlockFurnace.setState(furnace.isBurning(), world, furnace.getPos());
+                                burn_time -= 4;
                             }
                         }
 

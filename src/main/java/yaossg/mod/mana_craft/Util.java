@@ -1,18 +1,13 @@
 package yaossg.mod.mana_craft;
 
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.advancements.critereon.NBTPredicate;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.nbt.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -20,19 +15,11 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import yaossg.mod.mana_craft.ManaCraft;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 
 public class Util {
-    public static final int WOODEN_PICKAXE = 0;
-    public static final int STONE_PICKAXE = 1;
-    public static final int IRON_PICKAXE = 2;
-    public static final int DIAMOND_PICKAXE = 3;
-    public static float getLightLevel(int level) {
+    public static float lightAt(int level) {
         return level / 16f;
     }
     public static void register(Item item) {
@@ -90,21 +77,16 @@ public class Util {
     }
 
     public static void giveAdvancement(Entity player, String advance) {
-        if(player.getServer() != null) {
+        if(player.getServer() != null && player instanceof EntityPlayerMP) {
             MinecraftServer server = player.getServer();
-            if(player instanceof EntityPlayerMP) {
-                EntityPlayerMP playerMP = (EntityPlayerMP)player;
-                Advancement advancement = server.getAdvancementManager().getAdvancement(new ResourceLocation(advance));
-                AdvancementProgress progress = playerMP.getAdvancements().getProgress(advancement);
-                if (!progress.isDone()) {
-                    for (String s : progress.getRemaningCriteria()) {
-                        playerMP.getAdvancements().grantCriterion(advancement, s);
-                    }
+            EntityPlayerMP playerMP = (EntityPlayerMP)player;
+            Advancement advancement = server.getAdvancementManager().getAdvancement(new ResourceLocation(advance));
+            AdvancementProgress progress = playerMP.getAdvancements().getProgress(advancement);
+            if (!progress.isDone()) {
+                for (String s : progress.getRemaningCriteria()) {
+                    playerMP.getAdvancements().grantCriterion(advancement, s);
                 }
             }
         }
-    }
-    public static void giveManaCraftAdvancement(Entity player, String advance) {
-        giveAdvancement(player, ManaCraft.MODID + ":mana_craft/" + advance);
     }
 }

@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_wand"
+    },
+    "title": {
+      "translate": "advancement.not_staff.title"
+    },
+    "description": {
+      "translate": "advancement.not_staff.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "mana_craft:mana/shiny_mana",
+  "criteria": {
+    "not_staff": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

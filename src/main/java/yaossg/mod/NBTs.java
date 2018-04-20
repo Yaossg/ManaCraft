@@ -7,8 +7,6 @@ import javax.annotation.Nonnull;
 import java.util.Map;
 
 public class NBTs {
-
-
     @Nonnull public static NBTTagByte of(byte arg) {
         return new NBTTagByte(arg);
     }

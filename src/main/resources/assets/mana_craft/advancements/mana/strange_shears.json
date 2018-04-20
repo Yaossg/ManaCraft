@@ -11,7 +11,7 @@
     },
     "frame": "goal"
   },
-  "parent": "mana_craft:mana_craft/shiny_mana",
+  "parent": "mana_craft:mana/shiny_mana",
   "criteria": {
     "strange_shears": {
       "trigger": "minecraft:inventory_changed",

@@ -1,0 +1,26 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_diamond"
+    },
+    "title": {
+      "translate": "advancement.shiny_diamond.title"
+    },
+    "description": {
+      "translate": "advancement.shiny_diamond.description"
+    }
+  },
+  "parent": "mana_craft:mana/shiny_mana",
+  "criteria": {
+    "shiny_diamond": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mana_craft:mana_diamond"
+          }
+        ]
+      }
+    }
+  }
+}

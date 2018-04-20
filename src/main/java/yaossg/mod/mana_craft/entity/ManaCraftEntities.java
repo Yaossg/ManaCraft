@@ -12,7 +12,7 @@ public class ManaCraftEntities {
 
     private static int nextID = 0;
     public static void init() {
-        registerEntity(EntityManaBall.class, "mana_ball", 64, 10, true);
+        registerEntity(EntityManaBall.class, "mana_ball", 64, 8, true);
     }
     @SideOnly(Side.CLIENT)
     public static void clientInit() {
@@ -20,9 +20,8 @@ public class ManaCraftEntities {
     }
 
     private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange,
-                                       int updateFrequency, boolean sendsVelocityUpdates)
-    {
-        EntityRegistry.registerModEntity(new ResourceLocation(ManaCraft.MODID + ":" + name), entityClass, name, nextID++, ManaCraft.instance, trackingRange, updateFrequency,
-                sendsVelocityUpdates);
+                                       int updateFrequency, boolean sendsVelocityUpdates) {
+        EntityRegistry.registerModEntity(new ResourceLocation(ManaCraft.MODID + ":" + name), entityClass, name, nextID++,
+                ManaCraft.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
     }
 }

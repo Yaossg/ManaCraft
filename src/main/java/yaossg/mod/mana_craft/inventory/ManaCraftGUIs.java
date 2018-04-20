@@ -18,7 +18,6 @@ import java.util.function.Function;
 public class ManaCraftGUIs implements IGuiHandler {
 
     public enum GUIs {
-        NULL((player, tileEntity) -> null, container -> null),
         ManaProducer(ContainerManaProducer::new, GUIContainerManaProducer::new),
         ManaBooster(ContainerManaBooster::new, GUIContainerManaBooster::new);
         BiFunction<EntityPlayer, TileEntity, Container> container;

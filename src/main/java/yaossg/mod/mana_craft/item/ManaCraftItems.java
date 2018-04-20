@@ -1,61 +1,36 @@
 package yaossg.mod.mana_craft.item;
 
-import net.minecraft.block.BlockDispenser;
-import net.minecraft.dispenser.BehaviorProjectileDispense;
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.Util;
-import yaossg.mod.mana_craft.entity.EntityManaBall;
 
 public class ManaCraftItems {
-
-    private static ItemArmor.ArmorMaterial MANA_ARMOR = EnumHelper.addArmorMaterial("MANA_ARMOR", ManaCraft.MODID + ":mana",
-            10, new int[]{3, 6, 5, 2}, 32, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f);
-    static Item newItemManaArmor(EntityEquipmentSlot slot, String name) {
-        return nameAs(new ItemArmor(MANA_ARMOR, MANA_ARMOR.ordinal(), slot), name);
-    }
-
-    private static Item newItem(String name) {
-        return nameAs(new Item(), name);
-    }
     private static Item nameAs(Item item, String name) {
         return item.setCreativeTab(ManaCraft.tabMana).setUnlocalizedName(name).setRegistryName(name);
     }
-
+    private static Item newItem(String name) {
+        return nameAs(new Item(), name);
+    }
+    static Item newItemManaArmor(EntityEquipmentSlot slot, String name) {
+        return nameAs(new ItemManaArmor(slot), name);
+    }
     public static final Item itemBlueShit = newItem("blue_shit");
     public static final Item itemMana = newItem("mana");
     public static final Item itemManaIngot = newItem("mana_ingot");
     public static final Item itemManaNugget = newItem("mana_nugget");
-    public static final Item itemManaApple = nameAs(new ItemManaApple(), "mana_apple");
-    public static final Item itemManaBall = nameAs(new Item() {
+    public static final Item itemManaCoal = nameAs(new Item() {
         @Override
-        public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-            ItemStack item = playerIn.getHeldItem(handIn);
-            if (!playerIn.capabilities.isCreativeMode)
-                item.shrink(1);
-            if (!worldIn.isRemote) {
-                EntityManaBall entity = new EntityManaBall(worldIn, playerIn);
-                entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0, 0.4f, 1);
-                worldIn.spawnEntity(entity);
-            }
-            return ActionResult.newResult(EnumActionResult.SUCCESS, item);
+        public int getItemBurnTime(ItemStack itemStack) {
+            return itemStack.getItem() == this ? 200 * 64 : 0;
         }
-    },"mana_ball");
+    }, "mana_coal");
+    public static final Item itemManaDiamond = newItem("mana_diamond");
+    public static final Item itemManaApple = nameAs(new ItemManaApple(), "mana_apple");
+    public static final Item itemManaBall = nameAs(new ItemManaBall(),"mana_ball");
     public static final Item itemManaWand = nameAs(new ItemManaWand(), "mana_wand");
     public static final Item itemManaSword = nameAs(new ItemManaTool.ItemManaSword(), "mana_sword");
     public static final Item itemManaPickaxe = nameAs(new ItemManaTool.ItemManaPickaxe(), "mana_pickaxe");
@@ -75,6 +50,8 @@ public class ManaCraftItems {
         Util.register(itemManaNugget);
         Util.register(itemManaApple);
         Util.register(itemManaBall);
+        Util.register(itemManaCoal);
+        Util.register(itemManaDiamond);
         Util.register(itemManaWand);
         Util.register(itemManaSword);
         Util.register(itemManaPickaxe);
@@ -86,14 +63,6 @@ public class ManaCraftItems {
         Util.register(itemManaChestplate);
         Util.register(itemManaLeggings);
         Util.register(itemManaBoots);
-
-        OreDictionary.registerOre("dyeLightBlue", itemBlueShit);
-
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(itemManaBall, new BehaviorProjectileDispense() {
-            protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
-                return new EntityManaBall(worldIn, position.getX(), position.getY(), position.getZ());
-            }
-        });
     }
 
     @SideOnly(Side.CLIENT)
@@ -104,6 +73,8 @@ public class ManaCraftItems {
         Util.loadModel(itemManaNugget);
         Util.loadModel(itemManaApple);
         Util.loadModel(itemManaBall);
+        Util.loadModel(itemManaCoal);
+        Util.loadModel(itemManaDiamond);
         Util.loadModel(itemManaWand);
         Util.loadModel(itemManaSword);
         Util.loadModel(itemManaPickaxe);
@@ -116,5 +87,4 @@ public class ManaCraftItems {
         Util.loadModel(itemManaLeggings);
         Util.loadModel(itemManaBoots);
     }
-
 }

@@ -1,7 +1,6 @@
 package yaossg.mod.mana_craft.tile;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -9,25 +8,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeSwamp;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.block.BlockManaProducer;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
 
-import java.lang.reflect.AccessibleObject;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
-import static java.util.Arrays.copyOf;
 import static yaossg.mod.mana_craft.block.BlockManaProducer.FACING;
 
 public class TileManaProducer extends TileEntity implements ITickable {
@@ -57,37 +49,37 @@ public class TileManaProducer extends TileEntity implements ITickable {
     }
     public boolean checkCharged() {
         EnumFacing facing = world.getBlockState(pos).getValue(FACING);
-        return world.getBlockState(pos.down()).getBlock().equals(ManaCraftBlocks.blockManaIngot)
-                && world.getBlockState(pos.up()).getBlock().equals(ManaCraftBlocks.blockManaGlass)
+        return world.getBlockState(pos.down()).getBlock() == ManaCraftBlocks.blockManaIngot
+                && world.getBlockState(pos.up()).getBlock() == ManaCraftBlocks.blockManaGlass
                 && world.isAirBlock(pos.offset(facing))
-                && world.getBlockState(pos.offset(facing.rotateY())).getBlock().equals(ManaCraftBlocks.blockManaGlass)
-                && world.getBlockState(pos.offset(facing.rotateY().rotateY())).getBlock().equals(ManaCraftBlocks.blockManaGlass)
-                && world.getBlockState(pos.offset(facing.rotateY().rotateY().rotateY())).getBlock().equals(ManaCraftBlocks.blockManaGlass)
+                && world.getBlockState(pos.offset(facing.rotateY())).getBlock() == ManaCraftBlocks.blockManaGlass
+                && world.getBlockState(pos.offset(facing.rotateY().rotateY())).getBlock() == ManaCraftBlocks.blockManaGlass
+                && world.getBlockState(pos.offset(facing.rotateY().rotateY().rotateY())).getBlock() == ManaCraftBlocks.blockManaGlass
 
                 && world.isAirBlock(pos.offset(facing, 2))
                 && world.isAirBlock(pos.offset(facing.rotateY(), 2))
                 && world.isAirBlock(pos.offset(facing.rotateY().rotateY(), 2))
                 && world.isAirBlock(pos.offset(facing.rotateY().rotateY().rotateY(), 2))
 
-                && world.getBlockState(pos.add(1, -1, 0)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(0, -1, 1)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(-1, -1, 0)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(0, -1, -1)).getBlock().equals(ManaCraftBlocks.blockMana)
+                && world.getBlockState(pos.add(1, -1, 0)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(0, -1, 1)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(-1, -1, 0)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(0, -1, -1)).getBlock() == ManaCraftBlocks.blockMana
 
-                && world.getBlockState(pos.add(1, 0, 1)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(-1, 0, 1)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(-1, 0, -1)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(1, 0, -1)).getBlock().equals(ManaCraftBlocks.blockMana)
+                && world.getBlockState(pos.add(1, 0, 1)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(-1, 0, 1)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(-1, 0, -1)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(1, 0, -1)).getBlock() == ManaCraftBlocks.blockMana
 
-                && world.getBlockState(pos.add(1, 1, 0)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(0, 1, 1)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(-1, 1, 0)).getBlock().equals(ManaCraftBlocks.blockMana)
-                && world.getBlockState(pos.add(0, 1, -1)).getBlock().equals(ManaCraftBlocks.blockMana)
+                && world.getBlockState(pos.add(1, 1, 0)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(0, 1, 1)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(-1, 1, 0)).getBlock() == ManaCraftBlocks.blockMana
+                && world.getBlockState(pos.add(0, 1, -1)).getBlock() == ManaCraftBlocks.blockMana
 
-                && world.getBlockState(pos.add(1, -1, 1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
-                && world.getBlockState(pos.add(-1, -1, 1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
-                && world.getBlockState(pos.add(-1, -1, -1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
-                && world.getBlockState(pos.add(1, -1, -1)).getBlock().equals(ManaCraftBlocks.blockManaIngot)
+                && world.getBlockState(pos.add(1, -1, 1)).getBlock() == ManaCraftBlocks.blockManaIngot
+                && world.getBlockState(pos.add(-1, -1, 1)).getBlock() == ManaCraftBlocks.blockManaIngot
+                && world.getBlockState(pos.add(-1, -1, -1)).getBlock() == ManaCraftBlocks.blockManaIngot
+                && world.getBlockState(pos.add(1, -1, -1)).getBlock() == ManaCraftBlocks.blockManaIngot
 
                 && world.canSeeSky(pos.up(2))
                 && world.canSeeSky(pos.add(1, 2, 0))
@@ -125,7 +117,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
         }
     }
     private static final List<Recipe> recipes = Arrays.asList(
-            Recipe.of(new ItemStack(ManaCraftItems.itemMana, 7), 7500,
+            Recipe.of(new ItemStack(ManaCraftItems.itemMana, 6), 7500,
                     new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.REDSTONE), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.SUGAR)
             ),
             Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget), 5000,
@@ -144,7 +136,14 @@ public class TileManaProducer extends TileEntity implements ITickable {
                     new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftBlocks.blockMana, 48)
             ),
             Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass, 4), 8848,
-                    new ItemStack(Blocks.GLASS, 4), new ItemStack(ManaCraftItems.itemMana, 12), new ItemStack(ManaCraftItems.itemManaNugget, 12))
+                    new ItemStack(Blocks.GLASS, 4), new ItemStack(ManaCraftItems.itemMana, 12), new ItemStack(ManaCraftItems.itemManaNugget, 12)
+            ),
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 4000,
+                    new ItemStack(Items.COAL), new ItemStack(ManaCraftItems.itemManaBall, 8)
+            ),
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 40000,
+                    new ItemStack(Items.DIAMOND), new ItemStack(ManaCraftItems.itemManaCoal, 64)
+            )
     );
 
     ItemStackHandler sorted() {
@@ -208,7 +207,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
                     if ((work_time += step) >= total_work_time) {
                         this.work_time -= current.getWorkTime();
                         ItemStackHandler temp = sorted();
-                        for (int i = 0; i < temp.getSlots(); ++i) {
+                        for (int i = 0; i < temp.getSlots() && i < current.getInput().length; ++i) {
                             temp.extractItem(i, current.getInput()[i].getCount(),false);
                         }
                         copyToInput(temp);

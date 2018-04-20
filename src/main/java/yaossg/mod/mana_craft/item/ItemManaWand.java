@@ -10,6 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.entity.EntityManaBall;
 
 public class ItemManaWand extends Item implements ItemManaTool {
@@ -41,7 +42,8 @@ public class ItemManaWand extends Item implements ItemManaTool {
             if (!ammo.isEmpty()) {
                 if (!worldIn.isRemote) {
                     EntityManaBall entity = new EntityManaBall(worldIn, player);
-                    entity.shoot(player, player.rotationPitch, player.rotationYaw, 0, 0.5f + (useDuration - timeLeft) / 32f, 1);
+                    entity.shoot(player, player.rotationPitch, player.rotationYaw, 0,
+                            EntityManaBall.betterVelocity + (useDuration - timeLeft) / 32f, EntityManaBall.defaultInaccuracy);
                     worldIn.spawnEntity(entity);
                     if(stack.attemptDamageItem(1, player.getRNG(), player instanceof EntityPlayerMP ? (EntityPlayerMP)player : null)) {
                         player.renderBrokenItemStack(stack);
@@ -50,6 +52,7 @@ public class ItemManaWand extends Item implements ItemManaTool {
                         stack.setItemDamage(0);
                         net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, copy, player.getActiveHand());
                     }
+                    ManaCraft.giveAdvancement(player, "not_staff");
                 }
                 if (!player.isCreative()) {
                     ammo.shrink(1);

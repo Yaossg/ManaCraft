@@ -30,8 +30,8 @@ public class BlockManaBooster extends BlockContainer {
     public BlockManaBooster() {
         super(Material.IRON);
         this.setHardness(3);
-        this.setLightLevel(Util.getLightLevel(9));
-        this.setHarvestLevel("pickaxe", Util.IRON_PICKAXE);
+        this.setLightLevel(Util.lightAt(9));
+        this.setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         this.setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }
     @Override
@@ -77,5 +77,6 @@ public class BlockManaBooster extends BlockContainer {
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TileManaBooster tile = (TileManaBooster) worldIn.getTileEntity(pos);
         Block.spawnAsEntity(worldIn, pos, tile.fuel.getStackInSlot(0));
-        super.breakBlock(worldIn, pos, state);}
+        super.breakBlock(worldIn, pos, state);
+    }
 }

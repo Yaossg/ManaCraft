@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_ball"
+    },
+    "title": {
+      "translate": "advancement.ballgame.title"
+    },
+    "description": {
+      "translate": "advancement.ballgame.description"
+    },
+    "frame": "goal"
+  },
+  "parent": "mana_craft:mana/root",
+  "criteria": {
+    "ballgame": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "killing_blow": {
+          "direct_entity": {
+		    "type": "mana_craft:mana_ball"
+		  }
+		}
+      }
+    }
+  }
+}

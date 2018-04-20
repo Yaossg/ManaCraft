@@ -9,13 +9,13 @@
     "description": {
       "translate": "advancement.pig_bomb.description"
     },
-    "frame": "challenge"
+    "frame": "challenge",
+    "hidden": true
   },
   "rewards": {
     "experience": 1000
   },
-  "parent": "mana_craft:mana_craft/shiny_mana",
-  "hidden": true,
+  "parent": "mana_craft:mana/ballgame",
   "criteria": {
     "pig_bomb": {
       "trigger": "minecraft:impossible"

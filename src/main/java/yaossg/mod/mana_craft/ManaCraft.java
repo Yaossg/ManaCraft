@@ -1,5 +1,7 @@
 package yaossg.mod.mana_craft;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +19,7 @@ public class ManaCraft
 {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
-    public static final String VERSION = "1.2.0";
+    public static final String VERSION = "0.1.3";
 
     @SidedProxy(clientSide = "yaossg.mod.mana_craft.proxy.ClientProxy",
             serverSide = "yaossg.mod.mana_craft.proxy.CommonProxy")
@@ -26,14 +28,18 @@ public class ManaCraft
     @Instance(ManaCraft.MODID)
     public static ManaCraft instance;
 
-    public static Logger LOGGER = null;
+    public static Logger logger;
+
+    public static void giveAdvancement(Entity player, String advance) {
+        Util.giveAdvancement(player, MODID + ":mana/" + advance);
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        LOGGER = event.getModLog();
-        LOGGER.info(NAME + " v" + VERSION + "is loading");
-        LOGGER.warn("The mod is still unstable and in early development, There are lots of bugs to fix and ideas to add");
+        logger = event.getModLog();
+        logger.info(NAME + " v" + VERSION + "is loading");
+        logger.warn("The mod is still unstable and in early development, There are lots of bugs to fix and ideas to add");
         proxy.preInit(event);
     }
 

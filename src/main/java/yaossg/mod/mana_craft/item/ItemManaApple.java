@@ -1,5 +1,6 @@
 package yaossg.mod.mana_craft.item;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.passive.EntityPig;
@@ -8,13 +9,13 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.Util;
-import yaossg.mod.mana_craft.Config;
+import yaossg.mod.mana_craft.config.Config;
 
 import java.util.Random;
 
@@ -44,25 +45,25 @@ public class ItemManaApple extends ItemFood {
     private static final Random random = new Random();
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-        if(target instanceof EntityPig && Config.PES > 0 && Config.PEA) {
-            if(playerIn.getServer() != null)
-                playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.pig"));
+        if(target instanceof EntityPig && Config.bomb_size > 0 && Config.PEA) {
             EntityPig pig = (EntityPig) target;
             playerIn.attackEntityFrom(new DamageSource("byPig")
                     .setDifficultyScaled().setExplosion().setMagicDamage().setFireDamage(), 16);
-            ItemManaApple.appleExplosin(pig);
-            Util.giveManaCraftAdvancement(playerIn, "pig_bomb");
+            ItemManaApple.appleExplosin(playerIn, pig);
             stack.shrink(1);
             return true;
         }
         return false;
     }
-    public static void appleExplosin(EntityPig pig) {
-        Util.createThenApplyExplosin(pig.world, pig, pig.getPosition(), Config.PES, true, true);
-        for(int i = 0; i < Config.PES; ++i)
+    public static void appleExplosin(Entity playerIn, EntityPig pig) {
+        if(playerIn.getServer() != null)
+            playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.pig"));
+        Util.createThenApplyExplosin(pig.world, pig, pig.getPosition(), Config.bomb_size, true, true);
+        for(int i = 0; i < Config.bomb_size; ++i)
             pig.world.spawnEntity(new EntityLightningBolt(pig.world,
-                    pig.posX + (random.nextFloat() - 0.5f) * Config.PES,
-                    pig.posY + (random.nextFloat() - 0.5f) * Config.PES,
-                    pig.posZ + (random.nextFloat() - 0.5f) * Config.PES, false));
+                    pig.posX + (random.nextFloat() - 0.5f) * Config.bomb_size,
+                    pig.posY + (random.nextFloat() - 0.5f) * Config.bomb_size,
+                    pig.posZ + (random.nextFloat() - 0.5f) * Config.bomb_size, false));
+        ManaCraft.giveAdvancement(playerIn, "pig_bomb");
     }
 }

@@ -10,10 +10,10 @@ import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import yaossg.mod.NBTs;
+import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.Util;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
-
 
 public class ManaHoeEvent {
     public static void init() {
@@ -35,7 +35,7 @@ public class ManaHoeEvent {
                 Util.createThenApplyExplosin(world, event.getEntity(), event.getPos(), 1.25f,
                         true, false);
                 event.getEntityPlayer().addExperience(10);
-                Util.giveManaCraftAdvancement(event.getEntityPlayer(), "final_hoe");
+                ManaCraft.giveAdvancement(event.getEntityPlayer(), "final_hoe");
                 event.setResult(Event.Result.ALLOW);
             }
         }

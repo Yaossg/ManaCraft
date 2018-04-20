@@ -1,15 +1,12 @@
 package yaossg.mod.mana_craft.item;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
-import net.minecraft.util.EnumHand;
 import net.minecraftforge.common.util.EnumHelper;
-import yaossg.mod.mana_craft.Util;
-
 
 public interface ItemManaTool {
      Item.ToolMaterial manaToolMaterial
-            = EnumHelper.addToolMaterial("MANA", Util.DIAMOND_PICKAXE, 256, 6, 3, 32 ).setRepairItem(new ItemStack(ManaCraftItems.itemManaIngot));
+            = EnumHelper.addToolMaterial("MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(), 256, 6, 3, 32 )
+             .setRepairItem(new ItemStack(ManaCraftItems.itemManaIngot));
 
     int getManaValue();
     class ItemManaSword extends ItemSword implements ItemManaTool {
