@@ -5,12 +5,16 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class Config {
     public static Configuration config;
-    //defaults
+    //definition of defaults
+    //  General
     public static int bomb_size = 20;
     public static boolean PEA = true;
     public static boolean MBI = true;
     public static int radius = 3;
     public static int limit = 3;
+    public static boolean dropMana = true;
+    public static boolean dropManaApple = true;
+    //  Ore Generation
     public static int weight = 2333333;
     public static int mana_ore_size = 12;
     public static int mana_ore_height = 36;
@@ -53,6 +57,14 @@ public class Config {
         key = "weight";
         comment = "the weight of ore generation (disabled if not positive)";
         weight = config.get(Configuration.CATEGORY_GENERAL, key, weight, comment).getInt();
+
+        key = "dropMana";
+        comment = "whether Mana would been dropped by livings";
+        dropMana = config.get(Configuration.CATEGORY_GENERAL, key, dropMana, comment).getBoolean();
+
+        key = "dropManaApple";
+        comment = "whether Mana Apple would been dropped by pigs (when dropMana is true)";
+        dropManaApple = config.get(Configuration.CATEGORY_GENERAL, key, dropManaApple, comment).getBoolean();
 
         key = "mana_ore_size";
         comment = "max size of a single Mana Ore vein";

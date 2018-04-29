@@ -45,6 +45,14 @@
 
 ## v0.1.4 [major]
 
+- 调整源码位置
+- 修复bug，优化代码
 - 魔能增幅器可以增加酿造速度
-- *full changelog is coming soon*
+- 重置大量合成配方
+- 现在生物有几率掉落魔能
+- 更新配置文件内容
 
+*preparation:SausageCore*
+
+- 即将独立的模组核心
+- 实用的`Utils`
