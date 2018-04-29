@@ -17,7 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import yaossg.mod.mana_craft.Util;
+import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.inventory.ManaCraftGUIs;
 import yaossg.mod.mana_craft.tile.TileManaBooster;
@@ -68,7 +68,7 @@ public class BlockManaBooster extends BlockContainer {
     public boolean onBlockActivated(World worldIn, BlockPos pos,
                                     IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.GUIs.ManaBooster.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

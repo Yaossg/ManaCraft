@@ -7,7 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import yaossg.mod.mana_craft.Util;
+import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 
 import static net.minecraft.item.Item.ToolMaterial;
@@ -19,7 +19,7 @@ public class ManaCraftBlocks {
     public static Block newBlock(Material material, SoundType sound, String name) {
         return nameAs(new Block(material){{setSoundType(sound);}}, name);
     }
-    public static Block newBlock(Material material, SoundType sound, Item.ToolMaterial tool, String name) {
+    public static Block newBlock(Material material, SoundType sound, ToolMaterial tool, String name) {
         return nameAs(new Block(material){{setSoundType(sound);setHarvestLevel("pickaxe", tool.getHarvestLevel());}}, name);
     }
 

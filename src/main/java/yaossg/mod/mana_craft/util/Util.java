@@ -1,4 +1,4 @@
-package yaossg.mod.mana_craft;
+package yaossg.mod.mana_craft.util;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementProgress;
@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
@@ -78,15 +77,12 @@ public class Util {
 
     public static void giveAdvancement(Entity player, String advance) {
         if(player.getServer() != null && player instanceof EntityPlayerMP) {
-            MinecraftServer server = player.getServer();
             EntityPlayerMP playerMP = (EntityPlayerMP)player;
-            Advancement advancement = server.getAdvancementManager().getAdvancement(new ResourceLocation(advance));
+            Advancement advancement = player.getServer().getAdvancementManager().getAdvancement(new ResourceLocation(advance));
             AdvancementProgress progress = playerMP.getAdvancements().getProgress(advancement);
-            if (!progress.isDone()) {
-                for (String s : progress.getRemaningCriteria()) {
+            if (!progress.isDone())
+                for (String s : progress.getRemaningCriteria())
                     playerMP.getAdvancements().grantCriterion(advancement, s);
-                }
-            }
         }
     }
 }

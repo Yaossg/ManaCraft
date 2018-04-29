@@ -6,7 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.Util;
+import yaossg.mod.mana_craft.util.Util;
+
+import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
 public class ManaCraftItems {
     private static Item nameAs(Item item, String name) {
@@ -38,10 +40,10 @@ public class ManaCraftItems {
     public static final Item itemManaShovel = nameAs(new ItemManaTool.ItemManaShovel(), "mana_shovel");
     public static final Item itemManaHoe = nameAs(new ItemManaTool.ItemManaHoe(), "mana_hoe");
     public static final Item itemManaShears = nameAs(new ItemManaTool.ItemManaShears(), "mana_shears");
-    public static final Item itemManaHelmet = newItemManaArmor(EntityEquipmentSlot.HEAD,"mana_helmet");
-    public static final Item itemManaChestplate = newItemManaArmor(EntityEquipmentSlot.CHEST,"mana_chestplate");
-    public static final Item itemManaLeggings = newItemManaArmor(EntityEquipmentSlot.LEGS,"mana_leggings");
-    public static final Item itemManaBoots = newItemManaArmor(EntityEquipmentSlot.FEET,"mana_boots");
+    public static final Item itemManaHelmet = newItemManaArmor(HEAD,"mana_helmet");
+    public static final Item itemManaChestplate = newItemManaArmor(CHEST,"mana_chestplate");
+    public static final Item itemManaLeggings = newItemManaArmor(LEGS,"mana_leggings");
+    public static final Item itemManaBoots = newItemManaArmor(FEET,"mana_boots");
 
     public static void init() {
         Util.register(itemBlueShit);

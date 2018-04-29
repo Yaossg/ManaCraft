@@ -43,7 +43,8 @@
 - 魔能煤炭看是烧制一组物品
 - 魔能钻石目前只能用于加速
 
-### v0.1.4 *[plan]*
+## v0.1.4 [major]
 
 - 魔能增幅器可以增加酿造速度
+- *full changelog is coming soon*
 

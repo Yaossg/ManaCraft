@@ -4,5 +4,6 @@ public class ManaCraftEvents {
     public static void init() {
         ManaToolBrokenEvent.init();
         ManaHoeEvent.init();
+        ManaDropEvent.init();
     }
 }

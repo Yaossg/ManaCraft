@@ -9,6 +9,7 @@ public class Config {
     public static int bomb_size = 20;
     public static boolean PEA = true;
     public static boolean MBI = true;
+    public static int radius = 3;
     public static int limit = 3;
     public static int weight = 2333333;
     public static int mana_ore_size = 12;
@@ -44,6 +45,10 @@ public class Config {
         key = "limit";
         comment = "the number of Mana Producers that Mana Booster can boost (disabled if not positive)";
         limit = config.get(Configuration.CATEGORY_GENERAL, key, limit, comment).getInt();
+
+        key = "radius";
+        comment = "the radius of Mana Producers that Mana Booster can boost (disabled if less than 1)";
+        radius = config.get(Configuration.CATEGORY_GENERAL, key, radius, comment).getInt();
 
         key = "weight";
         comment = "the weight of ore generation (disabled if not positive)";

@@ -1,4 +1,4 @@
-package yaossg.mod;
+package yaossg.mod.mana_craft.util;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.nbt.*;
@@ -189,7 +189,7 @@ public class NBTs {
         return list;
     }
     public static class Builder {
-        NBTTagCompound cache;
+        public NBTTagCompound cache;
         public Builder() {
             cache = new NBTTagCompound();
         }

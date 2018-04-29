@@ -14,7 +14,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.Util;
+import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.config.Config;
 
 import java.util.Random;

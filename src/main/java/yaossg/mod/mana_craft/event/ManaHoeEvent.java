@@ -9,9 +9,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import yaossg.mod.NBTs;
+import yaossg.mod.mana_craft.util.NBTs;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.Util;
+import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
 

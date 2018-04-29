@@ -6,13 +6,13 @@
     "XNX"
   ],
   "key": {
-    "X": {
-      "item": "mana_craft:mana"
+    "N": {
+      "item": "mana_craft:mana_ball"
     },
     "G": {
       "item": "minecraft:glass"
     },
-    "N": {
+    "X": {
       "item": "mana_craft:mana_nugget"
     }
   },

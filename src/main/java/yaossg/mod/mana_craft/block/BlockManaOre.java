@@ -7,7 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import yaossg.mod.mana_craft.Util;
+import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
 
 import java.util.Random;

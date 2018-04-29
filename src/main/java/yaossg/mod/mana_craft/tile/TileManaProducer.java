@@ -8,11 +8,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import yaossg.mod.mana_craft.block.BlockManaProducer;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
 
@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import static yaossg.mod.mana_craft.block.BlockManaProducer.FACING;
+import static yaossg.mod.mana_craft.block.BlockManaProducer.*;
 
 public class TileManaProducer extends TileEntity implements ITickable {
     public int work_time;
@@ -47,6 +47,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
         compound.setInteger("total_work_time", this.total_work_time);
         return super.writeToNBT(compound);
     }
+
     public boolean checkCharged() {
         EnumFacing facing = world.getBlockState(pos).getValue(FACING);
         return world.getBlockState(pos.down()).getBlock() == ManaCraftBlocks.blockManaIngot
@@ -92,12 +93,15 @@ public class TileManaProducer extends TileEntity implements ITickable {
                 && world.canSeeSky(pos.add(-1, 2, -1))
                 && world.canSeeSky(pos.offset(facing, 2));
     }
+
     public interface Recipe {
+        Comparator<ItemStack> comparator = Comparator.<ItemStack, ResourceLocation>comparing(stack -> stack.getItem().getRegistryName()).thenComparingInt(ItemStack::getCount);
+
         ItemStack[] getInput();
         ItemStack getOutput();
         int getWorkTime();
         static Recipe of(ItemStack ouput, int time, ItemStack... input) {
-            Arrays.sort(input, Comparator.comparing(stack -> stack.getItem().getUnlocalizedName()));
+            Arrays.sort(input, comparator);
             return new Recipe() {
                 @Override
                 public ItemStack[] getInput() {
@@ -116,37 +120,33 @@ public class TileManaProducer extends TileEntity implements ITickable {
             };
         }
     }
+
     private static final List<Recipe> recipes = Arrays.asList(
-            Recipe.of(new ItemStack(ManaCraftItems.itemMana, 6), 7500,
+            Recipe.of(new ItemStack(ManaCraftItems.itemMana, 5), 4800,
                     new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.REDSTONE), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.SUGAR)
             ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget), 5000,
-                    new ItemStack(Items.GOLD_NUGGET), new ItemStack(ManaCraftItems.itemMana, 6)
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 12000,
+                    new ItemStack(Items.GOLD_NUGGET, 3), new ItemStack(ManaCraftItems.itemManaBall, 2)
             ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 14000,
-                    new ItemStack(Items.GOLD_NUGGET, 3), new ItemStack(ManaCraftBlocks.blockMana, 2)
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000 * 9,
+                    new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemManaBall, 6)
             ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 47000,
-                    new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemMana, 5), new ItemStack(ManaCraftBlocks.blockMana, 5)
+            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 12000 * 81,
+                    new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftItems.itemManaBall, 54)
             ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 47000,
-                    new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemMana, 50)
+            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass), 2333,
+                    new ItemStack(Blocks.GLASS), new ItemStack(ManaCraftItems.itemManaBall, 3), new ItemStack(ManaCraftItems.itemManaNugget, 3)
             ),
-            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 430000,
-                    new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftBlocks.blockMana, 48)
-            ),
-            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass, 4), 8848,
-                    new ItemStack(Blocks.GLASS, 4), new ItemStack(ManaCraftItems.itemMana, 12), new ItemStack(ManaCraftItems.itemManaNugget, 12)
-            ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 4000,
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 5500,
                     new ItemStack(Items.COAL), new ItemStack(ManaCraftItems.itemManaBall, 8)
             ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 40000,
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 126000,
                     new ItemStack(Items.DIAMOND), new ItemStack(ManaCraftItems.itemManaCoal, 64)
             )
     );
 
-    ItemStackHandler sorted() {
+    public boolean isSorted = false;
+    ItemStackHandler getSorted() {
         ItemStackHandler handler = new ItemStackHandler(4);
         for (int i = 0; i < input.getSlots(); ++i)
             ItemHandlerHelper.insertItemStacked(handler, input.getStackInSlot(i).copy(), false);
@@ -156,7 +156,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
         ItemStack[] items = new ItemStack[handler.getSlots() - empty];
         for (int i = 0; i < items.length; ++i)
             items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, Comparator.comparing(stack -> stack.getItem().getUnlocalizedName()));
+        Arrays.sort(items, Recipe.comparator);
         handler = new ItemStackHandler(items.length);
         for (int i = 0; i < handler.getSlots(); ++i)
             handler.setStackInSlot(i, items[i]);
@@ -164,13 +164,13 @@ public class TileManaProducer extends TileEntity implements ITickable {
     }
 
     Recipe detect() {
-        ItemStackHandler handler = sorted();
+        ItemStackHandler handler = getSorted();
         for(Recipe recipe : recipes) {
             ItemStack[] matches = recipe.getInput();
             boolean good = handler.getSlots() >= matches.length;
             for (int i = 0; i < matches.length && good
                     && (good = ItemStack.areItemStacksEqual(handler.extractItem(i, matches[i].getCount(), true), matches[i])); ++i);
-            if(good)
+            if (good)
                 return recipe;
         }
         return null;
@@ -183,54 +183,50 @@ public class TileManaProducer extends TileEntity implements ITickable {
             else
                 input.setStackInSlot(i, ItemStack.EMPTY);
     }
-
     @Override
     public void update() {
-        if (!world.isRemote)
-        {
+        if (!world.isRemote) {
             IBlockState state = this.getWorld().getBlockState(pos);
             if(work_time > total_work_time)
                 work_time = total_work_time;
             if(checkCharged()) {
                 Recipe current = detect();
                 if (current != null && output.insertItem(0, current.getOutput(), true).isEmpty()) {
-                    this.getWorld().setBlockState(pos, state.withProperty(BlockManaProducer.WORKING, Boolean.TRUE));
+                    this.getWorld().setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
                     if(total_work_time != current.getWorkTime()) {
                         total_work_time = current.getWorkTime();
                         work_time = Integer.min(work_time, total_work_time - 1);
                     }
-                    int step = 7
-                            - (world.getWorldInfo().isRaining() ? 2 : 0)
-                            + (world.getWorldInfo().isThundering() ? 5 : 0)
-                            + (int)((world.getBiome(pos).getRainfall() * 0.5f + 0.2f) * 8);
-                    copyToInput(sorted());
-                    if ((work_time += step) >= total_work_time) {
+                    if(!isSorted) {
+                        copyToInput(getSorted());
+                        isSorted = true;
+                    }
+                    if ((work_time += 8) >= total_work_time) {
                         this.work_time -= current.getWorkTime();
-                        ItemStackHandler temp = sorted();
+                        ItemStackHandler temp = getSorted();
                         for (int i = 0; i < temp.getSlots() && i < current.getInput().length; ++i) {
                             temp.extractItem(i, current.getInput()[i].getCount(),false);
                         }
                         copyToInput(temp);
                         output.insertItem(0, current.getOutput().copy(), false);
-                        this.markDirty();
+                        markDirty();
                     }
                 } else {
                     if (work_time > 0)
                         work_time -= 24;
                     if(work_time < 0)
                         work_time = 0;
-                    world.setBlockState(pos, state.withProperty(BlockManaProducer.WORKING, Boolean.FALSE));
+                    world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
                 }
             } else {
                 work_time = 0;
-                world.setBlockState(pos, state.withProperty(BlockManaProducer.WORKING, Boolean.FALSE));
+                world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
             }
         }
     }
 
     @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-    {
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
         return oldState.getBlock() != newState.getBlock();
     }
 }
