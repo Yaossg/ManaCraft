@@ -15,27 +15,34 @@ import java.util.Random;
 
 public class ManaDropEvent {
     public static void init() {
-        if(Config.dropMana)
+        if(Config.dropManaChance >= 0)
             MinecraftForge.EVENT_BUS.register(ManaDropEvent.class);
     }
-    public static final Random random = new Random();
-    public static final RandomBuffer rb = new RandomBuffer(random);
+    private static final Random random = new Random();
+    private static final RandomBuffer rb = new RandomBuffer(random);
+    private static void spawnEntityItem(LivingDropsEvent event, ItemStack stack) {
+        Entity entity = event.getEntity();
+        rb.reallocate(64);
+        float fx = rb.getFloat(16) * 0.8f + 0.1f + (float) entity.posX;
+        float fy = rb.getFloat(16) * 0.8f + 0.1f + (float) entity.posY;
+        float fz = rb.getFloat(16) * 0.8f + 0.1f + (float) entity.posZ;
+        EntityItem item = new EntityItem(entity.world, fx, fy, fz, stack);
+        item.motionX = random.nextGaussian() * 0.05;
+        item.motionY = random.nextGaussian() * 0.05;
+        item.motionZ = random.nextGaussian() * 0.05;
+        event.getDrops().add(item);
+    }
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         Entity entity = event.getEntity();
         int loot = event.getLootingLevel();
-        rb.reallocate(32);
-        if(rb.getAsInt(4) + (int)(1.75 * loot) > 14)
-            if(Config.dropManaApple
-                    && entity instanceof EntityPig && loot != 0
-                    && (loot > 4 || rb.getAsInt(2) < loot)
-                    && (rb.getAsInt(4) == 0)) {
-                event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ,
-                        new ItemStack(ManaCraftItems.itemManaApple, 1)));
-            } else {
-                event.getDrops().add(new EntityItem(entity.world, entity.posX, entity.posY, entity.posZ,
-                        new ItemStack(ManaCraftItems.itemMana,
-                                (int) (1 + (rb.getFloat(22) + 0.5) * loot * 0.75))));
-            }
+        rb.reallocate(64);
+        if(rb.getBitsAsInt(8) + 3 * loot > Config.dropManaChance) {
+            boolean piggy = Config.dropManaApple
+                    && entity instanceof EntityPig
+                    && rb.getBitsAsInt(4) / (loot + 1) < 2;
+            spawnEntityItem(event, piggy ? new ItemStack(ManaCraftItems.itemManaApple)
+                    : new ItemStack(ManaCraftItems.itemMana, (int) (1 + (rb.getFloat() + 0.25) * loot)));
+        }
     }
 }

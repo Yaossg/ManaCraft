@@ -20,11 +20,11 @@ public interface IGUIManager {
     default Container getServer(EntityPlayer player, TileEntity tileEntity) {
         return getServerBuilder().apply(player, tileEntity);
     }
-    default GuiContainer getClient(Container container) {
-        return getClientBuilder().apply(container);
-    }
     default GuiContainer getClient(EntityPlayer player, TileEntity tileEntity) {
         return getClient(getServer(player, tileEntity));
+    }
+    default GuiContainer getClient(Container container) {
+        return getClientBuilder().apply(container);
     }
     @FunctionalInterface
     interface Matcher<T> {
@@ -34,7 +34,9 @@ public interface IGUIManager {
     interface Builder<T extends Enum<T> & IGUIManager, R> {
         R build(T self, EntityPlayer player, TileEntity tileEntity);
     }
-    static <T extends Enum<T> & IGUIManager, R> R get(T[] values, int id, Builder<T, R> builder, EntityPlayer player, TileEntity tileEntity) {
+    @Nullable
+    static <T extends Enum<T> & IGUIManager, R>
+    R get(T[] values, int id, Builder<T, R> builder, EntityPlayer player, TileEntity tileEntity) {
         return Arrays.stream(values)
                 .filter(gui -> gui.ordinal() == id)
                 .map(gui -> builder.build(gui, player, tileEntity))
@@ -55,10 +57,10 @@ public interface IGUIManager {
         };
     }
     static <T extends Enum<T> & IGUIManager> IGuiHandler handler(T[] values) {
-        return handler((id, player, tileEntity) -> IGUIManager.get(values, id, IGUIManager::getServer, player, tileEntity),
-                (id, player, tileEntity) -> IGUIManager.get(values, id, IGUIManager::getClient, player, tileEntity));
+        return handler((id, player, tileEntity) -> get(values, id, IGUIManager::getServer, player, tileEntity),
+                (id, player, tileEntity) -> get(values, id, IGUIManager::getClient, player, tileEntity));
     }
     static <T extends Enum<T> & IGUIManager> void register(Object mod, T[] values) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(mod, IGUIManager.handler(values));
+        NetworkRegistry.INSTANCE.registerGuiHandler(mod, handler(values));
     }
 }

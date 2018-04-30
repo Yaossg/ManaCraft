@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import yaossg.mod.mana_craft.config.Config;
 import yaossg.mod.mana_craft.item.ItemManaApple;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
+import yaossg.mod.mana_craft.util.RandomBuffer;
 
 import java.util.Random;
 
@@ -31,16 +32,21 @@ public class EntityManaBall extends EntityThrowable {
     }
 
     private static final Random random = new Random();
+    private static final RandomBuffer rb = new RandomBuffer(random);
     @Override
     protected void onImpact(RayTraceResult result) {
-        if (!world.isRemote && result.entityHit instanceof EntityPig && Config.bomb_size > 0 && Config.MBI && random.nextInt(16) == 0) {
-            if(thrower != null)
-                ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit);
-            this.world.setEntityState(this, (byte) 3);
-            this.setDead();
+        if(rb.isEmpty())
+            rb.allocate(64);
+        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && rb.getBoolean(4)) {
+            if (thrower != null)
+                ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit, world.isRemote);
+            if (!world.isRemote) {
+                world.setEntityState(this, (byte) 3);
+                setDead();
+            }
         }
         if (result.entityHit != null)
-            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 8);
+            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 7);
     }
 
     public static class Render extends RenderSnowball<EntityManaBall> {

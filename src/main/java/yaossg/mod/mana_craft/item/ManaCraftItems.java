@@ -2,6 +2,7 @@ package yaossg.mod.mana_craft.item;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -26,12 +27,15 @@ public class ManaCraftItems {
     public static final Item itemManaNugget = newItem("mana_nugget");
     public static final Item itemManaCoal = nameAs(new Item() {
         @Override
-        public int getItemBurnTime(ItemStack itemStack) {
-            return itemStack.getItem() == this ? 200 * 64 : 0;
+        public int getItemBurnTime(ItemStack stack) {
+            return stack.getItem() == this ? 200 * 64 : 0;
         }
     }, "mana_coal");
     public static final Item itemManaDiamond = newItem("mana_diamond");
     public static final Item itemManaApple = nameAs(new ItemManaApple(), "mana_apple");
+    public static final Item itemManaPork = nameAs(
+            new ItemFood(12,2f,true),
+        "mana_pork");
     public static final Item itemManaBall = nameAs(new ItemManaBall(),"mana_ball");
     public static final Item itemManaWand = nameAs(new ItemManaWand(), "mana_wand");
     public static final Item itemManaSword = nameAs(new ItemManaTool.ItemManaSword(), "mana_sword");
@@ -51,6 +55,7 @@ public class ManaCraftItems {
         Util.register(itemManaIngot);
         Util.register(itemManaNugget);
         Util.register(itemManaApple);
+        Util.register(itemManaPork);
         Util.register(itemManaBall);
         Util.register(itemManaCoal);
         Util.register(itemManaDiamond);
@@ -74,6 +79,7 @@ public class ManaCraftItems {
         Util.loadModel(itemManaIngot);
         Util.loadModel(itemManaNugget);
         Util.loadModel(itemManaApple);
+        Util.loadModel(itemManaPork);
         Util.loadModel(itemManaBall);
         Util.loadModel(itemManaCoal);
         Util.loadModel(itemManaDiamond);

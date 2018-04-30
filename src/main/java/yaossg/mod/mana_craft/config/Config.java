@@ -7,44 +7,46 @@ public class Config {
     public static Configuration config;
     //definition of defaults
     //  General
-    public static int bomb_size = 20;
-    public static boolean PEA = true;
-    public static boolean MBI = true;
+    public static int bombSize = 20;
+    public static boolean damage = false;
+    public static boolean fire = false;
     public static int radius = 3;
     public static int limit = 3;
-    public static boolean dropMana = true;
+    public static int dropManaChance = 233;
     public static boolean dropManaApple = true;
     //  Ore Generation
     public static int weight = 2333333;
-    public static int mana_ore_size = 12;
-    public static int mana_ore_height = 36;
-    public static int mana_ore_times = 4;
-    public static int mana_ingot_ore_size = 8;
-    public static int mana_ingot_ore_height = 24;
-    public static int mana_ingot_ore_times = 1;
-    public static int mixture_chance = 3;
-    public static int mixture_height = 32;
-    public static int mixture_times = 4;
+    public static int sizeManaOre = 12;
+    public static int heightManaOre = 36;
+    public static int timesManaOre = 4;
+    public static int sizeManaIngotOre = 8;
+    public static int heightManaIngotOre = 24;
+    public static int timesManaIngotOre = 1;
+    public static int mixtureChance = 3;
+    public static int mixtureHeight = 32;
+    public static int mixtureTimes = 4;
 
     public static void init(FMLPreInitializationEvent event) {
         config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
         load();
+        config.save();
     }
+
     public static void load() {
         String key, comment;
 
-        key = "bomb_size";
+        key = "bombSize";
         comment = "Bomb Size (disabled if not positive)";
-        bomb_size = config.get(Configuration.CATEGORY_GENERAL, key, bomb_size, comment).getInt();
+        bombSize = config.get(Configuration.CATEGORY_GENERAL, key, bombSize, comment).getInt();
 
-        key = "PEA";
-        comment = "true if pigs eat Mana Apples (requires bomb_size > 0)";
-        PEA = config.get(Configuration.CATEGORY_GENERAL, key, PEA, comment).getBoolean();
+        key = "damage";
+        comment = "whether damage Terrain";
+        damage = config.get(Configuration.CATEGORY_GENERAL, key, damage, comment).getBoolean();
 
-        key = "MBI";
-        comment = "true if Mana Ball invokes pigs (requires bomb_size > 0)";
-        MBI = config.get(Configuration.CATEGORY_GENERAL, key, MBI, comment).getBoolean();
+        key = "fire";
+        comment = "wheather cause fire";
+        fire = config.get(Configuration.CATEGORY_GENERAL, key, fire, comment).getBoolean();
 
         key = "limit";
         comment = "the number of Mana Producers that Mana Booster can boost (disabled if not positive)";
@@ -58,50 +60,49 @@ public class Config {
         comment = "the weight of ore generation (disabled if not positive)";
         weight = config.get(Configuration.CATEGORY_GENERAL, key, weight, comment).getInt();
 
-        key = "dropMana";
-        comment = "whether Mana would been dropped by livings";
-        dropMana = config.get(Configuration.CATEGORY_GENERAL, key, dropMana, comment).getBoolean();
+        key = "dropManaChance";
+        comment = "drop chance of Mana from livings (disabled if negative, 100% if 0, 0% if 255 or greater without looting)";
+        dropManaChance = config.get(Configuration.CATEGORY_GENERAL, key, dropManaChance, comment).getInt();
 
         key = "dropManaApple";
         comment = "whether Mana Apple would been dropped by pigs (when dropMana is true)";
         dropManaApple = config.get(Configuration.CATEGORY_GENERAL, key, dropManaApple, comment).getBoolean();
 
-        key = "mana_ore_size";
+        key = "sizeManaOre";
         comment = "max size of a single Mana Ore vein";
-        mana_ore_size = config.get(Configuration.CATEGORY_GENERAL, key, mana_ore_size, comment).getInt();
+        sizeManaOre = config.get(Configuration.CATEGORY_GENERAL, key, sizeManaOre, comment).getInt();
 
-        key = "mana_ore_height";
+        key = "heightManaOre";
         comment = "max height of Mana Ores veins";
-        mana_ore_height = config.get(Configuration.CATEGORY_GENERAL, key, mana_ore_height, comment).getInt();
+        heightManaOre = config.get(Configuration.CATEGORY_GENERAL, key, heightManaOre, comment).getInt();
 
-        key = "mana_ore_times";
+        key = "timesManaOre";
         comment = "times of generation of Mana Ore veins per chunk";
-        mana_ore_times = config.get(Configuration.CATEGORY_GENERAL, key, mana_ore_times, comment).getInt();
+        timesManaOre = config.get(Configuration.CATEGORY_GENERAL, key, timesManaOre, comment).getInt();
 
-        key = "mana_ingot_ore_size";
+        key = "sizeManaIngotOre";
         comment = "max size of a single Mana Ingot Ore vein";
-        mana_ingot_ore_size = config.get(Configuration.CATEGORY_GENERAL, key, mana_ingot_ore_size, comment).getInt();
+        sizeManaIngotOre = config.get(Configuration.CATEGORY_GENERAL, key, sizeManaIngotOre, comment).getInt();
 
-        key = "mana_ingot_ore_height";
+        key = "heightManaIngotOre";
         comment = "max height of Mana Ingot Ores veins";
-        mana_ingot_ore_times = config.get(Configuration.CATEGORY_GENERAL, key, mana_ingot_ore_times, comment).getInt();
+        timesManaIngotOre = config.get(Configuration.CATEGORY_GENERAL, key, timesManaIngotOre, comment).getInt();
 
-        key = "mana_ingot_ore_times";
+        key = "timesManaIngotOre";
         comment = "times of generation of Mana Ingot Ore veins per chunk";
-        mana_ingot_ore_height= config.get(Configuration.CATEGORY_GENERAL, key, mana_ingot_ore_height, comment).getInt();
+        heightManaIngotOre = config.get(Configuration.CATEGORY_GENERAL, key, heightManaIngotOre, comment).getInt();
 
-        key = "mixture_chance";
+        key = "mixtureChance";
         comment = "Change of generation of mixture veins (1 in [value below] per chunk)";
-        mixture_chance= config.get(Configuration.CATEGORY_GENERAL, key, mixture_chance, comment).getInt();
+        mixtureChance = config.get(Configuration.CATEGORY_GENERAL, key, mixtureChance, comment).getInt();
 
-        key = "mixture_height";
+        key = "mixtureHeight";
         comment = "max height of mixture veins";
-        mixture_height = config.get(Configuration.CATEGORY_GENERAL, key, mixture_height, comment).getInt();
+        mixtureHeight = config.get(Configuration.CATEGORY_GENERAL, key, mixtureHeight, comment).getInt();
 
-        key = "mixture_times";
+        key = "mixtureTimes";
         comment = "times of generation of mixture veins per chunk";
-        mixture_times = config.get(Configuration.CATEGORY_GENERAL, key, mixture_times, comment).getInt();
+        mixtureTimes = config.get(Configuration.CATEGORY_GENERAL, key, mixtureTimes, comment).getInt();
 
-        config.save();
     }
 }

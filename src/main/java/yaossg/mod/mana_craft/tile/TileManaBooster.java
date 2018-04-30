@@ -22,6 +22,7 @@ import yaossg.mod.mana_craft.item.ManaCraftItems;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static yaossg.mod.mana_craft.block.BlockManaBooster.*;
 
@@ -96,7 +97,8 @@ public class TileManaBooster extends TileEntity implements ITickable {
             Burning.of(ManaCraftItems.itemManaIngot, 4000, 450),
             Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 12960, 1250),
             Burning.of(ManaCraftItems.itemManaCoal, 400, 800),
-            Burning.of(ManaCraftItems.itemManaDiamond, 14400, 1600)
+            Burning.of(ManaCraftItems.itemManaDiamond, 14400, 1600),
+            Burning.of(ManaCraftItems.itemManaPork, 8888, 40)
     );
     boolean flip = false;
     @Override
@@ -107,8 +109,7 @@ public class TileManaBooster extends TileEntity implements ITickable {
                 if (burn_time > 0) {
                     if (flip = !flip) {
                         --burn_time;
-                        for(EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings())
-                        {
+                        for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
                             TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
                             if(tileEntity instanceof TileEntityFurnace) {
                                 TileEntityFurnace furnace = (TileEntityFurnace) tileEntity;
@@ -127,7 +128,7 @@ public class TileManaBooster extends TileEntity implements ITickable {
                                 .filter(pos0 -> pos.distanceSq(pos0) <= Config.radius * Config.radius
                                         && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(BlockManaProducer.WORKING))
                                 .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
-                                .limit(Config.limit).forEach(tile -> {
+                                .limit(Config.limit).filter(Objects::nonNull).forEach(tile -> {
                             tile.work_time += burn_level;
                             burn_time -= 3;
                         });

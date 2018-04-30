@@ -128,10 +128,10 @@ public class TileManaProducer extends TileEntity implements ITickable {
             Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 12000,
                     new ItemStack(Items.GOLD_NUGGET, 3), new ItemStack(ManaCraftItems.itemManaBall, 2)
             ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000 * 9,
+            Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000 * 8,
                     new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemManaBall, 6)
             ),
-            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 12000 * 81,
+            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 12000 * 64,
                     new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftItems.itemManaBall, 54)
             ),
             Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass), 2333,
