@@ -15,15 +15,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import yaossg.mod.mana_craft.api.ManaCraftAPIs;
 import yaossg.mod.mana_craft.config.Config;
 import yaossg.mod.mana_craft.block.BlockManaProducer;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
+import static yaossg.mod.mana_craft.APIImpl.fuels;
+import static yaossg.mod.mana_craft.api.ManaCraftAPIs.Fuel;
 import static yaossg.mod.mana_craft.block.BlockManaBooster.*;
 
 public class TileManaBooster extends TileEntity implements ITickable {
@@ -63,43 +66,20 @@ public class TileManaBooster extends TileEntity implements ITickable {
         }
         return super.getCapability(capability, facing);
     }
-
-    interface Burning {
-        Item getItem();
-        int getBurnLevel();
-        int getBurnTime();
-        static Burning of(Item item, int level, int time) {
-            return new Burning() {
-                @Override
-                public Item getItem() {
-                    return item;
-                }
-
-                @Override
-                public int getBurnLevel() {
-                    return level;
-                }
-
-                @Override
-                public int getBurnTime() {
-                    return time;
-                }
-            };
-        }
+    static {
+        fuels.addAll(Arrays.asList(
+                Fuel.of(ManaCraftItems.itemMana, 20,200),
+                Fuel.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 100, 360),
+                Fuel.of(ManaCraftItems.itemManaBall, 108, 360),
+                Fuel.of(ManaCraftItems.itemManaApple, 888, 360),
+                Fuel.of(ManaCraftItems.itemManaNugget, 500, 400),
+                Fuel.of(ManaCraftItems.itemManaIngot, 4000, 450),
+                Fuel.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 12960, 1250),
+                Fuel.of(ManaCraftItems.itemManaCoal, 400, 800),
+                Fuel.of(ManaCraftItems.itemManaDiamond, 14400, 1600),
+                Fuel.of(ManaCraftItems.itemManaPork, 8888, 40)
+        ));
     }
-
-    private static final List<Burning> burnings = Arrays.asList(
-            Burning.of(ManaCraftItems.itemMana, 20,200),
-            Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 100, 360),
-            Burning.of(ManaCraftItems.itemManaBall, 108, 360),
-            Burning.of(ManaCraftItems.itemManaApple, 888, 360),
-            Burning.of(ManaCraftItems.itemManaNugget, 500, 400),
-            Burning.of(ManaCraftItems.itemManaIngot, 4000, 450),
-            Burning.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 12960, 1250),
-            Burning.of(ManaCraftItems.itemManaCoal, 400, 800),
-            Burning.of(ManaCraftItems.itemManaDiamond, 14400, 1600),
-            Burning.of(ManaCraftItems.itemManaPork, 8888, 40)
-    );
     boolean flip = false;
     @Override
     public void update() {
@@ -135,17 +115,11 @@ public class TileManaBooster extends TileEntity implements ITickable {
                     }
                 } else {
                     Item item = fuel.getStackInSlot(0).getItem();
-                    int index = -1;
-                    for (int i = 0; i < burnings.size(); ++i) {
-                        if (burnings.get(i).getItem() == item) {
-                            index = i;
-                            break;
-                        }
-                    }
-                    if (index != -1) {
-                        this.getWorld().setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
-                        total_burn_time = burn_time = burnings.get(index).getBurnTime();
-                        burn_level = burnings.get(index).getBurnLevel();
+                    Optional<ManaCraftAPIs.Fuel> opt = fuels.stream().filter(e -> e.getItem() == item).findAny();
+                    if(opt.isPresent()) {
+                        world.setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
+                        total_burn_time = burn_time = opt.get().getBurnTime();
+                        burn_level = opt.get().getBurnLevel();
                         fuel.extractItem(0, 1, false);
                         markDirty();
                     } else {

@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancement.root.description"
     },
-    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+    "background": "mana_craft:textures/gui/advancements/backgrounds/mana.png"
   },
   "criteria": {
     "get_mana": {

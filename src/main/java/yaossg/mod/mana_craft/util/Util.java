@@ -75,10 +75,11 @@ public class Util {
                 size, flaming, damagesTerrain, affectedPositions), spawnParticles);
     }
 
-    public static void giveAdvancement(Entity player, String advance) {
+    public static void giveAdvancement(Entity player, String modid, String root, String advance) {
         if(player.getServer() != null && player instanceof EntityPlayerMP) {
             EntityPlayerMP playerMP = (EntityPlayerMP)player;
-            Advancement advancement = player.getServer().getAdvancementManager().getAdvancement(new ResourceLocation(advance));
+            Advancement advancement = player.getServer().getAdvancementManager()
+                    .getAdvancement(new ResourceLocation(modid, root + "/" + advance));
             AdvancementProgress progress = playerMP.getAdvancements().getProgress(advancement);
             if (!progress.isDone())
                 for (String s : progress.getRemaningCriteria())

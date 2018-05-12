@@ -45,7 +45,7 @@ public class ItemManaWand extends Item implements ItemManaTool {
                     entity.shoot(player, player.rotationPitch, player.rotationYaw, 0,
                             EntityManaBall.betterVelocity + (useDuration - timeLeft) / 32f, EntityManaBall.defaultInaccuracy);
                     worldIn.spawnEntity(entity);
-                    if(stack.attemptDamageItem(1, player.getRNG(), player instanceof EntityPlayerMP ? (EntityPlayerMP)player : null)) {
+                    if(!player.isCreative() && stack.attemptDamageItem(1, player.getRNG(), player instanceof EntityPlayerMP ? (EntityPlayerMP)player : null)) {
                         player.renderBrokenItemStack(stack);
                         ItemStack copy = stack.copy();
                         stack.shrink(1);

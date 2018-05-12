@@ -17,7 +17,7 @@ import yaossg.mod.mana_craft.util.RandomBuffer;
 import java.util.Random;
 
 public class EntityManaBall extends EntityThrowable {
-    public static final float defaultVelocity = 0.4f;
+    public static final float defaultVelocity = 0.44f;
     public static final float betterVelocity = 0.5f;
     public static final float defaultInaccuracy = 1;
 
@@ -37,16 +37,14 @@ public class EntityManaBall extends EntityThrowable {
     protected void onImpact(RayTraceResult result) {
         if(rb.isEmpty())
             rb.allocate(64);
-        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && rb.getBoolean(4)) {
-            if (thrower != null)
-                ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit, world.isRemote);
-            if (!world.isRemote) {
-                world.setEntityState(this, (byte) 3);
-                setDead();
-            }
+        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && rb.getBoolean(4) && thrower != null)
+            ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit, world.isRemote);
+        if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
+            world.setEntityState(this, (byte) 3);
+            setDead();
         }
-        if (result.entityHit != null)
-            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 7);
+        if(result.entityHit != null)
+            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 6);
     }
 
     public static class Render extends RenderSnowball<EntityManaBall> {

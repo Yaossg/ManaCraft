@@ -32,6 +32,7 @@ container.mana_producer.title=魔能制造器
 container.mana_booster.title=魔能增幅器
 container.mana_producer.hover=制造中...%d%%
 container.mana_booster.hover=燃料剩余:%d%% 功率:+%d
+container.mana_booster.hoverEmpty=燃料剩余:0%
 advancement.root.title=ManaCraft
 advancement.root.description=感受魔能的力量！
 advancement.shiny_mana.title=闪亮的魔能

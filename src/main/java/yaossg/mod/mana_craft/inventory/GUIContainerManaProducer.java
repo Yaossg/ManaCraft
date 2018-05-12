@@ -6,6 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import yaossg.mod.mana_craft.ManaCraft;
+import yaossg.mod.mana_craft.util.IGUIManager;
 
 public class GUIContainerManaProducer extends GuiContainer
 {
@@ -37,12 +38,13 @@ public class GUIContainerManaProducer extends GuiContainer
         }
     }
 
+    private static final ResourceLocation texture = IGUIManager.getTexture(ManaCraft.MODID, "mana_producer");
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-        this.mc.getTextureManager().bindTexture(new ResourceLocation(ManaCraft.MODID + ":textures/gui/container/mana_producer.png"));
+        this.mc.getTextureManager().bindTexture(texture);
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
 
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);

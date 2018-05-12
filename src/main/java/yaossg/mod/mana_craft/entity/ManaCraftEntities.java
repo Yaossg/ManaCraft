@@ -21,7 +21,7 @@ public class ManaCraftEntities {
 
     private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange,
                                        int updateFrequency, boolean sendsVelocityUpdates) {
-        EntityRegistry.registerModEntity(new ResourceLocation(ManaCraft.MODID + ":" + name), entityClass, name, nextID++,
+        EntityRegistry.registerModEntity(new ResourceLocation(ManaCraft.MODID , name), entityClass, name, nextID++,
                 ManaCraft.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
     }
 }

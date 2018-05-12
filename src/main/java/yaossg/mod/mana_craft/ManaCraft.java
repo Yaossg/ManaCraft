@@ -20,7 +20,7 @@ public class ManaCraft
 {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
-    public static final String VERSION = "0.1.4";
+    public static final String VERSION = "0.1.5";
 
     @SidedProxy(clientSide = "yaossg.mod.mana_craft.proxy.ClientProxy",
             serverSide = "yaossg.mod.mana_craft.proxy.CommonProxy")
@@ -32,7 +32,7 @@ public class ManaCraft
     public static Logger logger;
 
     public static void giveAdvancement(Entity player, String advance) {
-        Util.giveAdvancement(player, MODID + ":mana/" + advance);
+        Util.giveAdvancement(player, MODID, "mana" , advance);
     }
 
     @EventHandler
@@ -40,7 +40,7 @@ public class ManaCraft
     {
         logger = event.getModLog();
         logger.info(NAME + " v" + VERSION + " is loading (modid:" + MODID + ")");
-        logger.warn("The mod is still unstable and in early development, There are lots of bugs to fix and ideas to add");
+        logger.warn("The mod is still unstable and in early development, There are still lots of bugs remaining");
         proxy.preInit(event);
     }
 

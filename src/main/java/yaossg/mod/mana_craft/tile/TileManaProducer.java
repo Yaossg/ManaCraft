@@ -8,18 +8,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import yaossg.mod.mana_craft.api.ManaCraftAPIs;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
 
+import static yaossg.mod.mana_craft.APIImpl.recipes;
+import static yaossg.mod.mana_craft.api.ManaCraftAPIs.Recipe;
 import static yaossg.mod.mana_craft.block.BlockManaProducer.*;
 
 public class TileManaProducer extends TileEntity implements ITickable {
@@ -93,57 +93,32 @@ public class TileManaProducer extends TileEntity implements ITickable {
                 && world.canSeeSky(pos.add(-1, 2, -1))
                 && world.canSeeSky(pos.offset(facing, 2));
     }
+    static {
+        recipes.addAll(Arrays.asList(
+                Recipe.of(new ItemStack(ManaCraftItems.itemMana, 5), 4800,
+                        new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.REDSTONE), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.SUGAR)
+                ),
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 12000,
+                        new ItemStack(Items.GOLD_NUGGET, 3), new ItemStack(ManaCraftItems.itemManaBall, 2)
+                ),
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000 * 8,
+                        new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemManaBall, 6)
+                ),
+                Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 12000 * 64,
+                        new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftItems.itemManaBall, 54)
+                ),
+                Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass), 2333,
+                        new ItemStack(Blocks.GLASS), new ItemStack(ManaCraftItems.itemManaBall, 3), new ItemStack(ManaCraftItems.itemManaNugget, 3)
+                ),
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 5500,
+                        new ItemStack(Items.COAL), new ItemStack(ManaCraftItems.itemManaBall, 8)
+                ),
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 126000,
+                        new ItemStack(Items.DIAMOND), new ItemStack(ManaCraftItems.itemManaCoal, 64)
+                )
+        ));
 
-    public interface Recipe {
-        Comparator<ItemStack> comparator = Comparator.<ItemStack, ResourceLocation>comparing(stack -> stack.getItem().getRegistryName()).thenComparingInt(ItemStack::getCount);
-
-        ItemStack[] getInput();
-        ItemStack getOutput();
-        int getWorkTime();
-        static Recipe of(ItemStack ouput, int time, ItemStack... input) {
-            Arrays.sort(input, comparator);
-            return new Recipe() {
-                @Override
-                public ItemStack[] getInput() {
-                    return input;
-                }
-
-                @Override
-                public ItemStack getOutput() {
-                    return ouput;
-                }
-
-                @Override
-                public int getWorkTime() {
-                    return time;
-                }
-            };
-        }
     }
-
-    private static final List<Recipe> recipes = Arrays.asList(
-            Recipe.of(new ItemStack(ManaCraftItems.itemMana, 5), 4800,
-                    new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.REDSTONE), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.SUGAR)
-            ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 12000,
-                    new ItemStack(Items.GOLD_NUGGET, 3), new ItemStack(ManaCraftItems.itemManaBall, 2)
-            ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000 * 8,
-                    new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemManaBall, 6)
-            ),
-            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 12000 * 64,
-                    new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftItems.itemManaBall, 54)
-            ),
-            Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass), 2333,
-                    new ItemStack(Blocks.GLASS), new ItemStack(ManaCraftItems.itemManaBall, 3), new ItemStack(ManaCraftItems.itemManaNugget, 3)
-            ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 5500,
-                    new ItemStack(Items.COAL), new ItemStack(ManaCraftItems.itemManaBall, 8)
-            ),
-            Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 126000,
-                    new ItemStack(Items.DIAMOND), new ItemStack(ManaCraftItems.itemManaCoal, 64)
-            )
-    );
 
     public boolean isSorted = false;
     ItemStackHandler getSorted() {
@@ -156,16 +131,16 @@ public class TileManaProducer extends TileEntity implements ITickable {
         ItemStack[] items = new ItemStack[handler.getSlots() - empty];
         for (int i = 0; i < items.length; ++i)
             items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, Recipe.comparator);
+        Arrays.sort(items, ManaCraftAPIs.Recipe.comparator);
         handler = new ItemStackHandler(items.length);
         for (int i = 0; i < handler.getSlots(); ++i)
             handler.setStackInSlot(i, items[i]);
         return handler;
     }
 
-    Recipe detect() {
+    ManaCraftAPIs.Recipe detect() {
         ItemStackHandler handler = getSorted();
-        for(Recipe recipe : recipes) {
+        for(ManaCraftAPIs.Recipe recipe : recipes) {
             ItemStack[] matches = recipe.getInput();
             boolean good = handler.getSlots() >= matches.length;
             for (int i = 0; i < matches.length && good
@@ -190,7 +165,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
             if(work_time > total_work_time)
                 work_time = total_work_time;
             if(checkCharged()) {
-                Recipe current = detect();
+                ManaCraftAPIs.Recipe current = detect();
                 if (current != null && output.insertItem(0, current.getOutput(), true).isEmpty()) {
                     this.getWorld().setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
                     if(total_work_time != current.getWorkTime()) {

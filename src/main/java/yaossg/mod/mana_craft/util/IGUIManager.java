@@ -4,6 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -31,12 +32,12 @@ public interface IGUIManager {
         T match(int id, EntityPlayer player, TileEntity tileEntity);
     }
     @FunctionalInterface
-    interface Builder<T extends Enum<T> & IGUIManager, R> {
-        R build(T self, EntityPlayer player, TileEntity tileEntity);
+    interface Builder<R> {
+        R build(IGUIManager self, EntityPlayer player, TileEntity tileEntity);
     }
     @Nullable
     static <T extends Enum<T> & IGUIManager, R>
-    R get(T[] values, int id, Builder<T, R> builder, EntityPlayer player, TileEntity tileEntity) {
+    R get(T[] values, int id, Builder<R> builder, EntityPlayer player, TileEntity tileEntity) {
         return Arrays.stream(values)
                 .filter(gui -> gui.ordinal() == id)
                 .map(gui -> builder.build(gui, player, tileEntity))
@@ -56,11 +57,14 @@ public interface IGUIManager {
             }
         };
     }
-    static <T extends Enum<T> & IGUIManager> IGuiHandler handler(T[] values) {
+    static <T extends Enum<T> & IGUIManager> IGuiHandler buildHandler(T[] values) {
         return handler((id, player, tileEntity) -> get(values, id, IGUIManager::getServer, player, tileEntity),
                 (id, player, tileEntity) -> get(values, id, IGUIManager::getClient, player, tileEntity));
     }
     static <T extends Enum<T> & IGUIManager> void register(Object mod, T[] values) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(mod, handler(values));
+        NetworkRegistry.INSTANCE.registerGuiHandler(mod, buildHandler(values));
+    }
+    static ResourceLocation getTexture(String modid, String texture) {
+        return new ResourceLocation(modid , "textures/gui/container/" + texture + ".png");
     }
 }

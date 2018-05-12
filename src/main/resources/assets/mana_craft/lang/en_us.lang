@@ -32,6 +32,7 @@ container.mana_producer.title=Mana Producer
 container.mana_booster.title=Mana Booster
 container.mana_producer.hover=producing...%d%%
 container.mana_booster.hover=fuel left:%d%% power:+%d
+container.mana_booster.hoverEmpty=fuel left:0%
 advancement.root.title=ManaCraft
 advancement.root.description=Feel the power of Mana!
 advancement.shiny_mana.title=Shiny Mana
