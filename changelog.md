@@ -2,7 +2,7 @@
 
 - 首次push+build
 
-## <s>v1.1.0</s> v0.1.1 <font size=5>[minor]</font>
+## <s>v1.1.0</s> v0.1.1 `[minor]`
 
 - 精简代码仓库，调整源码位置
 - 修复bug，优化代码
@@ -57,7 +57,7 @@
 - 即将独立的模组核心
 - 实用的`Utils`
 
-## v0.1.5 <font size=5>[minor]</font>
+## v0.1.5 `[minor]`
 
 - 修复bug，优化代码
 - 魔能球不再可以穿墙了
