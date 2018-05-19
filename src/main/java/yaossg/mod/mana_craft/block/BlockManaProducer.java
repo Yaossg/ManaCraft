@@ -80,7 +80,7 @@ public class BlockManaProducer extends BlockContainer {
         }
     }
 
-    public BlockManaProducer() {
+    BlockManaProducer() {
         super(Material.IRON);
         this.setHardness(3);
         this.setLightLevel(Util.lightAt(11));

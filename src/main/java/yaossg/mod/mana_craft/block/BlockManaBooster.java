@@ -27,7 +27,7 @@ import java.util.List;
 public class BlockManaBooster extends BlockContainer {
     public static final PropertyBool BURNING = PropertyBool.create("burning");
 
-    public BlockManaBooster() {
+    BlockManaBooster() {
         super(Material.IRON);
         this.setHardness(3);
         this.setLightLevel(Util.lightAt(9));

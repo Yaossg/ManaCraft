@@ -10,7 +10,7 @@ public interface ItemManaTool {
 
     int getManaValue();
     class ItemManaSword extends ItemSword implements ItemManaTool {
-        public ItemManaSword() {
+        ItemManaSword() {
             super(MANA_TOOL);
         }
         @Override
@@ -20,7 +20,7 @@ public interface ItemManaTool {
     }
 
     class ItemManaPickaxe extends ItemPickaxe implements ItemManaTool {
-        public ItemManaPickaxe() {
+        ItemManaPickaxe() {
             super(MANA_TOOL);
         }
         @Override
@@ -30,7 +30,7 @@ public interface ItemManaTool {
     }
 
     class ItemManaAxe extends ItemAxe implements ItemManaTool {
-        public ItemManaAxe() {
+        ItemManaAxe() {
             super(MANA_TOOL, 12, -2.8f);
         }
         @Override
@@ -40,7 +40,7 @@ public interface ItemManaTool {
     }
 
     class ItemManaShovel extends ItemSpade implements ItemManaTool {
-        public ItemManaShovel() {
+        ItemManaShovel() {
             super(MANA_TOOL);
         }
         @Override
@@ -50,7 +50,7 @@ public interface ItemManaTool {
     }
 
     class ItemManaHoe extends ItemHoe implements ItemManaTool {
-        public ItemManaHoe() {
+        ItemManaHoe() {
             super(MANA_TOOL);
         }
         @Override
@@ -60,7 +60,7 @@ public interface ItemManaTool {
     }
 
     class ItemManaShears extends ItemShears implements ItemManaTool {
-        public ItemManaShears() {
+        ItemManaShears() {
             this.setMaxStackSize(1);
             this.setMaxDamage(288);
         }

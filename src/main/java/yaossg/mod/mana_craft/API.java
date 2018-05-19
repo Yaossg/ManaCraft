@@ -5,10 +5,10 @@ import yaossg.mod.mana_craft.api.ManaCraftAPIs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class APIImpl extends ManaCraftAPIs {
+public class API extends ManaCraftAPIs {
     public static final List<Recipe> recipes = new ArrayList<>();
     public static final List<Fuel> fuels = new ArrayList<>();
-    public static final APIImpl INSTANCE = new APIImpl();
+    public static final API INSTANCE = new API();
 
     @Override
     public List<Recipe> getRecipes() {

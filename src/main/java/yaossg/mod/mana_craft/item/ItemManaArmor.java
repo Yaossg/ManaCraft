@@ -17,7 +17,7 @@ public class ItemManaArmor extends ItemArmor {
             20, new int[]{3, 6, 5, 2}, 32, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f)
             .setRepairItem(new ItemStack(ManaCraftItems.itemManaIngot));
 
-    public ItemManaArmor(EntityEquipmentSlot equipmentSlotIn) {
+    ItemManaArmor(EntityEquipmentSlot equipmentSlotIn) {
         super(ItemManaArmor.MANA_ARMOR, ItemManaArmor.MANA_ARMOR.ordinal(), equipmentSlotIn);
     }
 

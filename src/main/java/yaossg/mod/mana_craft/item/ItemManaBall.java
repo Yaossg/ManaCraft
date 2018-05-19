@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import yaossg.mod.mana_craft.entity.EntityManaBall;
 
 public class ItemManaBall extends Item {
-    public ItemManaBall() {
+    ItemManaBall() {
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorProjectileDispense() {
             protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
                 return new EntityManaBall(worldIn, position.getX(), position.getY(), position.getZ());

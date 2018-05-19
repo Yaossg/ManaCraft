@@ -14,7 +14,7 @@ import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.entity.EntityManaBall;
 
 public class ItemManaWand extends Item implements ItemManaTool {
-    public ItemManaWand() {
+    ItemManaWand() {
         this.setMaxDamage(255);
         this.setMaxStackSize(1);
     }

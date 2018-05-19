@@ -1,6 +1,5 @@
 package yaossg.mod.mana_craft.api;
 
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +13,7 @@ public abstract class ManaCraftAPIs {
     static {
         try
         {
-            Class<?> implClass = Class.forName("yaossg.mod.mana_craft.APIImpl");
+            Class<?> implClass = Class.forName("yaossg.mod.mana_craft.API");
             INSTANCE = (ManaCraftAPIs) implClass.getDeclaredField("INSTANCE").get(null);
         }
         catch (Exception e)

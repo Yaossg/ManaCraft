@@ -25,7 +25,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
-import static yaossg.mod.mana_craft.APIImpl.fuels;
+import static yaossg.mod.mana_craft.API.fuels;
 import static yaossg.mod.mana_craft.api.ManaCraftAPIs.Fuel;
 import static yaossg.mod.mana_craft.block.BlockManaBooster.*;
 

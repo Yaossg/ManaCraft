@@ -21,7 +21,7 @@ import yaossg.mod.mana_craft.config.Config;
 
 
 public class ItemManaApple extends ItemFood {
-    public ItemManaApple() {
+    ItemManaApple() {
         super(6,1.0f,false);
         this.setAlwaysEdible();
     }

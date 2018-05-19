@@ -13,7 +13,7 @@ import yaossg.mod.mana_craft.item.ManaCraftItems;
 import java.util.Random;
 
 public class BlockManaOre extends Block {
-    public BlockManaOre() {
+    BlockManaOre() {
         super(Material.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());

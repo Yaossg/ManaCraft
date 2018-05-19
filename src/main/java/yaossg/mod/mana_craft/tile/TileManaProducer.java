@@ -18,7 +18,7 @@ import yaossg.mod.mana_craft.item.ManaCraftItems;
 
 import java.util.Arrays;
 
-import static yaossg.mod.mana_craft.APIImpl.recipes;
+import static yaossg.mod.mana_craft.API.recipes;
 import static yaossg.mod.mana_craft.api.ManaCraftAPIs.Recipe;
 import static yaossg.mod.mana_craft.block.BlockManaProducer.*;
 

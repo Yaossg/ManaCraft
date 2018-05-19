@@ -20,7 +20,7 @@ public class ManaCraft
 {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
-    public static final String VERSION = "0.1.5";
+    public static final String VERSION = "0.1.6";
 
     @SidedProxy(clientSide = "yaossg.mod.mana_craft.proxy.ClientProxy",
             serverSide = "yaossg.mod.mana_craft.proxy.CommonProxy")
