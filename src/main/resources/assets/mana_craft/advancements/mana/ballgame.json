@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_ball"
     },
     "title": {
-      "translate": "advancement.ballgame.title"
+      "translate": "advancement.mana.ballgame.title"
     },
     "description": {
-      "translate": "advancement.ballgame.description"
+      "translate": "advancement.mana.ballgame.description"
     },
     "frame": "goal"
   },

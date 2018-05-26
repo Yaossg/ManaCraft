@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.util.IGUIManager;
+import yaossg.mod.sausage_core.api.util.IGUIManager;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;

@@ -2,21 +2,22 @@ package yaossg.mod.mana_craft;
 
 import yaossg.mod.mana_craft.api.ManaCraftAPIs;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 public class API extends ManaCraftAPIs {
-    public static final List<Recipe> recipes = new ArrayList<>();
-    public static final List<Fuel> fuels = new ArrayList<>();
     public static final API INSTANCE = new API();
 
+    public static final SortedSet<Recipe> recipes = new TreeSet<>();
+    public static final SortedSet<Fuel> fuels = new TreeSet<>();
+
     @Override
-    public List<Recipe> getRecipes() {
+    public SortedSet<Recipe> getRecipes() {
         return recipes;
     }
 
     @Override
-    public List<Fuel> getFuel() {
+    public SortedSet<Fuel> getFuel() {
         return fuels;
     }
 }

@@ -21,11 +21,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import yaossg.mod.mana_craft.util.NBTs;
-import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.inventory.ManaCraftGUIs;
 import yaossg.mod.mana_craft.tile.TileManaProducer;
+import yaossg.mod.sausage_core.api.util.NBTs;
+import yaossg.mod.sausage_core.api.util.Utils;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class BlockManaProducer extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     public static final PropertyBool WORKING = PropertyBool.create("working");
     public static class SavedData extends WorldSavedData {
-        public List<BlockPos> list = NonNullList.create();
+        public NonNullList<BlockPos> list = NonNullList.create();
         public SavedData(String name) {
             super(name);
         }
@@ -48,8 +48,7 @@ public class BlockManaProducer extends BlockContainer {
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
             list.clear();
-            NBTTagList list0 = nbt.getTagList("producers",10);
-            for (NBTBase each : list0) {
+            for (NBTBase each : nbt.getTagList("producers",10)) { // 10 -> Compound
                 NBTTagCompound compound = (NBTTagCompound) each;
                 list.add(new BlockPos(compound.getInteger("x"), compound.getInteger("y"), compound.getInteger("z")));
             }
@@ -71,8 +70,7 @@ public class BlockManaProducer extends BlockContainer {
 
         public static SavedData get(World world) {
             WorldSavedData data = world.getPerWorldStorage().getOrLoadData(SavedData.class, "Producers");
-            if (data == null)
-            {
+            if (data == null) {
                 data = new SavedData("Producers");
                 world.getPerWorldStorage().setData("Producers", data);
             }
@@ -83,7 +81,7 @@ public class BlockManaProducer extends BlockContainer {
     BlockManaProducer() {
         super(Material.IRON);
         this.setHardness(3);
-        this.setLightLevel(Util.lightAt(11));
+        this.setLightLevel(Utils.lightLevelOf(11));
         this.setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(WORKING, Boolean.FALSE));

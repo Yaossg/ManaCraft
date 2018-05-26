@@ -4,10 +4,10 @@
       "item": "mana_craft:mana"
     },
     "title": {
-      "translate": "advancement.root.title"
+      "translate": "advancement.mana.root.title"
     },
     "description": {
-      "translate": "advancement.root.description"
+      "translate": "advancement.mana.root.description"
     },
     "background": "mana_craft:textures/gui/advancements/backgrounds/mana.png"
   },

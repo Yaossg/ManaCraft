@@ -21,8 +21,7 @@ public class ContainerManaProducer extends Container {
     public int total_work_time;
     protected TileManaProducer tileEntity;
 
-    public ContainerManaProducer(EntityPlayer player, TileEntity tileEntity)
-    {
+    public ContainerManaProducer(EntityPlayer player, TileEntity tileEntity) {
         this.tileEntity = (TileManaProducer) tileEntity;
         for (int i = 0; i < 2; ++i)
             for (int j = 0; j < 2; ++j)
@@ -49,8 +48,7 @@ public class ContainerManaProducer extends Container {
             this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
     }
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         Slot slot = inventorySlots.get(index);
 
         if (slot == null || !slot.getHasStack())
@@ -85,13 +83,11 @@ public class ContainerManaProducer extends Container {
         return oldStack;
     }
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
+    public boolean canInteractWith(EntityPlayer playerIn) {
         return playerIn.getDistanceSq(tileEntity.getPos()) <= 64;
     }
     @Override
-    public void detectAndSendChanges()
-    {
+    public void detectAndSendChanges() {
         super.detectAndSendChanges();
         this.work_time = tileEntity.work_time;
         this.total_work_time = tileEntity.total_work_time;
@@ -102,8 +98,7 @@ public class ContainerManaProducer extends Container {
     }
     @SideOnly(Side.CLIENT)
     @Override
-    public void updateProgressBar(int id, int data)
-    {
+    public void updateProgressBar(int id, int data) {
         super.updateProgressBar(id, data);
         switch (id)
         {

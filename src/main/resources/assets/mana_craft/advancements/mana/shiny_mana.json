@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_ingot"
     },
     "title": {
-      "translate": "advancement.shiny_mana.title"
+      "translate": "advancement.mana.shiny_mana.title"
     },
     "description": {
-      "translate": "advancement.shiny_mana.description"
+      "translate": "advancement.mana.shiny_mana.description"
     }
   },
   "parent": "mana_craft:mana/root",

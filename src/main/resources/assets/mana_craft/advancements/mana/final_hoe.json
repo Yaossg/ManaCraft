@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_hoe"
     },
     "title": {
-      "translate": "advancement.final_hoe.title"
+      "translate": "advancement.mana.final_hoe.title"
     },
     "description": {
-      "translate": "advancement.final_hoe.description"
+      "translate": "advancement.mana.final_hoe.description"
     },
     "frame": "challenge"
   },

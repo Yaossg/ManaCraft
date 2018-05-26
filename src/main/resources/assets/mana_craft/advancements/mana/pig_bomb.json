@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_apple"
     },
     "title": {
-      "translate": "advancement.pig_bomb.title"
+      "translate": "advancement.mana.pig_bomb.title"
     },
     "description": {
-      "translate": "advancement.pig_bomb.description"
+      "translate": "advancement.mana.pig_bomb.description"
     },
     "frame": "challenge",
     "hidden": true

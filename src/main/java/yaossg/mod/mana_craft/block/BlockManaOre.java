@@ -7,8 +7,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
+import yaossg.mod.sausage_core.api.util.Utils;
 
 import java.util.Random;
 
@@ -17,7 +17,7 @@ public class BlockManaOre extends Block {
         super(Material.ROCK);
         this.setSoundType(SoundType.STONE);
         this.setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
-        this.setLightLevel(Util.lightAt(7));
+        this.setLightLevel(Utils.lightLevelOf(7));
         this.setHardness(3);
     }
 

@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_wand"
     },
     "title": {
-      "translate": "advancement.not_staff.title"
+      "translate": "advancement.mana.not_staff.title"
     },
     "description": {
-      "translate": "advancement.not_staff.description"
+      "translate": "advancement.mana.not_staff.description"
     },
     "frame": "goal"
   },

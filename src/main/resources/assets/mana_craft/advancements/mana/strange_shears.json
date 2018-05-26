@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_shears"
     },
     "title": {
-      "translate": "advancement.strange_shears.title"
+      "translate": "advancement.mana.strange_shears.title"
     },
     "description": {
-      "translate": "advancement.strange_shears.description"
+      "translate": "advancement.mana.strange_shears.description"
     },
     "frame": "goal"
   },

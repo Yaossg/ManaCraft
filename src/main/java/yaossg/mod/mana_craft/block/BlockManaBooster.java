@@ -17,10 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.ManaCraft;
 import yaossg.mod.mana_craft.inventory.ManaCraftGUIs;
 import yaossg.mod.mana_craft.tile.TileManaBooster;
+import yaossg.mod.sausage_core.api.util.Utils;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class BlockManaBooster extends BlockContainer {
     BlockManaBooster() {
         super(Material.IRON);
         this.setHardness(3);
-        this.setLightLevel(Util.lightAt(9));
+        this.setLightLevel(Utils.lightLevelOf(9));
         this.setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         this.setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }

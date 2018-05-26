@@ -9,7 +9,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import yaossg.mod.mana_craft.config.Config;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
-import yaossg.mod.mana_craft.util.RandomBuffer;
+import yaossg.mod.sausage_core.api.util.BufferedRandom;
 
 import java.util.Random;
 
@@ -19,30 +19,28 @@ public class ManaDropEvent {
             MinecraftForge.EVENT_BUS.register(ManaDropEvent.class);
     }
     private static final Random random = new Random();
-    private static final RandomBuffer rb = new RandomBuffer(random);
+    private static final BufferedRandom rb = BufferedRandom.boxed(random);
     private static void spawnEntityItem(LivingDropsEvent event, ItemStack stack) {
         Entity entity = event.getEntity();
-        rb.reallocate(64);
-        float fx = rb.getFloat(16) * 0.8f + 0.1f + (float) entity.posX;
-        float fy = rb.getFloat(16) * 0.8f + 0.1f + (float) entity.posY;
-        float fz = rb.getFloat(16) * 0.8f + 0.1f + (float) entity.posZ;
+        float fx = rb.nextFloat() * 0.5f + 0.25f + (float) entity.posX;
+        float fy = rb.nextFloat() * 0.5f + 0.25f + (float) entity.posY;
+        float fz = rb.nextFloat() * 0.5f + 0.25f + (float) entity.posZ;
         EntityItem item = new EntityItem(entity.world, fx, fy, fz, stack);
-        item.motionX = random.nextGaussian() * 0.05;
-        item.motionY = random.nextGaussian() * 0.05;
-        item.motionZ = random.nextGaussian() * 0.05;
+        item.motionX = rb.nextGaussianFloat() * 0.05;
+        item.motionY = rb.nextGaussianFloat() * 0.05;
+        item.motionZ = rb.nextGaussianFloat() * 0.05;
         event.getDrops().add(item);
     }
     @SubscribeEvent
     public static void onLivingDrops(LivingDropsEvent event) {
         Entity entity = event.getEntity();
         int loot = event.getLootingLevel();
-        rb.reallocate(64);
-        if(rb.getBitsAsInt(8) + 3 * loot > Config.dropManaChance) {
+        if(rb.nextInt(256) + 3 * loot > Config.dropManaChance) {
             boolean piggy = Config.dropManaApple
                     && entity instanceof EntityPig
-                    && rb.getBitsAsInt(4) / (loot + 1) < 2;
+                    && rb.nextInt(16) / (loot + 1) < 2;
             spawnEntityItem(event, piggy ? new ItemStack(ManaCraftItems.itemManaApple)
-                    : new ItemStack(ManaCraftItems.itemMana, (int) (1 + (rb.getFloat() + 0.25) * loot)));
+                    : new ItemStack(ManaCraftItems.itemMana, (int) (1 + (rb.nextFloat() + 0.25) * loot)));
         }
     }
 }

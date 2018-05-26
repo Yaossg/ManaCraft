@@ -68,16 +68,16 @@ public class TileManaBooster extends TileEntity implements ITickable {
     }
     static {
         fuels.addAll(Arrays.asList(
-                Fuel.of(ManaCraftItems.itemMana, 20,200),
-                Fuel.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 100, 360),
-                Fuel.of(ManaCraftItems.itemManaBall, 108, 360),
-                Fuel.of(ManaCraftItems.itemManaApple, 888, 360),
-                Fuel.of(ManaCraftItems.itemManaNugget, 500, 400),
-                Fuel.of(ManaCraftItems.itemManaIngot, 4000, 450),
-                Fuel.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 12960, 1250),
-                Fuel.of(ManaCraftItems.itemManaCoal, 400, 800),
-                Fuel.of(ManaCraftItems.itemManaDiamond, 14400, 1600),
-                Fuel.of(ManaCraftItems.itemManaPork, 8888, 40)
+                Fuel.of(ManaCraftItems.itemMana, 2,200),
+                Fuel.of(Item.getItemFromBlock(ManaCraftBlocks.blockMana), 10, 360),
+                Fuel.of(ManaCraftItems.itemManaBall, 11, 370),
+                Fuel.of(ManaCraftItems.itemManaApple, 88, 370),
+                Fuel.of(ManaCraftItems.itemManaNugget, 50, 400),
+                Fuel.of(ManaCraftItems.itemManaIngot, 400, 450),
+                Fuel.of(Item.getItemFromBlock(ManaCraftBlocks.blockManaIngot), 1296, 1250),
+                Fuel.of(ManaCraftItems.itemManaCoal, 40, 800),
+                Fuel.of(ManaCraftItems.itemManaDiamond, 1440, 1600),
+                Fuel.of(ManaCraftItems.itemManaPork, 888, 42)
         ));
     }
     boolean flip = false;
@@ -93,13 +93,13 @@ public class TileManaBooster extends TileEntity implements ITickable {
                             TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
                             if(tileEntity instanceof TileEntityFurnace) {
                                 TileEntityFurnace furnace = (TileEntityFurnace) tileEntity;
-                                furnace.setField(2, Math.min(furnace.getField(2) + burn_level / 20, furnace.getCookTime(ItemStack.EMPTY) - 1));
+                                furnace.setField(2, Math.min(furnace.getField(2) + burn_level / 2, furnace.getCookTime(ItemStack.EMPTY) - 1));
                                 BlockFurnace.setState(furnace.isBurning(), world, furnace.getPos());
                                 burn_time -= 4;
                             }
                             if(tileEntity instanceof TileEntityBrewingStand) {
                                 TileEntityBrewingStand brew = (TileEntityBrewingStand) tileEntity;
-                                brew.setField(0, Math.max(brew.getField(0) - burn_level / 20, 1));
+                                brew.setField(0, Math.max(brew.getField(0) - burn_level / 2, 1));
                                 burn_time -= 4;
                             }
                         }

@@ -16,8 +16,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.config.Config;
+import yaossg.mod.sausage_core.api.util.Explosions;
 
 
 public class ItemManaApple extends ItemFood {
@@ -55,10 +55,10 @@ public class ItemManaApple extends ItemFood {
     }
     public static void appleExplosin(Entity playerIn, EntityPig pig, boolean romote) {
         if(playerIn.getServer() != null)
-            playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.pig"));
+            playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.mana_craft.pig"));
         if (!romote)
             if (Config.bombSize > 0) {
-                Util.createThenApplyExplosin(pig.world, pig, pig.getPosition(), Config.bombSize, Config.fire, Config.damage);
+                Explosions.createThenApply(pig.world, pig, pig.getPosition(), Config.bombSize, Config.fire, Config.damage);
                 float step = (float) Math.PI / Config.bombSize;
                 for (float f = 0; f <= 2 * Math.PI; f += step) {
                     pig.world.spawnEntity(new EntityLightningBolt(pig.world,

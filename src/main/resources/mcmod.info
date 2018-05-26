@@ -2,7 +2,7 @@
 {
   "modid": "mana_craft",
   "name": "ManaCraft",
-  "description": "Mana is everywhere!",
+  "description": "Mana is the power of nature!",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",

@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_booster"
     },
     "title": {
-      "translate": "advancement.boost.title"
+      "translate": "advancement.mana.boost.title"
     },
     "description": {
-      "translate": "advancement.boost.description"
+      "translate": "advancement.mana.boost.description"
     }
   },
   "parent": "mana_craft:mana/encharge",

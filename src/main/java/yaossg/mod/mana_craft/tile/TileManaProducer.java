@@ -95,25 +95,25 @@ public class TileManaProducer extends TileEntity implements ITickable {
     }
     static {
         recipes.addAll(Arrays.asList(
-                Recipe.of(new ItemStack(ManaCraftItems.itemMana, 5), 4800,
+                Recipe.of(new ItemStack(ManaCraftItems.itemMana, 5), 600,
                         new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.REDSTONE), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.SUGAR)
                 ),
-                Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 12000,
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaNugget, 3), 1500,
                         new ItemStack(Items.GOLD_NUGGET, 3), new ItemStack(ManaCraftItems.itemManaBall, 2)
                 ),
-                Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000 * 8,
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaIngot), 12000,
                         new ItemStack(Items.GOLD_INGOT), new ItemStack(ManaCraftItems.itemManaBall, 6)
                 ),
-                Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 12000 * 64,
+                Recipe.of(new ItemStack(ManaCraftBlocks.blockManaIngot), 96000,
                         new ItemStack(Blocks.GOLD_BLOCK), new ItemStack(ManaCraftItems.itemManaBall, 54)
                 ),
-                Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass), 2333,
+                Recipe.of(new ItemStack(ManaCraftBlocks.blockManaGlass), 300,
                         new ItemStack(Blocks.GLASS), new ItemStack(ManaCraftItems.itemManaBall, 3), new ItemStack(ManaCraftItems.itemManaNugget, 3)
                 ),
-                Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 5500,
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaCoal), 688,
                         new ItemStack(Items.COAL), new ItemStack(ManaCraftItems.itemManaBall, 8)
                 ),
-                Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 126000,
+                Recipe.of(new ItemStack(ManaCraftItems.itemManaDiamond), 15750,
                         new ItemStack(Items.DIAMOND), new ItemStack(ManaCraftItems.itemManaCoal, 64)
                 )
         ));
@@ -131,7 +131,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
         ItemStack[] items = new ItemStack[handler.getSlots() - empty];
         for (int i = 0; i < items.length; ++i)
             items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, ManaCraftAPIs.Recipe.comparator);
+        Arrays.sort(items, ManaCraftAPIs.Recipe.comparatorInput);
         handler = new ItemStackHandler(items.length);
         for (int i = 0; i < handler.getSlots(); ++i)
             handler.setStackInSlot(i, items[i]);
@@ -142,10 +142,10 @@ public class TileManaProducer extends TileEntity implements ITickable {
         ItemStackHandler handler = getSorted();
         for(ManaCraftAPIs.Recipe recipe : recipes) {
             ItemStack[] matches = recipe.getInput();
-            boolean good = handler.getSlots() >= matches.length;
-            for (int i = 0; i < matches.length && good
-                    && (good = ItemStack.areItemStacksEqual(handler.extractItem(i, matches[i].getCount(), true), matches[i])); ++i);
-            if (good)
+            boolean found = handler.getSlots() >= matches.length;
+            for (int i = 0; i < matches.length && found
+                    && (found = ItemStack.areItemStacksEqual(handler.extractItem(i, matches[i].getCount(), true), matches[i])); ++i);
+            if (found)
                 return recipe;
         }
         return null;
@@ -153,10 +153,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
 
     void copyToInput(ItemStackHandler handler) {
         for (int i = 0; i < input.getSlots(); ++i)
-            if(i < handler.getSlots())
-                input.setStackInSlot(i, handler.getStackInSlot(i));
-            else
-                input.setStackInSlot(i, ItemStack.EMPTY);
+            input.setStackInSlot(i, i < handler.getSlots() ? handler.getStackInSlot(i) : ItemStack.EMPTY);
     }
     @Override
     public void update() {
@@ -176,20 +173,19 @@ public class TileManaProducer extends TileEntity implements ITickable {
                         copyToInput(getSorted());
                         isSorted = true;
                     }
-                    if ((work_time += 8) >= total_work_time) {
+                    if ((++work_time) >= total_work_time) {
                         this.work_time -= current.getWorkTime();
                         ItemStackHandler temp = getSorted();
-                        for (int i = 0; i < temp.getSlots() && i < current.getInput().length; ++i) {
+                        for (int i = 0; i < temp.getSlots() && i < current.getInput().length; ++i)
                             temp.extractItem(i, current.getInput()[i].getCount(),false);
-                        }
                         copyToInput(temp);
                         output.insertItem(0, current.getOutput().copy(), false);
                         markDirty();
                     }
                 } else {
                     if (work_time > 0)
-                        work_time -= 24;
-                    if(work_time < 0)
+                        work_time -= 3;
+                    if (work_time < 0)
                         work_time = 0;
                     world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
                 }

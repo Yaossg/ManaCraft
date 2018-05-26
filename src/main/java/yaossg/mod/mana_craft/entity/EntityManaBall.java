@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import yaossg.mod.mana_craft.config.Config;
 import yaossg.mod.mana_craft.item.ItemManaApple;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
-import yaossg.mod.mana_craft.util.RandomBuffer;
+import yaossg.mod.sausage_core.api.util.BufferedRandom;
 
 import java.util.Random;
 
@@ -32,12 +32,10 @@ public class EntityManaBall extends EntityThrowable {
     }
 
     private static final Random random = new Random();
-    private static final RandomBuffer rb = new RandomBuffer(random);
+    private static final BufferedRandom rb = BufferedRandom.boxed(random);
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(rb.isEmpty())
-            rb.allocate(64);
-        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && rb.getBoolean(4) && thrower != null)
+        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && rb.next(4) == 0 && thrower != null)
             ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit, world.isRemote);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);

@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_producer"
     },
     "title": {
-      "translate": "advancement.encharge.title"
+      "translate": "advancement.mana.encharge.title"
     },
     "description": {
-      "translate": "advancement.encharge.description"
+      "translate": "advancement.mana.encharge.description"
     },
     "frame": "goal"
   },

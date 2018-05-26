@@ -20,8 +20,7 @@ public class ContainerManaBooster extends Container {
     public int total_burn_time;
     protected TileManaBooster tileEntity;
 
-    public ContainerManaBooster(EntityPlayer player, TileEntity tileEntity)
-    {
+    public ContainerManaBooster(EntityPlayer player, TileEntity tileEntity) {
         this.tileEntity = (TileManaBooster) tileEntity;
         this.addSlotToContainer(slotFuel = new SlotItemHandler(this.tileEntity.fuel, 0, 80,48));
         for (int i = 0; i < 3; ++i)
@@ -31,8 +30,7 @@ public class ContainerManaBooster extends Container {
             this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
     }
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
-    {
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         Slot slot = inventorySlots.get(index);
 
         if (slot == null || !slot.getHasStack())
@@ -63,13 +61,11 @@ public class ContainerManaBooster extends Container {
         return oldStack;
     }
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn)
-    {
+    public boolean canInteractWith(EntityPlayer playerIn) {
         return playerIn.getDistanceSq(tileEntity.getPos()) <= 64;
     }
     @Override
-    public void detectAndSendChanges()
-    {
+    public void detectAndSendChanges() {
         super.detectAndSendChanges();
         this.burn_time = tileEntity.burn_time;
         this.burn_level = tileEntity.burn_level;
@@ -82,8 +78,7 @@ public class ContainerManaBooster extends Container {
     }
     @SideOnly(Side.CLIENT)
     @Override
-    public void updateProgressBar(int id, int data)
-    {
+    public void updateProgressBar(int id, int data) {
         super.updateProgressBar(id, data);
         switch (id)
         {

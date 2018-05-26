@@ -9,11 +9,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import yaossg.mod.mana_craft.util.NBTs;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.util.Util;
 import yaossg.mod.mana_craft.block.ManaCraftBlocks;
 import yaossg.mod.mana_craft.item.ManaCraftItems;
+import yaossg.mod.sausage_core.api.util.Explosions;
+import yaossg.mod.sausage_core.api.util.NBTs;
 
 public class ManaHoeEvent {
     public static void init() {
@@ -30,9 +30,9 @@ public class ManaHoeEvent {
                 item.addEnchantment(Enchantments.SHARPNESS, 7);
                 item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
                 item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(
-                        I18n.format("message.hoe")));
+                        I18n.format("message.mana_craft.hoe")));
                 world.setBlockToAir(event.getPos());
-                Util.createThenApplyExplosin(world, event.getEntity(), event.getPos(), 1.25f,
+                Explosions.createThenApply(world, event.getEntity(), event.getPos(), 1.25f,
                         true, false);
                 event.getEntityPlayer().addExperience(10);
                 ManaCraft.giveAdvancement(event.getEntityPlayer(), "final_hoe");

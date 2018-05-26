@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_diamond"
     },
     "title": {
-      "translate": "advancement.shiny_diamond.title"
+      "translate": "advancement.mana.shiny_diamond.title"
     },
     "description": {
-      "translate": "advancement.shiny_diamond.description"
+      "translate": "advancement.mana.shiny_diamond.description"
     }
   },
   "parent": "mana_craft:mana/shiny_mana",

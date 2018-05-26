@@ -22,4 +22,4 @@ eclipse
 run
 *.txt
 *.bat
-Build.bat
+libs

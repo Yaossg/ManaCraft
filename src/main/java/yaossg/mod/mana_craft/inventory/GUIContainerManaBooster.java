@@ -6,20 +6,18 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import yaossg.mod.mana_craft.ManaCraft;
-import yaossg.mod.mana_craft.util.IGUIManager;
+import yaossg.mod.sausage_core.api.util.IGUIManager;
 
 public class GUIContainerManaBooster extends GuiContainer
 {
-    public GUIContainerManaBooster(Container inventorySlotsIn)
-    {
+    public GUIContainerManaBooster(Container inventorySlotsIn) {
         super(inventorySlotsIn);
         this.xSize = 176;
         this.ySize = 166;
 
     }
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks)
-    {
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
         this.renderHoveredToolTip(mouseX, mouseY);
@@ -27,15 +25,16 @@ public class GUIContainerManaBooster extends GuiContainer
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        String translateKey = "container.mana_craft.mana_booster.";
         int offsetX = (this.width - this.xSize) / 2, offsetY = (this.height - this.ySize) / 2;
-        String title = I18n.format("container.mana_booster.title");
+        String title = I18n.format(translateKey + "title");
         this.drawString(this.fontRenderer, title,
                 (this.xSize - this.fontRenderer.getStringWidth(title)) / 2, 6,0x404040);
         if(mouseX >= 79 + offsetX && mouseX < 95 + offsetX && mouseY >= 30 + offsetY && mouseY < 46 + offsetY) {
             ContainerManaBooster self = (ContainerManaBooster)this.inventorySlots;
             String hover = self.burn_time != 0
-                    ? I18n.format("container.mana_booster.hover", (int)(100 * (float)self.burn_time / self.total_burn_time), self.burn_level)
-                    : I18n.format("container.mana_booster.hoverEmpty");
+                    ? I18n.format(translateKey + "hover", (int)(100 * (float)self.burn_time / self.total_burn_time), self.burn_level)
+                    : I18n.format(translateKey + "hoverIdle");
             this.drawHoveringText(hover, mouseX - offsetX, mouseY - offsetY);
         }
     }
