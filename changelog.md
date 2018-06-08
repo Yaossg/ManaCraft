@@ -84,7 +84,13 @@
 - 重置了语言文件和本地化系统
 - 修改了模组介绍
 
-####SausageCore
+#### SausageCore
 
 - 独立并全面应用
 - 所以我删掉了`util`包
+
+## v0.1.8 [minor]
+
+- 更换了包名
+- 采用新版的SausageCore了
+- 修复bug，优化代码，简化结构
