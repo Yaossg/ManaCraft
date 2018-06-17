@@ -1,7 +1,6 @@
 package com.github.yaossg.mana_craft.tile;
 
-import com.github.yaossg.mana_craft.APIsInstance;
-import com.github.yaossg.mana_craft.api.ManaCraftAPIs;
+import com.github.yaossg.mana_craft.api.ManaCraftRegistry;
 import com.github.yaossg.mana_craft.block.BlockManaBooster;
 import com.github.yaossg.mana_craft.block.BlockManaProducer;
 import com.github.yaossg.mana_craft.config.Config;
@@ -22,6 +21,8 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Objects;
 import java.util.Optional;
+
+import static com.github.yaossg.mana_craft.api.ManaCraftRegistry.fuels;
 
 public class TileManaBooster extends TileEntity implements ITickable {
     public int burn_time = 0;
@@ -48,15 +49,13 @@ public class TileManaBooster extends TileEntity implements ITickable {
 
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability) || super.hasCapability(capability, facing);
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability || super.hasCapability(capability, facing);
     }
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-        if (CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.equals(capability))
-        {
-            return (T) (fuel);
-        }
+        if (CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability)
+            return (T) fuel;
         return super.getCapability(capability, facing);
     }
 
@@ -95,7 +94,7 @@ public class TileManaBooster extends TileEntity implements ITickable {
                     }
                 } else {
                     ItemStack item = fuel.getStackInSlot(0);
-                    Optional<ManaCraftAPIs.Fuel> opt = APIsInstance.fuels.stream().filter(e -> ItemStack.areItemsEqual(e.getItem(), item)).findAny();
+                    Optional<ManaCraftRegistry.Fuel> opt = fuels.stream().filter(e -> ItemStack.areItemsEqual(e.get(), item)).findAny();
                     if(opt.isPresent()) {
                         world.setBlockState(pos, state.withProperty(BlockManaBooster.BURNING, Boolean.TRUE));
                         total_burn_time = burn_time = opt.get().getBurnTime();

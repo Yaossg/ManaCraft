@@ -1,6 +1,7 @@
 package com.github.yaossg.mana_craft.item;
 
 import com.github.yaossg.mana_craft.ManaCraft;
+import com.github.yaossg.mana_craft.config.Config;
 import com.github.yaossg.mana_craft.event.ManaToolsEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -13,7 +14,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemManaArmor extends ItemArmor {
     public static ItemArmor.ArmorMaterial MANA_ARMOR = EnumHelper.addArmorMaterial("MANA_ARMOR", ManaCraft.MODID + ":mana",
-            20, new int[]{3, 6, 5, 2}, 32, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f)
+            20, Config.armor, 32, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 1f)
             .setRepairItem(new ItemStack(ManaCraftItems.manaIngot));
 
     ItemManaArmor(EntityEquipmentSlot equipmentSlotIn) {

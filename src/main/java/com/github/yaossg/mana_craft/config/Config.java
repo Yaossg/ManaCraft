@@ -14,6 +14,9 @@ public class Config {
     public static int limit = 3;
     public static int dropManaChance = 233;
     public static boolean dropManaApple = true;
+    public static int invokeChance = 4;
+    public static boolean hoe = true;
+    public static int[] armor = new int[]{3, 6, 5, 2};
     //  Ore Generation
     public static boolean genOre = true;
     public static int sizeManaOre = 12;
@@ -68,6 +71,18 @@ public class Config {
         comment = "whether Mana Apple would been dropped by pigs (when dropMana is true)";
         dropManaApple = config.get(Configuration.CATEGORY_GENERAL, key, dropManaApple, comment).getBoolean();
 
+        key = "invokeChance";
+        comment = "invoke chance of pigs (disabled if not positive, or 1 in [value below])";
+        invokeChance = config.get(Configuration.CATEGORY_GENERAL, key, invokeChance, comment).getInt();
+
+        key = "hoe";
+        comment = "enable Final Hoe of Mana";
+        hoe = config.get(Configuration.CATEGORY_GENERAL, key, hoe, comment).getBoolean();
+
+        key = "armor";
+        comment = "armor reduction amounts";
+        armor = config.get(Configuration.CATEGORY_GENERAL, key, armor, comment).getIntList();
+
         key = "sizeManaOre";
         comment = "max size of a single Mana Ore vein";
         sizeManaOre = config.get(Configuration.CATEGORY_GENERAL, key, sizeManaOre, comment).getInt();
@@ -103,6 +118,5 @@ public class Config {
         key = "mixtureTimes";
         comment = "times of generation of mixture veins per chunk";
         mixtureTimes = config.get(Configuration.CATEGORY_GENERAL, key, mixtureTimes, comment).getInt();
-
     }
 }

@@ -2,13 +2,14 @@ package com.github.yaossg.mana_craft.item;
 
 import com.github.yaossg.mana_craft.api.IItemManaTool;
 import net.minecraft.item.*;
+import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.util.EnumHelper;
 
+// TODO remove magic numbers
 public interface ItemManaTools {
      Item.ToolMaterial MANA_TOOL
             = EnumHelper.addToolMaterial("MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(), 256, 6, 3, 32)
              .setRepairItem(new ItemStack(ManaCraftItems.manaIngot));
-
 
     class ItemManaSword extends ItemSword implements IItemManaTool {
         ItemManaSword() {

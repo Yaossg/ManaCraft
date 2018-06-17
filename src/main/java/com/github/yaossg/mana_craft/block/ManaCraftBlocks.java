@@ -2,7 +2,7 @@ package com.github.yaossg.mana_craft.block;
 
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.sausage_core.api.util.IBRegistryManager;
-import com.github.yaossg.sausage_core.api.util.Utils;
+import com.github.yaossg.sausage_core.api.util.SausageUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.SoundType;
@@ -17,17 +17,17 @@ public class ManaCraftBlocks {
 
     public static final IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
     public static final Block manaBlock = addBlock(Material.ROCK, ToolMaterial.STONE, "mana_block")
-            .setHardness(5).setLightLevel(Utils.lightLevelOf(7));
+            .setHardness(5f).setLightLevel(SausageUtils.lightLevelOf(7));
     public static final Block manaIngotBlock = addBlock(Material.ROCK, ToolMaterial.IRON, "mana_ingot_block")
-            .setHardness(6).setLightLevel(Utils.lightLevelOf(10));
+            .setHardness(6f).setLightLevel(SausageUtils.lightLevelOf(10));
     public static final Block manaIngotOre = addBlock(Material.ROCK, ToolMaterial.IRON, "mana_ingot_ore")
-            .setHardness(4).setLightLevel(Utils.lightLevelOf(5));
+            .setHardness(4f).setLightLevel(SausageUtils.lightLevelOf(5));
     public static final Block manaGlass = manager.addBlock(new BlockGlass(Material.GLASS, false)
         {{ setSoundType(SoundType.GLASS);setHarvestLevel("pickaxe", ToolMaterial.STONE.getHarvestLevel()); }}
-            .setHardness(2).setLightLevel(Utils.lightLevelOf(9)), "mana_glass");
+            .setHardness(1f).setLightLevel(SausageUtils.lightLevelOf(9)), "mana_glass");
     public static final Block manaOre = manager.addBlock(new BlockManaOre(), "mana_ore");
     public static final Block machineFrame = addBlock(Material.IRON, ToolMaterial.IRON, "machine_frame")
-            .setHardness(5).setLightLevel(Utils.lightLevelOf(8));
+            .setHardness(5f).setLightLevel(SausageUtils.lightLevelOf(8));
     public static final Block manaProducer = manager.addBlock(new BlockManaProducer(), "mana_producer");
     public static final Block manaBooster = manager.addBlock(new BlockManaBooster(), "mana_booster");
 }

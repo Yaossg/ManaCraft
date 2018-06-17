@@ -4,7 +4,7 @@ import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
 import com.github.yaossg.sausage_core.api.util.NBTs;
-import com.github.yaossg.sausage_core.api.util.Utils;
+import com.github.yaossg.sausage_core.api.util.SausageUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -83,10 +83,10 @@ public class BlockManaProducer extends BlockContainer {
 
     BlockManaProducer() {
         super(Material.IRON);
-        this.setHardness(3);
-        this.setLightLevel(Utils.lightLevelOf(11));
-        this.setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
+        setHardness(5f);
+        setLightLevel(SausageUtils.lightLevelOf(11));
+        setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(WORKING, Boolean.FALSE));
     }
 
@@ -98,7 +98,7 @@ public class BlockManaProducer extends BlockContainer {
     @Override
     @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
+        return getDefaultState()
                 .withProperty(FACING, EnumFacing.getHorizontal(meta & 3))
                 .withProperty(WORKING, (meta & 4) != 0);
     }
@@ -129,8 +129,8 @@ public class BlockManaProducer extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos,
-                                    IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaProducer.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

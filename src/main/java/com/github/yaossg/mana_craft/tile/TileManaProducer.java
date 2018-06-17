@@ -1,7 +1,6 @@
 package com.github.yaossg.mana_craft.tile;
 
-import com.github.yaossg.mana_craft.APIsInstance;
-import com.github.yaossg.mana_craft.api.ManaCraftAPIs;
+import com.github.yaossg.mana_craft.api.ManaCraftRegistry;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -16,6 +15,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Arrays;
 
+import static com.github.yaossg.mana_craft.api.ManaCraftRegistry.recipes;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.FACING;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.WORKING;
 
@@ -100,16 +100,16 @@ public class TileManaProducer extends TileEntity implements ITickable {
         ItemStack[] items = new ItemStack[handler.getSlots() - empty];
         for (int i = 0; i < items.length; ++i)
             items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, ManaCraftAPIs.Recipe.comparatorInput);
+        Arrays.sort(items, ManaCraftRegistry.Recipe.comparator0);
         handler = new ItemStackHandler(items.length);
         for (int i = 0; i < handler.getSlots(); ++i)
             handler.setStackInSlot(i, items[i]);
         return handler;
     }
 
-    ManaCraftAPIs.Recipe detect() {
+    ManaCraftRegistry.Recipe detect() {
         ItemStackHandler handler = getSorted();
-        for(ManaCraftAPIs.Recipe recipe : APIsInstance.recipes) {
+        for(ManaCraftRegistry.Recipe recipe : recipes) {
             ItemStack[] matches = recipe.getInput();
             boolean found = handler.getSlots() >= matches.length;
             for (int i = 0; i < matches.length && found
@@ -131,7 +131,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
             if(work_time > total_work_time)
                 work_time = total_work_time;
             if(checkCharged()) {
-                ManaCraftAPIs.Recipe current = detect();
+                ManaCraftRegistry.Recipe current = detect();
                 if (current != null && output.insertItem(0, current.getOutput(), true).isEmpty()) {
                     this.getWorld().setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
                     if(total_work_time != current.getWorkTime()) {

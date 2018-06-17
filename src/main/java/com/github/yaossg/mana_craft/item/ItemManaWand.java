@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class ItemManaWand extends Item implements IItemManaTool {
     ItemManaWand() {
-        this.setMaxDamage(255);
-        this.setMaxStackSize(1);
+        setMaxDamage(255);
+        setMaxStackSize(1);
     }
     private static boolean isAmmo(ItemStack stack) {
         return stack.getItem() == ManaCraftItems.manaBall;
@@ -37,14 +37,13 @@ public class ItemManaWand extends Item implements IItemManaTool {
         {
             EntityPlayer player = (EntityPlayer)entityLiving;
             ItemStack ammo = findAmmo(player);
-            if(player.isCreative()) {
+            if(player.isCreative())
                 ammo = new ItemStack(ManaCraftItems.manaBall);
-            }
             if (!ammo.isEmpty()) {
                 if (!worldIn.isRemote) {
                     EntityManaBall entity = new EntityManaBall(worldIn, player);
                     entity.shoot(player, player.rotationPitch, player.rotationYaw, 0,
-                            EntityManaBall.betterVelocity + (useDuration - timeLeft) / 32f, EntityManaBall.defaultInaccuracy);
+                            EntityManaBall.betterVelocity + (getMaxItemUseDuration(stack) - timeLeft) / 32f, EntityManaBall.defaultInaccuracy);
                     worldIn.spawnEntity(entity);
                     if(!player.isCreative() && stack.attemptDamageItem(1, player.getRNG(), player instanceof EntityPlayerMP ? (EntityPlayerMP)player : null)) {
                         player.renderBrokenItemStack(stack);
@@ -64,10 +63,10 @@ public class ItemManaWand extends Item implements IItemManaTool {
             }
         }
     }
-    public final int useDuration = 48000;
+
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
-        return useDuration;
+        return 48000;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.github.yaossg.mana_craft.block;
 
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
-import com.github.yaossg.sausage_core.api.util.Utils;
+import com.github.yaossg.sausage_core.api.util.SausageUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,10 +15,9 @@ import java.util.Random;
 public class BlockManaOre extends Block {
     BlockManaOre() {
         super(Material.ROCK);
-        this.setSoundType(SoundType.STONE);
-        this.setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
-        this.setLightLevel(Utils.lightLevelOf(7));
-        this.setHardness(3);
+        setHardness(3f);
+        setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
+        setLightLevel(SausageUtils.lightLevelOf(7));
     }
 
     @Override

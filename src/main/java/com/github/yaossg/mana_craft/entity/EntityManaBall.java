@@ -32,8 +32,8 @@ public class EntityManaBall extends EntityThrowable {
     private static final BufferedRandom random = new BufferedRandom();
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && random.next(4) == 0 && thrower != null)
-            ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit, world.isRemote);
+        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && Config.invokeChance > 0 && random.next(Config.invokeChance) == 0)
+            ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);
             setDead();
@@ -42,10 +42,8 @@ public class EntityManaBall extends EntityThrowable {
             result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 6);
     }
 
-    public static class Render extends RenderSnowball<EntityManaBall> {
-        public Render(RenderManager renderManagerIn) {
-            super(renderManagerIn, ManaCraftItems.manaBall, Minecraft.getMinecraft().getRenderItem());
-        }
+    public static RenderSnowball<EntityManaBall> getRender(RenderManager renderManager) {
+        return new RenderSnowball<>(renderManager, ManaCraftItems.manaBall, Minecraft.getMinecraft().getRenderItem());
     }
 }
 

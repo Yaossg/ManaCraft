@@ -3,6 +3,7 @@ package com.github.yaossg.mana_craft.event;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.api.IItemManaTool;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
+import com.github.yaossg.mana_craft.config.Config;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
 import com.github.yaossg.sausage_core.api.util.BufferedRandom;
 import com.github.yaossg.sausage_core.api.util.Explosions;
@@ -38,17 +39,17 @@ public class ManaToolsEvent {
     @SubscribeEvent
     public static void onUseHoe(UseHoeEvent event) {
         ItemStack item = event.getCurrent();
-        if(item.getItem().equals(ManaCraftItems.manaHoe)) {
+        if(Config.hoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.manaHoe))) {
             World world = event.getWorld();
             Block block = world.getBlockState(event.getPos()).getBlock();
-            if (block.equals(ManaCraftBlocks.manaBlock) && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.manaHoe))) {
+            if (block == ManaCraftBlocks.manaBlock) {
                 item.setStackDisplayName("Final Hoe of Mana");
                 item.addEnchantment(Enchantments.SHARPNESS, 7);
                 item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
                 item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(
                         I18n.format("message.mana_craft.hoe")));
                 world.setBlockToAir(event.getPos());
-                Explosions.createThenApply(world, event.getEntity(), event.getPos(), 1.25f,
+                Explosions.createToApply(world, event.getEntity(), event.getPos(), 1.25f,
                         true, false);
                 event.getEntityPlayer().addExperience(10);
                 ManaCraft.giveAdvancement(event.getEntityPlayer(), "final_hoe");

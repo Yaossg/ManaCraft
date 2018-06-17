@@ -16,7 +16,7 @@ public class ManaCraftEntities {
     }
     @SideOnly(Side.CLIENT)
     public static void clientInit() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityManaBall.class, EntityManaBall.Render::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityManaBall.class, EntityManaBall::getRender);
     }
 
     private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange,

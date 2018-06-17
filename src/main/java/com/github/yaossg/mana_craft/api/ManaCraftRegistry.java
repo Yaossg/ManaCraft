@@ -8,27 +8,20 @@ import net.minecraft.util.ResourceLocation;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.function.Supplier;
 
-public abstract class ManaCraftAPIs {
-    public static ManaCraftAPIs INSTANCE;
-    static {
-        try {
-            Class<?> implClass = Class.forName("com.github.yaossg.mana_craft.APIsInstance");
-            INSTANCE = (ManaCraftAPIs) implClass.getDeclaredField("INSTANCE").get(null);
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot find implementation", e);
-        }
-    }
+public interface ManaCraftRegistry {
+    //register by add(), create by of()
+    SortedSet<Recipe> recipes = new TreeSet<>();
+    SortedSet<Fuel> fuels = new TreeSet<>();
 
-    public abstract SortedSet<Recipe> getRecipes();
-    public abstract SortedSet<Fuel> getFuel();
-	
-	// note: even if you can override to create a new fuel, you should use 'of' anyway.
-    public interface Fuel extends Comparable<Fuel> {
-        ItemStack getItem();
+    interface Fuel extends Comparable<Fuel>, Supplier<ItemStack> {
+        @Override
+        ItemStack get();
         int getBurnLevel();
         int getBurnTime();
-        Comparator<Fuel> comparator = Comparator.comparing(fuel -> fuel.getItem().getItem().getRegistryName());
+        Comparator<Fuel> comparator = Comparator.comparing(fuel -> fuel.get().getItem().getRegistryName());
         @Override
         default int compareTo(Fuel o) {
             return comparator.compare(this, o);
@@ -38,7 +31,7 @@ public abstract class ManaCraftAPIs {
             ItemStack stack = Conversions.To.stack(item, 1);
             return new Fuel() {
                 @Override
-                public ItemStack getItem() {
+                public ItemStack get() {
                     return stack;
                 }
 
@@ -61,20 +54,17 @@ public abstract class ManaCraftAPIs {
             };
         }
     }
-	
-	// note: even if you can override to create a new recipe, you had better use 'of' anyway. (without the sort of input, it may not work)
-    public interface Recipe extends Comparable<Recipe> {
-        Comparator<ItemStack> comparatorInput =
-                Comparator.<ItemStack, ResourceLocation>comparing(stack -> stack.getItem().getRegistryName())
-                        .thenComparing(Comparator.comparingInt(ItemStack::getCount).reversed());
 
+    interface Recipe extends Comparable<Recipe> {
         ItemStack[] getInput();
         ItemStack getOutput();
         int getWorkTime(); // tick
 
+        Comparator<ItemStack> comparator0 =
+                Comparator.<ItemStack, ResourceLocation>comparing(stack -> stack.getItem().getRegistryName())
+                        .thenComparing(Comparator.comparingInt(ItemStack::getCount).reversed());
         Comparator<Recipe> comparator =
-                Comparator.<Recipe, Iterable<ItemStack>>comparing(recipe -> Arrays.asList(recipe.getInput()), Comparators.lexicographical(comparatorInput))
-                    .thenComparing(Recipe::getOutput, comparatorInput);
+                Comparator.<Recipe, Iterable<ItemStack>>comparing(recipe -> Arrays.asList(recipe.getInput()), Comparators.lexicographical(comparator0));
 
         @Override
         default int compareTo(Recipe o) {
@@ -82,7 +72,7 @@ public abstract class ManaCraftAPIs {
         }
 
         static Recipe of(ItemStack ouput, int time, ItemStack... input) {
-            Arrays.sort(input, comparatorInput);
+            Arrays.sort(input, comparator0);
             return new Recipe() {
                 @Override
                 public ItemStack[] getInput() {
@@ -97,6 +87,13 @@ public abstract class ManaCraftAPIs {
                 @Override
                 public int getWorkTime() {
                     return time;
+                }
+
+                @Override
+                public boolean equals(Object obj) {
+                    if(this == obj) return true;
+                    if(getClass() != obj.getClass()) return false;
+                    return compareTo((Recipe) obj) == 0;
                 }
             };
         }

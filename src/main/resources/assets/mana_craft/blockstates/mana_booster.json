@@ -1,20 +1,20 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "orientable",
+    "model": "orientable_vertical",
     "textures": {
-      "front": "mana_craft:blocks/machine_frame",
-      "side": "mana_craft:blocks/machine_frame",
-      "bottom": "mana_craft:blocks/machine_frame"
+      "side": "mana_craft:blocks/machine_frame"
     }
   },
   "variants": {
     "inventory": [{
-      "textures": { "top": "mana_craft:blocks/mana_booster" }
+      "textures": {
+        "front": "mana_craft:blocks/mana_booster"
+      }
     }],
     "burning": {
-      "true": { "textures": { "top": "mana_craft:blocks/active_mana_booster" } },
-      "false": { "textures": { "top": "mana_craft:blocks/mana_booster" } }
+      "true": { "textures": { "front": "mana_craft:blocks/active_mana_booster" } },
+      "false": { "textures": { "front": "mana_craft:blocks/mana_booster" } }
     }
   }
 }

@@ -3,7 +3,7 @@ package com.github.yaossg.mana_craft.block;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaBooster;
-import com.github.yaossg.sausage_core.api.util.Utils;
+import com.github.yaossg.sausage_core.api.util.SausageUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -29,10 +29,10 @@ public class BlockManaBooster extends BlockContainer {
 
     BlockManaBooster() {
         super(Material.IRON);
-        this.setHardness(3);
-        this.setLightLevel(Utils.lightLevelOf(9));
-        this.setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
-        this.setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
+        setHardness(5f);
+        setLightLevel(SausageUtils.lightLevelOf(9));
+        setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
+        setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }
     @Override
     protected BlockStateContainer createBlockState() {
@@ -42,7 +42,7 @@ public class BlockManaBooster extends BlockContainer {
     @Override
     @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
+        return getDefaultState()
                 .withProperty(BURNING, meta != 0);
     }
 
@@ -65,8 +65,8 @@ public class BlockManaBooster extends BlockContainer {
         return EnumBlockRenderType.MODEL;
     }
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos,
-                                    IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
+                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         }

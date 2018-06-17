@@ -1,23 +1,21 @@
 package com.github.yaossg.mana_craft.tile;
 
-import com.github.yaossg.mana_craft.APIsInstance;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
+import com.github.yaossg.sausage_core.api.util.SausageUtils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import java.util.Arrays;
 
-import static com.github.yaossg.mana_craft.api.ManaCraftAPIs.Fuel;
-import static com.github.yaossg.mana_craft.api.ManaCraftAPIs.Recipe;
-import static com.github.yaossg.sausage_core.api.util.Utils.registerTile;
+import static com.github.yaossg.mana_craft.api.ManaCraftRegistry.*;
 
 public class ManaCraftTiles {
     public static void init() {
-        registerTile(TileManaProducer.class, ManaCraft.MODID);
-        APIsInstance.recipes.addAll(Arrays.asList(
+        SausageUtils.registerTile(TileManaProducer.class, ManaCraft.MODID);
+        recipes.addAll(Arrays.asList(
                 Recipe.of(new ItemStack(ManaCraftItems.mana, 5), 600,
                         new ItemStack(Items.GLOWSTONE_DUST), new ItemStack(Items.REDSTONE), new ItemStack(Items.GUNPOWDER), new ItemStack(Items.SUGAR)
                 ),
@@ -40,8 +38,8 @@ public class ManaCraftTiles {
                         new ItemStack(Items.DIAMOND), new ItemStack(ManaCraftItems.manaCoal, 64)
                 )
         ));
-        registerTile(TileManaBooster.class, ManaCraft.MODID);
-        APIsInstance.fuels.addAll(Arrays.asList(
+        SausageUtils.registerTile(TileManaBooster.class, ManaCraft.MODID);
+        fuels.addAll(Arrays.asList(
                 Fuel.of(new ItemStack(ManaCraftItems.mana), 2,200),
                 Fuel.of(new ItemStack(ManaCraftBlocks.manaBlock), 10, 360),
                 Fuel.of(new ItemStack(ManaCraftItems.manaBall), 11, 370),

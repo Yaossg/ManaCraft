@@ -19,8 +19,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class CommonProxy
 {
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         Config.init(event);
         ManaCraftItems.manager.registerAll();
         ManaCraftBlocks.manager.registerAll();
@@ -38,14 +37,12 @@ public class CommonProxy
     public static void addOreDictionary() {
         OreDictionary.registerOre("dyeLightBlue", ManaCraftItems.blueShit);
     }
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         ManaCraftEvents.init();
         ManaCraftWorldGens.init();
     }
 
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
 
     }
 }
