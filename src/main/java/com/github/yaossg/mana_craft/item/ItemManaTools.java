@@ -2,7 +2,6 @@ package com.github.yaossg.mana_craft.item;
 
 import com.github.yaossg.mana_craft.api.IItemManaTool;
 import net.minecraft.item.*;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.util.EnumHelper;
 
 // TODO remove magic numbers

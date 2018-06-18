@@ -8,8 +8,6 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.Random;
-
 public class ManaCraftWorldGens {
     private static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.manaOre.getDefaultState(), Config.sizeManaOre);
     private static final WorldGenMinable MANAINGOT = new WorldGenMinable(ManaCraftBlocks.manaIngotOre.getDefaultState(), Config.sizeManaIngotOre);

@@ -3,7 +3,6 @@ package com.github.yaossg.mana_craft.block;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
 import com.github.yaossg.sausage_core.api.util.SausageUtils;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;

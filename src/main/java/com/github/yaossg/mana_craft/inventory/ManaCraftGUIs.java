@@ -1,6 +1,5 @@
 package com.github.yaossg.mana_craft.inventory;
 
-import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.sausage_core.api.util.IGUIManager;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;

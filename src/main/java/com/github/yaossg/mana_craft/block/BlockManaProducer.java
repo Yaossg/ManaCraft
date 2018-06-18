@@ -131,19 +131,16 @@ public class BlockManaProducer extends BlockContainer {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
                                     EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
+        if (!worldIn.isRemote)
             playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaProducer.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
-        }
         return true;
     }
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         SavedData.get(worldIn).add(pos);
-        if(((TileManaProducer)worldIn.getTileEntity(pos)).checkCharged()) {
+        if(((TileManaProducer)worldIn.getTileEntity(pos)).checkCharged())
             ManaCraft.giveAdvancement(placer, "encharge");
-        }
-
     }
 
     @Override
