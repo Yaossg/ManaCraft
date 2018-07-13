@@ -29,7 +29,10 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
 
     ItemStack getOutput();
 
-    int getWorkTime(); // tick
+    /**
+     * @return work_time, ticks.
+     * */
+    int getWorkTime();
 
     Comparator<IMPRecipe> comparator =
             Comparator.<IMPRecipe, Iterable<IngredientStack>>comparing(recipe -> Arrays.asList(recipe.getInput()),

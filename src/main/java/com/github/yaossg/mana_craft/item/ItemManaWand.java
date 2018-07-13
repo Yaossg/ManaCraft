@@ -1,7 +1,7 @@
 package com.github.yaossg.mana_craft.item;
 
 import com.github.yaossg.mana_craft.ManaCraft;
-import com.github.yaossg.mana_craft.api.IItemManaTool;
+import com.github.yaossg.mana_craft.api.IItemManaDamagable;
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.mana_craft.enchantment.ManaCraftEnchantments;
 import com.github.yaossg.mana_craft.entity.EntityManaBall;
@@ -20,7 +20,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public class ItemManaWand extends Item implements IItemManaTool {
+public class ItemManaWand extends Item implements IItemManaDamagable {
     ItemManaWand() {
         setMaxDamage(ManaCraftConfig.durability * 10);
         setMaxStackSize(1);

@@ -23,6 +23,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * */
 @Immutable
 public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supplier<Ingredient> {
+    /**
+     * @return the fuel ingredient
+     * please test with {@link IMBFuel#test(ItemStack)} instead of this
+     * */
     @Override
     Ingredient get();
 
@@ -43,7 +47,7 @@ public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supp
     }
 
     @Nonnull
-    static IMBFuel of(Ingredient ingredient, int level, int time) {
+    static IMBFuel of(@Nonnull Ingredient ingredient, int level, int time) {
         checkNotNull(ingredient);
         checkArgument(level > 0);
         checkArgument(time > 0);

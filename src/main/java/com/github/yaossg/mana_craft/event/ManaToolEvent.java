@@ -1,7 +1,7 @@
 package com.github.yaossg.mana_craft.event;
 
 import com.github.yaossg.mana_craft.ManaCraft;
-import com.github.yaossg.mana_craft.api.IItemManaTool;
+import com.github.yaossg.mana_craft.api.IItemManaDamagable;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.mana_craft.enchantment.ManaCraftEnchantments;
@@ -14,7 +14,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -31,9 +30,9 @@ public class ManaToolEvent {
     public static void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
         Random random = event.getEntityPlayer().getRNG();
         ItemStack stack = event.getOriginal();
-        if(stack.getItem() instanceof IItemManaTool && !(stack.getItem() instanceof ItemArmor)) {
+        if(stack.getItem() instanceof IItemManaDamagable && !(stack.getItem() instanceof ItemArmor)) {
             EntityPlayer player = event.getEntityPlayer();
-            int i = 1 + random.nextInt(((IItemManaTool) stack.getItem()).getManaValue() - 1);
+            int i = 1 + random.nextInt(((IItemManaDamagable) stack.getItem()).getManaValue() - 1);
             int l = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.manaRecycler, stack);
             InventoryHelper.spawnItemStack(player.world, player.posX, player.posY, player.posZ,
                     new ItemStack(ManaCraftItems.mana, l + i * (random.nextInt(l + 2) + 1)));

@@ -12,7 +12,12 @@ import java.util.*;
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
+ * @author Yaossg
  * registries of ManaCraft
+ * register or load {@link IMPRecipe} and {@link IMBFuel}
+ * {@link ManaCraftRegistries#recipe2load} and {@link ManaCraftRegistries#recipe2load}
+ *      will be loaded by ManaCraft when
+ *          {@link net.minecraftforge.fml.common.event.FMLPostInitializationEvent} is fired
  * */
 public interface ManaCraftRegistries {
     SortedSet<IMPRecipe> recipes = new TreeSet<>();

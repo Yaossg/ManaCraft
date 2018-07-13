@@ -1,6 +1,6 @@
 package com.github.yaossg.mana_craft.item;
 
-import com.github.yaossg.mana_craft.api.IItemManaTool;
+import com.github.yaossg.mana_craft.api.IItemManaDamagable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +17,7 @@ public class ItemManaTools {
                             durability * 20, 6, 3, enchantability)
                     .setRepairItem(new ItemStack(ManaCraftItems.manaIngot));
 
-    public static class ItemManaSword extends ItemSword implements IItemManaTool {
+    public static class ItemManaSword extends ItemSword implements IItemManaDamagable {
         ItemManaSword() {
             super(MANA_TOOL);
         }
@@ -28,7 +28,7 @@ public class ItemManaTools {
         }
     }
 
-    public static class ItemManaPickaxe extends ItemPickaxe implements IItemManaTool {
+    public static class ItemManaPickaxe extends ItemPickaxe implements IItemManaDamagable {
         ItemManaPickaxe() {
             super(MANA_TOOL);
         }
@@ -39,7 +39,7 @@ public class ItemManaTools {
         }
     }
 
-    public static class ItemManaAxe extends ItemAxe implements IItemManaTool {
+    public static class ItemManaAxe extends ItemAxe implements IItemManaDamagable {
         ItemManaAxe() {
             super(MANA_TOOL, 12, -2.8f);
         }
@@ -50,7 +50,7 @@ public class ItemManaTools {
         }
     }
 
-    public static class ItemManaShovel extends ItemSpade implements IItemManaTool {
+    public static class ItemManaShovel extends ItemSpade implements IItemManaDamagable {
         ItemManaShovel() {
             super(MANA_TOOL);
         }
@@ -61,7 +61,7 @@ public class ItemManaTools {
         }
     }
 
-    public static class ItemManaHoe extends ItemHoe implements IItemManaTool {
+    public static class ItemManaHoe extends ItemHoe implements IItemManaDamagable {
         ItemManaHoe() {
             super(MANA_TOOL);
         }
@@ -72,7 +72,7 @@ public class ItemManaTools {
         }
     }
 
-    public static class ItemManaShears extends ItemShears implements IItemManaTool {
+    public static class ItemManaShears extends ItemShears implements IItemManaDamagable {
         ItemManaShears() {
             setMaxStackSize(1);
             setMaxDamage(durability * 14);

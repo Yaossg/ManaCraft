@@ -1,14 +1,14 @@
 package com.github.yaossg.mana_craft.enchantment;
 
 import com.github.yaossg.mana_craft.ManaCraft;
-import com.github.yaossg.mana_craft.api.IItemManaTool;
+import com.github.yaossg.mana_craft.api.IItemManaDamagable;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class EnchantmentManaRecycler extends Enchantment {
-    static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_tool", input -> input instanceof IItemManaTool);
+    static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_tool", input -> input instanceof IItemManaDamagable);
     protected EnchantmentManaRecycler() {
         super(Rarity.UNCOMMON, TYPE, EntityEquipmentSlot.values());
         setName(ManaCraft.MODID + ".mana_recycler").setRegistryName("mana_recycler");

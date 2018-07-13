@@ -4,11 +4,10 @@ import java.util.function.IntSupplier;
 
 /**
  * @author Yaossg
- * implement it to be a mana tool or weapon
- * HAVE NO EFFECT ON ARMOR
+ * implement it to be a mana tool, weapon or armor
  * */
 @FunctionalInterface
-public interface IItemManaTool extends IntSupplier {
+public interface IItemManaDamagable extends IntSupplier {
     int getManaValue();
 
     @Override

@@ -22,7 +22,7 @@ public class ManaCraftConfig {
     @Comment("Mana Boost boosting boostRadius")
     @RangeInt(min = 0, max = 10)
     @LangKey("mana_craft.general.boostRadius")
-    public static float boostRadius = 3;
+    public static double boostRadius = 3;
 
     @Comment("the number of Mana Producers that Mana Booster can boost (set this to 0 to disable)")
     @RangeInt(min = 0, max = 100)
