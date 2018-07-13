@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_chestplate"
+    },
+    "title": {
+      "translate": "advancement.mana.protect_around.title"
+    },
+    "description": {
+      "translate": "advancement.mana.protect_around.description"
+    },
+    "frame": "challenge"
+  },
+  "parent": "mana_craft:mana/ballgame",
+  "criteria": {
+    "protect_around": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

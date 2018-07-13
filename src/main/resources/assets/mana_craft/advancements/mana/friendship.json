@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_emerald"
+    },
+    "title": {
+      "translate": "advancement.mana.friendship.title"
+    },
+    "description": {
+      "translate": "advancement.mana.friendship.description"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "parent": "mana_craft:mana/shiny_diamond",
+  "criteria": {
+    "friendship": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mana_craft:mana_emerald"
+          }
+        ]
+      }
+    }
+  }
+}

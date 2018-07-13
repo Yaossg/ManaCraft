@@ -1,0 +1,16 @@
+{
+  "input": [{
+    "item": "minecraft:glowstone_dust"
+  },{
+    "item": "minecraft:redstone"
+  },{
+    "item": "minecraft:gunpowder"
+  },{
+    "item": "minecraft:sugar"
+  }],
+  "output": {
+    "item": "mana_craft:mana",
+    "count": 5
+  },
+  "work_time": 500
+}

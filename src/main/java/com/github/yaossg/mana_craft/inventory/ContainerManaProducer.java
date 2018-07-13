@@ -1,8 +1,8 @@
 package com.github.yaossg.mana_craft.inventory;
 
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
+import com.github.yaossg.sausage_core.api.util.inventory.ContainerBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -10,20 +10,15 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerManaProducer extends Container {
-
-    private Slot[] slotInput = new Slot[4];
-    @SuppressWarnings({"FieldCanBeLocal", "unused"})
-    private Slot slotOutput;
+public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
     public int work_time;
     public int total_work_time;
-    protected TileManaProducer tileEntity;
 
     ContainerManaProducer(EntityPlayer player, TileEntity tileEntity) {
-        this.tileEntity = (TileManaProducer) tileEntity;
+        super(tileEntity);
         for (int i = 0; i < 2; ++i)
             for (int j = 0; j < 2; ++j)
-                addSlotToContainer(slotInput[j + i * 2] = new SlotItemHandler(this.tileEntity.input, j + i * 2, 47 + j * 18, 28 + i * 18) {
+                addSlotToContainer(new SlotItemHandler(this.tileEntity.input, j + i * 2, 47 + j * 18, 28 + i * 18) {
                     @Override
                     public void onSlotChanged() {
                         ContainerManaProducer.this.tileEntity.isSorted = false;
@@ -31,7 +26,7 @@ public class ContainerManaProducer extends Container {
                     }
                 });
 
-        addSlotToContainer(slotOutput = new SlotItemHandler(this.tileEntity.output, 0, 115,36) {
+        addSlotToContainer(new SlotItemHandler(this.tileEntity.output, 0, 115, 36) {
             @Override
             public boolean isItemValid(ItemStack stack) {
                 return false;
@@ -47,55 +42,20 @@ public class ContainerManaProducer extends Container {
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return playerIn.getDistanceSq(tileEntity.getPos()) <= 64 && tileEntity.checkCharged();
-    }
-
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
-        Slot slot = inventorySlots.get(index);
-
-        if (slot == null || !slot.getHasStack())
-            return ItemStack.EMPTY;
-
-        ItemStack newStack = slot.getStack(), oldStack = newStack.copy();
-
-        boolean isMerged = false;
-
-        if (index < 5) isMerged = mergeItemStack(newStack, 5, 41, true);
-         else if (index < 32) for(Slot slot0 : slotInput)
-                isMerged = slot0.getStack().isStackable() && mergeItemStack(newStack, 0, 4, false )
-                        || mergeItemStack(newStack, 32, 41, false);
-         else for(Slot slot0 : slotInput)
-                isMerged = slot0.getStack().isStackable() && mergeItemStack(newStack, 0, 4, false )
-                        || mergeItemStack(newStack, 5,32, false);
-
-        if (!isMerged)
-            return ItemStack.EMPTY;
-
-        if (newStack.isEmpty())
-            slot.putStack(ItemStack.EMPTY);
-        else
-            slot.onSlotChanged();
-
-        return oldStack;
-    }
-
-    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
         this.work_time = tileEntity.work_time;
         this.total_work_time = tileEntity.total_work_time;
-        listeners.forEach( listener -> {
+        listeners.forEach(listener -> {
             listener.sendWindowProperty(this, 0, work_time);
             listener.sendWindowProperty(this, 1, total_work_time);
         });
     }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void updateProgressBar(int id, int data) {
-        switch (id)
-        {
+        switch (id) {
             case 0:
                 this.work_time = data;
                 break;

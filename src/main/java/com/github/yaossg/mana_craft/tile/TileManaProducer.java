@@ -1,6 +1,8 @@
 package com.github.yaossg.mana_craft.tile;
 
-import com.github.yaossg.mana_craft.api.ManaCraftRegistry;
+import com.github.yaossg.mana_craft.api.IngredientStack;
+import com.github.yaossg.mana_craft.api.registry.IMPRecipe;
+import com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -13,9 +15,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 
-import static com.github.yaossg.mana_craft.api.ManaCraftRegistry.recipes;
+import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.recipes;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.FACING;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.WORKING;
 
@@ -43,8 +46,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
         return super.writeToNBT(compound);
     }
 
-    public boolean checkCharged() {
-        EnumFacing facing = world.getBlockState(pos).getValue(FACING);
+    public static boolean checkCharged(World world, BlockPos pos, EnumFacing facing) {
         return world.getBlockState(pos.down()).getBlock() == ManaCraftBlocks.manaIngotBlock
                 && world.getBlockState(pos.up()).getBlock() == ManaCraftBlocks.manaGlass
                 && world.isAirBlock(pos.offset(facing))
@@ -90,6 +92,7 @@ public class TileManaProducer extends TileEntity implements ITickable {
     }
 
     public boolean isSorted = false;
+
     ItemStackHandler getSorted() {
         ItemStackHandler handler = new ItemStackHandler(4);
         for (int i = 0; i < input.getSlots(); ++i)
@@ -100,22 +103,24 @@ public class TileManaProducer extends TileEntity implements ITickable {
         ItemStack[] items = new ItemStack[handler.getSlots() - empty];
         for (int i = 0; i < items.length; ++i)
             items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, ManaCraftRegistry.Recipe.comparator0);
+        Arrays.sort(items, ManaCraftRegistries.comparatorItemStack);
         handler = new ItemStackHandler(items.length);
         for (int i = 0; i < handler.getSlots(); ++i)
             handler.setStackInSlot(i, items[i]);
         return handler;
     }
 
-    ManaCraftRegistry.Recipe detect() {
+    @Nullable
+    IMPRecipe detect() {
         ItemStackHandler handler = getSorted();
-        for(ManaCraftRegistry.Recipe recipe : recipes) {
-            ItemStack[] matches = recipe.getInput();
+        for (IMPRecipe recipe : recipes) {
+            IngredientStack[] matches = recipe.getInput();
             boolean found = handler.getSlots() >= matches.length;
-            for (int i = 0; i < matches.length && found
-                    && (found = ItemStack.areItemStacksEqual(handler.extractItem(i, matches[i].getCount(), true), matches[i])); ++i);
-            if (found)
-                return recipe;
+            for (int i = 0;
+                 i < matches.length && found && (found =
+                          matches[i].test(handler.extractItem(i, matches[i].getCount(), true))); ++i)
+                ;
+            if(found) return recipe;
         }
         return null;
     }
@@ -124,44 +129,45 @@ public class TileManaProducer extends TileEntity implements ITickable {
         for (int i = 0; i < input.getSlots(); ++i)
             input.setStackInSlot(i, i < handler.getSlots() ? handler.getStackInSlot(i) : ItemStack.EMPTY);
     }
+    void work(IMPRecipe current) {
+        if((++work_time) >= total_work_time) {
+            work_time -= current.getWorkTime();
+            ItemStackHandler temp = getSorted();
+            for (int i = 0; i < temp.getSlots() && i < current.getInput().length; ++i)
+                temp.extractItem(i, current.getInput()[i].getCount(), false);
+            copyToInput(temp);
+            output.insertItem(0, current.getOutput().copy(), false);
+            isSorted = false;
+            markDirty();
+        }
+    }
     @Override
     public void update() {
-        if (!world.isRemote) {
-            IBlockState state = this.getWorld().getBlockState(pos);
-            if(work_time > total_work_time)
-                work_time = total_work_time;
-            if(checkCharged()) {
-                ManaCraftRegistry.Recipe current = detect();
-                if (current != null && output.insertItem(0, current.getOutput(), true).isEmpty()) {
-                    this.getWorld().setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
-                    if(total_work_time != current.getWorkTime()) {
-                        total_work_time = current.getWorkTime();
-                        work_time = Integer.min(work_time, total_work_time - 1);
-                    }
-                    if(!isSorted) {
-                        copyToInput(getSorted());
-                        isSorted = true;
-                    }
-                    if ((++work_time) >= total_work_time) {
-                        this.work_time -= current.getWorkTime();
-                        ItemStackHandler temp = getSorted();
-                        for (int i = 0; i < temp.getSlots() && i < current.getInput().length; ++i)
-                            temp.extractItem(i, current.getInput()[i].getCount(),false);
-                        copyToInput(temp);
-                        output.insertItem(0, current.getOutput().copy(), false);
-                        markDirty();
-                    }
-                } else {
-                    if (work_time > 0)
-                        work_time -= 3;
-                    if (work_time < 0)
-                        work_time = 0;
-                    world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
-                }
-            } else {
-                work_time = 0;
-                world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
+        IBlockState state = world.getBlockState(pos);
+        if(!checkCharged(world, pos, state.getValue(FACING))) {
+            world.destroyBlock(pos, true);
+            return;
+        }
+        if(world.isRemote)
+            return;
+        if(work_time > total_work_time)
+            work_time = total_work_time;
+        IMPRecipe current = detect();
+        if(current != null && output.insertItem(0, current.getOutput(), true).isEmpty()) {
+            world.setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
+            if(total_work_time != current.getWorkTime()) {
+                total_work_time = current.getWorkTime();
+                work_time = Integer.min(work_time, total_work_time - 1);
             }
+            if(!isSorted) {
+                copyToInput(getSorted());
+                isSorted = true;
+            }
+            work(current);
+        } else {
+            if(work_time > 0) work_time -= 3;
+            if(work_time < 0) work_time = 0;
+            world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
         }
     }
 

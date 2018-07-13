@@ -1,0 +1,15 @@
+{
+  "input": [{
+    "item": "minecraft:glass"
+  },{
+    "item": "mana_craft:mana_ball",
+	"count": 3
+  },{
+    "item": "mana_craft:mana_nugget",
+    "count": 3
+  }],
+  "output": {
+    "item": "mana_craft:mana_glass"
+  },
+  "work_time": 300
+}

@@ -1,49 +1,128 @@
 package com.github.yaossg.mana_craft.entity;
 
-import com.github.yaossg.mana_craft.config.Config;
+import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.mana_craft.item.ItemManaApple;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
-import com.github.yaossg.sausage_core.api.util.BufferedRandom;
+import com.github.yaossg.sausage_core.api.util.math.BufferedRandom;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityManaBall extends EntityThrowable {
-    public static final float defaultVelocity = 0.44f;
-    public static final float betterVelocity = 0.5f;
-    public static final float defaultInaccuracy = 1;
-
+    public static final float lowVelocity = 0.45f;
+    public static final float highVelocity = 0.55f;
+    public static final float defaultInaccuracy = 1f;
+    public float damage = 6;
+    public boolean flame = false;
     public EntityManaBall(World worldIn) {
         super(worldIn);
     }
+
     public EntityManaBall(World worldIn, EntityLivingBase throwerIn) {
         super(worldIn, throwerIn);
     }
+
     public EntityManaBall(World worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
     }
 
+    @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        damage = compound.getFloat("damage");
+        flame = compound.getBoolean("flame");
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        compound.setFloat("damage", damage);
+        compound.setBoolean("flame", flame);
+        super.writeEntityToNBT(compound);
+    }
+
+    public EntityManaBall setDamage(float damage) {
+        this.damage = damage;
+        return this;
+    }
+
+    public EntityManaBall setFlame(boolean flame) {
+        this.flame = flame;
+        return this;
+    }
+
     private static final BufferedRandom random = new BufferedRandom();
+
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit instanceof EntityPig && Config.bombSize > 0 && Config.invokeChance > 0 && random.next(Config.invokeChance) == 0)
-            ItemManaApple.appleExplosin(thrower, (EntityPig) result.entityHit);
+        if(result.entityHit instanceof EntityPig && ManaCraftConfig.bombSize > 0 && ManaCraftConfig.invokeChance > random.nextFloat())
+            ItemManaApple.appleExplosion(thrower, (EntityPig) result.entityHit);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);
             setDead();
         }
-        if(result.entityHit != null)
-            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, getThrower()), 6);
+        if(result.entityHit != null && result.entityHit != thrower) {
+            if(flame)
+                result.entityHit.setFire((int)damage);
+            result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), damage);
+        }
     }
 
-    public static RenderSnowball<EntityManaBall> getRender(RenderManager renderManager) {
+    @Override
+    public void onUpdate() {
+        super.onUpdate();
+        if(flame)
+            setFire(1);
+    }
+
+    public static <T extends Entity> RenderSnowball<T> getRender(RenderManager renderManager) {
         return new RenderSnowball<>(renderManager, ManaCraftItems.manaBall, Minecraft.getMinecraft().getRenderItem());
+    }
+    public static EntityManaBall get(World worldIn, EntityLivingBase throwerIn, boolean floating) {
+        return floating ? new Floating(worldIn, throwerIn) : new EntityManaBall(worldIn, throwerIn);
+    }
+
+    public static class Floating extends EntityManaBall {
+        public Floating(World worldIn) {
+            super(worldIn);
+        }
+
+        public Floating(World worldIn, EntityLivingBase throwerIn) {
+            super(worldIn, throwerIn);
+        }
+
+        public Floating(World worldIn, double x, double y, double z) {
+            super(worldIn, x, y, z);
+        }
+
+        @Override
+        public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
+            super.shoot(x, y, z, velocity * 0.5f, inaccuracy);
+        }
+
+        @Override
+        public EntityManaBall setDamage(float damage) {
+            return super.setDamage(damage * 0.5f);
+        }
+
+        @Override
+        protected float getGravityVelocity() {
+            return 0;
+        }
+
+        @Override
+        public void onUpdate() {
+            super.onUpdate();
+            if(motionX < 0.005 && motionY < 0.005 && motionZ < 0.005)
+                setDead();
+        }
     }
 }
 

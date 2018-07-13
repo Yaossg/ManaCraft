@@ -3,14 +3,14 @@ package com.github.yaossg.mana_craft.block;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaBooster;
-import com.github.yaossg.sausage_core.api.util.SausageUtils;
-import net.minecraft.block.Block;
+import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -34,6 +34,7 @@ public class BlockManaBooster extends BlockContainer {
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }
+
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, BURNING);
@@ -42,8 +43,7 @@ public class BlockManaBooster extends BlockContainer {
     @Override
     @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState()
-                .withProperty(BURNING, meta != 0);
+        return getDefaultState().withProperty(BURNING, meta != 0);
     }
 
     @Override
@@ -60,14 +60,15 @@ public class BlockManaBooster extends BlockContainer {
     public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileManaBooster();
     }
+
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
+
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote)
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(!worldIn.isRemote)
             playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
@@ -75,7 +76,7 @@ public class BlockManaBooster extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TileManaBooster tile = (TileManaBooster) worldIn.getTileEntity(pos);
-        Block.spawnAsEntity(worldIn, pos, tile.fuel.getStackInSlot(0));
+        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), tile.fuel.getStackInSlot(0));
         super.breakBlock(worldIn, pos, state);
     }
 }

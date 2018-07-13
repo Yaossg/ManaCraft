@@ -3,8 +3,8 @@ package com.github.yaossg.mana_craft.block;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
-import com.github.yaossg.sausage_core.api.util.NBTs;
-import com.github.yaossg.sausage_core.api.util.SausageUtils;
+import com.github.yaossg.sausage_core.api.util.common.NBTs;
+import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -35,23 +35,28 @@ import java.util.List;
 public class BlockManaProducer extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     public static final PropertyBool WORKING = PropertyBool.create("working");
+
     public static class SavedData extends WorldSavedData {
-        public NonNullList<BlockPos> list = NonNullList.create();
+        public List<BlockPos> list = NonNullList.create();
+
         public SavedData(String name) {
             super(name);
         }
+
         public void add(BlockPos pos) {
             list.add(pos);
-            this.markDirty();
+            markDirty();
         }
+
         public void remove(BlockPos pos) {
             list.remove(pos);
-            this.markDirty();
+            markDirty();
         }
+
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
             list.clear();
-            for (NBTBase each : nbt.getTagList("producers",10)) { // 10 -> Compound
+            for (NBTBase each : nbt.getTagList("producers", 10)) { // 10 -> Compound
                 NBTTagCompound compound = (NBTTagCompound) each;
                 list.add(new BlockPos(compound.getInteger("x"), compound.getInteger("y"), compound.getInteger("z")));
             }
@@ -60,22 +65,19 @@ public class BlockManaProducer extends BlockContainer {
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound compound) {
             NBTTagList list0 = new NBTTagList();
-            for(BlockPos pos : list) {
-                list0.appendTag(NBTs.of(
+            list.forEach(pos -> list0.appendTag(NBTs.of(
                     "x", NBTs.of(pos.getX()),
                     "y", NBTs.of(pos.getY()),
-                    "z", NBTs.of(pos.getZ())
-                ));
-            }
+                    "z", NBTs.of(pos.getZ()))));
             compound.setTag("producers", list0);
             return compound;
         }
 
         public static SavedData get(World world) {
-            WorldSavedData data = world.getPerWorldStorage().getOrLoadData(SavedData.class, "Producers");
-            if (data == null) {
-                data = new SavedData("Producers");
-                world.getPerWorldStorage().setData("Producers", data);
+            WorldSavedData data = world.getPerWorldStorage().getOrLoadData(SavedData.class, "ManaProducers");
+            if(data == null) {
+                data = new SavedData("ManaProducers");
+                world.getPerWorldStorage().setData("ManaProducers", data);
             }
             return (SavedData) data;
         }
@@ -86,8 +88,7 @@ public class BlockManaProducer extends BlockContainer {
         setHardness(5f);
         setLightLevel(SausageUtils.lightLevelOf(11));
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
-        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
-                .withProperty(WORKING, Boolean.FALSE));
+        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(WORKING, Boolean.FALSE));
     }
 
     @Override
@@ -98,9 +99,7 @@ public class BlockManaProducer extends BlockContainer {
     @Override
     @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState()
-                .withProperty(FACING, EnumFacing.getHorizontal(meta & 3))
-                .withProperty(WORKING, (meta & 4) != 0);
+        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(WORKING, (meta & 4) != 0);
     }
 
     @Override
@@ -114,7 +113,8 @@ public class BlockManaProducer extends BlockContainer {
     }
 
     @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
+                                            float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
@@ -129,18 +129,21 @@ public class BlockManaProducer extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote)
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(!worldIn.isRemote)
             playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaProducer.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
     @Override
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
+        return TileManaProducer.checkCharged(worldIn, pos, side);
+    }
+
+    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         SavedData.get(worldIn).add(pos);
-        if(((TileManaProducer)worldIn.getTileEntity(pos)).checkCharged())
-            ManaCraft.giveAdvancement(placer, "encharge");
+        ManaCraft.giveAdvancement(placer, "encharge");
     }
 
     @Override

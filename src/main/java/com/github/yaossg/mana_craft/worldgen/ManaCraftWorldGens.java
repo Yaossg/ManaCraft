@@ -1,31 +1,37 @@
 package com.github.yaossg.mana_craft.worldgen;
 
+import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
-import com.github.yaossg.mana_craft.config.Config;
-import com.github.yaossg.sausage_core.api.util.IWorldGenBiome;
+import com.github.yaossg.sausage_core.api.util.worldgen.IWorldGenBiome;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import static com.github.yaossg.mana_craft.config.ManaCraftConfig.OreGens.*;
+
 public class ManaCraftWorldGens {
-    private static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.manaOre.getDefaultState(), Config.sizeManaOre);
-    private static final WorldGenMinable MANAINGOT = new WorldGenMinable(ManaCraftBlocks.manaIngotOre.getDefaultState(), Config.sizeManaIngotOre);
+    private static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.manaOre.getDefaultState(), sizeManaOre);
+    private static final WorldGenMinable MANA_INGOT = new WorldGenMinable(ManaCraftBlocks.manaIngotOre.getDefaultState(), sizeManaIngotOre);
+
     public static void init() {
         GameRegistry.registerWorldGenerator((random, chunkX, chunkZ, world, chunkGenerator, chunkProvider) -> {
             if(world.provider.getDimensionType() != DimensionType.OVERWORLD) return;
-            for(int i = 0; i < Config.timesManaOre; ++i)
-                MANA.generate(world, random, IWorldGenBiome.randomPos(random, chunkX, chunkZ, Config.heightManaOre));
-            for(int i = 0; i < Config.timesManaIngotOre; ++i)
-                MANAINGOT.generate(world, random, IWorldGenBiome.randomPos(random,chunkX, chunkZ, Config.heightManaIngotOre));
-            if(random.nextInt(Config.mixtureChance - 1) == 0) {
-                BlockPos genPos = IWorldGenBiome.randomPos(random,chunkX, chunkZ, Config.mixtureHeight);
-                for (int i = 0; i < Config.mixtureTimes; ++i) {
-                    MANA.generate(world, random, genPos);
-                    MANAINGOT.generate(world, random, genPos);
+            for (int i = 0; i < timesManaOre; ++i)
+                MANA.generate(world, random, IWorldGenBiome.randomPos(random, chunkX, chunkZ, 0, heightManaOre));
+            for (int i = 0; i < timesManaIngotOre; ++i)
+                MANA_INGOT.generate(world, random, IWorldGenBiome.randomPos(random, chunkX, chunkZ, 0, heightManaIngotOre));
+            float chance = mixtureChance;
+            do
+                if(random.nextFloat() < chance) {
+                    BlockPos genPos = IWorldGenBiome.randomPos(random, chunkX, chunkZ, 0, heightMixture);
+                    for (int i = 0; i < 4; ++i) {
+                        MANA.generate(world, random, genPos);
+                        MANA_INGOT.generate(world, random, genPos);
+                    }
                 }
-            }
-        }, 0);
+            while (--chance > 0);
+        }, ManaCraft.MODID.hashCode());
     }
 
 }

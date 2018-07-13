@@ -2,7 +2,7 @@ package com.github.yaossg.mana_craft;
 
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
 import com.github.yaossg.mana_craft.proxy.CommonProxy;
-import com.github.yaossg.sausage_core.api.util.SausageUtils;
+import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -17,17 +17,12 @@ import org.apache.logging.log4j.Logger;
 
 /**
  * @author Yaossg
- * */
-@Mod(modid = ManaCraft.MODID,
-        name = ManaCraft.NAME,
-        version = ManaCraft.VERSION,
-        acceptedMinecraftVersions = "1.12.2",
-        dependencies = "required-after:sausage_core@[0.1.3,)")
-public class ManaCraft
-{
+ */
+@Mod(modid = ManaCraft.MODID, name = ManaCraft.NAME, version = ManaCraft.VERSION, acceptedMinecraftVersions = "1.12.2", dependencies = "required-after:sausage_core@[0.1.4,)")
+public class ManaCraft {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
-    public static final String VERSION = "0.2.0";
+    public static final String VERSION = "0.2.1";
 
     @SidedProxy(clientSide = "com.github.yaossg.mana_craft.proxy.ClientProxy",
             serverSide = "com.github.yaossg.mana_craft.proxy.CommonProxy")
@@ -39,25 +34,22 @@ public class ManaCraft
     public static Logger logger;
 
     public static void giveAdvancement(Entity player, String advance) {
-        SausageUtils.giveAdvancement(player, MODID, "mana" , advance);
+        SausageUtils.giveAdvancement(player, MODID, "mana", advance);
     }
 
     @EventHandler
-    public void preInit(FMLPreInitializationEvent event)
-    {
+    public void preInit(FMLPreInitializationEvent event) {
         SausageUtils.unstableWarning(logger = event.getModLog(), NAME, VERSION, MODID);
         proxy.preInit(event);
     }
 
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         proxy.init(event);
     }
 
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event)
-    {
+    public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
     }
 

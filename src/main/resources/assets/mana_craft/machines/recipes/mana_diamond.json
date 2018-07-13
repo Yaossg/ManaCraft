@@ -1,0 +1,12 @@
+{
+  "input": [{
+    "item": "minecraft:diamond"
+  },{
+    "item": "mana_craft:mana_coal",
+	"count": 64
+  }],
+  "output": {
+    "item": "mana_craft:mana_diamond"
+  },
+  "work_time": 16000
+}

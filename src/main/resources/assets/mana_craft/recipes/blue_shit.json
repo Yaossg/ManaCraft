@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "forge:ore_shaped",
   "pattern": [
     "XXX",
     "MCM",
@@ -7,8 +7,8 @@
   ],
   "key": {
     "X": {
-      "item": "minecraft:dye",
-      "data": 12
+      "type": "forge:ore_dict",
+      "ore": "dyeLightBlue"
     },
     "M": {
       "item": "mana_craft:mana"
