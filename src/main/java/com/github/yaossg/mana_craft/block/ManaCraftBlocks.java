@@ -6,6 +6,7 @@ import com.github.yaossg.sausage_core.api.util.registry.IBRegistryManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 
 import static net.minecraft.item.Item.ToolMaterial;
@@ -34,4 +35,6 @@ public class ManaCraftBlocks {
             .setHardness(5f).setLightLevel(SausageUtils.lightLevelOf(8));
     public static final Block manaProducer = manager.addBlock(new BlockManaProducer(), "mana_producer");
     public static final Block manaBooster = manager.addBlock(new BlockManaBooster(), "mana_booster");
+    public static final Block manaLantern = manager.addBlock(new Block(Material.GLASS, MapColor.PURPLE)
+            .setHardness(1.2f).setLightLevel(SausageUtils.lightLevelOf(16)), "mana_lantern");
 }

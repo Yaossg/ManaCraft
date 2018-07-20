@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "0.2.1"
+version = "0.2.2"
 group = "com.github.yaossg.mana_craft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "mana_craft"
 
@@ -31,6 +31,8 @@ minecraft {
     // simply re-run your setup task after changing the mappings to update your workspace.
     mappings = "snapshot_20171003"
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
+
+    replace "@version@", project.version
 }
 
 dependencies {

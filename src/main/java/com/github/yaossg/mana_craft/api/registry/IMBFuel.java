@@ -17,24 +17,23 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * @author Yaossg
  * DO NOT implement this interface directly
  * use parse() or of() instead
  * */
 @Immutable
 public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supplier<Ingredient> {
     /**
-     * @return the fuel ingredient
+     * @return the handler ingredient
      * please test with {@link IMBFuel#test(ItemStack)} instead of this
      * */
     @Override
     Ingredient get();
 
-    int getBurnLevel();
+    int level();
 
-    int getBurnTime();
+    int time();
 
-    Comparator<IMBFuel> comparator = Comparator.comparing(IMBFuel::get, ManaCraftRegistries.comparatorIngredient);
+    Comparator<IMBFuel> comparator = Comparator.comparing(IMBFuel::get, ManaCraftRegistries.IComparators.ingredient);
 
     @Override
     default int compareTo(IMBFuel o) {
@@ -58,12 +57,12 @@ public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supp
             }
 
             @Override
-            public int getBurnLevel() {
+            public int level() {
                 return level;
             }
 
             @Override
-            public int getBurnTime() {
+            public int time() {
                 return time;
             }
 

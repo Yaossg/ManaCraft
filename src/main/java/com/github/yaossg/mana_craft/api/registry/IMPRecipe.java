@@ -19,24 +19,23 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * @author Yaossg
  * DO NOT implement this interface directly
  * use parse() or of() instead
  * */
 @Immutable
 public interface IMPRecipe extends Comparable<IMPRecipe> {
-    IngredientStack[] getInput();
+    IngredientStack[] input();
 
-    ItemStack getOutput();
+    ItemStack output();
 
     /**
-     * @return work_time, ticks.
+     * @return work time, by ticks.
      * */
-    int getWorkTime();
+    int work_time();
 
     Comparator<IMPRecipe> comparator =
-            Comparator.<IMPRecipe, Iterable<IngredientStack>>comparing(recipe -> Arrays.asList(recipe.getInput()),
-                    Comparators.lexicographical(ManaCraftRegistries.comparatorIngredientStack));
+            Comparator.<IMPRecipe, Iterable<IngredientStack>>comparing(recipe -> Arrays.asList(recipe.input()),
+                    Comparators.lexicographical(ManaCraftRegistries.IComparators.ingredientStack));
 
     @Override
     default int compareTo(IMPRecipe o) {
@@ -49,20 +48,20 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
         checkNotNull(input);
         checkArgument(input.length > 0);
         checkArgument(work_time > 0);
-        Arrays.sort(input, ManaCraftRegistries.comparatorIngredientStack);
+        Arrays.sort(input, ManaCraftRegistries.IComparators.ingredientStack);
         return new IMPRecipe() {
             @Override
-            public IngredientStack[] getInput() {
+            public IngredientStack[] input() {
                 return input;
             }
 
             @Override
-            public ItemStack getOutput() {
+            public ItemStack output() {
                 return output;
             }
 
             @Override
-            public int getWorkTime() {
+            public int work_time() {
                 return work_time;
             }
 

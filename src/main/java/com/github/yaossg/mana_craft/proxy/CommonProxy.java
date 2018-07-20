@@ -1,6 +1,7 @@
 package com.github.yaossg.mana_craft.proxy;
 
 import com.github.yaossg.mana_craft.ManaCraft;
+import com.github.yaossg.mana_craft.ManaCraftRegistriesImpl;
 import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
 import com.github.yaossg.mana_craft.enchantment.ManaCraftEnchantments;
 import com.github.yaossg.mana_craft.entity.ManaCraftEntities;
@@ -28,14 +29,14 @@ public class CommonProxy {
         IGUIManager.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftEntities.init();
         ManaCraftEnchantments.init();
-        ManaCraftRecipes.preInit();
+        ManaCraftRecipes.init();
         addOreDictionary();
     }
 
     public static void addOreDictionary() {
         OreDictionary.registerOre("dyeLightBlue", ManaCraftItems.blueShit);
         OreDictionary.registerOre("blockGlass", ManaCraftBlocks.manaGlass);
-        OreDictionary.registerOre("blockGlassMana", ManaCraftBlocks.manaGlass);
+        OreDictionary.registerOre("blockGlassHardened", ManaCraftBlocks.manaGlass);
         OreDictionary.registerOre("gemEmerald", ManaCraftItems.manaEmerald);
     }
 
@@ -46,7 +47,7 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent event) {
-        ManaCraftRecipes.postInit();
+        ManaCraftRegistriesImpl.INSTANCE.loadAll();
         MinecraftForge.addGrassSeed(new ItemStack(ManaCraftItems.mana), 1);
     }
 }

@@ -21,6 +21,8 @@ item.mana_craft.mana_wand.name=Mana Wand
 item.mana_craft.mana_coal.name=Mana Coal
 item.mana_craft.mana_diamond.name=Mana Diamond
 item.mana_craft.mana_emerald.name=Mana Emerald
+item.mana_craft.mana_producer_generator.name=Mana Producer Generator
+tile.mana_craft.mana_lantern.name=Mana Lantern
 tile.mana_craft.mana_ore.name=Mana Ore
 tile.mana_craft.mana_ingot_ore.name=Mana Gold Ore
 tile.mana_craft.mana_block.name=Mana Block
@@ -62,6 +64,7 @@ advancement.mana.friendship.description=We hope to remember our friendship forev
 
 message.mana_craft.hoe=It's the Final Hoe of Mana that Controls Power of Fire!
 message.mana_craft.pig=BOOM!
+message.mana_craft.failed=Failed to generate:ManaProducer is blocked
 tooltip.mana_craft.emerald=enjoy your friendship with villagers!
 
 entity.Villager.enchanter=Enchanter
@@ -90,3 +93,5 @@ mana_craft.general.durability=Mana Tools/Weapons/Armors Durability
 mana_craft.general.enchantability=Mana Tools/Weapons/Armors Enchantability
 mana_craft.general.toughness=Mana Armor Toughness
 mana_craft.general.enchanter=Enable Enchanter
+mana_craft.general.min_speed=Min Speed Of Floating Mana Ball
+mana_craft.general.replace=Mana Producer Generator replaces blocks

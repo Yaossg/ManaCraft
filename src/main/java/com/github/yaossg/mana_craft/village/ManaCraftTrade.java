@@ -53,6 +53,8 @@ public class ManaCraftTrade {
     static final ITradeList tradeIngot = item2gem(new ItemStack(ManaCraftItems.manaIngot), 4, 6);
     static final ITradeList tradeDiamond = item2gem(new ItemStack(ManaCraftItems.manaDiamond), -11, -4);
     static final ITradeList tradeShears = gem2item(new ItemStack(ManaCraftItems.manaShears), 4, 5);
+
+    @SuppressWarnings("ConstantConditions")
     public static void init() {
         if(ManaCraftConfig.enchanter)
             new VillagerRegistry.VillagerCareer(librarian, "enchanter")

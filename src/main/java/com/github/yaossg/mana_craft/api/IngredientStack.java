@@ -16,7 +16,6 @@ import java.util.function.Predicate;
 import static com.google.common.base.Preconditions.*;
 
 /**
- * @author Yaossg
  * {@link Ingredient} with a count
  * */
 @Immutable

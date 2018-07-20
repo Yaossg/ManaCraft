@@ -28,10 +28,10 @@ public class GUIContainerManaProducer extends GuiContainer {
         int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
         String title = I18n.format(translateKey + "title");
         GUIHelper.drawCenteredString(this, fontRenderer, title, 6, 0x404040);
-        //drawString(fontRenderer, title, (xSize - fontRenderer.getStringWidth(title)) / 2, 6, 0x404040);
         if(mouseX >= 87 + offsetX && mouseX < 110 + offsetX && mouseY >= 36 + offsetY && mouseY < 54 + offsetY) {
             ContainerManaProducer self = GUIHelper.getContainer(this);
-            String hover = self.work_time != 0 ? I18n.format(translateKey + "hover", (int) (100 * (float) self.work_time / self.total_work_time)) : I18n.format(translateKey + "hoverIdle");
+            String hover = self.work_time != 0 ? I18n.format(translateKey + "hover",
+                    (int) (100 * (float) self.work_time / self.total_work_time)) : I18n.format(translateKey + "hoverIdle");
             drawHoveringText(hover, mouseX - offsetX, mouseY - offsetY);
         }
     }

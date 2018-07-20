@@ -47,6 +47,7 @@ public class ManaCraftItems {
             tooltip.add(I18n.format("tooltip.mana_craft.emerald"));
         }
     }, "mana_emerald");
+    public static final Item manaProducerGenerator =  manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
 
 
 }

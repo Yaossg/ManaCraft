@@ -1,8 +1,12 @@
 package com.github.yaossg.mana_craft.enchantment;
 
-import net.minecraft.creativetab.CreativeTabs;
+import com.github.yaossg.mana_craft.ManaCraft;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+
+import static com.google.common.collect.ObjectArrays.concat;
+import static net.minecraft.creativetab.CreativeTabs.COMBAT;
+import static net.minecraft.creativetab.CreativeTabs.TOOLS;
 
 public class ManaCraftEnchantments {
     public static final Enchantment floating = new EnchantmentFloating();
@@ -10,10 +14,18 @@ public class ManaCraftEnchantments {
     public static final Enchantment manaRecycler = new EnchantmentManaRecycler();
     public static void init() {
         ForgeRegistries.ENCHANTMENTS.register(floating);
-        CreativeTabs.COMBAT.setRelevantEnchantmentTypes(EnchantmentFloating.TYPE);
         ForgeRegistries.ENCHANTMENTS.register(manaEvoker);
-        CreativeTabs.COMBAT.setRelevantEnchantmentTypes(EnchantmentManaEvoker.TYPE);
         ForgeRegistries.ENCHANTMENTS.register(manaRecycler);
-        CreativeTabs.TOOLS.setRelevantEnchantmentTypes(EnchantmentManaRecycler.TYPE);
+
+        //add into CreativeTabs
+        TOOLS.setRelevantEnchantmentTypes(
+                concat(TOOLS.getRelevantEnchantmentTypes(),
+                        EnchantmentManaRecycler.TYPE)
+        );
+        COMBAT.setRelevantEnchantmentTypes(
+                concat(concat(COMBAT.getRelevantEnchantmentTypes(),
+                        EnchantmentFloating.TYPE), EnchantmentManaEvoker.TYPE));
+        ManaCraft.tabMana.setRelevantEnchantmentTypes(
+                EnchantmentManaRecycler.TYPE, EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE);
     }
 }

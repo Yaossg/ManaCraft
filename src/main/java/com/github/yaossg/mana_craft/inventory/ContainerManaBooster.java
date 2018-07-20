@@ -17,7 +17,7 @@ public class ContainerManaBooster extends ContainerBase<TileManaBooster> {
 
     ContainerManaBooster(EntityPlayer player, TileEntity tileEntity) {
         super(tileEntity);
-        addSlotToContainer(new SlotItemHandler(this.tileEntity.fuel, 0, 80, 48));
+        addSlotToContainer(new SlotItemHandler(this.tileEntity.handler, 0, 80, 48));
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 9; ++j)
                 addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));

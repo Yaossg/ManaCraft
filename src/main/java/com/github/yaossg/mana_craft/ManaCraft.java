@@ -18,11 +18,15 @@ import org.apache.logging.log4j.Logger;
 /**
  * @author Yaossg
  */
-@Mod(modid = ManaCraft.MODID, name = ManaCraft.NAME, version = ManaCraft.VERSION, acceptedMinecraftVersions = "1.12.2", dependencies = "required-after:sausage_core@[0.1.4,)")
+@Mod(modid = ManaCraft.MODID,
+        name = ManaCraft.NAME,
+        version = ManaCraft.VERSION,
+        acceptedMinecraftVersions = "1.12.2",
+        dependencies = "required-after:sausage_core@[0.1.5,)")
 public class ManaCraft {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
-    public static final String VERSION = "0.2.1";
+    public static final String VERSION = "@version@";
 
     @SidedProxy(clientSide = "com.github.yaossg.mana_craft.proxy.ClientProxy",
             serverSide = "com.github.yaossg.mana_craft.proxy.CommonProxy")

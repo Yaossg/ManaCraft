@@ -1,12 +1,9 @@
 package com.github.yaossg.mana_craft.tile;
 
 import com.github.yaossg.mana_craft.api.registry.IMBFuel;
-import com.github.yaossg.mana_craft.block.BlockManaBooster;
-import com.github.yaossg.mana_craft.block.BlockManaProducer;
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
-import net.minecraft.block.BlockFurnace;
+import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBrewingStand;
@@ -20,21 +17,33 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Optional;
 
-import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.fuels;
+import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.instance;
+import static com.github.yaossg.mana_craft.block.BlockManaBooster.BURNING;
+import static com.github.yaossg.mana_craft.block.BlockManaProducer.SavedData;
+import static com.github.yaossg.mana_craft.block.BlockManaProducer.WORKING;
 
-public class TileManaBooster extends TileEntity implements ITickable {
+public class TileManaBooster extends TileEntity implements ITickable, IDefaultInventory {
     public int burn_time = 0;
     public int burn_level = 0;
     public int total_burn_time = 0;
-    public ItemStackHandler fuel = new ItemStackHandler();
+    public ItemStackHandler handler = new ItemStackHandler();
+
+    @Override
+    public ItemStackHandler[] getItemStackHandlers() {
+        return new ItemStackHandler[] {handler};
+    }
+
+    @Override
+    public Optional<TileEntity> getTileEntity() {
+        return Optional.of(this);
+    }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-        fuel.deserializeNBT(compound.getCompoundTag("fuel"));
+        handler.deserializeNBT(compound.getCompoundTag("fuel"));
         burn_time = compound.getInteger("burn_time");
         burn_level = compound.getInteger("burn_level");
         total_burn_time = compound.getInteger("total_burn_time");
@@ -42,50 +51,58 @@ public class TileManaBooster extends TileEntity implements ITickable {
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setTag("fuel", this.fuel.serializeNBT());
-        compound.setInteger("burn_time", this.burn_time);
-        compound.setInteger("burn_level", this.burn_level);
-        compound.setInteger("total_burn_time", this.total_burn_time);
+        compound.setTag("fuel", handler.serializeNBT());
+        compound.setInteger("burn_time", burn_time);
+        compound.setInteger("burn_level", burn_level);
+        compound.setInteger("total_burn_time", total_burn_time);
         return super.writeToNBT(compound);
     }
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability || super.hasCapability(capability, facing);
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability
+                && facing !=null && facing.getAxis().isHorizontal()
+                || super.hasCapability(capability, facing);
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability) return (T) fuel;
+        if(hasCapability(capability, facing)) return (T) handler;
         return super.getCapability(capability, facing);
     }
-
-    boolean flip = false;
+    final int states = 16;
+    int state = states - 1;
+    int[] times = new int[states];
     void work() {
-        if(flip = !flip) {
+        if(++state == states) state = 0;
+        if(state % 3 == 0)
             --burn_time;
-            for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
-                TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
-                if(tileEntity instanceof TileEntityFurnace) {
-                    TileEntityFurnace furnace = (TileEntityFurnace) tileEntity;
-                    furnace.setField(2, Math.min(furnace.getField(2) + burn_level / 2, furnace.getCookTime(ItemStack.EMPTY) - 1));
-                    BlockFurnace.setState(furnace.isBurning(), world, furnace.getPos());
-                    burn_time -= 4;
-                }
-                if(tileEntity instanceof TileEntityBrewingStand) {
-                    TileEntityBrewingStand brew = (TileEntityBrewingStand) tileEntity;
-                    brew.setField(0, Math.max(brew.getField(0) - burn_level / 2, 1));
-                    burn_time -= 4;
-                }
-            }
-
-            BlockManaProducer.SavedData.get(world).list.stream().filter(pos0 -> pos.distanceSq(pos0) <= ManaCraftConfig.boostRadius * ManaCraftConfig.boostRadius && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(BlockManaProducer.WORKING)).map(pos0 -> (TileManaProducer) world.getTileEntity(pos0)).limit(ManaCraftConfig.boostLimit).filter(Objects::nonNull).forEach(tile -> {
-                tile.work_time += burn_level;
-                burn_time -= 3;
+        if(state % 2 == 0)
+            SavedData.get(world).list.stream()
+                    .filter(pos0 -> pos.distanceSq(pos0) <= ManaCraftConfig.boostRadius * ManaCraftConfig.boostRadius
+                            && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(WORKING))
+                    .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
+                    .limit(ManaCraftConfig.boostLimit)
+                    .forEach(tile -> {
+                        tile.work_time += burn_level;
+                        burn_time -= 3;
             });
+        if(state == 0) {
+            int sum = 0;
+            for (int i = 1; i < times.length; ++i)
+                sum += times[i] =  burn_level / times.length;
+            times[0] = burn_level - sum;
         }
-
+        for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
+            TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
+            if(tileEntity instanceof TileEntityFurnace || tileEntity instanceof TileEntityBrewingStand) {
+                ITickable tickable = (ITickable) tileEntity;
+                --burn_time;
+                for (int i = 0; i < times[state]; ++i)
+                    tickable.update();
+            }
+        }
     }
     @Override
     public void update() {
@@ -96,21 +113,20 @@ public class TileManaBooster extends TileEntity implements ITickable {
             if(burn_time > 0) {
                 work();
             } else {
-                ItemStack stack = fuel.getStackInSlot(0);
-                Optional<IMBFuel> opt = fuels.stream().filter(fuel0 -> fuel0.test(stack)).findAny();
-                if(opt.isPresent()) {
-                    world.setBlockState(pos, state.withProperty(BlockManaBooster.BURNING, Boolean.TRUE));
-                    total_burn_time = burn_time = opt.get().getBurnTime();
-                    burn_level = opt.get().getBurnLevel();
-                    fuel.extractItem(0, 1, false);
+                Optional<IMBFuel> fuel = instance().getFuels().stream().filter(fuel0 -> fuel0.test(handler.getStackInSlot(0))).findAny();
+                if(fuel.isPresent()) {
+                    world.setBlockState(pos, state.withProperty(BURNING, true));
+                    total_burn_time = burn_time = fuel.get().time();
+                    burn_level = fuel.get().level();
+                    handler.extractItem(0, 1, false);
                     markDirty();
                     return;
                 }
-                world.setBlockState(pos, state.withProperty(BlockManaBooster.BURNING, Boolean.FALSE));
+                world.setBlockState(pos, state.withProperty(BURNING, false));
             }
             return;
         }
-        world.setBlockState(pos, state.withProperty(BlockManaBooster.BURNING, Boolean.FALSE));
+        world.setBlockState(pos, state.withProperty(BURNING, false));
     }
 
     @Override

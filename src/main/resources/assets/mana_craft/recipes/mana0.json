@@ -7,12 +7,10 @@
       "item": "minecraft:redstone"
     }, {
       "item": "minecraft:gunpowder"
-    }, {
-      "item": "minecraft:glowstone_dust"
     }
   ],
   "result": {
     "item": "mana_craft:mana",
-    "count": 6
+    "count": 4
   }
 }

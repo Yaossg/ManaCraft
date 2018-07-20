@@ -5,7 +5,6 @@ import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
 import com.github.yaossg.sausage_core.api.util.common.NBTs;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -14,6 +13,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -27,8 +28,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -107,11 +106,6 @@ public class BlockManaProducer extends BlockContainer {
         return state.getValue(FACING).getHorizontalIndex() | (state.getValue(WORKING) ? 4 : 0);
     }
 
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(Item itemIn, List<ItemStack> subItems) {
-        subItems.add(new ItemStack(itemIn));
-    }
-
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing,
                                             float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
@@ -150,12 +144,7 @@ public class BlockManaProducer extends BlockContainer {
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TileManaProducer tile = (TileManaProducer) worldIn.getTileEntity(pos);
         SavedData.get(worldIn).remove(pos);
-        NonNullList<ItemStack> items = NonNullList.create();
-        for (int i = 0; i < tile.input.getSlots(); ++i)
-            items.add(tile.input.getStackInSlot(i));
-        items.add(tile.output.getStackInSlot(0));
-        for (ItemStack item : items)
-            Block.spawnAsEntity(worldIn, pos, item);
+        InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }
 

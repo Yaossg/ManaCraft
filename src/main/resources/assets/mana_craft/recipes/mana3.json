@@ -2,8 +2,6 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "minecraft:sugar"
-    }, {
       "item": "minecraft:redstone"
     }, {
       "item": "minecraft:gunpowder"
@@ -13,6 +11,6 @@
   ],
   "result": {
     "item": "mana_craft:mana",
-    "count": 6
+    "count": 4
   }
 }

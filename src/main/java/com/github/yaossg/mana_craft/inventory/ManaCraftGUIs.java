@@ -10,7 +10,8 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public enum ManaCraftGUIs implements IGUIManager {
-    ManaProducer(ContainerManaProducer::new, GUIContainerManaProducer::new), ManaBooster(ContainerManaBooster::new, GUIContainerManaBooster::new);
+    ManaProducer(ContainerManaProducer::new, GUIContainerManaProducer::new),
+    ManaBooster(ContainerManaBooster::new, GUIContainerManaBooster::new);
 
     BiFunction<EntityPlayer, TileEntity, Container> common;
     Function<Container, GuiContainer> client;

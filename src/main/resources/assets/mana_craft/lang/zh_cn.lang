@@ -21,6 +21,8 @@ item.mana_craft.mana_wand.name=魔能魔杖
 item.mana_craft.mana_coal.name=魔能煤炭
 item.mana_craft.mana_diamond.name=魔能钻石
 item.mana_craft.mana_emerald.name=魔能绿宝石
+item.mana_craft.mana_producer_generator.name=魔能制造器生成器
+tile.mana_craft.mana_lantern.name=魔能灯
 tile.mana_craft.mana_ore.name=魔能矿
 tile.mana_craft.mana_ingot_ore.name=魔能金矿
 tile.mana_craft.mana_block.name=魔能块
@@ -62,6 +64,7 @@ advancement.mana.friendship.description=愿我们能永远记住我们的友谊�
 
 message.mana_craft.hoe=这是控制着火的力量的终极魔能锄头！
 message.mana_craft.pig=嘭！
+message.mana_craft.failed=生成失败:魔能制造器被阻挡
 tooltip.mana_craft.emerald=享受你和村民的友谊！
 
 entity.Villager.enchanter=附魔师
@@ -90,3 +93,5 @@ mana_craft.general.durability=魔能工具/武器/盔甲 耐久度
 mana_craft.general.enchantability=魔能工具/武器/盔甲 附魔能力
 mana_craft.general.toughness=魔能盔甲韧性
 mana_craft.general.enchanter=启用附魔师
+mana_craft.general.min_speed=悬浮魔能球的最低速度
+mana_craft.general.replace=魔能制造器生成器替换方块

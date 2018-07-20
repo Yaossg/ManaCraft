@@ -1,6 +1,5 @@
 package com.github.yaossg.mana_craft.entity;
 
-import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.mana_craft.item.ItemManaApple;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
 import com.github.yaossg.sausage_core.api.util.math.BufferedRandom;
@@ -15,6 +14,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import static com.github.yaossg.mana_craft.config.ManaCraftConfig.*;
 
 public class EntityManaBall extends EntityThrowable {
     public static final float lowVelocity = 0.45f;
@@ -62,7 +63,7 @@ public class EntityManaBall extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit instanceof EntityPig && ManaCraftConfig.bombSize > 0 && ManaCraftConfig.invokeChance > random.nextFloat())
+        if(result.entityHit instanceof EntityPig && bombSize > 0 && invokeChance > random.nextFloat())
             ItemManaApple.appleExplosion(thrower, (EntityPig) result.entityHit);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);
@@ -82,7 +83,7 @@ public class EntityManaBall extends EntityThrowable {
             setFire(1);
     }
 
-    public static <T extends Entity> RenderSnowball<T> getRender(RenderManager renderManager) {
+    public static <T extends Entity> RenderSnowball<T> render(RenderManager renderManager) {
         return new RenderSnowball<>(renderManager, ManaCraftItems.manaBall, Minecraft.getMinecraft().getRenderItem());
     }
     public static EntityManaBall get(World worldIn, EntityLivingBase throwerIn, boolean floating) {
@@ -120,7 +121,7 @@ public class EntityManaBall extends EntityThrowable {
         @Override
         public void onUpdate() {
             super.onUpdate();
-            if(motionX < 0.005 && motionY < 0.005 && motionZ < 0.005)
+            if(motionX < minSpeed && motionY < minSpeed && motionZ < minSpeed)
                 setDead();
         }
     }

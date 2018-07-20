@@ -74,6 +74,15 @@ public class ManaCraftConfig {
     @RequiresMcRestart
     public static boolean enchanter = false;
 
+    @Comment("min speed of floating mana ball")
+    @LangKey("mana_craft.general.min_speed")
+    @RangeDouble(min = 0.001, max = 0.025)
+    public static double minSpeed = 0.005;
+
+    @Comment("whether Mana Produecer Generator can replace block")
+    @LangKey("mana_craft.general.replace")
+    public static boolean replace = false;
+
 
     @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME + " OreGens")
     @RequiresMcRestart
@@ -81,7 +90,6 @@ public class ManaCraftConfig {
         @Comment({"whether to generate ores",
                 "WARNING: if set this to false, values below would NOT be used"})
         public static boolean genOre = true;
-
 
         @Comment("max size of a Mana Ore vein")
         @RangeInt(min = 0, max = 40)
@@ -95,7 +103,6 @@ public class ManaCraftConfig {
         @RangeInt(min = 0, max = 16)
         public static int timesManaOre = 4;
 
-
         @Comment("max size of a Mana Ingot Ore vein")
         @RangeInt(min = 0, max = 40)
         public static int sizeManaIngotOre = 10;
@@ -107,7 +114,6 @@ public class ManaCraftConfig {
         @Comment("times of generation of Mana Ingot Ore veins per chunk")
         @RangeInt(min = 0, max = 16)
         public static int timesManaIngotOre = 1;
-
 
         @Comment({"Change of generation of mixture veins",
                 "3.6 means 60% 4 times and 40% 3 times"})
