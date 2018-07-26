@@ -1,6 +1,6 @@
 package com.github.yaossg.mana_craft.api;
 
-import java.util.function.IntSupplier;
+import javax.annotation.Nonnegative;
 
 /**
  * implement it to be a mana tool, weapon or armor
@@ -8,11 +8,7 @@ import java.util.function.IntSupplier;
  * for a armor, mana has to be dropped by implementation
  * */
 @FunctionalInterface
-public interface IItemManaDamagable extends IntSupplier {
+public interface IItemManaDamagable  {
+    @Nonnegative
     int getManaValue();
-
-    @Override
-    default int getAsInt() {
-        return getManaValue();
-    }
 }

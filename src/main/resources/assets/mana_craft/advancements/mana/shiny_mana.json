@@ -15,11 +15,9 @@
     "shiny_mana": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
+        "items": [{
             "item": "mana_craft:mana_ingot"
-          }
-        ]
+        }]
       }
     }
   }

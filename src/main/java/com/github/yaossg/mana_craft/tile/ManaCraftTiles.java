@@ -7,6 +7,7 @@ public class ManaCraftTiles {
     public static void init() {
         SausageUtils.registerTile(TileManaProducer.class, ManaCraft.MODID);
         SausageUtils.registerTile(TileManaBooster.class, ManaCraft.MODID);
+        TileManaProducer.init();
     }
 
 }

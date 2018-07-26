@@ -4,13 +4,12 @@
     "model": "orientable",
     "textures": {
       "top": "mana_craft:blocks/machine_frame",
-      "side": "mana_craft:blocks/machine_frame"
+      "side": "mana_craft:blocks/machine_frame",
+      "front": "mana_craft:blocks/mana_producer"
     }
   },
   "variants": {
-    "inventory": [{
-      "textures": { "front": "mana_craft:blocks/mana_producer" }
-    }],
+    "inventory": [{}],
     "working": {
       "true": { "textures": { "front": "mana_craft:blocks/active_mana_producer" } },
       "false": { "textures": { "front": "mana_craft:blocks/mana_producer" } }

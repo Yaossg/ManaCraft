@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -23,6 +24,8 @@ public class EntityManaBall extends EntityThrowable {
     public static final float defaultInaccuracy = 1f;
     public float damage = 6;
     public boolean flame = false;
+    public boolean playerFriendly = false;
+
     public EntityManaBall(World worldIn) {
         super(worldIn);
     }
@@ -40,12 +43,14 @@ public class EntityManaBall extends EntityThrowable {
         super.readEntityFromNBT(compound);
         damage = compound.getFloat("damage");
         flame = compound.getBoolean("flame");
+        playerFriendly = compound.getBoolean("playerFriendly");
     }
 
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         compound.setFloat("damage", damage);
         compound.setBoolean("flame", flame);
+        compound.setBoolean("playerFriendly", playerFriendly);
         super.writeEntityToNBT(compound);
     }
 
@@ -59,7 +64,19 @@ public class EntityManaBall extends EntityThrowable {
         return this;
     }
 
+    public EntityManaBall setPlayerFriendly(boolean playerFriendly) {
+        this.playerFriendly = playerFriendly;
+        return this;
+    }
+
     private static final BufferedRandom random = new BufferedRandom();
+
+    private boolean isAttackable(Entity entity) {
+        return  !( entity == null
+                || entity == thrower
+                ||                   entity instanceof EntityManaShooter
+                || playerFriendly && entity instanceof EntityPlayer);
+    }
 
     @Override
     protected void onImpact(RayTraceResult result) {
@@ -69,7 +86,7 @@ public class EntityManaBall extends EntityThrowable {
             world.setEntityState(this, (byte) 3);
             setDead();
         }
-        if(result.entityHit != null && result.entityHit != thrower) {
+        if(isAttackable(result.entityHit)) {
             if(flame)
                 result.entityHit.setFire((int)damage);
             result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), damage);

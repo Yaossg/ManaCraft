@@ -26,7 +26,7 @@ public class BlockManaBooster extends BlockContainer {
     BlockManaBooster() {
         super(Material.IRON);
         setHardness(5f);
-        setLightLevel(SausageUtils.lightLevelOf(9));
+        setLightLevel(SausageUtils.lightLevelOf(11));
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }

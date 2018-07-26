@@ -1,0 +1,9 @@
+{
+  "parent": "mana_craft:block/foot",
+  "textures": {
+    "bottom": "mana_craft:blocks/mana_body",
+    "top": "mana_craft:blocks/mana_body",
+    "side": "mana_craft:blocks/mana_body"
+  },
+  "__comment": "fake model to trick forge"
+}

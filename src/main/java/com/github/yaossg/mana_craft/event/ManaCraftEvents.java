@@ -8,5 +8,6 @@ public class ManaCraftEvents {
         MinecraftForge.EVENT_BUS.register(ManaToolEvent.class);
         if(ManaCraftConfig.dropManaChance > 0)
             MinecraftForge.EVENT_BUS.register(ManaDropEvent.class);
+        MinecraftForge.TERRAIN_GEN_BUS.register(ManaGenEvent.class);
     }
 }

@@ -130,22 +130,16 @@ public class BlockManaProducer extends BlockContainer {
     }
 
     @Override
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
-        return TileManaProducer.checkCharged(worldIn, pos, side);
-    }
-
-    @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         SavedData.get(worldIn).add(pos);
-        ManaCraft.giveAdvancement(placer, "encharge");
+        if(TileManaProducer.checkCharged(worldIn, pos))
+            ManaCraft.giveAdvancement(placer, "energize");
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        TileManaProducer tile = (TileManaProducer) worldIn.getTileEntity(pos);
         SavedData.get(worldIn).remove(pos);
         InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }
-
 }

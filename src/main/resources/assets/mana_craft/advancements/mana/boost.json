@@ -10,16 +10,14 @@
       "translate": "advancement.mana.boost.description"
     }
   },
-  "parent": "mana_craft:mana/encharge",
+  "parent": "mana_craft:mana/energize",
   "criteria": {
     "booster": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [
-          {
+        "items": [{
             "item": "mana_craft:mana_booster"
-          }
-        ]
+        }]
       }
     }
   }

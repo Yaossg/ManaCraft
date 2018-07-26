@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -41,42 +42,40 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
             EntityPlayer player = (EntityPlayer) entityLiving;
             ItemStack ammo = findAmmo(player);
             if(player.isCreative()) ammo = new ItemStack(ManaCraftItems.manaBall);
-            if(!ammo.isEmpty()) {
-                float speed = (getMaxItemUseDuration(stack) - timeLeft) / 32f;
-                if(speed > 0.1f) {
-                    if(!worldIn.isRemote) {
-                        int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
-                        EntityManaBall entity = EntityManaBall.get(worldIn, player,
-                                EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.floating, stack) > 0)
-                                .setDamage(6.5f + power * 0.5f + speed * (power + 1))
-                                .setFlame(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0);
-                        entity.shoot(player, player.rotationPitch, player.rotationYaw, 0,
-                                (EntityManaBall.highVelocity + speed), EntityManaBall.defaultInaccuracy);
-                        worldIn.spawnEntity(entity);
-                        if(!player.isCreative() && stack.attemptDamageItem(1, player.getRNG(),
-                                player instanceof EntityPlayerMP ? (EntityPlayerMP) player : null)) {
-                            player.renderBrokenItemStack(stack);
-                            ItemStack copy = stack.copy();
-                            stack.shrink(1);
-                            stack.setItemDamage(0);
-                            ForgeEventFactory.onPlayerDestroyItem(player, copy, player.getActiveHand());
-                        }
-                        ManaCraft.giveAdvancement(player, "not_staff");
-                    }
-                    if(!player.isCreative()) {
-                        ammo.shrink(1);
-                        if(ammo.isEmpty()) {
-                            player.inventory.deleteStack(ammo);
-                        }
-                    }
+            if(ammo.isEmpty()) return;
+            int progress = getMaxItemUseDuration(stack) - timeLeft;
+            float speed = progress / 20f;
+            if(speed < 0.16f) return;
+            if(!worldIn.isRemote) {
+                int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+                boolean floating = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.floating, stack) > 0;
+                if(!floating && (floating = progress > 200))
+                    ManaCraft.giveAdvancement(player, "fly_so_high");
+                EntityManaBall entity = EntityManaBall.get(worldIn, player, floating)
+                        .setDamage(6.4f + power + speed * (power + 1))
+                        .setFlame(EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0);
+                entity.shoot(player, player.rotationPitch, player.rotationYaw, 0,
+                        (EntityManaBall.highVelocity + speed * 0.8f), EntityManaBall.defaultInaccuracy);
+                player.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1, 1 / (player.getRNG().nextFloat() * 0.4f + 0.8f));
+                worldIn.spawnEntity(entity);
+                if(!player.isCreative() && stack.attemptDamageItem(1, player.getRNG(),
+                        player instanceof EntityPlayerMP ? (EntityPlayerMP) player : null)) {
+                    player.renderBrokenItemStack(stack);
+                    ItemStack copy = stack.copy();
+                    stack.shrink(1);
+                    ForgeEventFactory.onPlayerDestroyItem(player, copy, player.getActiveHand());
                 }
+                ManaCraft.giveAdvancement(player, "cool_wand");
             }
+            if(!player.isCreative())
+                ammo.shrink(1);
         }
     }
 
+
     @Override
     public int getMaxItemUseDuration(ItemStack stack) {
-        return 60000;
+        return 72000;
     }
 
     @Override
@@ -110,7 +109,6 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
         return super.canApplyAtEnchantingTable(stack, enchantment)
                 || enchantment == Enchantments.POWER
                 || enchantment == Enchantments.KNOCKBACK
-                || enchantment == Enchantments.FLAME
-                || enchantment == ManaCraftEnchantments.floating;
+                || enchantment == Enchantments.FLAME;
     }
 }

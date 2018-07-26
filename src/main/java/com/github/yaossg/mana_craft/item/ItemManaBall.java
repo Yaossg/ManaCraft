@@ -34,14 +34,14 @@ public class ItemManaBall extends Item {
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack item = playerIn.getHeldItem(handIn);
-        if(!playerIn.isCreative()) item.shrink(1);
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if(!playerIn.isCreative()) stack.shrink(1);
         if(!worldIn.isRemote) {
             EntityManaBall entity = new EntityManaBall(worldIn, playerIn);
             entity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0,
                     EntityManaBall.lowVelocity, EntityManaBall.defaultInaccuracy);
             worldIn.spawnEntity(entity);
         }
-        return ActionResult.newResult(EnumActionResult.SUCCESS, item);
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 }

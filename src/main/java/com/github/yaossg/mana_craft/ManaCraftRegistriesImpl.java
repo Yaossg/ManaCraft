@@ -25,7 +25,7 @@ import java.util.function.BiFunction;
 
 public class ManaCraftRegistriesImpl extends ManaCraftRegistries {
     public static final ManaCraftRegistriesImpl INSTANCE = new ManaCraftRegistriesImpl();
-    static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public void loadAll() {
         pathRecipe.forEach((modid, path) -> loadEntries(modid, walk(path), IMPRecipe::parse, this::addRecipe));

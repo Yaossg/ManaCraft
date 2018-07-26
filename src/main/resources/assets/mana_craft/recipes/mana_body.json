@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana_dust"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_body"
+  }
+}

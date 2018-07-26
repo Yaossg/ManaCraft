@@ -4,10 +4,10 @@
       "item": "mana_craft:mana_producer"
     },
     "title": {
-      "translate": "advancement.mana.encharge.title"
+      "translate": "advancement.mana.energize.title"
     },
     "description": {
-      "translate": "advancement.mana.encharge.description"
+      "translate": "advancement.mana.energize.description"
     },
     "frame": "goal"
   },
@@ -16,7 +16,7 @@
   },
   "parent": "mana_craft:mana/strange_shears",
   "criteria": {
-    "encharge": {
+    "energize": {
       "trigger": "minecraft:impossible"
     }
   }

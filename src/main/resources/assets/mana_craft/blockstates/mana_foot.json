@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "mana_craft:foot",
+    "textures": {
+      "bottom": "mana_craft:blocks/mana_body",
+      "top": "mana_craft:blocks/mana_body",
+      "side": "mana_craft:blocks/mana_body"
+    }
+  },
+  "variants": {
+    "facing": {
+      "east": { "y": 90, "uvlock": true },
+      "north": {},
+      "south": { "y": 180, "uvlock": true },
+      "west": { "y": 270, "uvlock": true }
+    }
+  }
+}

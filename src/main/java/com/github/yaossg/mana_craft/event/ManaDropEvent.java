@@ -45,6 +45,7 @@ public class ManaDropEvent {
                     : new ItemStack(ManaCraftItems.mana, (int) (1 + (random.nextFloat() + 0.25) * loot)));
         }
     }
+
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         DamageSource source = event.getSource();
@@ -52,8 +53,10 @@ public class ManaDropEvent {
         if(source instanceof EntityDamageSourceIndirect && entity instanceof EntityVillager) {
             EntityDamageSourceIndirect indirect = (EntityDamageSourceIndirect) source;
             if(indirect.getImmediateSource() instanceof EntityManaBall) {
-                InventoryHelper.spawnItemStack(entity.world, entity.posX, entity.posY, entity.posZ,
-                        new ItemStack(ManaCraftItems.manaEmerald));
+                EntityManaBall ball = (EntityManaBall) indirect.getImmediateSource();
+                if(!ball.playerFriendly)
+                    InventoryHelper.spawnItemStack(entity.world, entity.posX, entity.posY, entity.posZ,
+                            new ItemStack(ManaCraftItems.manaEmerald));
             }
         }
     }

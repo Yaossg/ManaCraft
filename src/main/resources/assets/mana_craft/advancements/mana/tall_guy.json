@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_head"
+    },
+    "title": {
+      "translate": "advancement.mana.tall_guy.title"
+    },
+    "description": {
+      "translate": "advancement.mana.tall_guy.description"
+    }
+  },
+  "parent": "mana_craft:mana/root",
+  "criteria": {
+    "tall_guy": {
+      "trigger": "minecraft:summoned_entity",
+      "conditions": {
+        "entity": {
+          "type": "mana_craft:mana_shooter"
+        }
+      }
+    }
+  }
+}

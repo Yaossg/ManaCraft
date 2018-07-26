@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana_ball"
+    },
+    "title": {
+      "translate": "advancement.mana.fly_so_high.title"
+    },
+    "description": {
+      "translate": "advancement.mana.fly_so_high.description"
+    },
+    "frame": "challenge",
+    "hidden": true
+  },
+  "parent": "mana_craft:mana/cool_wand",
+  "criteria": {
+    "fly_so_high": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

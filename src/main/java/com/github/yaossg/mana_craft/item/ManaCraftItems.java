@@ -14,6 +14,7 @@ import java.util.List;
 
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
+@SuppressWarnings("unused")
 public class ManaCraftItems {
     public static final IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
     public static final Item blueShit = manager.addItem(new Item(), "blue_shit");
@@ -47,7 +48,7 @@ public class ManaCraftItems {
             tooltip.add(I18n.format("tooltip.mana_craft.emerald"));
         }
     }, "mana_emerald");
-    public static final Item manaProducerGenerator =  manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
-
+    public static final Item mpGenerator = manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
+    public static final Item manaDust = manager.addItem(new Item(), "mana_dust");
 
 }

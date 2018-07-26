@@ -68,7 +68,7 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
             @Override
             public boolean equals(Object obj) {
                 if(this == obj) return true;
-                if(getClass() != obj.getClass()) return false;
+                if(obj == null || getClass() != obj.getClass()) return false;
                 return compareTo((IMPRecipe) obj) == 0;
             }
         };

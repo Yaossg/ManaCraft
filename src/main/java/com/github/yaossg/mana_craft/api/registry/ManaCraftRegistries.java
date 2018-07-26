@@ -23,7 +23,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * registries of ManaCraft
- * register or load {@link IMPRecipe} and {@link IMBFuel}
+ * register {@link IMPRecipe} and {@link IMBFuel} instance from their folder
  * load when {@link net.minecraftforge.fml.common.event.FMLPostInitializationEvent} is fired
  * */
 public abstract class ManaCraftRegistries {
@@ -41,7 +41,7 @@ public abstract class ManaCraftRegistries {
                         .thenComparing(Comparator.comparingInt(IngredientStack::getCount).reversed());
     }
 
-    static ManaCraftRegistries INSTANCE;
+    private static final ManaCraftRegistries INSTANCE;
     public static ManaCraftRegistries instance() {
         return INSTANCE;
     }
@@ -59,11 +59,11 @@ public abstract class ManaCraftRegistries {
     protected final SortedSet<IMPRecipe> recipes = new TreeSet<>();
     protected final SortedSet<IMBFuel> fuels = new TreeSet<>();
 
-    public SortedSet<IMPRecipe> getRecipes() {
+    public SortedSet<IMPRecipe> recipesView() {
         return Collections.unmodifiableSortedSet(recipes);
     }
 
-    public SortedSet<IMBFuel> getFuels() {
+    public SortedSet<IMBFuel> fuelsView() {
         return Collections.unmodifiableSortedSet(fuels);
     }
 

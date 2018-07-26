@@ -69,7 +69,7 @@ public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supp
             @Override
             public boolean equals(Object obj) {
                 if(this == obj) return true;
-                if(getClass() != obj.getClass()) return false;
+                if(obj == null || getClass() != obj.getClass()) return false;
                 return compareTo((IMBFuel) obj) == 0;
             }
         };

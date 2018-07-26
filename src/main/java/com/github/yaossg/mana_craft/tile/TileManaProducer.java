@@ -3,16 +3,21 @@ package com.github.yaossg.mana_craft.tile;
 import com.github.yaossg.mana_craft.api.IngredientStack;
 import com.github.yaossg.mana_craft.api.registry.IMPRecipe;
 import com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries;
+import com.github.yaossg.mana_craft.block.BlockManaFoot;
 import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
+import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockPattern;
+import net.minecraft.block.state.pattern.FactoryBlockPattern;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -21,9 +26,12 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.instance;
-import static com.github.yaossg.mana_craft.block.BlockManaProducer.FACING;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.WORKING;
 import static com.github.yaossg.mana_craft.block.ManaCraftBlocks.*;
+import static com.github.yaossg.mana_craft.config.ManaCraftConfig.delay;
+import static com.github.yaossg.mana_craft.config.ManaCraftConfig.destroy;
+import static net.minecraft.block.state.BlockWorldState.hasState;
+import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 
 public class TileManaProducer extends TileEntity implements ITickable, IDefaultInventory {
     public int work_time;
@@ -59,46 +67,57 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
         return super.writeToNBT(compound);
     }
 
-    public static boolean checkCharged(World world, BlockPos pos, EnumFacing facing) {
-        return world.getBlockState(pos.down()).getBlock() == manaBlock
-                && world.getBlockState(pos.up()).getBlock() == manaGlass
-                && world.getBlockState(pos.up(2)).getBlock() == manaLantern
-
-                && world.isAirBlock(pos.offset(facing))
+    private static BlockPattern pattern;
+    public static void init() {
+        pattern = FactoryBlockPattern.start()
+                .aisle("     ", "     ", "  _  ", "     ")
+                .aisle("  _  ", " _#_ ", " # # ", " *#* ")
+                .aisle(" _^_ ", "_#!#_", "_ O _", " ### ")
+                .aisle("  _  ", " _#_ ", " # # ", " *#* ")
+                .aisle("     ", "     ", "  _  ", "     ")
+                .where('_', hasState(forBlock(Blocks.AIR)))
+                .where('^', hasState(forBlock(manaLantern)))
+                .where('#', hasState(forBlock(manaBlock)))
+                .where('!', hasState(forBlock(manaGlass)))
+                .where('*', hasState(forBlock(manaIngotBlock)))
+                .where('O', TileManaProducer::core)
+                .build();
+    }
+    public static boolean core(BlockWorldState bws) {
+        IBlockState state = bws.getBlockState();
+        if(state.getBlock() != manaProducer)
+            return false;
+        World world = ReflectionHelper.getPrivateValue(BlockWorldState.class, bws, "world");
+        EnumFacing facing = state.getValue(BlockManaFoot.FACING);
+        BlockPos pos = bws.getPos();
+        return world.isAirBlock(pos.offset(facing))
                 && world.getBlockState(pos.offset(facing.rotateY())).getBlock() == manaGlass
-                && world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == manaGlass
                 && world.getBlockState(pos.offset(facing.rotateYCCW())).getBlock() == manaGlass
+                && world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == manaGlass;
+    }
+    public static boolean checkCharged(World world, BlockPos pos) {
+        BlockPattern.PatternHelper helper = pattern.match(world, pos);
+        if(helper != null)
+            return helper.translateOffset(2, 2, 2).getPos().equals(pos);
+        return false;
+    }
 
-                && world.isAirBlock(pos.offset(facing, 2))
-                && world.isAirBlock(pos.offset(facing.rotateY(), 2))
-                && world.isAirBlock(pos.offset(facing.rotateY().rotateY(), 2))
-                && world.isAirBlock(pos.offset(facing.rotateY().rotateY().rotateY(), 2))
-
-                && world.getBlockState(pos.add(1, -1, 0)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(0, -1, 1)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(-1, -1, 0)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(0, -1, -1)).getBlock() == manaBlock
-
-                && world.getBlockState(pos.add(1, 0, 1)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(-1, 0, 1)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(-1, 0, -1)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(1, 0, -1)).getBlock() == manaBlock
-
-                && world.getBlockState(pos.add(1, 1, 0)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(0, 1, 1)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(-1, 1, 0)).getBlock() == manaBlock
-                && world.getBlockState(pos.add(0, 1, -1)).getBlock() == manaBlock
-
-                && world.getBlockState(pos.add(1, -1, 1)).getBlock() == manaIngotBlock
-                && world.getBlockState(pos.add(-1, -1, 1)).getBlock() == manaIngotBlock
-                && world.getBlockState(pos.add(-1, -1, -1)).getBlock() == manaIngotBlock
-                && world.getBlockState(pos.add(1, -1, -1)).getBlock() == manaIngotBlock
-
-                && world.getLightFor(EnumSkyBlock.SKY, pos.up(3)) > 13;
+    public boolean isCharged = false;
+    private int checkDelay = delay;
+    boolean check() {
+        if(--checkDelay < 0) isCharged = false;
+        if(!isCharged) {
+            if(!(isCharged = checkCharged(world, pos))) {
+                if(destroy)
+                    world.destroyBlock(pos, true);
+                return false;
+            }
+            checkDelay = 8;
+        }
+        return true;
     }
 
     public boolean isSorted = false;
-
     ItemStackHandler getSorted() {
         ItemStackHandler handler = new ItemStackHandler(4);
         for (int i = 0; i < input.getSlots(); ++i)
@@ -119,7 +138,7 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
     @Nullable
     IMPRecipe detect() {
         ItemStackHandler handler = getSorted();
-        for (IMPRecipe recipe : instance().getRecipes()) {
+        for (IMPRecipe recipe : instance().recipesView()) {
             IngredientStack[] matches = recipe.input();
             boolean found = handler.getSlots() >= matches.length;
             for (int i = 0;
@@ -136,6 +155,7 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
         for (int i = 0; i < input.getSlots(); ++i)
             input.setStackInSlot(i, i < handler.getSlots() ? handler.getStackInSlot(i) : ItemStack.EMPTY);
     }
+
     void work(IMPRecipe current) {
         if((++work_time) >= total_work_time) {
             work_time -= current.work_time();
@@ -144,27 +164,22 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
                 temp.extractItem(i, current.input()[i].getCount(), false);
             copyToInput(temp);
             output.insertItem(0, current.output().copy(), false);
-            isSorted = false;
+            isCharged = isSorted = false;
             markDirty();
         }
     }
+
     @Override
     public void update() {
         IBlockState state = world.getBlockState(pos);
-        if(!checkCharged(world, pos, state.getValue(FACING))) {
-            world.destroyBlock(pos, true);
-            return;
-        }
-        if(world.isRemote)
-            return;
-        if(work_time > total_work_time)
-            work_time = total_work_time;
+        if(world.isRemote || !check()) return;
+        work_time = Math.min(work_time, total_work_time);
         IMPRecipe current = detect();
         if(current != null && output.insertItem(0, current.output(), true).isEmpty()) {
             world.setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
             if(total_work_time != current.work_time()) {
                 total_work_time = current.work_time();
-                work_time = Integer.min(work_time, total_work_time - 1);
+                work_time = Math.min(work_time, total_work_time - 1);
             }
             if(!isSorted) {
                 copyToInput(getSorted());

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XOX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "mana_craft:mana_dust"
+    },
+    "O": {
+      "item": "mana_craft:mana_diamond"
+    }
+  },
+  "result": {
+    "item": "mana_craft:mana_head"
+  }
+}
