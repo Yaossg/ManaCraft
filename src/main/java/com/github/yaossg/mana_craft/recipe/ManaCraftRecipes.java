@@ -10,7 +10,6 @@ import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 
 public class ManaCraftRecipes {
     public static void init() {
-
         addSmelting(ManaCraftBlocks.manaOre, new ItemStack(ManaCraftItems.mana, 4), 0.6f);
         addSmelting(ManaCraftBlocks.manaIngotOre, new ItemStack(ManaCraftItems.manaIngot), 0.4f);
         addSmelting(ManaCraftBlocks.manaBlock, new ItemStack(ManaCraftItems.manaBall), 0.2f);

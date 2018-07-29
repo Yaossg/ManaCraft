@@ -40,7 +40,7 @@ container.mana_craft.mana_booster.title=魔能增益器
 container.mana_craft.mana_producer.hover=制造中...%d%%
 container.mana_craft.mana_producer.hoverIdle=闲置
 container.mana_craft.mana_booster.hover=燃料剩余:%d%% 功率:+%d
-container.mana_craft.mana_booster.hoverIdle=燃料剩余:0%%
+container.mana_craft.mana_booster.hoverIdle=空
 advancement.mana.root.title=ManaCraft
 advancement.mana.root.description=感受魔能的力量！
 advancement.mana.shiny_mana.title=闪亮的魔能
@@ -75,7 +75,7 @@ message.mana_craft.pig=嘭！
 message.mana_craft.failed=生成失败:魔能制造器被阻挡
 tooltip.mana_craft.emerald=享受你和村民的友谊！
 
-entity.mana_shooter.name=魔能射手
+entity.ManaShooter.name=魔能射手
 entity.Villager.enchanter=附魔师
 entity.Villager.mana=魔能术士
 entity.Villager.mana_tool=魔能工具术士
@@ -117,3 +117,8 @@ mana_craft.ore_gens.general.heightManaIngotOre=魔能金矿最高高度
 mana_craft.ore_gens.general.timesManaIngotOre=魔能金矿生成次数
 mana_craft.ore_gens.general.mixtureChance=混合矿脉生成几率
 mana_craft.ore_gens.general.heightMixture=混合矿脉最高高度
+
+gui.jei.category.mana_craft.mana_producer=魔能制造器配方
+gui.jei.category.mana_craft.mana_booster=魔能增益器燃料
+gui.jei.category.mana_craft.mana_booster.level=功率:%d
+gui.jei.category.mana_craft.mana_booster.time=时间:%d

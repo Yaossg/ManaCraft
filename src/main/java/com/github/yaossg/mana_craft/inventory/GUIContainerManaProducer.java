@@ -7,7 +7,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.awt.*;
+
+@SideOnly(Side.CLIENT)
 public class GUIContainerManaProducer extends GuiContainer {
     GUIContainerManaProducer(Container inventorySlotsIn) {
         super(inventorySlotsIn);
@@ -27,7 +33,8 @@ public class GUIContainerManaProducer extends GuiContainer {
         String translateKey = "container.mana_craft.mana_producer.";
         int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
         String title = I18n.format(translateKey + "title");
-        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, 0x404040);
+        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Color.DARK_GRAY.getRGB());
+        if(!Loader.isModLoaded("jei"))
         if(mouseX >= 87 + offsetX && mouseX < 110 + offsetX && mouseY >= 36 + offsetY && mouseY < 54 + offsetY) {
             ContainerManaProducer self = GUIHelper.getContainer(this);
             String hover = self.work_time != 0 ? I18n.format(translateKey + "hover",
@@ -36,7 +43,7 @@ public class GUIContainerManaProducer extends GuiContainer {
         }
     }
 
-    private static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_producer");
+    public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_producer");
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -48,7 +55,7 @@ public class GUIContainerManaProducer extends GuiContainer {
         drawTexturedModalRect(offsetX, offsetY, 0, 0, xSize, ySize);
         ContainerManaProducer self = GUIHelper.getContainer(this);
         int textureWidth = ((int) Math.ceil(22.0 * self.work_time / self.total_work_time)) % 24;
-        drawTexturedModalRect(offsetX + 87, offsetY + 36, 177, 0, textureWidth, 17);
+        drawTexturedModalRect(offsetX + 87, offsetY + 36, 176, 0, textureWidth, 17);
 
     }
 

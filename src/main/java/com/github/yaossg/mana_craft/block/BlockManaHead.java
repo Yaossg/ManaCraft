@@ -98,9 +98,8 @@ public class BlockManaHead extends BlockManaBody {
         IBlockState state = bws.getBlockState();
         if(state.getBlock() != manaFoot)
             return false;
-        World world = ReflectionHelper.getPrivateValue(BlockWorldState.class, bws, "world");
         EnumFacing facing = state.getValue(BlockManaFoot.FACING).getOpposite();
-        IBlockState other = world.getBlockState(bws.getPos().offset(facing, 2));
+        IBlockState other = bws.world.getBlockState(bws.getPos().offset(facing, 2));
         return other.getBlock() == manaFoot && other.getValue(BlockManaFoot.FACING) == facing;
     }
 

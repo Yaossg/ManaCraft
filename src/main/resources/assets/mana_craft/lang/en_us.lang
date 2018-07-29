@@ -40,7 +40,7 @@ container.mana_craft.mana_booster.title=Mana Booster
 container.mana_craft.mana_producer.hover=producing...%d%%
 container.mana_craft.mana_producer.hoverIdle=idle
 container.mana_craft.mana_booster.hover=fuel left:%d%% power:+%d
-container.mana_craft.mana_booster.hoverIdle=fuel left:0%%
+container.mana_craft.mana_booster.hoverIdle=empty
 advancement.mana.root.title=ManaCraft
 advancement.mana.root.description=Feel the power of Mana!
 advancement.mana.shiny_mana.title=Shiny Mana
@@ -75,7 +75,7 @@ message.mana_craft.pig=BOOM!
 message.mana_craft.failed=Failed to generate:ManaProducer is blocked
 tooltip.mana_craft.emerald=enjoy your friendship with villagers!
 
-entity.mana_shooter.name=Mana Shooter
+entity.ManaShooter.name=Mana Shooter
 entity.Villager.enchanter=Enchanter
 entity.Villager.mana=Mana Magician
 entity.Villager.mana_tool=Mana Tool Magician
@@ -117,3 +117,8 @@ mana_craft.ore_gens.general.heightManaIngotOre=Max Height of Mana Ingot Ore
 mana_craft.ore_gens.general.timesManaIngotOre=Generate times of Mana Ingot Ore
 mana_craft.ore_gens.general.mixtureChance=Change of generation of mixture veins
 mana_craft.ore_gens.general.heightMixture=Max height of mixture veins
+
+gui.jei.category.mana_craft.mana_producer=Mana Producer Recipe
+gui.jei.category.mana_craft.mana_booster=Mana Booster Fuel
+gui.jei.category.mana_craft.mana_booster.level=Power:%d
+gui.jei.category.mana_craft.mana_booster.time=Time:%d

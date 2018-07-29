@@ -6,7 +6,7 @@
 	"count": 44
   }],
   "output": {
-    "item": "mana_craft:mana_block"
+    "item": "mana_craft:mana_ingot_block"
   },
   "work_time": 32400
 }

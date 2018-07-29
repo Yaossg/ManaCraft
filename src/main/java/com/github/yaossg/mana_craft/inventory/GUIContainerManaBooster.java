@@ -7,7 +7,13 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.awt.*;
+
+@SideOnly(Side.CLIENT)
 public class GUIContainerManaBooster extends GuiContainer {
     GUIContainerManaBooster(Container inventorySlotsIn) {
         super(inventorySlotsIn);
@@ -27,16 +33,17 @@ public class GUIContainerManaBooster extends GuiContainer {
         String translateKey = "container.mana_craft.mana_booster.";
         int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
         String title = I18n.format(translateKey + "title");
-        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, 0x404040);
+        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Color.DARK_GRAY.getRGB());
+        if(!Loader.isModLoaded("jei"))
         if(mouseX >= 79 + offsetX && mouseX < 95 + offsetX && mouseY >= 30 + offsetY && mouseY < 46 + offsetY) {
             ContainerManaBooster self = GUIHelper.getContainer(this);
-            String hover = self.burn_time != 0 ? I18n.format(translateKey + "hover",
+            String hover = self.burn_time > 0 ? I18n.format(translateKey + "hover",
                     (int) (100 * (float) self.burn_time / self.total_burn_time), self.burn_level) : I18n.format(translateKey + "hoverIdle");
             drawHoveringText(hover, mouseX - offsetX, mouseY - offsetY);
         }
     }
 
-    private static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_booster");
+    public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_booster");
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {

@@ -6,12 +6,12 @@
     "XXX"
   ],
   "key": {
-    "X": {
+    "G": {
       "type": "forge:ore_dict",
       "ore": "nuggetGold"
     },
-    "G": {
-      "item": "minecraft:gold_nugget"
+    "X": {
+      "item": "mana_craft:mana"
     }
   },
   "result": {

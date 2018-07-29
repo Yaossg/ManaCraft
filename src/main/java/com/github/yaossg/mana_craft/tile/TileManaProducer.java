@@ -87,7 +87,7 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
         IBlockState state = bws.getBlockState();
         if(state.getBlock() != manaProducer)
             return false;
-        World world = ReflectionHelper.getPrivateValue(BlockWorldState.class, bws, "world");
+        World world = bws.world;
         EnumFacing facing = state.getValue(BlockManaFoot.FACING);
         BlockPos pos = bws.getPos();
         return world.isAirBlock(pos.offset(facing))
