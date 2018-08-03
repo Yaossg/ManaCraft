@@ -24,7 +24,7 @@ public class ManaCraftItems {
     public static final Item manaCoal = manager.addItem(new Item() {
         @Override
         public int getItemBurnTime(ItemStack stack) {
-            return stack.getItem() == this ? 64 * 200 : 0;
+            return 64 * 200;
         }
     }, "mana_coal");
     public static final Item manaDiamond = manager.addItem(new Item(), "mana_diamond");

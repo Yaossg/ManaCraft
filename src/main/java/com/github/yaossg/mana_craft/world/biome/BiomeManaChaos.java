@@ -2,7 +2,6 @@ package com.github.yaossg.mana_craft.world.biome;
 
 import com.github.yaossg.mana_craft.block.BlockManaFoot;
 import com.github.yaossg.mana_craft.block.BlockManaHead;
-import com.github.yaossg.mana_craft.world.gen.ManaCraftWorldGens;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
@@ -13,7 +12,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.*;
 
@@ -27,7 +25,7 @@ public class BiomeManaChaos extends BiomeMana {
         return new BiomeManaChaos(new BiomeProperties("ManaChaos").setBaseBiome("Mana").setHeightVariation(0.25f));
     }
     static BiomeManaChaos getHills() {
-        return new BiomeManaChaos(new BiomeProperties("ManaChaosHills").setBaseBiome("ManaHills").setBaseHeight(1.25f).setHeightVariation(0.32f));
+        return new BiomeManaChaos(new BiomeProperties("ManaChaosHills").setBaseBiome("ManaHills").setBaseHeight(1.2f).setHeightVariation(0.32f));
     }
 
     protected BiomeManaChaos(BiomeProperties properties) {
@@ -115,15 +113,12 @@ public class BiomeManaChaos extends BiomeMana {
             super.generateDoubleFlower(worldIn, rand, pos);
     }
 
-    private static final WorldGenLakes lavaLakes = new WorldGenLakes(Blocks.LAVA);
+    private static final WorldGenLakes LAVA_LAKES = new WorldGenLakes(Blocks.LAVA);
     @Override
     public void decorate(World worldIn, Random rand, BlockPos pos) {
-        Chunk chunk = worldIn.getChunkFromBlockCoords(pos);
-        ManaCraftWorldGens.generate(rand, chunk.x, chunk.z, worldIn);
-        ManaCraftWorldGens.generate(rand, chunk.x, chunk.z, worldIn);
         for (int i = 0; i < 4; i++)
             sky.generate(worldIn, rand, randomPos(worldIn, rand, pos).up(rand.nextInt(48) - rand.nextInt(36)));
-        lavaLakes.generate(worldIn, rand, pos.add(rand.nextInt(16) + 8, 256, rand.nextInt(16) + 8));
+        LAVA_LAKES.generate(worldIn, rand, pos.add(rand.nextInt(16) + 8, 256, rand.nextInt(16) + 8));
         super.decorate(worldIn, rand, pos);
     }
 }

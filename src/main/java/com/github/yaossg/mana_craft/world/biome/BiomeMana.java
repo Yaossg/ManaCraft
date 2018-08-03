@@ -1,9 +1,9 @@
 package com.github.yaossg.mana_craft.world.biome;
 
 import com.github.yaossg.mana_craft.entity.EntityManaShooter;
-import com.github.yaossg.mana_craft.world.gen.ManaCraftWorldGens;
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.*;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.init.Blocks;
@@ -11,7 +11,7 @@ import net.minecraft.util.WeightedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.*;
 
 import java.util.List;
@@ -19,24 +19,47 @@ import java.util.Random;
 
 public class BiomeMana extends Biome {
     static BiomeMana get() {
-        return new BiomeMana(new BiomeProperties("Mana").setHeightVariation(0.08f));
+        return new BiomeMana(new BiomeProperties("Mana").setBaseHeight(0).setHeightVariation(0.08f));
     }
     static BiomeMana getHills() {
-        return new BiomeMana(new BiomeProperties("ManaHills").setBaseHeight(1).setHeightVariation(0.12f));
+        return new BiomeMana(new BiomeProperties("ManaHills").setBaseHeight(0.8f).setHeightVariation(0.12f));
     }
 
     protected BiomeMana(BiomeProperties properties) {
         super(properties.setWaterColor(0xFF0033));
         decorator.treesPerChunk = 2;
         decorator.grassPerChunk = 8;
-        decorator.waterlilyPerChunk = 4;
+        decorator.waterlilyPerChunk = 10;
         decorator.mushroomsPerChunk = 4;
         decorator.flowersPerChunk = 8;
         decorator.sandPatchesPerChunk = 0;
         decorator.gravelPatchesPerChunk = 0;
+        decorator.reedsPerChunk = 100;
         spawnableCreatureList.clear();
         spawnableCreatureList.add(new SpawnListEntry(EntityPig.class, 10, 1, 3));
         spawnableCreatureList.add(new SpawnListEntry(EntityManaShooter.class, 1, 1, 1));
+    }
+
+    @Override
+    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal) {
+        double d0 = GRASS_COLOR_NOISE.getValue((double)x * 0.25D, (double)z * 0.25D);
+        if (d0 > 0.0D) {
+            int i = x & 15;
+            int j = z & 15;
+
+            for(int k = 255; k >= 0; --k) {
+                if (chunkPrimerIn.getBlockState(j, k, i).getMaterial() != Material.AIR) {
+                    if (k == 62 && chunkPrimerIn.getBlockState(j, k, i).getBlock() != Blocks.WATER) {
+                        chunkPrimerIn.setBlockState(j, k, i, WATER);
+                        if (d0 < 0.12D) {
+                            chunkPrimerIn.setBlockState(j, k + 1, i, Blocks.WATERLILY.getDefaultState());
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        super.genTerrainBlocks(worldIn, rand, chunkPrimerIn, x, z, noiseVal);
     }
 
     @Override
@@ -115,10 +138,7 @@ public class BiomeMana extends Biome {
 
     @Override
     public void decorate(World worldIn, Random rand, BlockPos pos) {
-        LAKES.generate(worldIn, rand, pos.add(rand.nextInt(16) + 8, 256, rand.nextInt(16) + 8));
-        Chunk chunk = worldIn.getChunkFromBlockCoords(pos);
         generateDoubleFlower(worldIn, rand, pos);
-        ManaCraftWorldGens.generate(rand, chunk.x, chunk.z, worldIn);
         super.decorate(worldIn, rand, pos);
     }
 }

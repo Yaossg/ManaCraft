@@ -38,7 +38,7 @@ public class ItemManaArmor extends ItemArmor implements IDefaultSpecialArmor, II
     }
 
     @Override
-    public void damageArmor(EntityLivingBase entity, @Nonnull ItemStack stack, DamageSource source, int damage, int slot) {
+    public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot) {
         Random random = entity.getRNG();
         if(stack.attemptDamageItem(damage, random, entity instanceof EntityPlayerMP ? (EntityPlayerMP) entity : null)) {
             int base = getManaValue();

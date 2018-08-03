@@ -121,8 +121,4 @@ public class BlockManaHead extends BlockManaBody {
         }
     }
 
-    @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-
-    }
 }

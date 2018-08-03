@@ -64,7 +64,6 @@ public final class IngredientStack implements Predicate<ItemStack> {
         return count;
     }
 
-    @Nonnull
     public static IngredientStack parse(JsonContext context, JsonElement json) {
         return new IngredientStack(CraftingHelper.getIngredient(json, context), seekCount(context, json).orElse(1));
     }

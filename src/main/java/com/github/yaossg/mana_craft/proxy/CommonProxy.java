@@ -13,6 +13,7 @@ import com.github.yaossg.mana_craft.recipe.ManaCraftRecipes;
 import com.github.yaossg.mana_craft.tile.ManaCraftTiles;
 import com.github.yaossg.mana_craft.world.biome.ManaCraftBiomes;
 import com.github.yaossg.mana_craft.world.gen.ManaCraftWorldGens;
+import com.github.yaossg.sausage_core.api.util.inventory.IEnumGUIBase;
 import com.github.yaossg.sausage_core.api.util.inventory.IGUIManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -28,11 +29,12 @@ public class CommonProxy {
         ManaCraftItems.manager.registerAll();
         ManaCraftBlocks.init();
         ManaCraftTiles.init();
-        IGUIManager.register(ManaCraft.instance, ManaCraftGUIs.values());
+        IEnumGUIBase.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftEntities.init();
         ManaCraftEnchantments.init();
         ManaCraftRecipes.init();
         addOreDictionary();
+
     }
 
     public static void addOreDictionary() {

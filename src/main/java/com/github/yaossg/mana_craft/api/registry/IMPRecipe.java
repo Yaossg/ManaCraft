@@ -42,8 +42,7 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
         return comparator.compare(this, o);
     }
 
-    @Nonnull
-    static IMPRecipe of(int work_time, @Nonnull ItemStack output, IngredientStack... input) {
+    static IMPRecipe of(int work_time, ItemStack output, IngredientStack... input) {
         checkNotNull(output);
         checkNotNull(input);
         checkArgument(input.length > 0);
@@ -74,7 +73,6 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
         };
     }
 
-    @Nonnull
     static IMPRecipe parse(JsonContext context, JsonObject json) {
         JsonArray input = JsonUtils.getJsonArray(json, "input");
         IngredientStack[] ingredients = Streams.stream(input)

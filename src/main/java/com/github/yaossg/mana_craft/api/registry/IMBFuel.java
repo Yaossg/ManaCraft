@@ -45,7 +45,6 @@ public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supp
         return get().apply(stack);
     }
 
-    @Nonnull
     static IMBFuel of(@Nonnull Ingredient ingredient, int level, int time) {
         checkNotNull(ingredient);
         checkArgument(level > 0);
@@ -75,7 +74,6 @@ public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supp
         };
     }
 
-    @Nonnull
     static IMBFuel parse(JsonContext context, JsonObject json) {
         Ingredient ingredient = CraftingHelper.getIngredient(JsonUtils.getJsonObject(json, "fuel"), context);
         return of(ingredient, JsonUtils.getInt(json, "level"), JsonUtils.getInt(json, "time"));
