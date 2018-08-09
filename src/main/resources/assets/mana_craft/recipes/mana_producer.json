@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
-    "XFX",
-    "XXX"
+    "XDX",
+    "DFD",
+    "XDX"
   ],
   "key": {
     "X": {
@@ -11,6 +11,9 @@
     },
     "F": {
       "item": "mana_craft:machine_frame"
+    },
+    "D": {
+      "item": "mana_craft:mana_dust"
     }
   },
   "result": {

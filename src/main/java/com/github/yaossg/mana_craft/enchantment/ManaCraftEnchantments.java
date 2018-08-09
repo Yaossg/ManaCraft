@@ -25,6 +25,7 @@ public class ManaCraftEnchantments {
         COMBAT.setRelevantEnchantmentTypes(
                 concat(concat(COMBAT.getRelevantEnchantmentTypes(),
                         EnchantmentFloating.TYPE), EnchantmentManaEvoker.TYPE));
+        //add another way to get these books
         ManaCraft.tabMana.setRelevantEnchantmentTypes(
                 EnchantmentManaRecycler.TYPE, EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE);
     }

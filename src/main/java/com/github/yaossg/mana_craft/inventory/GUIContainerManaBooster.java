@@ -30,16 +30,15 @@ public class GUIContainerManaBooster extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String translateKey = "container.mana_craft.mana_booster.";
-        int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
-        String title = I18n.format(translateKey + "title");
+        String title = I18n.format("container.mana_craft.mana_booster.title");
         GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Color.DARK_GRAY.getRGB());
-        if(!Loader.isModLoaded("jei"))
-        if(mouseX >= 79 + offsetX && mouseX < 95 + offsetX && mouseY >= 30 + offsetY && mouseY < 46 + offsetY) {
-            ContainerManaBooster self = GUIHelper.getContainer(this);
-            String hover = self.burn_time > 0 ? I18n.format(translateKey + "hover",
-                    (int) (100 * (float) self.burn_time / self.total_burn_time), self.burn_level) : I18n.format(translateKey + "hoverIdle");
-            drawHoveringText(hover, mouseX - offsetX, mouseY - offsetY);
+        ContainerManaBooster self = GUIHelper.getContainer(this);
+        String translateKey = "gui.jei.category.mana_craft.mana_booster.";
+        if(self.burn_time != 0) {
+            fontRenderer.drawString(I18n.format(translateKey + "level", self.burn_level), 75, 24, Color.DARK_GRAY.getRGB());
+            fontRenderer.drawString(I18n.format(translateKey + "time", self.burn_time), 75, 42, Color.DARK_GRAY.getRGB());
+        } else {
+            fontRenderer.drawString(I18n.format("container.mana_craft.mana_booster.idle"), 75, 24, Color.DARK_GRAY.getRGB());
         }
     }
 
@@ -54,8 +53,8 @@ public class GUIContainerManaBooster extends GuiContainer {
 
         drawTexturedModalRect(offsetX, offsetY, 0, 0, xSize, ySize);
         ContainerManaBooster self = GUIHelper.getContainer(this);
-        int textureHeight = (int) Math.ceil(12.0 * self.burn_time / self.total_burn_time);
-        drawTexturedModalRect(offsetX + 81, offsetY + 45 - textureHeight, 176, 12 - textureHeight, 14, textureHeight);
+        int textureHeight = (int) Math.ceil(14.0 * self.burn_time / self.total_burn_time);
+        drawTexturedModalRect(offsetX + 52, offsetY + 34 - textureHeight, 176, 14 - textureHeight, 14, textureHeight);
 
     }
 

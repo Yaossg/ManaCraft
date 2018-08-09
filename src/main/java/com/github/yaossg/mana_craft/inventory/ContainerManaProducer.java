@@ -3,6 +3,7 @@ package com.github.yaossg.mana_craft.inventory;
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
 import com.github.yaossg.sausage_core.api.util.inventory.ContainerBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -14,7 +15,7 @@ public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
     public int work_time;
     public int total_work_time;
 
-    ContainerManaProducer(EntityPlayer player, TileEntity tileEntity) {
+    ContainerManaProducer(InventoryPlayer inventory, TileEntity tileEntity) {
         super(tileEntity);
         for (int i = 0; i < 2; ++i)
             for (int j = 0; j < 2; ++j)
@@ -35,10 +36,10 @@ public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
 
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 9; ++j)
-                addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
 
         for (int i = 0; i < 9; ++i)
-            addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
+            addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 142));
     }
 
     @Override

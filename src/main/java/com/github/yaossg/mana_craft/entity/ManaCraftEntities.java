@@ -38,8 +38,4 @@ public class ManaCraftEntities {
         registerEntityRenderingHandler(EntityManaBall.Floating.class, EntityManaBall::render);
         registerEntityRenderingHandler(EntityManaShooter.class, EntityManaShooter.Render::new);
     }
-
-    private static void registerEntity(Class<? extends Entity> entityClass, String name, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
-        EntityRegistry.registerModEntity(new ResourceLocation(ManaCraft.MODID, name), entityClass, name, nextID++, ManaCraft.instance, trackingRange, updateFrequency, sendsVelocityUpdates);
-    }
 }

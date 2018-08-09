@@ -71,7 +71,7 @@ public class EntityManaBall extends EntityThrowable {
 
     private static final BufferedRandom random = new BufferedRandom();
 
-    private boolean isAttackable(Entity entity) {
+    private boolean canAttack(Entity entity) {
         return  !( entity == null
                 || entity == thrower
                 ||                   entity instanceof EntityManaShooter
@@ -86,7 +86,7 @@ public class EntityManaBall extends EntityThrowable {
             world.setEntityState(this, (byte) 3);
             setDead();
         }
-        if(isAttackable(result.entityHit)) {
+        if(canAttack(result.entityHit)) {
             if(flame)
                 result.entityHit.setFire((int)damage);
             result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), damage);

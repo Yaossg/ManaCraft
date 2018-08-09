@@ -19,7 +19,7 @@ public class MBFuelCategory implements IRecipeCategory<MBFuelWrapper> {
     public static final String UID = ManaCraft.MODID + ".mana_booster";
     private final IDrawable background, icon;
     public MBFuelCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createDrawable(texture, 79, 31, 84, 36);
+        background = guiHelper.createDrawable(texture, 51, 20, 84, 36);
         icon = guiHelper.createDrawableIngredient(new ItemStack(ManaCraftBlocks.manaBooster));
     }
 

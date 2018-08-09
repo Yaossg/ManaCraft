@@ -49,7 +49,6 @@ public class ItemManaApple extends ItemFood {
             playerIn.attackEntityFrom(new DamageSource("byPig").setDifficultyScaled().setExplosion().setMagicDamage().setFireDamage(), 32);
             ItemManaApple.appleExplosion(playerIn, pig);
             stack.shrink(1);
-            pig.setDead();
             return true;
         }
         return false;
@@ -61,6 +60,7 @@ public class ItemManaApple extends ItemFood {
             ManaCraft.giveAdvancement(playerIn, "pig_bomb");
         }
         if(ManaCraftConfig.bombSize > 0) {
+            pig.setDead();
             Explosions.createToApply(pig.world, pig, pig.getPosition(), ManaCraftConfig.bombSize, ManaCraftConfig.causeFire, ManaCraftConfig.damageTerrain);
             float step = (float) Math.PI / ManaCraftConfig.bombSize;
             for (float f = 0; f <= 2 * Math.PI; f += step) {

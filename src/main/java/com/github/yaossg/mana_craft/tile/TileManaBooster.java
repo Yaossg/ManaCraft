@@ -61,7 +61,7 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability
-                && facing !=null && facing.getAxis().isHorizontal()
+                && facing != null && facing.getAxis().isHorizontal()
                 || super.hasCapability(capability, facing);
     }
 

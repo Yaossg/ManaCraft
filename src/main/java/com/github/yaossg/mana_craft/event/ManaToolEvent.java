@@ -25,7 +25,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Random;
 
 public class ManaToolEvent {
-
     @SubscribeEvent
     public static void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
         Random random = event.getEntityPlayer().getRNG();
@@ -47,11 +46,11 @@ public class ManaToolEvent {
         if(ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.manaHoe))) {
             World world = event.getWorld();
             Block block = world.getBlockState(event.getPos()).getBlock();
-            if(block == ManaCraftBlocks.manaBlock) {
+            if(block == ManaCraftBlocks.manaBody) {
                 item.setStackDisplayName("Final Hoe of Mana");
                 item.addEnchantment(Enchantments.SHARPNESS, 7);
                 item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
-                item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(I18n.format("message.mana_craft.finalHoe")));
+                item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(I18n.format("message.mana_craft.hoe")));
                 world.setBlockToAir(event.getPos());
                 Explosions.createToApply(world, event.getEntity(), event.getPos(), 1.25f, true, false);
                 event.getEntityPlayer().addExperience(10);

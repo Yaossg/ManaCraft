@@ -16,8 +16,7 @@ import net.minecraftforge.common.ForgeHooks;
 import static com.github.yaossg.mana_craft.block.ManaCraftBlocks.*;
 
 public class ItemMPGenerator extends Item {
-
-    public static void placeFrame(World worldIn, BlockPos root, EnumFacing facing) {
+    public static void buildFrame(World worldIn, BlockPos root, EnumFacing facing) {
         worldIn.setBlockState(root, manaBlock.getDefaultState());
         worldIn.setBlockState(root.add(1, 0, 0), manaBlock.getDefaultState());
         worldIn.setBlockState(root.add(0, 0, 1), manaBlock.getDefaultState());
@@ -58,7 +57,7 @@ public class ItemMPGenerator extends Item {
         }
         if(!player.isCreative())
             player.getHeldItem(hand).shrink(1);
-        placeFrame(worldIn, root, player.getHorizontalFacing());
+        buildFrame(worldIn, root, player.getHorizontalFacing());
         ForgeHooks.onPlaceItemIntoWorld(new ItemStack(manaProducer), player, worldIn, root, facing, hitX, hitY, hitZ, hand);
         return EnumActionResult.SUCCESS;
     }

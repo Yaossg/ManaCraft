@@ -29,7 +29,7 @@ public class ManaCraftItems {
     }, "mana_coal");
     public static final Item manaDiamond = manager.addItem(new Item(), "mana_diamond");
     public static final Item manaApple = manager.addItem(new ItemManaApple(), "mana_apple");
-    public static final Item manaPork = manager.addItem(new ItemFood(12, 2f, true), "mana_pork");
+    public static final Item manaPork = manager.addItem(new ItemManaPork(), "mana_pork");
     public static final Item manaBall = manager.addItem(new ItemManaBall(), "mana_ball");
     public static final Item manaWand = manager.addItem(new ItemManaWand(), "mana_wand");
     public static final Item manaSword = manager.addItem(new ItemManaTools.ItemManaSword(), "mana_sword");

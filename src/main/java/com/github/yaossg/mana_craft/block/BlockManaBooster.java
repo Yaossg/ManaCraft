@@ -5,6 +5,7 @@ import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaBooster;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
@@ -24,11 +25,11 @@ public class BlockManaBooster extends BlockContainer {
     public static final PropertyBool BURNING = PropertyBool.create("burning");
 
     BlockManaBooster() {
-        super(Material.IRON);
+        super(Material.IRON, MapColor.PURPLE);
         setHardness(5f);
         setLightLevel(SausageUtils.lightLevelOf(11));
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
-        setDefaultState(this.blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
+        setDefaultState(blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
     }
 
     @Override
@@ -60,7 +61,7 @@ public class BlockManaBooster extends BlockContainer {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(!worldIn.isRemote)
-            playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

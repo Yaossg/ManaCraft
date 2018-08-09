@@ -18,7 +18,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Random;
 
 public class ManaDropEvent {
-
     private static void spawnEntityItem(LivingDropsEvent event, ItemStack stack) {
         EntityLivingBase entity = event.getEntityLiving();
         Random random = entity.getRNG();

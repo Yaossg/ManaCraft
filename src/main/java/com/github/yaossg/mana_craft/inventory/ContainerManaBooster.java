@@ -3,6 +3,7 @@ package com.github.yaossg.mana_craft.inventory;
 import com.github.yaossg.mana_craft.tile.TileManaBooster;
 import com.github.yaossg.sausage_core.api.util.inventory.ContainerBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -10,19 +11,18 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerManaBooster extends ContainerBase<TileManaBooster> {
-
     public int burn_time;
     public int burn_level;
     public int total_burn_time;
 
-    ContainerManaBooster(EntityPlayer player, TileEntity tileEntity) {
+    ContainerManaBooster(InventoryPlayer inventory, TileEntity tileEntity) {
         super(tileEntity);
-        addSlotToContainer(new SlotItemHandler(this.tileEntity.handler, 0, 80, 48));
+        addSlotToContainer(new SlotItemHandler(this.tileEntity.handler, 0, 52, 37));
         for (int i = 0; i < 3; ++i)
             for (int j = 0; j < 9; ++j)
-                addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 62 + i * 18));
         for (int i = 0; i < 9; ++i)
-            addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
+            addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 120));
     }
 
     @Override

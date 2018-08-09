@@ -14,7 +14,6 @@ import com.github.yaossg.mana_craft.tile.ManaCraftTiles;
 import com.github.yaossg.mana_craft.world.biome.ManaCraftBiomes;
 import com.github.yaossg.mana_craft.world.gen.ManaCraftWorldGens;
 import com.github.yaossg.sausage_core.api.util.inventory.IEnumGUIBase;
-import com.github.yaossg.sausage_core.api.util.inventory.IGUIManager;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -34,7 +33,6 @@ public class CommonProxy {
         ManaCraftEnchantments.init();
         ManaCraftRecipes.init();
         addOreDictionary();
-
     }
 
     public static void addOreDictionary() {

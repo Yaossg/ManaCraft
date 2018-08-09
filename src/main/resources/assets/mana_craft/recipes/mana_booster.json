@@ -1,15 +1,14 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XEX",
-    "EFE",
-    "XEX"
+    "BEB",
+    "BFB"
   ],
   "key": {
     "E": {
       "item": "minecraft:ender_pearl"
     },
-    "X": {
+    "B": {
       "item": "mana_craft:mana_ball"
     },
     "F": {

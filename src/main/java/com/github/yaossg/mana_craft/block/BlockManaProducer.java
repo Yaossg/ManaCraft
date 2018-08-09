@@ -6,6 +6,7 @@ import com.github.yaossg.mana_craft.tile.TileManaProducer;
 import com.github.yaossg.sausage_core.api.util.common.NBTs;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
@@ -83,11 +84,11 @@ public class BlockManaProducer extends BlockContainer {
     }
 
     BlockManaProducer() {
-        super(Material.IRON);
+        super(Material.IRON, MapColor.PURPLE);
         setHardness(5f);
         setLightLevel(SausageUtils.lightLevelOf(11));
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
-        setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(WORKING, Boolean.FALSE));
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(WORKING, Boolean.FALSE));
     }
 
     @Override
@@ -125,7 +126,7 @@ public class BlockManaProducer extends BlockContainer {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(!worldIn.isRemote)
-            playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaProducer.ordinal(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+            playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaProducer.ID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 
