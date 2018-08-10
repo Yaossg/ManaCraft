@@ -14,6 +14,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -22,15 +23,14 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.util.Constants;
 
 import java.util.List;
+import java.util.Random;
 
 public class BlockManaProducer extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -56,7 +56,7 @@ public class BlockManaProducer extends BlockContainer {
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
             list.clear();
-            for (NBTBase each : nbt.getTagList("producers", 10)) { // 10 -> Compound
+            for (NBTBase each : nbt.getTagList("producers", Constants.NBT.TAG_COMPOUND)) {
                 NBTTagCompound compound = (NBTTagCompound) each;
                 list.add(new BlockPos(compound.getInteger("x"), compound.getInteger("y"), compound.getInteger("z")));
             }
@@ -142,5 +142,11 @@ public class BlockManaProducer extends BlockContainer {
         SavedData.get(worldIn).remove(pos);
         InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
+    }
+
+    @Override
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        if (rand.nextFloat() < 0.05f && stateIn.getValue(WORKING))
+            worldIn.playSound(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 1, 1, true);
     }
 }
