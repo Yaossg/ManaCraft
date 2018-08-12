@@ -13,7 +13,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.awt.*;
 
-@SideOnly(Side.CLIENT)
 public class GUIContainerManaProducer extends GuiContainer {
     GUIContainerManaProducer(Container inventorySlotsIn) {
         super(inventorySlotsIn);

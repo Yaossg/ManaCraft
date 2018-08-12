@@ -1,6 +1,6 @@
 package com.github.yaossg.mana_craft.api.registry;
 
-import com.github.yaossg.mana_craft.api.IngredientStack;
+import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Comparators;
 import com.google.common.collect.Multimap;
@@ -27,20 +27,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * load when {@link net.minecraftforge.fml.common.event.FMLPostInitializationEvent} is fired
  * */
 public abstract class ManaCraftRegistries {
-    public interface IComparators {
-        Comparator<Item> item =
-                Comparator.comparing(Item::getRegistryName);
-        Comparator<ItemStack> itemStack =
-                Comparator.comparing(ItemStack::getItem, item)
-                        .thenComparing(Comparator.comparingInt(ItemStack::getCount).reversed());
-        Comparator<Ingredient> ingredient =
-                Comparator.<Ingredient, Iterable<ItemStack>>comparing(ingredient -> Arrays.asList(ingredient.getMatchingStacks()),
-                        Comparators.lexicographical(itemStack));
-        Comparator<IngredientStack> ingredientStack =
-                Comparator.comparing(IngredientStack::getIngredient, ingredient)
-                        .thenComparing(Comparator.comparingInt(IngredientStack::getCount).reversed());
-    }
-
     private static final ManaCraftRegistries INSTANCE;
     public static ManaCraftRegistries instance() {
         return INSTANCE;

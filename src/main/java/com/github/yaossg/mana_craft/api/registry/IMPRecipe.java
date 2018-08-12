@@ -1,6 +1,7 @@
 package com.github.yaossg.mana_craft.api.registry;
 
-import com.github.yaossg.mana_craft.api.IngredientStack;
+import com.github.yaossg.sausage_core.api.util.common.IItemComparators;
+import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
 import com.google.common.collect.Comparators;
 import com.google.common.collect.Streams;
 import com.google.gson.JsonArray;
@@ -10,7 +11,6 @@ import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 
-import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -35,7 +35,7 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
 
     Comparator<IMPRecipe> comparator =
             Comparator.<IMPRecipe, Iterable<IngredientStack>>comparing(recipe -> Arrays.asList(recipe.input()),
-                    Comparators.lexicographical(ManaCraftRegistries.IComparators.ingredientStack));
+                    Comparators.lexicographical(IItemComparators.ingredientStack));
 
     @Override
     default int compareTo(IMPRecipe o) {
@@ -47,7 +47,7 @@ public interface IMPRecipe extends Comparable<IMPRecipe> {
         checkNotNull(input);
         checkArgument(input.length > 0);
         checkArgument(work_time > 0);
-        Arrays.sort(input, ManaCraftRegistries.IComparators.ingredientStack);
+        Arrays.sort(input, IItemComparators.ingredientStack);
         return new IMPRecipe() {
             @Override
             public IngredientStack[] input() {

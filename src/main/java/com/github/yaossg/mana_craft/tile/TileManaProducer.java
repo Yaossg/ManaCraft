@@ -1,9 +1,10 @@
 package com.github.yaossg.mana_craft.tile;
 
-import com.github.yaossg.mana_craft.api.IngredientStack;
 import com.github.yaossg.mana_craft.api.registry.IMPRecipe;
 import com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries;
 import com.github.yaossg.mana_craft.block.BlockManaFoot;
+import com.github.yaossg.sausage_core.api.util.common.IItemComparators;
+import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
 import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -128,7 +128,7 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
         ItemStack[] items = new ItemStack[handler.getSlots() - empty];
         for (int i = 0; i < items.length; ++i)
             items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, ManaCraftRegistries.IComparators.itemStack);
+        Arrays.sort(items, IItemComparators.itemStack);
         handler = new ItemStackHandler(items.length);
         for (int i = 0; i < handler.getSlots(); ++i)
             handler.setStackInSlot(i, items[i]);

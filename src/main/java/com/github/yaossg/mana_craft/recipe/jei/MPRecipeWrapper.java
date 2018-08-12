@@ -1,7 +1,7 @@
 package com.github.yaossg.mana_craft.recipe.jei;
 
-import com.github.yaossg.mana_craft.api.IngredientStack;
 import com.github.yaossg.mana_craft.api.registry.IMPRecipe;
+import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.ingredients.IIngredients;

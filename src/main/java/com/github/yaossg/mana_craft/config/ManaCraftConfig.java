@@ -103,7 +103,7 @@ public class ManaCraftConfig {
         @Comment("max size of a Mana Ore vein")
         @LangKey("mana_craft.ore_gens.general.sizeManaOre")
         @RangeInt(min = 0, max = 40)
-        public static int sizeManaOre = 13;
+        public static int sizeManaOre = 11;
 
         @Comment("max height of Mana Ores veins")
         @LangKey("mana_craft.ore_gens.general.heightManaOre")
@@ -113,7 +113,7 @@ public class ManaCraftConfig {
         @Comment("times of generation of Mana Ore veins per chunk")
         @LangKey("mana_craft.ore_gens.general.timesManaOre")
         @RangeInt(min = 0, max = 16)
-        public static int timesManaOre = 4;
+        public static int timesManaOre = 3;
 
         @Comment("max size of a Mana Ingot Ore vein")
         @LangKey("mana_craft.ore_gens.general.sizeManaIngotOre")

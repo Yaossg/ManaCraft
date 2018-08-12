@@ -14,26 +14,30 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public enum ManaCraftGUIs implements IEnumGUIBase {
-    ManaProducer(ContainerManaProducer::new, GUIContainerManaProducer::new),
-    ManaBooster(ContainerManaBooster::new, GUIContainerManaBooster::new);
+    ManaProducer {
+        @Nonnull
+        @Override
+        public Object getServer(EntityPlayer entityPlayer, World world, int i, int i1, int i2) {
+            return new ContainerManaProducer(entityPlayer.inventory, world.getTileEntity(new BlockPos(i, i1, i2)));
+        }
 
-    BiFunction<InventoryPlayer, TileEntity, Container> server;
-    Function<Container, GuiContainer> client;
+        @Nonnull
+        @Override
+        public Object getClient(EntityPlayer entityPlayer, World world, int i, int i1, int i2) {
+            return new GUIContainerManaProducer(new ContainerManaProducer(entityPlayer.inventory, world.getTileEntity(new BlockPos(i, i1, i2))));
+        }
+    },
+    ManaBooster {
+        @Nonnull
+        @Override
+        public Object getServer(EntityPlayer entityPlayer, World world, int i, int i1, int i2) {
+            return new ContainerManaBooster(entityPlayer.inventory, world.getTileEntity(new BlockPos(i, i1, i2)));
+        }
 
-    ManaCraftGUIs(BiFunction<InventoryPlayer, TileEntity, Container> server, Function<Container, GuiContainer> client) {
-        this.server = server;
-        this.client = client;
-    }
-
-    @Nonnull
-    @Override
-    public Container getServer(EntityPlayer entityPlayer, World world, int x, int y, int z) {
-        return server.apply(entityPlayer.inventory, world.getTileEntity(new BlockPos(x, y, z)));
-    }
-
-    @Nonnull
-    @Override
-    public GuiContainer getClient(EntityPlayer entityPlayer, World world, int x, int y, int z) {
-        return client.apply(getServer(entityPlayer, world, x, y, z));
+        @Nonnull
+        @Override
+        public Object getClient(EntityPlayer entityPlayer, World world, int i, int i1, int i2) {
+            return new GUIContainerManaBooster(new ContainerManaBooster(entityPlayer.inventory, world.getTileEntity(new BlockPos(i, i1, i2))));
+        }
     }
 }

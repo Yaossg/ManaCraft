@@ -3,6 +3,7 @@ package com.github.yaossg.mana_craft.tile;
 import com.github.yaossg.mana_craft.api.registry.IMBFuel;
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
+import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -17,6 +18,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.instance;
@@ -47,6 +49,7 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
         burn_time = compound.getInteger("burn_time");
         burn_level = compound.getInteger("burn_level");
         total_burn_time = compound.getInteger("total_burn_time");
+        state = compound.getInteger("state");
     }
 
     @Override
@@ -55,6 +58,7 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
         compound.setInteger("burn_time", burn_time);
         compound.setInteger("burn_level", burn_level);
         compound.setInteger("total_burn_time", total_burn_time);
+        compound.setInteger("state", state);
         return super.writeToNBT(compound);
     }
 
@@ -71,7 +75,7 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
         if(hasCapability(capability, facing)) return (T) handler;
         return super.getCapability(capability, facing);
     }
-    final int states = 16;
+    private static final int states = 16;
     int state = states - 1;
     int[] times = new int[states];
     void work() {
@@ -83,7 +87,7 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
                     .filter(pos0 -> pos.distanceSq(pos0) <= ManaCraftConfig.boostRadius * ManaCraftConfig.boostRadius
                             && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(WORKING))
                     .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
-                    .limit(ManaCraftConfig.boostLimit)
+                    .limit(ManaCraftConfig.boostLimit).filter(Objects::nonNull)
                     .forEach(tile -> {
                         tile.work_time += burn_level;
                         burn_time -= 3;
@@ -96,7 +100,9 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
         }
         for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
             TileEntity tileEntity = world.getTileEntity(pos.offset(facing));
-            if(tileEntity instanceof TileEntityFurnace || tileEntity instanceof TileEntityBrewingStand) {
+            boolean enable = tileEntity instanceof TileEntityFurnace && ((TileEntityFurnace) tileEntity).isBurning()
+            || tileEntity instanceof TileEntityBrewingStand && ((TileEntityBrewingStand) tileEntity).getField(0) > 0;
+            if(enable) {
                 ITickable tickable = (ITickable) tileEntity;
                 --burn_time;
                 for (int i = 0; i < times[state]; ++i)

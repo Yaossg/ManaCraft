@@ -1,5 +1,6 @@
 package com.github.yaossg.mana_craft.api.registry;
 
+import com.github.yaossg.sausage_core.api.util.common.IItemComparators;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -33,7 +34,7 @@ public interface IMBFuel extends Comparable<IMBFuel>, Predicate<ItemStack>, Supp
 
     int time();
 
-    Comparator<IMBFuel> comparator = Comparator.comparing(IMBFuel::get, ManaCraftRegistries.IComparators.ingredient);
+    Comparator<IMBFuel> comparator = Comparator.comparing(IMBFuel::get, IItemComparators.ingredient);
 
     @Override
     default int compareTo(IMBFuel o) {
