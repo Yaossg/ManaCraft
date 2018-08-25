@@ -1,5 +1,6 @@
 ﻿
 itemGroup.mana_craft.mana=Mana
+
 item.mana_craft.blue_shit.name=Blue Shit
 item.mana_craft.mana.name=Mana
 item.mana_craft.mana_ingot.name=Mana Gold Ingot
@@ -23,6 +24,7 @@ item.mana_craft.mana_diamond.name=Mana Diamond
 item.mana_craft.mana_emerald.name=Mana Emerald
 item.mana_craft.mana_producer_generator.name=Mana Producer Generator
 item.mana_craft.mana_dust.name=Mana Dust
+
 tile.mana_craft.mana_head.name=Mana Head
 tile.mana_craft.mana_body.name=Mana Body
 tile.mana_craft.mana_foot.name=Mana Foot
@@ -35,11 +37,18 @@ tile.mana_craft.mana_glass.name=Mana Glass
 tile.mana_craft.machine_frame.name=Machine Frame
 tile.mana_craft.mana_producer.name=Mana Producer
 tile.mana_craft.mana_booster.name=Mana Booster
+
+effect.ManaEvoker=Mana Evoker
+potion.effect.mana_evoker=Potion of Mana Evoker
+splash_potion.effect.mana_evoker=Splash Potion of Mana Evoker
+lingering_potion.effect.mana_evoker=Lingering Potion of Mana Evoker
+
 container.mana_craft.mana_producer.title=Mana Producer
 container.mana_craft.mana_booster.title=Mana Booster
 container.mana_craft.mana_producer.hover=producing...%d%%
 container.mana_craft.mana_producer.hoverIdle=idle
 container.mana_craft.mana_booster.idle=idle
+
 advancement.mana.root.title=ManaCraft
 advancement.mana.root.description=Feel the power of Mana!
 advancement.mana.shiny_mana.title=Shiny Mana

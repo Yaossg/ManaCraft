@@ -14,6 +14,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -115,7 +116,7 @@ public class BiomeMana extends Biome {
         }
     }
 
-    private static final List<DoubleFlowerEntry> LIST = ImmutableList.of(
+    private static final List<DoubleFlowerEntry> LIST = Arrays.asList(
             new DoubleFlowerEntry(BlockDoublePlant.EnumPlantType.GRASS, 100),
             new DoubleFlowerEntry(BlockDoublePlant.EnumPlantType.FERN, 25),
             new DoubleFlowerEntry(BlockDoublePlant.EnumPlantType.SYRINGA, 4),

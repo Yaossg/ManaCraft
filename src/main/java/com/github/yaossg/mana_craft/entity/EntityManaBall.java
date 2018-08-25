@@ -69,7 +69,7 @@ public class EntityManaBall extends EntityThrowable {
         return this;
     }
 
-    private static final BufferedRandom random = new BufferedRandom();
+    private static final BufferedRandom random = BufferedRandom.shared();
 
     private boolean canAttack(Entity entity) {
         return  !( entity == null

@@ -35,7 +35,7 @@ public class MPRecipeCategory implements IRecipeCategory<MPRecipeWrapper> {
 
     @Override
     public String getTitle() {
-        return I18n.format("gui.jei.category." + getUid());
+        return I18n.format("gui.jei.category." + UID);
     }
 
     @Override

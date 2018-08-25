@@ -119,7 +119,8 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
             if(burn_time > 0) {
                 work();
             } else {
-                Optional<IMBFuel> fuel = instance().fuelsView().stream().filter(fuel0 -> fuel0.test(handler.getStackInSlot(0))).findAny();
+                Optional<IMBFuel> fuel = instance().fuelsView().stream()
+                        .filter(fuel0 -> fuel0.test(handler.getStackInSlot(0))).findAny();
                 if(fuel.isPresent()) {
                     world.setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
                     total_burn_time = burn_time = fuel.get().time();

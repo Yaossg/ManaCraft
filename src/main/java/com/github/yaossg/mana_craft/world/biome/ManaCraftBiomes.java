@@ -15,17 +15,17 @@ public class ManaCraftBiomes {
     public static final Biome manaChaosHills = BiomeManaChaos.getHills();
     public static void init() {
         ForgeRegistries.BIOMES.register(mana.setRegistryName("mana"));
-        addBiome(WARM, new BiomeEntry(mana, 5));
+        addBiome(WARM, new BiomeEntry(mana, 6));
         addTypes(mana, Type.MAGICAL);
         ForgeRegistries.BIOMES.register(manaHills.setRegistryName("mana_hills"));
-        addBiome(WARM, new BiomeEntry(manaHills, 2));
+        addBiome(WARM, new BiomeEntry(manaHills, 3));
         addTypes(manaHills, Type.MAGICAL, Type.HILLS);
 
         ForgeRegistries.BIOMES.register(manaChaos.setRegistryName("mana_chaos"));
-        addBiome(WARM, new BiomeEntry(manaChaos, 2));
+        addBiome(WARM, new BiomeEntry(manaChaos, 4));
         addTypes(manaChaos, Type.MAGICAL, Type.RARE);
         ForgeRegistries.BIOMES.register(manaChaosHills.setRegistryName("mana_chaos_hills"));
-        addBiome(WARM, new BiomeEntry(manaChaosHills, 1));
+        addBiome(WARM, new BiomeEntry(manaChaosHills, 2));
         addTypes(manaChaosHills, Type.MAGICAL, Type.HILLS, Type.RARE);
 
         addVillageBiome(mana, true);
