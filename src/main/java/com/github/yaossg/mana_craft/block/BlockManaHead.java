@@ -20,7 +20,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import static com.github.yaossg.mana_craft.block.ManaCraftBlocks.*;
 import static com.github.yaossg.sausage_core.api.util.common.Conversions.To.item;

@@ -1,16 +1,14 @@
 package com.github.yaossg.mana_craft.entity;
 
 import com.github.yaossg.mana_craft.ManaCraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.awt.*;
 
 import static net.minecraftforge.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler;
-import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.*;
+import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.create;
 import static net.minecraftforge.fml.common.registry.ForgeRegistries.ENTITIES;
 
 public class ManaCraftEntities {

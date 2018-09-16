@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.github.yaossg.mana_craft.inventory.GUIContainerManaProducer.texture;
-import static com.github.yaossg.sausage_core.api.util.common.Conversions.To.stack;
 
 public class MPRecipeWrapper implements IRecipeWrapper {
     private final List<List<ItemStack>> input;

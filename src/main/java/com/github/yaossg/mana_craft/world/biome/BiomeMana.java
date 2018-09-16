@@ -1,7 +1,6 @@
 package com.github.yaossg.mana_craft.world.biome;
 
 import com.github.yaossg.mana_craft.entity.EntityManaShooter;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

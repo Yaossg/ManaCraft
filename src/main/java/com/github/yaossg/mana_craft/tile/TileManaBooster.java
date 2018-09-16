@@ -4,7 +4,6 @@ import com.github.yaossg.mana_craft.api.registry.IMBFuel;
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

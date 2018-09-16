@@ -13,8 +13,8 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import static net.minecraft.world.gen.structure.MapGenStructureIO.*;
-import static net.minecraftforge.fml.common.registry.VillagerRegistry.*;
+import static net.minecraft.world.gen.structure.MapGenStructureIO.registerStructureComponent;
+import static net.minecraftforge.fml.common.registry.VillagerRegistry.instance;
 
 public class ManaCraftWorldGens {
     public static void init() {

@@ -3,16 +3,10 @@ package com.github.yaossg.mana_craft.inventory;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.sausage_core.api.util.inventory.GUIContainerBase;
 import com.github.yaossg.sausage_core.api.util.inventory.GUIHelper;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.awt.*;
 

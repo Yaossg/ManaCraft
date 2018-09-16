@@ -6,12 +6,12 @@ import com.github.yaossg.mana_craft.block.ManaCraftBlocks;
 import com.github.yaossg.mana_craft.enchantment.ManaCraftEnchantments;
 import com.github.yaossg.mana_craft.entity.ManaCraftEntities;
 import com.github.yaossg.mana_craft.entity.ManaCraftVillage;
-import com.github.yaossg.mana_craft.loot.ManaCraftLoots;
-import com.github.yaossg.mana_craft.subscriber.ManaCraftSubscribers;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
+import com.github.yaossg.mana_craft.loot.ManaCraftLoots;
 import com.github.yaossg.mana_craft.potion.ManaCraftPotions;
 import com.github.yaossg.mana_craft.recipe.ManaCraftRecipes;
+import com.github.yaossg.mana_craft.subscriber.ManaCraftSubscribers;
 import com.github.yaossg.mana_craft.tile.ManaCraftTiles;
 import com.github.yaossg.mana_craft.world.biome.ManaCraftBiomes;
 import com.github.yaossg.mana_craft.world.gen.ManaCraftWorldGens;
@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import static com.github.yaossg.mana_craft.block.ManaCraftBlocks.*;
+import static com.github.yaossg.mana_craft.block.ManaCraftBlocks.manaGlass;
 import static com.github.yaossg.mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 

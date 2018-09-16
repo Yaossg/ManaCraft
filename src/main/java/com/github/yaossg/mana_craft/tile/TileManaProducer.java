@@ -22,7 +22,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
-import java.util.Optional;
 
 import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.instance;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.WORKING;

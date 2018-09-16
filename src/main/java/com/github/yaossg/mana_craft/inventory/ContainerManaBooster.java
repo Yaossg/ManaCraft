@@ -2,7 +2,6 @@ package com.github.yaossg.mana_craft.inventory;
 
 import com.github.yaossg.mana_craft.tile.TileManaBooster;
 import com.github.yaossg.sausage_core.api.util.inventory.ContainerBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;

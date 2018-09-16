@@ -1,23 +1,14 @@
 package com.github.yaossg.mana_craft.api.registry;
 
-import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Comparators;
 import com.google.common.collect.Multimap;
 import com.google.gson.JsonObject;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.JsonContext;
-import org.apache.commons.io.FilenameUtils;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
