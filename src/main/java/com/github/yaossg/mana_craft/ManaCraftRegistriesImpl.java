@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,10 +23,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
 public class ManaCraftRegistriesImpl extends ManaCraftRegistries {
     public static final ManaCraftRegistriesImpl INSTANCE = new ManaCraftRegistriesImpl();
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+
+    public List<Path> walk(Path value) {
+        try {
+            return Files.walk(value)
+                    .filter(path -> "json".equals(
+                            FilenameUtils.getExtension(path.getFileName().toString())))
+                    .collect(Collectors.toList());
+        } catch (IOException e) {
+            return Collections.emptyList();
+        }
+    }
 
     public void loadAll() {
         pathRecipe.forEach((modid, path) -> loadEntries(modid, walk(path), IMPRecipe::parse, this::addRecipe));
@@ -70,7 +83,7 @@ public class ManaCraftRegistriesImpl extends ManaCraftRegistries {
             try (BufferedReader reader = Files.newBufferedReader(path)) {
                 JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
                 consumer.accept(parser.apply(context, json), path);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 ManaCraft.logger.error("Unexpected Exception: ", e);
             }
         });

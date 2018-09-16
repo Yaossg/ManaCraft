@@ -3,6 +3,10 @@ package com.github.yaossg.mana_craft.config;
 import com.github.yaossg.mana_craft.ManaCraft;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.*;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME)
 public class ManaCraftConfig {
@@ -55,7 +59,6 @@ public class ManaCraftConfig {
     @Comment("enchantability of Mana Tools/Weapons/Armors")
     @RangeInt(min = 20, max = 80)
     @LangKey("mana_craft.general.enchantability")
-    @RequiresMcRestart
     public static int enchantability = 36;
 
     @Comment({"armor reduction amounts",
@@ -66,7 +69,6 @@ public class ManaCraftConfig {
     @Comment("armor toughness")
     @LangKey("mana_craft.general.toughness")
     @RangeDouble(min = 0.5f, max = 2.5f)
-    @RequiresMcRestart
     public static float toughness = 0.8f;
 
     @Comment("min speed of floating mana ball")
@@ -93,13 +95,7 @@ public class ManaCraftConfig {
     public static float ratio = 0.1f;
 
     @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME + " OreGens")
-    @RequiresMcRestart
     public static class OreGens {
-        @Comment({"whether to generate ores",
-                "WARNING: if set this to false, values below would NOT be used"})
-        @LangKey("mana_craft.ore_gens.general.genOre")
-        public static boolean genOre = true;
-
         @Comment("max size of a Mana Ore vein")
         @LangKey("mana_craft.ore_gens.general.sizeManaOre")
         @RangeInt(min = 0, max = 40)
@@ -140,5 +136,16 @@ public class ManaCraftConfig {
         @LangKey("mana_craft.ore_gens.general.heightMixture")
         @RangeInt(min = 0, max = 256)
         public static int heightMixture = 32;
+    }
+
+
+    @Mod.EventBusSubscriber(modid = ManaCraft.MODID)
+    public static class Sync {
+        @SubscribeEvent
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+            if(event.getModID().equals(ManaCraft.MODID))
+                ConfigManager.sync(event.getModID(), Type.INSTANCE);
+        }
+
     }
 }

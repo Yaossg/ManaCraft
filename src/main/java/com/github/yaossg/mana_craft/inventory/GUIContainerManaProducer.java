@@ -1,30 +1,23 @@
 package com.github.yaossg.mana_craft.inventory;
 
 import com.github.yaossg.mana_craft.ManaCraft;
+import com.github.yaossg.sausage_core.api.util.inventory.GUIContainerBase;
 import com.github.yaossg.sausage_core.api.util.inventory.GUIHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.awt.*;
 
-public class GUIContainerManaProducer extends GuiContainer {
+public class GUIContainerManaProducer extends GUIContainerBase {
     GUIContainerManaProducer(Container inventorySlotsIn) {
-        super(inventorySlotsIn);
-        xSize = 176;
-        ySize = 166;
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        drawDefaultBackground();
-        super.drawScreen(mouseX, mouseY, partialTicks);
-        renderHoveredToolTip(mouseX, mouseY);
+        super(inventorySlotsIn, 176, 166, texture);
     }
 
     @Override
@@ -43,17 +36,12 @@ public class GUIContainerManaProducer extends GuiContainer {
     }
 
     public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_producer");
-
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        GlStateManager.color(1.0F, 1.0F, 1.0F);
-
-        mc.getTextureManager().bindTexture(texture);
+       super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
         int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
-
-        drawTexturedModalRect(offsetX, offsetY, 0, 0, xSize, ySize);
         ContainerManaProducer self = GUIHelper.getContainer(this);
-        int textureWidth = ((int) Math.ceil(22.0 * self.work_time / self.total_work_time)) % 24;
+        int textureWidth = MathHelper.ceil(22.0 * self.work_time / self.total_work_time) % 24;
         drawTexturedModalRect(offsetX + 87, offsetY + 36, 176, 0, textureWidth, 17);
 
     }

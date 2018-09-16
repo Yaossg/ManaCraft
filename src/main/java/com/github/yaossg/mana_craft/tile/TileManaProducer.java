@@ -6,6 +6,7 @@ import com.github.yaossg.mana_craft.block.BlockManaFoot;
 import com.github.yaossg.sausage_core.api.util.common.IItemComparators;
 import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
 import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
+import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
@@ -33,7 +34,7 @@ import static com.github.yaossg.mana_craft.config.ManaCraftConfig.destroy;
 import static net.minecraft.block.state.BlockWorldState.hasState;
 import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 
-public class TileManaProducer extends TileEntity implements ITickable, IDefaultInventory {
+public class TileManaProducer extends TileEntity implements ITickable, ITileDropItems {
     public int work_time;
     public int total_work_time;
     public ItemStackHandler input = new ItemStackHandler(4);
@@ -42,11 +43,6 @@ public class TileManaProducer extends TileEntity implements ITickable, IDefaultI
     @Override
     public ItemStackHandler[] getItemStackHandlers() {
         return new ItemStackHandler[] {input, output};
-    }
-
-    @Override
-    public Optional<TileEntity> getTileEntity() {
-        return Optional.of(this);
     }
 
     @Override

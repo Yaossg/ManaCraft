@@ -116,7 +116,6 @@ mana_craft.general.replace=Mana Producer Generator replaces blocks
 mana_craft.general.destroy=Self Destroy Without energizing
 mana_craft.general.delay=Checking delay of Mana Producer
 mana_craft.general.ratio=Health ratio
-mana_craft.ore_gens.general.genOre=Ore Generation
 mana_craft.ore_gens.general.sizeManaOre=Size of Mana Ore
 mana_craft.ore_gens.general.heightManaOre=Max Height of Mana Ore
 mana_craft.ore_gens.general.timesManaOre=Generate times of Mana Ore

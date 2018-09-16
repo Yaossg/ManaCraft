@@ -2,7 +2,8 @@ package com.github.yaossg.mana_craft.tile;
 
 import com.github.yaossg.mana_craft.api.registry.IMBFuel;
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
-import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
+import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
+import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,7 +27,7 @@ import static com.github.yaossg.mana_craft.block.BlockManaBooster.BURNING;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.SavedData;
 import static com.github.yaossg.mana_craft.block.BlockManaProducer.WORKING;
 
-public class TileManaBooster extends TileEntity implements ITickable, IDefaultInventory {
+public class TileManaBooster extends TileEntity implements ITickable, ITileDropItems {
     public int burn_time = 0;
     public int burn_level = 0;
     public int total_burn_time = 0;
@@ -35,11 +36,6 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
     @Override
     public ItemStackHandler[] getItemStackHandlers() {
         return new ItemStackHandler[] {handler};
-    }
-
-    @Override
-    public Optional<TileEntity> getTileEntity() {
-        return Optional.of(this);
     }
 
     @Override
@@ -70,11 +66,11 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(hasCapability(capability, facing)) return (T) handler;
+        if(hasCapability(capability, facing)) return SausageUtils.rawtype(handler);
         return super.getCapability(capability, facing);
     }
+
     private static final int states = 16;
     int state = states - 1;
     int[] times = new int[states];
@@ -110,6 +106,7 @@ public class TileManaBooster extends TileEntity implements ITickable, IDefaultIn
             }
         }
     }
+
     @Override
     public void update() {
         if(world.isRemote)

@@ -14,7 +14,6 @@ import java.util.List;
 
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
-@SuppressWarnings("unused")
 public class ManaCraftItems {
     public static final IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
     public static final Item blueShit = manager.addItem(new Item(), "blue_shit");

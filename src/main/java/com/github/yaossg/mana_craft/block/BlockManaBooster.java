@@ -4,6 +4,7 @@ import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaBooster;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
+import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -93,7 +94,7 @@ public class BlockManaBooster extends BlockContainer {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) worldIn.getTileEntity(pos));
+        ITileDropItems.dropAll(worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }
 

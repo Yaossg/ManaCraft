@@ -19,11 +19,11 @@ import java.util.List;
 import static com.github.yaossg.mana_craft.inventory.GUIContainerManaBooster.texture;
 
 public class MBFuelWrapper implements IRecipeWrapper {
-    private final List<List<ItemStack>> list;
+    private final List<List<ItemStack>> input;
     private final IDrawable flame;
     private final String[] info = new String[2];
     MBFuelWrapper(IGuiHelper guiHelper, IMBFuel fuel) {
-        list = Collections.singletonList(Arrays.asList(fuel.get().getMatchingStacks()));
+        input = Collections.singletonList(Arrays.asList(fuel.get().getMatchingStacks()));
         String translateKey = "gui.jei.category." + ManaCraft.MODID;
         info[0] = I18n.format(translateKey + ".mana_booster.level", fuel.level());
         info[1] = I18n.format(translateKey + ".mana_booster.time", fuel.time());
@@ -33,7 +33,7 @@ public class MBFuelWrapper implements IRecipeWrapper {
 
     @Override
     public void getIngredients(IIngredients ingredients) {
-        ingredients.setInputLists(ItemStack.class, list);
+        ingredients.setInputLists(ItemStack.class, input);
     }
 
     @Override

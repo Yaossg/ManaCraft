@@ -5,8 +5,8 @@ import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 
 public class ManaCraftTiles {
     public static void init() {
-        SausageUtils.registerTile(TileManaProducer.class, ManaCraft.MODID);
-        SausageUtils.registerTile(TileManaBooster.class, ManaCraft.MODID);
+        SausageUtils.registerTileEntity(ManaCraft.MODID, TileManaProducer.class);
+        SausageUtils.registerTileEntity(ManaCraft.MODID, TileManaBooster.class);
         TileManaProducer.init();
     }
 

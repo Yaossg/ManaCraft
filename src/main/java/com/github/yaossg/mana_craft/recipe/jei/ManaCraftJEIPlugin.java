@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 
 import static com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries.instance;
 
-@SuppressWarnings("unused")
 @JEIPlugin
 public class ManaCraftJEIPlugin implements IModPlugin {
 

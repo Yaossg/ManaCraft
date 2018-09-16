@@ -116,7 +116,6 @@ mana_craft.general.replace=魔能制造器生成器替换方块
 mana_craft.general.destroy=失活时自毁
 mana_craft.general.delay=魔能制造器检查延时
 mana_craft.general.ratio=血量分数
-mana_craft.ore_gens.general.genOre=矿物生成
 mana_craft.ore_gens.general.sizeManaOre=魔能矿大小
 mana_craft.ore_gens.general.heightManaOre=魔能矿最高高度
 mana_craft.ore_gens.general.timesManaOre=魔能矿生成次数

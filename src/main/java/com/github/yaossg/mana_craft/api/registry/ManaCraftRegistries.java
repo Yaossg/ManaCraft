@@ -70,17 +70,6 @@ public abstract class ManaCraftRegistries {
         pathFuel.put(modid, path);
     }
 
-    public List<Path> walk(Path value) {
-        try {
-            return Files.walk(value)
-                    .filter(path -> "json".equals(
-                            FilenameUtils.getExtension(path.getFileName().toString())))
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
-            return Collections.emptyList();
-        }
-    }
-
     public abstract Optional<Path> getPath(Class<?> clazz, String meta);
 
     public abstract <T> void loadEntries(String modid, List<Path> paths,

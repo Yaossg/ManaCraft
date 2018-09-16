@@ -5,6 +5,7 @@ import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
 import com.github.yaossg.sausage_core.api.util.common.NBTs;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
+import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -140,7 +141,7 @@ public class BlockManaProducer extends BlockContainer {
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         SavedData.get(worldIn).remove(pos);
-        InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory) worldIn.getTileEntity(pos));
+        ITileDropItems.dropAll(worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }
 

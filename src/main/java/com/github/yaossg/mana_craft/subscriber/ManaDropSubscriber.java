@@ -1,4 +1,4 @@
-package com.github.yaossg.mana_craft.event;
+package com.github.yaossg.mana_craft.subscriber;
 
 import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.mana_craft.entity.EntityManaBall;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
 
-public class ManaDropEvent {
+public class ManaDropSubscriber {
     private static void spawnEntityItem(LivingDropsEvent event, ItemStack stack) {
         EntityLivingBase entity = event.getEntityLiving();
         Random random = entity.getRNG();

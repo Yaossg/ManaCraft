@@ -1,4 +1,4 @@
-package com.github.yaossg.mana_craft.event;
+package com.github.yaossg.mana_craft.subscriber;
 
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.api.IItemManaDamagable;
@@ -7,7 +7,7 @@ import com.github.yaossg.mana_craft.config.ManaCraftConfig;
 import com.github.yaossg.mana_craft.enchantment.ManaCraftEnchantments;
 import com.github.yaossg.mana_craft.item.ManaCraftItems;
 import com.github.yaossg.sausage_core.api.util.common.Explosions;
-import com.github.yaossg.sausage_core.api.util.common.NBTs;
+import com.github.yaossg.sausage_core.api.util.nbt.NBTs;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Random;
 
-public class ManaToolEvent {
+public class ManaToolSubscriber {
     @SubscribeEvent
     public static void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
         Random random = event.getEntityPlayer().getRNG();

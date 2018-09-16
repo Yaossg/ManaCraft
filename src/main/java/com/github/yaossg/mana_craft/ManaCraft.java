@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
         name = ManaCraft.NAME,
         version = ManaCraft.VERSION,
         acceptedMinecraftVersions = "1.12.2",
-        dependencies = "required-after:sausage_core@[0.1.9,)")
+        dependencies = "required-after:sausage_core@[0.1.10,)")
 public class ManaCraft {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
