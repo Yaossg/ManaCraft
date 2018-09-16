@@ -1,11 +1,9 @@
 package com.github.yaossg.mana_craft.tile;
 
 import com.github.yaossg.mana_craft.api.registry.IMPRecipe;
-import com.github.yaossg.mana_craft.api.registry.ManaCraftRegistries;
 import com.github.yaossg.mana_craft.block.BlockManaFoot;
 import com.github.yaossg.sausage_core.api.util.common.IItemComparators;
 import com.github.yaossg.sausage_core.api.util.common.IngredientStack;
-import com.github.yaossg.sausage_core.api.util.inventory.IDefaultInventory;
 import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;

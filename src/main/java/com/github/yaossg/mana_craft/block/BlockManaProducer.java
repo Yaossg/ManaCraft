@@ -3,7 +3,7 @@ package com.github.yaossg.mana_craft.block;
 import com.github.yaossg.mana_craft.ManaCraft;
 import com.github.yaossg.mana_craft.inventory.ManaCraftGUIs;
 import com.github.yaossg.mana_craft.tile.TileManaProducer;
-import com.github.yaossg.sausage_core.api.util.common.NBTs;
+import com.github.yaossg.sausage_core.api.util.nbt.NBTs;
 import com.github.yaossg.sausage_core.api.util.common.SausageUtils;
 import com.github.yaossg.sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.BlockContainer;
