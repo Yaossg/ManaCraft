@@ -8,10 +8,10 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
-import static sausage_core.api.util.common.Conversions.To.stack;
 import static net.minecraft.entity.passive.EntityVillager.*;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCareer;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
+import static sausage_core.api.util.common.Conversions.To.stack;
 
 public class ManaCraftVillage {
     public static final VillagerProfession mana_priest =

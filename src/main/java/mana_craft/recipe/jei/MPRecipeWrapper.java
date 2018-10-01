@@ -1,13 +1,13 @@
 package mana_craft.recipe.jei;
 
 import mana_craft.api.registry.IMPRecipe;
-import sausage_core.api.util.common.IngredientStack;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import sausage_core.api.util.common.IngredientStack;
 
 import java.util.Arrays;
 import java.util.List;

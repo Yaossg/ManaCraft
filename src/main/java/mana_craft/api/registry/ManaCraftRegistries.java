@@ -6,7 +6,10 @@ import com.google.gson.JsonObject;
 import net.minecraftforge.common.crafting.JsonContext;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 

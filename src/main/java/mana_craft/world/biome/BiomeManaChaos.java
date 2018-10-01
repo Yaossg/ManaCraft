@@ -1,8 +1,8 @@
 package mana_craft.world.biome;
 
+import com.google.common.collect.ImmutableList;
 import mana_craft.block.BlockManaFoot;
 import mana_craft.block.BlockManaHead;
-import com.google.common.collect.ImmutableList;
 import net.minecraft.block.BlockDoublePlant;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockTallGrass;

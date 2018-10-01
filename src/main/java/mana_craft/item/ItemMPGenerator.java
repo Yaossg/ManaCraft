@@ -1,7 +1,7 @@
 package mana_craft.item;
 
-import mana_craft.config.ManaCraftConfig;
 import com.google.common.collect.Streams;
+import mana_craft.config.ManaCraftConfig;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

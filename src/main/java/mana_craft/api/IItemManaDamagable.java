@@ -2,12 +2,12 @@ package mana_craft.api;
 
 import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.item.ManaCraftItems;
-import sausage_core.api.util.common.IDefaultSpecialArmor;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import sausage_core.api.util.common.IDefaultSpecialArmor;
 
 import javax.annotation.Nonnull;
 import java.util.Random;

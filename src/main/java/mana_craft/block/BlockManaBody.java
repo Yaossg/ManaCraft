@@ -1,10 +1,6 @@
 package mana_craft.block;
 
 import mana_craft.item.ManaCraftItems;
-import mana_craft.sound.ManaCraftSounds;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.SoundCategory;
-import sausage_core.api.util.common.SausageUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -15,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import sausage_core.api.util.common.SausageUtils;
 
 import java.util.Random;
 

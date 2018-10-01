@@ -2,9 +2,6 @@ package mana_craft.tile;
 
 import mana_craft.api.registry.IMPRecipe;
 import mana_craft.block.BlockManaFoot;
-import sausage_core.api.util.common.IItemComparators;
-import sausage_core.api.util.common.IngredientStack;
-import sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
@@ -19,6 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
+import sausage_core.api.util.common.IItemComparators;
+import sausage_core.api.util.common.IngredientStack;
+import sausage_core.api.util.inventory.ITileDropItems;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;

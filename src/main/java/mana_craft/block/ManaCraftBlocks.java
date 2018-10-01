@@ -1,13 +1,13 @@
 package mana_craft.block;
 
 import mana_craft.ManaCraft;
-import sausage_core.api.util.registry.IBRegistryManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import sausage_core.api.util.registry.IBRegistryManager;
 
-import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
 import static net.minecraft.item.Item.ToolMaterial;
+import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
 
 public class ManaCraftBlocks {
     public static final IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);

@@ -2,7 +2,6 @@ package mana_craft.item;
 
 import mana_craft.ManaCraft;
 import mana_craft.config.ManaCraftConfig;
-import sausage_core.api.util.common.Explosions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -18,6 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
+import sausage_core.api.util.common.Explosions;
 
 import javax.annotation.Nullable;
 

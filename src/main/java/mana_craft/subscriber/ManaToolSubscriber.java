@@ -6,8 +6,6 @@ import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
 import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.item.ManaCraftItems;
-import sausage_core.api.util.common.Explosions;
-import sausage_core.api.util.nbt.NBTs;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -21,6 +19,8 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import sausage_core.api.util.common.Explosions;
+import sausage_core.api.util.nbt.NBTs;
 
 import java.util.Random;
 

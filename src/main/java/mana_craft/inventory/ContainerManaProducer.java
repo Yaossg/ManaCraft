@@ -1,7 +1,6 @@
 package mana_craft.inventory;
 
 import mana_craft.tile.TileManaProducer;
-import sausage_core.api.util.inventory.ContainerBase;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -9,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
+import sausage_core.api.util.inventory.ContainerBase;
 
 public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
     public int work_time;

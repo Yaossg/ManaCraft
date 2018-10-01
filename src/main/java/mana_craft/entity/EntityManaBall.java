@@ -2,7 +2,6 @@ package mana_craft.entity;
 
 import mana_craft.item.ItemManaApple;
 import mana_craft.item.ManaCraftItems;
-import sausage_core.api.util.math.BufferedRandom;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -15,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import sausage_core.api.util.math.BufferedRandom;
 
 import static mana_craft.config.ManaCraftConfig.*;
 

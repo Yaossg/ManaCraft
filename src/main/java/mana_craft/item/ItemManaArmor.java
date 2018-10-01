@@ -3,7 +3,6 @@ package mana_craft.item;
 import mana_craft.ManaCraft;
 import mana_craft.api.IItemManaDamagable;
 import mana_craft.config.ManaCraftConfig;
-import sausage_core.api.util.common.IDefaultSpecialArmor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -11,6 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
+import sausage_core.api.util.common.IDefaultSpecialArmor;
 
 import javax.annotation.Nonnull;
 

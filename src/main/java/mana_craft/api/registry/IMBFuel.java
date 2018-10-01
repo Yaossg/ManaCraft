@@ -1,12 +1,12 @@
 package mana_craft.api.registry;
 
-import sausage_core.api.util.common.IItemComparators;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
+import sausage_core.api.util.common.IItemComparators;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;

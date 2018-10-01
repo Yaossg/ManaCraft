@@ -1,11 +1,9 @@
 package mana_craft.block;
 
+import com.google.common.collect.ImmutableMap;
 import mana_craft.ManaCraft;
 import mana_craft.inventory.ManaCraftGUIs;
 import mana_craft.tile.TileManaBooster;
-import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.inventory.ITileDropItems;
-import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
@@ -26,6 +24,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.items.ItemHandlerHelper;
+import sausage_core.api.util.common.SausageUtils;
+import sausage_core.api.util.inventory.ITileDropItems;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

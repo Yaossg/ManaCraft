@@ -16,12 +16,12 @@ import mana_craft.subscriber.ManaCraftSubscribers;
 import mana_craft.tile.ManaCraftTiles;
 import mana_craft.world.biome.ManaCraftBiomes;
 import mana_craft.world.gen.ManaCraftWorldGens;
-import sausage_core.api.util.inventory.IEnumGUIHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import sausage_core.api.util.inventory.IEnumGUIHandler;
 
 import static mana_craft.block.ManaCraftBlocks.manaGlass;
 import static mana_craft.item.ManaCraftItems.*;

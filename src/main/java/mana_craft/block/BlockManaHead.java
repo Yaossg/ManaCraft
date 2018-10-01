@@ -22,10 +22,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import static mana_craft.block.ManaCraftBlocks.*;
-import static sausage_core.api.util.common.Conversions.To.item;
 import static net.minecraft.block.state.BlockWorldState.hasState;
 import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 import static net.minecraft.init.Blocks.AIR;
+import static sausage_core.api.util.common.Conversions.To.item;
 
 public class BlockManaHead extends BlockManaBody {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);

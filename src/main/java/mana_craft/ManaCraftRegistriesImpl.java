@@ -1,11 +1,11 @@
 package mana_craft;
 
-import mana_craft.api.registry.IMBFuel;
-import mana_craft.api.registry.IMPRecipe;
-import mana_craft.api.registry.ManaCraftRegistries;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+import mana_craft.api.registry.IMBFuel;
+import mana_craft.api.registry.IMPRecipe;
+import mana_craft.api.registry.ManaCraftRegistries;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -13,14 +13,10 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URI;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;

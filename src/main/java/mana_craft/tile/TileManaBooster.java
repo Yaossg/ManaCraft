@@ -2,8 +2,6 @@ package mana_craft.tile;
 
 import mana_craft.api.registry.IMBFuel;
 import mana_craft.config.ManaCraftConfig;
-import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.inventory.ITileDropItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +14,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import sausage_core.api.util.common.SausageUtils;
+import sausage_core.api.util.inventory.ITileDropItems;
 
 import javax.annotation.Nullable;
 import java.util.Objects;

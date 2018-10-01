@@ -1,7 +1,5 @@
 package mana_craft.api.registry;
 
-import sausage_core.api.util.common.IItemComparators;
-import sausage_core.api.util.common.IngredientStack;
 import com.google.common.collect.Comparators;
 import com.google.common.collect.Streams;
 import com.google.gson.JsonArray;
@@ -10,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
+import sausage_core.api.util.common.IItemComparators;
+import sausage_core.api.util.common.IngredientStack;
 
 import javax.annotation.concurrent.Immutable;
 import java.util.Arrays;

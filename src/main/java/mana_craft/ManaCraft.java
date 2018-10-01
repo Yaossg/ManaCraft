@@ -2,7 +2,6 @@ package mana_craft;
 
 import mana_craft.item.ManaCraftItems;
 import mana_craft.proxy.CommonProxy;
-import sausage_core.api.util.common.SausageUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
+import sausage_core.api.util.common.SausageUtils;
 
 /**
  * @author Yaossg
