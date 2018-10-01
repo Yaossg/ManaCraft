@@ -24,6 +24,8 @@ item.mana_craft.mana_diamond.name=Mana Diamond
 item.mana_craft.mana_emerald.name=Mana Emerald
 item.mana_craft.mana_producer_generator.name=Mana Producer Generator
 item.mana_craft.mana_dust.name=Mana Dust
+item.mana_craft.mana_record.name=Mana Record
+item.record.mana.desc=Eric Fullerton & Yaossg - Chaos Minecraft's End
 
 tile.mana_craft.mana_head.name=Mana Head
 tile.mana_craft.mana_body.name=Mana Body

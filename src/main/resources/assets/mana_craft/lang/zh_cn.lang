@@ -24,6 +24,8 @@ item.mana_craft.mana_diamond.name=魔能钻石
 item.mana_craft.mana_emerald.name=魔能绿宝石
 item.mana_craft.mana_producer_generator.name=魔能制造器生成器
 item.mana_craft.mana_dust.name=魔能尘
+item.mana_craft.mana_record.name=魔能唱片
+item.record.mana.desc=Eric Fullerton & Yaossg - 混乱终末之诗
 
 tile.mana_craft.mana_head.name=魔能头
 tile.mana_craft.mana_body.name=魔能身体

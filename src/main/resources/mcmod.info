@@ -9,8 +9,8 @@
   "updateUrl": "",
   "authorList": ["Yaossg"],
   "credits": "",
-  "logoFile": "",
+  "logoFile": "assets/mana_craft/textures/logo.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["sausage_core"]
 }
 ]
