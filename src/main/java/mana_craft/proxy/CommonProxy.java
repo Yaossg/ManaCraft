@@ -30,7 +30,7 @@ import static net.minecraftforge.oredict.OreDictionary.registerOre;
 public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
-        ManaCraftSounds.manager.register();
+        ManaCraftSounds.init();
         ManaCraftItems.manager.registerAll();
         ManaCraftBlocks.init();
         ManaCraftTiles.init();

@@ -7,4 +7,5 @@ import sausage_core.api.util.registry.SoundRegistryManager;
 public class ManaCraftSounds {
     public static final SoundRegistryManager manager = new SoundRegistryManager(ManaCraft.MODID);
     public static final SoundEvent record = manager.addSound("record");
+    public static void init() {}
 }
