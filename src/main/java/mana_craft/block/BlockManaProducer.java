@@ -25,8 +25,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
 import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.inventory.ITileDropItems;
 import sausage_core.api.util.nbt.NBTs;
+import sausage_core.api.util.tile.ITileDropItems;
 
 import java.util.List;
 import java.util.Random;

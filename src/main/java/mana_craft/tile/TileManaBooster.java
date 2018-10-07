@@ -15,7 +15,8 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.inventory.ITileDropItems;
+import sausage_core.api.util.tile.ITileDropItems;
+import sausage_core.api.util.tile.TileBase;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -26,7 +27,7 @@ import static mana_craft.block.BlockManaBooster.BURNING;
 import static mana_craft.block.BlockManaProducer.SavedData;
 import static mana_craft.block.BlockManaProducer.WORKING;
 
-public class TileManaBooster extends TileEntity implements ITickable, ITileDropItems {
+public class TileManaBooster extends TileBase implements ITickable, ITileDropItems {
     public int burn_time = 0;
     public int burn_level = 0;
     public int total_burn_time = 0;
@@ -130,10 +131,5 @@ public class TileManaBooster extends TileEntity implements ITickable, ITileDropI
             return;
         }
         world.setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
-    }
-
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-        return oldState.getBlock() != newState.getBlock();
     }
 }

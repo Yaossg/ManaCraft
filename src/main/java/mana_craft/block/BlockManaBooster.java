@@ -25,7 +25,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.items.ItemHandlerHelper;
 import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.inventory.ITileDropItems;
+import sausage_core.api.util.tile.ITileDropItems;
 
 import javax.annotation.Nullable;
 import java.util.Optional;

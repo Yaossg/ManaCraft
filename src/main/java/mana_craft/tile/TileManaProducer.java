@@ -18,7 +18,8 @@ import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import sausage_core.api.util.common.IItemComparators;
 import sausage_core.api.util.common.IngredientStack;
-import sausage_core.api.util.inventory.ITileDropItems;
+import sausage_core.api.util.tile.ITileDropItems;
+import sausage_core.api.util.tile.TileBase;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -31,7 +32,7 @@ import static mana_craft.config.ManaCraftConfig.destroy;
 import static net.minecraft.block.state.BlockWorldState.hasState;
 import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 
-public class TileManaProducer extends TileEntity implements ITickable, ITileDropItems {
+public class TileManaProducer extends TileBase implements ITickable, ITileDropItems {
     public int work_time;
     public int total_work_time;
     public ItemStackHandler input = new ItemStackHandler(4);
@@ -184,10 +185,5 @@ public class TileManaProducer extends TileEntity implements ITickable, ITileDrop
             if(work_time < 0) work_time = 0;
             world.setBlockState(pos, state.withProperty(WORKING, Boolean.FALSE));
         }
-    }
-
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-        return oldState.getBlock() != newState.getBlock();
     }
 }
