@@ -1,7 +1,6 @@
 package mana_craft.proxy;
 
 import mana_craft.ManaCraft;
-import mana_craft.ManaCraftRegistriesImpl;
 import mana_craft.block.ManaCraftBlocks;
 import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.entity.ManaCraftEntities;
@@ -31,7 +30,7 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent event) {
         ManaCraftSounds.init();
-        ManaCraftItems.manager.registerAll();
+        ManaCraftItems.init();
         ManaCraftBlocks.init();
         ManaCraftTiles.init();
         IEnumGUIHandler.register(ManaCraft.instance, ManaCraftGUIs.values());
@@ -60,7 +59,7 @@ public class CommonProxy {
     }
 
     public void postInit(FMLPostInitializationEvent event) {
-        ManaCraftRegistriesImpl.INSTANCE.loadAll();
+        ManaCraftRecipes.loadAll();
         MinecraftForge.addGrassSeed(new ItemStack(mana), 1);
     }
 }

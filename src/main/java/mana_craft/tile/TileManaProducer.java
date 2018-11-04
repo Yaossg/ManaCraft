@@ -1,6 +1,6 @@
 package mana_craft.tile;
 
-import mana_craft.api.registry.IMPRecipe;
+import mana_craft.api.registry.MPRecipe;
 import mana_craft.block.BlockManaFoot;
 import net.minecraft.block.state.BlockWorldState;
 import net.minecraft.block.state.IBlockState;
@@ -9,22 +9,16 @@ import net.minecraft.block.state.pattern.FactoryBlockPattern;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import sausage_core.api.util.common.IItemComparators;
-import sausage_core.api.util.common.IngredientStack;
+import sausage_core.api.util.item.*;
 import sausage_core.api.util.tile.ITileDropItems;
 import sausage_core.api.util.tile.TileBase;
 
-import javax.annotation.Nullable;
-import java.util.Arrays;
-
-import static mana_craft.api.registry.ManaCraftRegistries.instance;
+import static mana_craft.api.registry.IManaCraftRegistries.MP_RECIPES;
 import static mana_craft.block.BlockManaProducer.WORKING;
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.config.ManaCraftConfig.delay;
@@ -35,8 +29,14 @@ import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 public class TileManaProducer extends TileBase implements ITickable, ITileDropItems {
     public int work_time;
     public int total_work_time;
-    public ItemStackHandler input = new ItemStackHandler(4);
-    public ItemStackHandler output = new ItemStackHandler();
+    public PortableItemStackHandler input = new PortableItemStackHandler(4) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            current = null;
+            isCharged = false;
+        }
+    };
+    public SingleItemStackHandler output = new SingleItemStackHandler();
 
     @Override
     public ItemStackHandler[] getItemStackHandlers() {
@@ -111,75 +111,31 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
         return true;
     }
 
-    public boolean isSorted = false;
-    ItemStackHandler getSorted() {
-        ItemStackHandler handler = new ItemStackHandler(4);
-        for (int i = 0; i < input.getSlots(); ++i)
-            ItemHandlerHelper.insertItemStacked(handler, input.getStackInSlot(i).copy(), false);
-        int empty = 0;
-        for (int i = 0; i < handler.getSlots(); ++i)
-            if(handler.getStackInSlot(i).isEmpty()) ++empty;
-        ItemStack[] items = new ItemStack[handler.getSlots() - empty];
-        for (int i = 0; i < items.length; ++i)
-            items[i] = handler.getStackInSlot(i);
-        Arrays.sort(items, IItemComparators.itemStack);
-        handler = new ItemStackHandler(items.length);
-        for (int i = 0; i < handler.getSlots(); ++i)
-            handler.setStackInSlot(i, items[i]);
-        return handler;
-    }
-
-    @Nullable
-    IMPRecipe detect() {
-        ItemStackHandler handler = getSorted();
-        for (IMPRecipe recipe : instance().recipesView()) {
-            IngredientStack[] matches = recipe.input();
-            boolean found = handler.getSlots() >= matches.length;
-            for (int i = 0;
-                 i < matches.length && found && (found =
-                         matches[i].test(handler.extractItem(i, matches[i].getCount(), true)));
-                 ++i);
-            if(found)
-                return recipe;
-        }
-        return null;
-    }
-
-    void copyToInput(ItemStackHandler handler) {
-        for (int i = 0; i < input.getSlots(); ++i)
-            input.setStackInSlot(i, i < handler.getSlots() ? handler.getStackInSlot(i) : ItemStack.EMPTY);
-    }
-
-    void work(IMPRecipe current) {
+    MPRecipe current = null;
+    void work() {
         if((++work_time) >= total_work_time) {
-            work_time -= current.work_time();
-            ItemStackHandler temp = getSorted();
-            for (int i = 0; i < temp.getSlots() && i < current.input().length; ++i)
-                temp.extractItem(i, current.input()[i].getCount(), false);
-            copyToInput(temp);
-            output.insertItem(0, current.output().copy(), false);
-            isCharged = isSorted = false;
-            markDirty();
+            work_time -= current.work_time;
+            ItemStack[] match = ItemStackMatches.match(current.input(), ItemStackMatches.merge(input.view()));
+            ItemStack copy = current.output();
+            ItemStackMatches.remove(input, match);
+            output.insertItem(copy, false);
         }
     }
-
     @Override
     public void update() {
         IBlockState state = world.getBlockState(pos);
         if(world.isRemote || !check()) return;
         work_time = Math.min(work_time, total_work_time);
-        IMPRecipe current = detect();
-        if(current != null && output.insertItem(0, current.output(), true).isEmpty()) {
+        if(current == null)
+            current = MP_RECIPES.find(recipe ->
+                    ItemStackMatches.match(recipe.input(), ItemStackMatches.merge(input.view())) != null).orElse(null);
+        if(current != null && output.insertItem(current.output(), true).isEmpty()) {
             world.setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
-            if(total_work_time != current.work_time()) {
-                total_work_time = current.work_time();
+            if(total_work_time != current.work_time) {
+                total_work_time = current.work_time;
                 work_time = Math.min(work_time, total_work_time - 1);
             }
-            if(!isSorted) {
-                copyToInput(getSorted());
-                isSorted = true;
-            }
-            work(current);
+            work();
         } else {
             if(work_time > 0) work_time -= 3;
             if(work_time < 0) work_time = 0;

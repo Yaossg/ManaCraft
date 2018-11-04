@@ -13,15 +13,15 @@ import net.minecraftforge.common.util.EnumHelper;
 import sausage_core.api.util.common.IDefaultSpecialArmor;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 
 import static mana_craft.config.ManaCraftConfig.*;
 
 public class ItemManaArmor extends ItemArmor implements IDefaultSpecialArmor, IItemManaDamagable {
-    public static final ItemArmor.ArmorMaterial MANA_ARMOR =
+    public static final ItemArmor.ArmorMaterial MANA_ARMOR = Objects.requireNonNull(
             EnumHelper.addArmorMaterial("MANA_ARMOR", ManaCraft.MODID + ":mana",
                     durability, armor, enchantability,
-                    SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, ManaCraftConfig.toughness)
-                    .setRepairItem(new ItemStack(ManaCraftItems.manaIngot));
+                    SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, ManaCraftConfig.toughness));
 
     public ItemManaArmor(EntityEquipmentSlot equipmentSlotIn) {
         super(MANA_ARMOR, MANA_ARMOR.ordinal(), equipmentSlotIn);

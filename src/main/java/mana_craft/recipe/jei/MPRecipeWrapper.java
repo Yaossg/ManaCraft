@@ -1,13 +1,13 @@
 package mana_craft.recipe.jei;
 
-import mana_craft.api.registry.IMPRecipe;
+import mana_craft.api.registry.MPRecipe;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawableAnimated;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import sausage_core.api.util.common.IngredientStack;
+import sausage_core.api.util.item.IngredientStack;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +20,7 @@ public class MPRecipeWrapper implements IRecipeWrapper {
     private final ItemStack output;
     private final IDrawableAnimated arrow;
 
-    MPRecipeWrapper(IGuiHelper guiHelper, IMPRecipe recipe) {
+    MPRecipeWrapper(IGuiHelper guiHelper, MPRecipe recipe) {
         IngredientStack[] ingredientStacks = recipe.input();
         input = Arrays.stream(ingredientStacks)
                 .map(IngredientStack::getMatchingStacks)
@@ -28,7 +28,7 @@ public class MPRecipeWrapper implements IRecipeWrapper {
                 .collect(Collectors.toList());
         output = recipe.output();
         arrow = guiHelper.drawableBuilder(texture, 176, 0, 24, 17)
-                .buildAnimated(recipe.work_time(), IDrawableAnimated.StartDirection.LEFT, false);
+                .buildAnimated(recipe.work_time, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
     @Override

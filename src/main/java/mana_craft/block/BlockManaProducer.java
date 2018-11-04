@@ -24,30 +24,32 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.util.Constants;
+import sausage_core.api.util.common.DimensionalBlockPos;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.nbt.NBTs;
 import sausage_core.api.util.tile.ITileDropItems;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class BlockManaProducer extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     public static final PropertyBool WORKING = PropertyBool.create("working");
 
     public static class SavedData extends WorldSavedData {
-        public List<BlockPos> list = NonNullList.create();
+        public List<DimensionalBlockPos> list = NonNullList.create();
 
         public SavedData(String name) {
             super(name);
         }
 
-        public void add(BlockPos pos) {
+        public void add(DimensionalBlockPos pos) {
             list.add(pos);
             markDirty();
         }
 
-        public void remove(BlockPos pos) {
+        public void remove(DimensionalBlockPos pos) {
             list.remove(pos);
             markDirty();
         }
@@ -56,19 +58,13 @@ public class BlockManaProducer extends BlockContainer {
         public void readFromNBT(NBTTagCompound nbt) {
             list.clear();
             for (NBTBase each : nbt.getTagList("producers", Constants.NBT.TAG_COMPOUND)) {
-                NBTTagCompound compound = (NBTTagCompound) each;
-                list.add(new BlockPos(compound.getInteger("x"), compound.getInteger("y"), compound.getInteger("z")));
+                list.add(DimensionalBlockPos.fromNBT((NBTTagCompound) each));
             }
         }
 
         @Override
         public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-            NBTTagList list0 = new NBTTagList();
-            list.forEach(pos -> list0.appendTag(NBTs.of(
-                    "x", NBTs.of(pos.getX()),
-                    "y", NBTs.of(pos.getY()),
-                    "z", NBTs.of(pos.getZ()))));
-            compound.setTag("producers", list0);
+            compound.setTag("producers", NBTs.of(list.stream().map(DimensionalBlockPos::toNBT).collect(Collectors.toList())));
             return compound;
         }
 
@@ -131,14 +127,14 @@ public class BlockManaProducer extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        SavedData.get(worldIn).add(pos);
+        SavedData.get(worldIn).add(new DimensionalBlockPos(worldIn.provider.getDimension(), pos));
         if(TileManaProducer.checkCharged(worldIn, pos))
             ManaCraft.giveAdvancement(placer, "energize");
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        SavedData.get(worldIn).remove(pos);
+        SavedData.get(worldIn).remove(new DimensionalBlockPos(worldIn.provider.getDimension(), pos));
         ITileDropItems.dropAll(worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }

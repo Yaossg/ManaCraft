@@ -1,7 +1,7 @@
 package mana_craft.recipe.jei;
 
 import mana_craft.ManaCraft;
-import mana_craft.api.registry.IMBFuel;
+import mana_craft.api.registry.MBFuel;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -22,13 +22,13 @@ public class MBFuelWrapper implements IRecipeWrapper {
     private final List<List<ItemStack>> input;
     private final IDrawable flame;
     private final String[] info = new String[2];
-    MBFuelWrapper(IGuiHelper guiHelper, IMBFuel fuel) {
+    MBFuelWrapper(IGuiHelper guiHelper, MBFuel fuel) {
         input = Collections.singletonList(Arrays.asList(fuel.get().getMatchingStacks()));
         String translateKey = "gui.jei.category." + ManaCraft.MODID;
-        info[0] = I18n.format(translateKey + ".mana_booster.level", fuel.level());
-        info[1] = I18n.format(translateKey + ".mana_booster.time", fuel.time());
+        info[0] = I18n.format(translateKey + ".mana_booster.level", fuel.level);
+        info[1] = I18n.format(translateKey + ".mana_booster.time", fuel.time);
         flame = guiHelper.drawableBuilder(texture, 176, 0, 14, 14)
-                .buildAnimated(fuel.time(), IDrawableAnimated.StartDirection.TOP, true);
+                .buildAnimated(fuel.time, IDrawableAnimated.StartDirection.TOP, true);
     }
 
     @Override

@@ -4,7 +4,6 @@ import mana_craft.config.ManaCraftConfig;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ManaCraftSubscribers {
-
     public static void init() {
         MinecraftForge.EVENT_BUS.register(ManaToolSubscriber.class);
         if(ManaCraftConfig.dropManaChance > 0)

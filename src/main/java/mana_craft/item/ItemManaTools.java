@@ -8,14 +8,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
 import net.minecraftforge.common.util.EnumHelper;
 
+import java.util.Objects;
+
 import static mana_craft.config.ManaCraftConfig.durability;
 import static mana_craft.config.ManaCraftConfig.enchantability;
 
 public class ItemManaTools {
-    public static final Item.ToolMaterial MANA_TOOL =
+
+    public static final Item.ToolMaterial MANA_TOOL = Objects.requireNonNull(
             EnumHelper.addToolMaterial("MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
-                            durability * 20, 6, 3, enchantability)
-                    .setRepairItem(new ItemStack(ManaCraftItems.manaIngot));
+                            durability * 20, 6, 3, enchantability));
 
     public static class ItemManaSword extends ItemSword implements IItemManaDamagable {
         ItemManaSword() {
@@ -24,7 +26,7 @@ public class ItemManaTools {
 
         @Override
         public int getManaValue() {
-            return 8;
+            return 14;
         }
     }
 
@@ -35,7 +37,7 @@ public class ItemManaTools {
 
         @Override
         public int getManaValue() {
-            return 13;
+            return 19;
         }
     }
 
@@ -46,7 +48,7 @@ public class ItemManaTools {
 
         @Override
         public int getManaValue() {
-            return 17;
+            return 23;
         }
     }
 
@@ -57,7 +59,7 @@ public class ItemManaTools {
 
         @Override
         public int getManaValue() {
-            return 3;
+            return 9;
         }
     }
 
@@ -68,7 +70,7 @@ public class ItemManaTools {
 
         @Override
         public int getManaValue() {
-            return 7;
+            return 13;
         }
     }
 

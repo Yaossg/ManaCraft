@@ -1,6 +1,6 @@
 package mana_craft.tile;
 
-import mana_craft.api.registry.IMBFuel;
+import mana_craft.api.registry.MBFuel;
 import mana_craft.config.ManaCraftConfig;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,12 +9,11 @@ import net.minecraft.tileentity.TileEntityBrewingStand;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import sausage_core.api.util.common.SausageUtils;
+import sausage_core.api.util.item.SingleItemStackHandler;
 import sausage_core.api.util.tile.ITileDropItems;
 import sausage_core.api.util.tile.TileBase;
 
@@ -22,7 +21,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Optional;
 
-import static mana_craft.api.registry.ManaCraftRegistries.instance;
+import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
 import static mana_craft.block.BlockManaBooster.BURNING;
 import static mana_craft.block.BlockManaProducer.SavedData;
 import static mana_craft.block.BlockManaProducer.WORKING;
@@ -31,7 +30,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     public int burn_time = 0;
     public int burn_level = 0;
     public int total_burn_time = 0;
-    public ItemStackHandler handler = new ItemStackHandler();
+    public SingleItemStackHandler handler = new SingleItemStackHandler();
 
     @Override
     public ItemStackHandler[] getItemStackHandlers() {
@@ -80,9 +79,10 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
             --burn_time;
         if(state % 2 == 0)
             SavedData.get(world).list.stream()
-                    .filter(pos0 -> pos.distanceSq(pos0) <= ManaCraftConfig.boostRadius * ManaCraftConfig.boostRadius
-                            && pos0.getY() > pos.getY() && world.getBlockState(pos0).getValue(WORKING))
-                    .map(pos0 -> (TileManaProducer) world.getTileEntity(pos0))
+                    .filter(dp -> world.provider.getDimension() == dp.getDim())
+                    .filter(dp -> pos.distanceSq(dp.getPos()) <= ManaCraftConfig.boostRadius * ManaCraftConfig.boostRadius
+                            && dp.getPos().getY() > pos.getY() && world.getBlockState(dp.getPos()).getValue(WORKING))
+                    .map(dp -> (TileManaProducer) world.getTileEntity(dp.getPos()))
                     .limit(ManaCraftConfig.boostLimit).filter(Objects::nonNull)
                     .forEach(tile -> {
                         tile.work_time += burn_level;
@@ -105,6 +105,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
                     tickable.update();
             }
         }
+        if(burn_time < 0) burn_time = 0;
     }
 
     @Override
@@ -116,13 +117,12 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
             if(burn_time > 0) {
                 work();
             } else {
-                Optional<IMBFuel> fuel = instance().fuelsView().stream()
-                        .filter(fuel0 -> fuel0.test(handler.getStackInSlot(0))).findAny();
+                Optional<MBFuel> fuel = MB_FUELS.find(fuel0 -> fuel0.test(handler.getStack()));
                 if(fuel.isPresent()) {
                     world.setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
-                    total_burn_time = burn_time = fuel.get().time();
-                    burn_level = fuel.get().level();
-                    handler.extractItem(0, 1, false);
+                    total_burn_time = burn_time = fuel.get().time;
+                    burn_level = fuel.get().level;
+                    handler.extractItem(1, false);
                     markDirty();
                     return;
                 }

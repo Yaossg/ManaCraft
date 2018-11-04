@@ -18,13 +18,7 @@ public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
         super(tileEntity);
         for (int i = 0; i < 2; ++i)
             for (int j = 0; j < 2; ++j)
-                addSlotToContainer(new SlotItemHandler(this.tileEntity.input, j + i * 2, 47 + j * 18, 28 + i * 18) {
-                    @Override
-                    public void onSlotChanged() {
-                        ContainerManaProducer.this.tileEntity.isSorted = false;
-                        super.onSlotChanged();
-                    }
-                });
+                addSlotToContainer(new SlotItemHandler(this.tileEntity.input, j + i * 2, 47 + j * 18, 28 + i * 18));
 
         addSlotToContainer(new SlotItemHandler(this.tileEntity.output, 0, 115, 36) {
             @Override

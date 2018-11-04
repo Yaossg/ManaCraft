@@ -13,6 +13,7 @@ import sausage_core.api.util.registry.IBRegistryManager;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static mana_craft.item.ItemManaTools.*;
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
 public class ManaCraftItems {
@@ -32,12 +33,12 @@ public class ManaCraftItems {
     public static final Item manaPork = manager.addItem(new ItemManaPork(), "mana_pork");
     public static final Item manaBall = manager.addItem(new ItemManaBall(), "mana_ball");
     public static final Item manaWand = manager.addItem(new ItemManaWand(), "mana_wand");
-    public static final Item manaSword = manager.addItem(new ItemManaTools.ItemManaSword(), "mana_sword");
-    public static final Item manaPickaxe = manager.addItem(new ItemManaTools.ItemManaPickaxe(), "mana_pickaxe");
-    public static final Item manaAxe = manager.addItem(new ItemManaTools.ItemManaAxe(), "mana_axe");
-    public static final Item manaShovel = manager.addItem(new ItemManaTools.ItemManaShovel(), "mana_shovel");
-    public static final Item manaHoe = manager.addItem(new ItemManaTools.ItemManaHoe(), "mana_hoe");
-    public static final Item manaShears = manager.addItem(new ItemManaTools.ItemManaShears(), "mana_shears");
+    public static final Item manaSword = manager.addItem(new ItemManaSword(), "mana_sword");
+    public static final Item manaPickaxe = manager.addItem(new ItemManaPickaxe(), "mana_pickaxe");
+    public static final Item manaAxe = manager.addItem(new ItemManaAxe(), "mana_axe");
+    public static final Item manaShovel = manager.addItem(new ItemManaShovel(), "mana_shovel");
+    public static final Item manaHoe = manager.addItem(new ItemManaHoe(), "mana_hoe");
+    public static final Item manaShears = manager.addItem(new ItemManaShears(), "mana_shears");
     public static final Item manaHelmet = manager.addItem(new ItemManaArmor(HEAD), "mana_helmet");
     public static final Item manaChestplate = manager.addItem(new ItemManaArmor(CHEST), "mana_chestplate");
     public static final Item manaLeggings = manager.addItem(new ItemManaArmor(LEGS), "mana_leggings");
@@ -51,5 +52,11 @@ public class ManaCraftItems {
     public static final Item mpGenerator = manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
     public static final Item manaDust = manager.addItem(new Item(), "mana_dust");
     public static final Item manaRecord = manager.addItem(new ItemRecord("mana", ManaCraftSounds.record) {}, "mana_record");
+    public static final Item manaRod = manager.addItem(new Item(), "mana_rod");
+    public static void init() {
+        ManaCraftItems.manager.registerAll();
+        ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(manaIngot));
+        ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(manaIngot));
+    }
 
 }
