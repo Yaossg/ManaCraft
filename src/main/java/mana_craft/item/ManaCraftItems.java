@@ -1,7 +1,6 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
-import mana_craft.sound.ManaCraftSounds;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
