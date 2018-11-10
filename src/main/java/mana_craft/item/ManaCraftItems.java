@@ -44,7 +44,7 @@ public class ManaCraftItems {
     public static final Item mana_producer_generator = null;
     public static final Item mana_dust = null;
     public static final Item mana_record = null;
-    public static final Item manaRod = null;
+    public static final Item mana_rod = null;
     public interface Manager {
         IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
 

@@ -30,7 +30,7 @@ public interface IItemManaDamagable {
     default void onArmorBroken(EntityLivingBase entity, @Nonnull ItemStack stack) {
         Random random = entity.getRNG();
         int base = getManaValue();
-        int level = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.manaRecycler, stack);
+        int level = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.mana_recycler, stack);
         InventoryHelper.spawnItemStack(entity.world, entity.posX, entity.posY, entity.posZ,
                 new ItemStack(ManaCraftItems.mana, base + level + random.nextInt(base * (level + 2))));
     }

@@ -44,7 +44,7 @@ public class EnchantmentManaEvoker extends Enchantment {
     @Override
     public void onUserHurt(EntityLivingBase user, Entity attacker, int level) {
         Random random = user.getRNG();
-        ItemStack stack = EnchantmentHelper.getEnchantedItem(ManaCraftEnchantments.manaEvoker, user);
+        ItemStack stack = EnchantmentHelper.getEnchantedItem(ManaCraftEnchantments.mana_evoker, user);
         if (stack.getItem() instanceof ItemManaArmor) {
             ManaCraft.giveAdvancement(user, "protect_around");
             int times = level + 2 + random.nextInt(2 * level + 2);

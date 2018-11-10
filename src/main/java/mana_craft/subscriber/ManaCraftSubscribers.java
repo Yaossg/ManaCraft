@@ -69,6 +69,7 @@ public class ManaCraftSubscribers {
         event.getRegistry().registerAll(new EnchantmentFloating(), new EnchantmentManaEvoker(), new EnchantmentManaRecycler());
         ManaCraftEnchantments.init();
     }
+    //Entities have no holders
     private static int nextEntityID = 0;
     @SubscribeEvent
     public static void addEntities(RegistryEvent.Register<EntityEntry> event) {
@@ -86,7 +87,7 @@ public class ManaCraftSubscribers {
         );
     }
 
-//    @ObjectHolder    note: this is the only instance of mana_evoker kept
+//    @ObjectHolder    note: this is the only instance of (Potion) mana_evoker kept
     public static Potion mana_evoker;
 
     @SubscribeEvent
@@ -102,9 +103,9 @@ public class ManaCraftSubscribers {
                 new PotionType("mana_evoker", new PotionEffect(mana_evoker, 12000, 2)).setRegistryName("mega_mana_evoker"));
     }
 
+//    see above addItems(RegistryEvent.Register<Item>)
 //    @SubscribeEvent
 //    public static void addSoundEvents(RegistryEvent.Register<SoundEvent> event) {
-//        see #addItems(RegistryEvent.Register<Item>)
 //    }
 
     @SubscribeEvent

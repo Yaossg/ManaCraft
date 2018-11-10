@@ -70,11 +70,11 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
         return super.getCapability(capability, facing);
     }
 
-    private static final int states = 16;
-    int state = states - 1;
-    int[] times = new int[states];
+    private static final int STATES = 16;
+    int state = STATES - 1;
+    int[] times = new int[STATES];
     void work() {
-        if(++state == states) state = 0;
+        if(++state == STATES) state = 0;
         if(state % 3 == 0)
             --burn_time;
         if(state % 2 == 0)
@@ -113,23 +113,19 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
         if(world.isRemote)
             return;
         IBlockState state = world.getBlockState(pos);
-        if(world.canSeeSky(pos.up())) {
-            if(burn_time > 0) {
-                work();
-            } else {
-                Optional<MBFuel> fuel = MB_FUELS.find(fuel0 -> fuel0.test(handler.getStack()));
-                if(fuel.isPresent()) {
-                    world.setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
-                    total_burn_time = burn_time = fuel.get().time;
-                    burn_level = fuel.get().level;
-                    handler.extractItem(1, false);
-                    markDirty();
-                    return;
-                }
+        if(!world.canSeeSky(pos.up())) {
+            world.setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
+        } else if(burn_time <= 0) {
+            Optional<MBFuel> fuel = MB_FUELS.find(fuel0 -> fuel0.test(handler.getStack()));
+            if(!fuel.isPresent()) {
                 world.setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
+            } else {
+                world.setBlockState(pos, state.withProperty(BURNING, Boolean.TRUE));
+                total_burn_time = burn_time = fuel.get().time;
+                burn_level = fuel.get().level;
+                handler.extractItem(1, false);
+                markDirty();
             }
-            return;
-        }
-        world.setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
+        } else work();
     }
 }

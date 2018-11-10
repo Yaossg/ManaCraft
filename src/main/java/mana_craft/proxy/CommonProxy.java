@@ -23,7 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.inventory.IEnumGUIHandler;
 
-import static mana_craft.block.ManaCraftBlocks.mana_glass;
+import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
@@ -35,13 +35,29 @@ public class CommonProxy {
         ManaCraftRecipes.init(event);
     }
 
-    public static void addOre() {
+    static void addOre() {
         registerOre("dye", blue_shit);
         registerOre("dyeLightBlue", blue_shit);
         registerOre("blockGlass", mana_glass);
         registerOre("blockGlassHardened", mana_glass);
         registerOre("gemEmerald", mana_emerald);
         registerOre("record", mana_record);
+    }
+
+    static void addSmelt() {
+        addSmelting(mana_ore, new ItemStack(mana, 4), 0.6f);
+        addSmelting(mana_ingot_ore, new ItemStack(mana_ingot), 0.4f);
+        addSmelting(mana_block, new ItemStack(mana_ball), 0.2f);
+    }
+
+    static void misc() {
+        BlockManaHead.init();
+
+        ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(mana_ingot));
+        ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(mana_ingot));
+
+        SausageUtils.registerTileEntities(ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
+        TileManaProducer.init();
     }
 
     public void init(FMLInitializationEvent event) {
@@ -51,14 +67,8 @@ public class CommonProxy {
         ManaCraftWorldGens.init();
         ManaCraftPotionTypes.init();
         addOre();
-        addSmelting(ManaCraftBlocks.mana_ore, new ItemStack(ManaCraftItems.mana, 4), 0.6f);
-        addSmelting(ManaCraftBlocks.mana_ingot_ore, new ItemStack(ManaCraftItems.mana_ingot), 0.4f);
-        addSmelting(ManaCraftBlocks.mana_block, new ItemStack(ManaCraftItems.mana_ball), 0.2f);
-        BlockManaHead.init();
-        SausageUtils.registerTileEntities(ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
-        TileManaProducer.init();
-        ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(mana_ingot));
-        ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(mana_ingot));
+        addSmelt();
+        misc();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

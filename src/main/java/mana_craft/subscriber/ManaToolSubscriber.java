@@ -34,7 +34,7 @@ public class ManaToolSubscriber {
             int value = ((IItemManaDamagable) stack.getItem()).getManaValue();
             if(value <= 0) return;
             int i = value > 1 ? 1 + random.nextInt(value - 1) : 1;
-            int l = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.manaRecycler, stack);
+            int l = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.mana_recycler, stack);
             InventoryHelper.spawnItemStack(player.world, player.posX, player.posY, player.posZ,
                     new ItemStack(ManaCraftItems.mana, l + i * (random.nextInt(l + 2) + 1)));
         }
