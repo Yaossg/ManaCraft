@@ -18,10 +18,10 @@ import java.util.List;
 import java.util.Random;
 
 public class BiomeMana extends Biome {
-    static BiomeMana get() {
+    public static BiomeMana get() {
         return new BiomeMana(new BiomeProperties("Mana").setBaseHeight(0).setHeightVariation(0.08f));
     }
-    static BiomeMana getHills() {
+    public static BiomeMana getHills() {
         return new BiomeMana(new BiomeProperties("ManaHills").setBaseHeight(0.8f).setHeightVariation(0.12f));
     }
 

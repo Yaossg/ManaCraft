@@ -39,7 +39,7 @@ public class ManaCraftWorldGens {
                 event.setReplacement(Blocks.BONE_BLOCK.getDefaultState().withProperty(BlockBone.AXIS, EnumFacing.Axis.Y));
 
             if(original.getBlock() == Blocks.GRASS_PATH)
-                event.setReplacement(ManaCraftBlocks.manaBlock.getDefaultState());
+                event.setReplacement(ManaCraftBlocks.mana_block.getDefaultState());
 
             if(original.getBlock() == Blocks.COBBLESTONE)
                 event.setReplacement(Blocks.STONEBRICK.getDefaultState());

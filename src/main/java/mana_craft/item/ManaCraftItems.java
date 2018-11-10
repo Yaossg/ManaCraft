@@ -5,9 +5,12 @@ import mana_craft.sound.ManaCraftSounds;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import sausage_core.api.util.registry.IBRegistryManager;
 
 import javax.annotation.Nullable;
@@ -16,47 +19,78 @@ import java.util.List;
 import static mana_craft.item.ItemManaTools.*;
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
+@ObjectHolder(ManaCraft.MODID)
 public class ManaCraftItems {
-    public static final IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
-    public static final Item blueShit = manager.addItem(new Item(), "blue_shit");
-    public static final Item mana = manager.addItem(new Item(), "mana");
-    public static final Item manaIngot = manager.addItem(new Item(), "mana_ingot");
-    public static final Item manaNugget = manager.addItem(new Item(), "mana_nugget");
-    public static final Item manaCoal = manager.addItem(new Item() {
-        @Override
-        public int getItemBurnTime(ItemStack stack) {
-            return 64 * 200;
-        }
-    }, "mana_coal");
-    public static final Item manaDiamond = manager.addItem(new Item(), "mana_diamond");
-    public static final Item manaApple = manager.addItem(new ItemManaApple(), "mana_apple");
-    public static final Item manaPork = manager.addItem(new ItemManaPork(), "mana_pork");
-    public static final Item manaBall = manager.addItem(new ItemManaBall(), "mana_ball");
-    public static final Item manaWand = manager.addItem(new ItemManaWand(), "mana_wand");
-    public static final Item manaSword = manager.addItem(new ItemManaSword(), "mana_sword");
-    public static final Item manaPickaxe = manager.addItem(new ItemManaPickaxe(), "mana_pickaxe");
-    public static final Item manaAxe = manager.addItem(new ItemManaAxe(), "mana_axe");
-    public static final Item manaShovel = manager.addItem(new ItemManaShovel(), "mana_shovel");
-    public static final Item manaHoe = manager.addItem(new ItemManaHoe(), "mana_hoe");
-    public static final Item manaShears = manager.addItem(new ItemManaShears(), "mana_shears");
-    public static final Item manaHelmet = manager.addItem(new ItemManaArmor(HEAD), "mana_helmet");
-    public static final Item manaChestplate = manager.addItem(new ItemManaArmor(CHEST), "mana_chestplate");
-    public static final Item manaLeggings = manager.addItem(new ItemManaArmor(LEGS), "mana_leggings");
-    public static final Item manaBoots = manager.addItem(new ItemManaArmor(FEET), "mana_boots");
-    public static final Item manaEmerald = manager.addItem(new Item() {
-        @Override
-        public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-            tooltip.add(I18n.format("tooltip.mana_craft.emerald"));
-        }
-    }, "mana_emerald");
-    public static final Item mpGenerator = manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
-    public static final Item manaDust = manager.addItem(new Item(), "mana_dust");
-    public static final Item manaRecord = manager.addItem(new ItemRecord("mana", ManaCraftSounds.record) {}, "mana_record");
-    public static final Item manaRod = manager.addItem(new Item(), "mana_rod");
-    public static void init() {
-        ManaCraftItems.manager.registerAll();
-        ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(manaIngot));
-        ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(manaIngot));
-    }
+    public static final Item blue_shit = null;
+    public static final Item mana = null;
+    public static final Item mana_ingot = null;
+    public static final Item mana_nugget = null;
+    public static final Item mana_coal = null;
+    public static final Item mana_diamond = null;
+    public static final Item mana_apple = null;
+    public static final Item mana_pork = null;
+    public static final Item mana_ball = null;
+    public static final Item mana_wand = null;
+    public static final Item mana_sword = null;
+    public static final Item mana_pickaxe = null;
+    public static final Item mana_axe = null;
+    public static final Item mana_shovel = null;
+    public static final Item mana_hoe = null;
+    public static final Item mana_shears = null;
+    public static final Item mana_helmet = null;
+    public static final Item mana_chestplate = null;
+    public static final Item mana_leggings = null;
+    public static final Item mana_boots = null;
+    public static final Item mana_emerald = null;
+    public static final Item mana_producer_generator = null;
+    public static final Item mana_dust = null;
+    public static final Item mana_record = null;
+    public static final Item manaRod = null;
+    public interface Manager {
+        IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
 
+        static void init(/*necessary*/ SoundEvent record) {
+            manager.addItem(new ItemFood(1, 0.2f, false) {
+                @Override
+                public int getMaxItemUseDuration(ItemStack stack) {
+                    return 5;
+                }
+            }, "blue_shit");
+            manager.addItem(new ItemMana(), "mana");
+            manager.addItem(new Item(), "mana_ingot");
+            manager.addItem(new Item(), "mana_nugget");
+            manager.addItem(new Item() {
+                @Override
+                public int getItemBurnTime(ItemStack stack) {
+                    return 64 * 200;
+                }
+            }, "mana_coal");
+            manager.addItem(new Item(), "mana_diamond");
+            manager.addItem(new ItemManaApple(), "mana_apple");
+            manager.addItem(new ItemManaPork(), "mana_pork");
+            manager.addItem(new ItemManaBall(), "mana_ball");
+            manager.addItem(new ItemManaWand(), "mana_wand");
+            manager.addItem(new ItemManaSword(), "mana_sword");
+            manager.addItem(new ItemManaPickaxe(), "mana_pickaxe");
+            manager.addItem(new ItemManaAxe(), "mana_axe");
+            manager.addItem(new ItemManaShovel(), "mana_shovel");
+            manager.addItem(new ItemManaHoe(), "mana_hoe");
+            manager.addItem(new ItemManaShears(), "mana_shears");
+            manager.addItem(new ItemManaArmor(HEAD), "mana_helmet");
+            manager.addItem(new ItemManaArmor(CHEST), "mana_chestplate");
+            manager.addItem(new ItemManaArmor(LEGS), "mana_leggings");
+            manager.addItem(new ItemManaArmor(FEET), "mana_boots");
+            manager.addItem(new Item() {
+                @Override
+                public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+                    tooltip.add(I18n.format("tooltip.mana_craft.emerald"));
+                }
+            }, "mana_emerald");
+            manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
+            manager.addItem(new Item(), "mana_dust");
+            manager.addItem(new ItemRecord("mana", record) {}, "mana_record");
+            manager.addItem(new Item(), "mana_rod");
+            manager.registerItems();
+        }
+    }
 }

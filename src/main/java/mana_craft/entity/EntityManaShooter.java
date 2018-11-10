@@ -115,7 +115,7 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
         tasks.addTask(3, new EntityAIMoveToBlock(this, 0.45, 64) {
             @Override
             protected boolean shouldMoveTo(World worldIn, BlockPos pos) {
-                return worldIn.getBlockState(pos).getBlock() == ManaCraftBlocks.manaLantern;
+                return worldIn.getBlockState(pos).getBlock() == ManaCraftBlocks.mana_lantern;
             }
         });
         tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8));

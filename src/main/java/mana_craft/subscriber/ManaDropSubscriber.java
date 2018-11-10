@@ -40,7 +40,7 @@ public class ManaDropSubscriber {
         if(random.nextFloat() < chance + (loot - 1) * chance * 0.8) {
             boolean piggy = ManaCraftConfig.dropManaApple && entity instanceof EntityPig && random.nextInt(16) / (loot + 1) < 2;
             spawnEntityItem(event, piggy
-                    ? new ItemStack(ManaCraftItems.manaApple)
+                    ? new ItemStack(ManaCraftItems.mana_apple)
                     : new ItemStack(ManaCraftItems.mana, (int) (1 + (random.nextFloat() + 0.25) * loot)));
         }
     }
@@ -55,7 +55,7 @@ public class ManaDropSubscriber {
                 EntityManaBall ball = (EntityManaBall) indirect.getImmediateSource();
                 if(!ball.playerFriendly)
                     InventoryHelper.spawnItemStack(entity.world, entity.posX, entity.posY, entity.posZ,
-                            new ItemStack(ManaCraftItems.manaEmerald));
+                            new ItemStack(ManaCraftItems.mana_emerald));
             }
         }
     }

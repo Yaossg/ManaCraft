@@ -21,10 +21,10 @@ import java.util.Random;
 import static mana_craft.block.ManaCraftBlocks.*;
 
 public class BiomeManaChaos extends BiomeMana {
-    static BiomeManaChaos get() {
+    public static BiomeManaChaos get() {
         return new BiomeManaChaos(new BiomeProperties("ManaChaos").setBaseBiome("Mana").setHeightVariation(0.25f));
     }
-    static BiomeManaChaos getHills() {
+    public static BiomeManaChaos getHills() {
         return new BiomeManaChaos(new BiomeProperties("ManaChaosHills").setBaseBiome("ManaHills").setBaseHeight(1.2f).setHeightVariation(0.32f));
     }
 
@@ -98,10 +98,10 @@ public class BiomeManaChaos extends BiomeMana {
             int y = worldIn.getTopSolidOrLiquidBlock(pos).getY();
             IBlockState state;
             state = rand.nextInt(64) == 0
-                    ? manaHead.getDefaultState().withProperty(BlockManaHead.FACING, EnumFacing.Plane.HORIZONTAL.random(rand))
+                    ? mana_head.getDefaultState().withProperty(BlockManaHead.FACING, EnumFacing.Plane.HORIZONTAL.random(rand))
                     : rand.nextInt(4) == 0
-                    ? manaBody.getDefaultState()
-                    : manaFoot.getDefaultState().withProperty(BlockManaFoot.FACING, EnumFacing.Plane.HORIZONTAL.random(rand));
+                    ? mana_body.getDefaultState()
+                    : mana_foot.getDefaultState().withProperty(BlockManaFoot.FACING, EnumFacing.Plane.HORIZONTAL.random(rand));
             worldIn.setBlockState(pos.up(y), state);
             return true;
         }

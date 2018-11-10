@@ -17,28 +17,28 @@ import static mana_craft.block.ManaCraftBlocks.*;
 
 public class ItemMPGenerator extends Item {
     public static void buildFrame(World worldIn, BlockPos root, EnumFacing facing) {
-        worldIn.setBlockState(root, manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(1, 0, 0), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(0, 0, 1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 0, 0), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(0, 0, -1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(1, 0, 1), manaIngotBlock.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 0, 1), manaIngotBlock.getDefaultState());
-        worldIn.setBlockState(root.add(1, 0, -1), manaIngotBlock.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 0, -1), manaIngotBlock.getDefaultState());
-        worldIn.setBlockState(root.add(1, 1, 1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 1, 1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(1, 1, -1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 1, -1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(1, 2, 0), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(0, 2, 1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 2, 0), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(0, 2, -1), manaBlock.getDefaultState());
-        worldIn.setBlockState(root.add(0, 3, 0), manaLantern.getDefaultState());
-        worldIn.setBlockState(root.add(0, 2, 0), manaGlass.getDefaultState());
-        worldIn.setBlockState(root.up().offset(facing), manaGlass.getDefaultState());
-        worldIn.setBlockState(root.up().offset(facing.rotateY()), manaGlass.getDefaultState());
-        worldIn.setBlockState(root.up().offset(facing.rotateYCCW()), manaGlass.getDefaultState());
+        worldIn.setBlockState(root, mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 0, 0), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(0, 0, 1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 0, 0), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(0, 0, -1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 0, 1), mana_ingot_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 0, 1), mana_ingot_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 0, -1), mana_ingot_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 0, -1), mana_ingot_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 1, 1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 1, 1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 1, -1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 1, -1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 2, 0), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(0, 2, 1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 2, 0), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(0, 2, -1), mana_block.getDefaultState());
+        worldIn.setBlockState(root.add(0, 3, 0), mana_lantern.getDefaultState());
+        worldIn.setBlockState(root.add(0, 2, 0), mana_glass.getDefaultState());
+        worldIn.setBlockState(root.up().offset(facing), mana_glass.getDefaultState());
+        worldIn.setBlockState(root.up().offset(facing.rotateY()), mana_glass.getDefaultState());
+        worldIn.setBlockState(root.up().offset(facing.rotateYCCW()), mana_glass.getDefaultState());
     }
 
     @Override
@@ -58,7 +58,7 @@ public class ItemMPGenerator extends Item {
         if(!player.isCreative())
             player.getHeldItem(hand).shrink(1);
         buildFrame(worldIn, root, player.getHorizontalFacing());
-        ForgeHooks.onPlaceItemIntoWorld(new ItemStack(manaProducer), player, worldIn, root, facing, hitX, hitY, hitZ, hand);
+        ForgeHooks.onPlaceItemIntoWorld(new ItemStack(mana_producer), player, worldIn, root, facing, hitX, hitY, hitZ, hand);
         return EnumActionResult.SUCCESS;
     }
 }

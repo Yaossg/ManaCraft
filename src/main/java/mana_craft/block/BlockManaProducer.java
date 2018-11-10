@@ -17,7 +17,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -127,14 +126,14 @@ public class BlockManaProducer extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        SavedData.get(worldIn).add(new DimensionalBlockPos(worldIn.provider.getDimension(), pos));
+        SavedData.get(worldIn).add(new DimensionalBlockPos(worldIn, pos));
         if(TileManaProducer.checkCharged(worldIn, pos))
             ManaCraft.giveAdvancement(placer, "energize");
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        SavedData.get(worldIn).remove(new DimensionalBlockPos(worldIn.provider.getDimension(), pos));
+        SavedData.get(worldIn).remove(new DimensionalBlockPos(worldIn, pos));
         ITileDropItems.dropAll(worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }

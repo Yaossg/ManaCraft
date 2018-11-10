@@ -8,13 +8,12 @@ import sausage_core.api.util.registry.SausageRegistry;
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
 
-import static mana_craft.api.registry.Helper.INSTANCE;
-
-class Helper {
-    static IManaCraftRegistries INSTANCE;
-}
+import static mana_craft.api.registry.IManaCraftRegistries.Helper.INSTANCE;
 
 public interface IManaCraftRegistries {
+    class Helper {
+        static IManaCraftRegistries INSTANCE;
+    }
     static IManaCraftRegistries instance() {
         if(INSTANCE == null) {
             try {
@@ -28,6 +27,7 @@ public interface IManaCraftRegistries {
         }
         return INSTANCE;
     }
+
     SausageRegistry<MPRecipe> MP_RECIPES = new SausageRegistry<>(MPRecipe.class);
     SausageRegistry<MBFuel> MB_FUELS = new SausageRegistry<>(MBFuel.class);
 

@@ -14,8 +14,8 @@
       "item": "mana_craft:mana"
     },
     "C": {
-      "item": "minecraft:dye",
-      "data": 3
+      "type": "forge:ore_dict",
+      "ore": "dyeBrown"
     }
   },
   "result": {

@@ -8,16 +8,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.*;
 import net.minecraftforge.common.util.EnumHelper;
 
-import java.util.Objects;
-
 import static mana_craft.config.ManaCraftConfig.durability;
 import static mana_craft.config.ManaCraftConfig.enchantability;
 
 public class ItemManaTools {
 
-    public static final Item.ToolMaterial MANA_TOOL = Objects.requireNonNull(
+    public static final Item.ToolMaterial MANA_TOOL =
             EnumHelper.addToolMaterial("MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
-                            durability * 20, 6, 3, enchantability));
+                            durability * 20, 6, 3, enchantability);
 
     public static class ItemManaSword extends ItemSword implements IItemManaDamagable {
         ItemManaSword() {

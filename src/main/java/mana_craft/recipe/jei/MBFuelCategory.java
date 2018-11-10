@@ -20,7 +20,7 @@ public class MBFuelCategory implements IRecipeCategory<MBFuelWrapper> {
     private final IDrawable background, icon;
     public MBFuelCategory(IGuiHelper guiHelper) {
         background = guiHelper.createDrawable(texture, 51, 20, 84, 36);
-        icon = guiHelper.createDrawableIngredient(new ItemStack(ManaCraftBlocks.manaBooster));
+        icon = guiHelper.createDrawableIngredient(new ItemStack(ManaCraftBlocks.mana_booster));
     }
 
     @Override

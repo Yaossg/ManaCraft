@@ -21,7 +21,7 @@ import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
 public class EnchantmentManaEvoker extends Enchantment {
     static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_armor", input -> input instanceof ItemManaArmor);
-    EnchantmentManaEvoker() {
+    public EnchantmentManaEvoker() {
         super(Rarity.RARE, TYPE, new EntityEquipmentSlot[] {HEAD, CHEST, LEGS, FEET});
         setName(ManaCraft.MODID + ".mana_evoker").setRegistryName("mana_evoker");
     }

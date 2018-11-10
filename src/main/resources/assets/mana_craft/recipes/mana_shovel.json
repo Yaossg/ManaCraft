@@ -10,7 +10,7 @@
       "item" : "mana_craft:mana_shears"
     },
     "O": {
-      "item" : "minecraft:obsidian"
+      "item" : "mana_craft:mana_rod"
     }
   },
   "result": {

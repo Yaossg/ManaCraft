@@ -67,7 +67,7 @@ public class ItemManaApple extends ItemFood {
                 pig.world.spawnEntity(new EntityLightningBolt(pig.world, pig.posX + ManaCraftConfig.bombSize * MathHelper.cos(f), pig.posY, pig.posZ + ManaCraftConfig.bombSize * MathHelper.sin(f), false));
             }
             if(!pig.world.isRemote)
-                InventoryHelper.spawnItemStack(pig.world, pig.posX, pig.posY, pig.posZ, new ItemStack(ManaCraftItems.manaPork));
+                InventoryHelper.spawnItemStack(pig.world, pig.posX, pig.posY, pig.posZ, new ItemStack(ManaCraftItems.mana_pork));
         }
 
     }

@@ -36,7 +36,6 @@ public final class MPRecipe {
         checkNotNull(this.input = input);
         checkArgument(input.length > 0);
         checkArgument((this.work_time = work_time) > 0);
-
     }
 
     public static MPRecipe parse(JsonContext context, JsonObject json) {

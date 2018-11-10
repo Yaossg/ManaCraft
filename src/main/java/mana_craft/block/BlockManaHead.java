@@ -41,29 +41,29 @@ public class BlockManaHead extends BlockManaBody {
     @Override
     public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         super.getDrops(drops, world, pos, state, fortune);
-        drops.add(new ItemStack(ManaCraftItems.manaDiamond));
+        drops.add(new ItemStack(ManaCraftItems.mana_diamond));
     }
 
     public static void init() {
         patternBase = FactoryBlockPattern.start().aisle("___", "_#_", "M#M")
                 .where('_', hasState(forBlock(AIR)))
-                .where('#', hasState(forBlock(manaBody)))
+                .where('#', hasState(forBlock(mana_body)))
                 .where('M', BlockManaHead::foot)
                 .build();
         pattern = FactoryBlockPattern.start().aisle("_^_", "_#_", "M#M")
-                .where('^', hasState(forBlock(manaHead)))
+                .where('^', hasState(forBlock(mana_head)))
                 .where('_', hasState(forBlock(AIR)))
-                .where('#', hasState(forBlock(manaBody)))
+                .where('#', hasState(forBlock(mana_body)))
                 .where('M', BlockManaHead::foot)
                 .build();
 
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item(manaHead), new Bootstrap.BehaviorDispenseOptional() {
+        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item(mana_head), new Bootstrap.BehaviorDispenseOptional() {
             protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
                 World world = source.getWorld();
                 BlockPos pos = source.getBlockPos().offset(source.getBlockState().getValue(BlockDispenser.FACING));
                 if (successful = patternBase.match(world, pos) != null) {
                     if (!world.isRemote)
-                        world.setBlockState(pos, manaHead.getDefaultState(), 3);
+                        world.setBlockState(pos, mana_head.getDefaultState(), 3);
                     stack.shrink(1);
                 }
                 return stack;
@@ -95,11 +95,11 @@ public class BlockManaHead extends BlockManaBody {
 
     private static boolean foot(BlockWorldState bws) {
         IBlockState state = bws.getBlockState();
-        if(state.getBlock() != manaFoot)
+        if(state.getBlock() != mana_foot)
             return false;
         EnumFacing facing = state.getValue(BlockManaFoot.FACING).getOpposite();
         IBlockState other = bws.world.getBlockState(bws.getPos().offset(facing, 2));
-        return other.getBlock() == manaFoot && other.getValue(BlockManaFoot.FACING) == facing;
+        return other.getBlock() == mana_foot && other.getValue(BlockManaFoot.FACING) == facing;
     }
 
     @Override

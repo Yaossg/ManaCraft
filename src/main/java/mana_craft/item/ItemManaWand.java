@@ -28,7 +28,7 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
     }
 
     private static boolean isAmmo(ItemStack stack) {
-        return stack.getItem() == ManaCraftItems.manaBall;
+        return stack.getItem() == ManaCraftItems.mana_ball;
     }
 
     private static ItemStack findAmmo(EntityPlayer player) {
@@ -41,7 +41,7 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
         if(entityLiving instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entityLiving;
             ItemStack ammo = findAmmo(player);
-            if(player.isCreative()) ammo = new ItemStack(ManaCraftItems.manaBall);
+            if(player.isCreative()) ammo = new ItemStack(ManaCraftItems.mana_ball);
             if(ammo.isEmpty()) return;
             int progress = getMaxItemUseDuration(stack) - timeLeft;
             float speed = progress / 20f;

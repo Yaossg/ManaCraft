@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.EnumHelper;
 
 public class EnchantmentFloating extends Enchantment {
     static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_wand", input -> input instanceof ItemManaWand);
-    EnchantmentFloating() {
+    public EnchantmentFloating() {
         super(Rarity.VERY_RARE, TYPE,
                 new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
         setName(ManaCraft.MODID + ".floating").setRegistryName("floating");

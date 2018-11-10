@@ -33,7 +33,6 @@ public class ManaCraftLoots {
             String suffix = name.substring(prefix.length());
             if(ArrayUtils.contains(NAMES, suffix)) event.getTable().addPool(getInjectPool(suffix));
         }
-
     }
 
     private static LootPool getInjectPool(String name) {

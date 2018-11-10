@@ -7,13 +7,14 @@
   ],
   "key": {
     "X": {
-      "item": "mana_craft:mana_ingot"
+      "item": "mana_craft:mana"
     },
     "O": {
-      "item" : "mana_craft:mana_rod"
+      "item" : "minecraft:obsidian"
     }
   },
   "result": {
-    "item": "mana_craft:mana_shears"
+    "item": "mana_craft:mana_rod",
+    "count": 2
   }
 }

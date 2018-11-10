@@ -1,10 +1,11 @@
 package mana_craft.entity;
 
+import mana_craft.ManaCraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
@@ -13,11 +14,9 @@ import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCa
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
 import static sausage_core.api.util.common.Conversions.To.stack;
 
-public class ManaCraftVillage {
-    public static final VillagerProfession mana_priest =
-            new VillagerProfession("mana_craft:mana_priest",
-                    "mana_craft:textures/entity/mana_priest.png",
-                    "mana_craft:textures/entity/zombie_mana_priest.png");
+@ObjectHolder(ManaCraft.MODID)
+public class ManaCraftVillagers {
+    public static final VillagerProfession mana_priest = null;
 
     private static ITradeList item2gem(ItemStack item, int min, int max) {
         return item2gem(item, new PriceInfo(min, max));
@@ -49,49 +48,48 @@ public class ManaCraftVillage {
     }
 
     static final ITradeList tradeMana = item2gem(new ItemStack(mana), 13, 17);
-    static final ITradeList tradeIngot = item2gem(new ItemStack(manaIngot), 4, 6);
-    static final ITradeList tradeDiamond = item2gem(new ItemStack(manaDiamond), -11, -4);
-    static final ITradeList tradeShears = gem2item(new ItemStack(manaShears), 4, 5);
+    static final ITradeList tradeIngot = item2gem(new ItemStack(mana_ingot), 4, 6);
+    static final ITradeList tradeDiamond = item2gem(new ItemStack(mana_diamond), -11, -4);
+    static final ITradeList tradeShears = gem2item(new ItemStack(mana_shears), 4, 5);
 
 
     public static void init() {
-        ForgeRegistries.VILLAGER_PROFESSIONS.register(mana_priest);
         new VillagerCareer(mana_priest, "mana")
                 .addTrade(1, tradeMana,
-                        gem2item(new ItemStack(manaGlass), -4, -2),
-                        gem2item(new ItemStack(manaApple), 1, 1))
+                        gem2item(new ItemStack(mana_glass), -4, -2),
+                        gem2item(new ItemStack(mana_apple), 1, 1))
                 .addTrade(2,
-                        item2gem(new ItemStack(manaPork), 1, 2),
-                        gem2item(new ItemStack(machineFrame), 5, 7));
+                        item2gem(new ItemStack(mana_pork), 1, 2),
+                        gem2item(new ItemStack(machine_frame), 5, 7));
         new VillagerCareer(mana_priest, "mana_tool")
                 .addTrade(1, tradeMana, tradeShears,
-                        enchanted(manaShovel, 7, 9))
+                        enchanted(mana_shovel, 7, 9))
                 .addTrade(2, tradeIngot,
-                        enchanted(manaHoe, 8, 11))
+                        enchanted(mana_hoe, 8, 11))
                 .addTrade(3, tradeDiamond,
-                        enchanted(manaPickaxe, 11, 15));
+                        enchanted(mana_pickaxe, 11, 15));
         new VillagerCareer(mana_priest, "mana_weapon")
                 .addTrade(1, tradeMana, tradeShears,
-                        gem2item(new ItemStack(manaBall), 1, 1))
+                        gem2item(new ItemStack(mana_ball), 1, 1))
                 .addTrade(2, tradeIngot,
-                        enchanted(manaWand, 7, 9))
+                        enchanted(mana_wand, 7, 9))
                 .addTrade(3, tradeDiamond,
-                        enchanted(manaSword,10, 15));
+                        enchanted(mana_sword,10, 15));
         new VillagerCareer(mana_priest, "mana_armor")
                 .addTrade(1, tradeMana, tradeShears,
-                        enchanted(manaBoots, 6, 9))
+                        enchanted(mana_boots, 6, 9))
                 .addTrade(2, tradeIngot,
-                        enchanted(manaHelmet, 6, 9),
-                        enchanted(manaLeggings, 9, 13))
+                        enchanted(mana_helmet, 6, 9),
+                        enchanted(mana_leggings, 9, 13))
                 .addTrade(3, tradeDiamond,
-                        enchanted(manaChestplate, 13, 17));
+                        enchanted(mana_chestplate, 13, 17));
         new VillagerCareer(mana_priest, "mana_summoner")
                 .addTrade(1, tradeMana,
-                        gem2item(new ItemStack(manaDust), 1, 1))
+                        gem2item(new ItemStack(mana_dust), 1, 1))
                 .addTrade(2, tradeIngot,
-                        gem2item(new ItemStack(manaFoot), 3, 5),
-                        gem2item(new ItemStack(manaBody), 7, 10))
+                        gem2item(new ItemStack(mana_foot), 3, 5),
+                        gem2item(new ItemStack(mana_body), 7, 10))
                 .addTrade(3, tradeDiamond,
-                        gem2item(new ItemStack(manaHead), 17, 23));
+                        gem2item(new ItemStack(mana_head), 17, 23));
     }
 }

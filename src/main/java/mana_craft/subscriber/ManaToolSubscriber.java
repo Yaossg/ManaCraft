@@ -43,10 +43,10 @@ public class ManaToolSubscriber {
     @SubscribeEvent
     public static void onUseHoe(UseHoeEvent event) {
         ItemStack item = event.getCurrent();
-        if(ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.manaHoe))) {
+        if(ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.mana_hoe))) {
             World world = event.getWorld();
             Block block = world.getBlockState(event.getPos()).getBlock();
-            if(block == ManaCraftBlocks.manaBody) {
+            if(block == ManaCraftBlocks.mana_body) {
                 item.setStackDisplayName("Final Hoe of Mana");
                 item.addEnchantment(Enchantments.SHARPNESS, 7);
                 item.addEnchantment(Enchantments.FIRE_ASPECT, 3);

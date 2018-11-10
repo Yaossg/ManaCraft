@@ -40,7 +40,7 @@ tile.mana_craft.machine_frame.name=机器外壳
 tile.mana_craft.mana_producer.name=魔能制造器
 tile.mana_craft.mana_booster.name=魔能增益器
 
-effect.ManaEvoker=魔能召唤者
+effect.mana_evoker=魔能召唤者
 potion.effect.mana_evoker=魔能召唤者药水
 splash_potion.effect.mana_evoker=喷溅型魔能召唤者药水
 lingering_potion.effect.mana_evoker=滞留型魔能召唤者药水
@@ -131,3 +131,4 @@ gui.jei.category.mana_craft.mana_producer=魔能制造器配方
 gui.jei.category.mana_craft.mana_booster=魔能增益器燃料
 gui.jei.category.mana_craft.mana_booster.level=功率:%d
 gui.jei.category.mana_craft.mana_booster.time=时间:%d
+item.mana_craft.mana_rod.name=魔能杆

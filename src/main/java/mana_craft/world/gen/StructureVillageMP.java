@@ -2,7 +2,7 @@ package mana_craft.world.gen;
 
 import mana_craft.block.BlockManaProducer;
 import mana_craft.block.ManaCraftBlocks;
-import mana_craft.entity.ManaCraftVillage;
+import mana_craft.entity.ManaCraftVillagers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -37,8 +37,8 @@ public class StructureVillageMP extends Village {
             boundingBox.offset(0, averageGroundLvl - boundingBox.maxY + 7 - 1, 0);
         }
         IBlockState cobblestone = getBiomeSpecificBlockState(Blocks.COBBLESTONE.getDefaultState());
-        IBlockState glass = manaGlass.getDefaultState();
-        IBlockState manaBlock = ManaCraftBlocks.manaBlock.getDefaultState();
+        IBlockState glass = mana_glass.getDefaultState();
+        IBlockState manaBlock = ManaCraftBlocks.mana_block.getDefaultState();
         IBlockState fence = getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
 
         fillWithAir(worldIn, boundingBox, 0, 0, 0, 7, 7, 7);
@@ -61,10 +61,10 @@ public class StructureVillageMP extends Village {
         setBlockState(worldIn, manaBlock, 3, 1, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 4, 1, 3, boundingBox);
         setBlockState(worldIn, manaBlock, 3, 1, 4, boundingBox);
-        setBlockState(worldIn, manaIngotBlock.getDefaultState(), 2, 1, 2, boundingBox);
-        setBlockState(worldIn, manaIngotBlock.getDefaultState(), 4, 1, 2, boundingBox);
-        setBlockState(worldIn, manaIngotBlock.getDefaultState(), 2, 1, 4, boundingBox);
-        setBlockState(worldIn, manaIngotBlock.getDefaultState(), 4, 1, 4, boundingBox);
+        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 2, 1, 2, boundingBox);
+        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 4, 1, 2, boundingBox);
+        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 2, 1, 4, boundingBox);
+        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 4, 1, 4, boundingBox);
         setBlockState(worldIn, manaBlock, 2, 2, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 4, 2, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 2, 2, 4, boundingBox);
@@ -74,7 +74,7 @@ public class StructureVillageMP extends Village {
         setBlockState(worldIn, manaBlock, 3, 3, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 4, 3, 3, boundingBox);
         setBlockState(worldIn, manaBlock, 3, 3, 4, boundingBox);
-        setBlockState(worldIn, manaLantern.getDefaultState(), 3, 4, 3, boundingBox);
+        setBlockState(worldIn, mana_lantern.getDefaultState(), 3, 4, 3, boundingBox);
 
         setBlockState(worldIn, glass, 3, 3, 3, boundingBox);
 
@@ -83,7 +83,7 @@ public class StructureVillageMP extends Village {
         setBlockState(worldIn, glass, 3, 2, 4, boundingBox);
 
         //noinspection ConstantConditions <-look at constrcutor
-        setBlockState(worldIn, manaProducer.getDefaultState().withProperty(BlockManaProducer.FACING, getCoordBaseMode().getOpposite()), 3, 2, 3, boundingBox);
+        setBlockState(worldIn, mana_producer.getDefaultState().withProperty(BlockManaProducer.FACING, getCoordBaseMode().getOpposite()), 3, 2, 3, boundingBox);
 
         spawnVillagers(worldIn, boundingBox, 3, 1, 0, 2);
 
@@ -92,7 +92,7 @@ public class StructureVillageMP extends Village {
 
     @Override
     protected VillagerProfession chooseForgeProfession(int count, VillagerProfession prof) {
-        return ManaCraftVillage.mana_priest;
+        return ManaCraftVillagers.mana_priest;
     }
 
     public static class Handler implements IVillageCreationHandler {

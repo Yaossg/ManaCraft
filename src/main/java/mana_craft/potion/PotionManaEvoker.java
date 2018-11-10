@@ -1,17 +1,20 @@
 package mana_craft.potion;
 
+import mana_craft.ManaCraft;
 import mana_craft.entity.EntityManaBall;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.Random;
 
 public class PotionManaEvoker extends Potion {
-    PotionManaEvoker() {
+    public static final ResourceLocation texture = new ResourceLocation(ManaCraft.MODID, "textures/gui/potions.png");
+    public PotionManaEvoker() {
         super(false, 0xEB7BEA);
-        setPotionName("ManaEvoker");
+        setPotionName("effect.mana_evoker");
     }
 
     @Override
@@ -38,13 +41,13 @@ public class PotionManaEvoker extends Potion {
 
     @Override
     public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
-        mc.getTextureManager().bindTexture(ManaCraftPotions.texture);
+        mc.getTextureManager().bindTexture(texture);
         mc.currentScreen.drawTexturedModalRect(x + 6, y + 7, 0, 0, 18, 18);
     }
 
     @Override
     public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
-        mc.getTextureManager().bindTexture(ManaCraftPotions.texture);
+        mc.getTextureManager().bindTexture(texture);
         mc.ingameGUI.drawTexturedModalRect(x + 4, y + 4, 0, 0, 18, 18);
     }
 }

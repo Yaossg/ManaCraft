@@ -40,7 +40,7 @@ tile.mana_craft.machine_frame.name=Machine Frame
 tile.mana_craft.mana_producer.name=Mana Producer
 tile.mana_craft.mana_booster.name=Mana Booster
 
-effect.ManaEvoker=Mana Evoker
+effect.mana_evoker=Mana Evoker
 potion.effect.mana_evoker=Potion of Mana Evoker
 splash_potion.effect.mana_evoker=Splash Potion of Mana Evoker
 lingering_potion.effect.mana_evoker=Lingering Potion of Mana Evoker
@@ -131,3 +131,4 @@ gui.jei.category.mana_craft.mana_producer=Mana Producer Recipe
 gui.jei.category.mana_craft.mana_booster=Mana Booster Fuel
 gui.jei.category.mana_craft.mana_booster.level=Power:%d
 gui.jei.category.mana_craft.mana_booster.time=Time:%d
+item.mana_craft.mana_rod.name=Mana Rod

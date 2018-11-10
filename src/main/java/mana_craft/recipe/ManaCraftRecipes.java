@@ -6,9 +6,6 @@ import com.google.gson.JsonObject;
 import mana_craft.ManaCraft;
 import mana_craft.api.registry.MBFuel;
 import mana_craft.api.registry.MPRecipe;
-import mana_craft.block.ManaCraftBlocks;
-import mana_craft.item.ManaCraftItems;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,16 +24,11 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static mana_craft.api.registry.IManaCraftRegistries.*;
-import static mana_craft.api.registry.IManaCraftRegistries.instance;
-import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 
 public class ManaCraftRecipes {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public static void init(FMLPreInitializationEvent event) {
-        addSmelting(ManaCraftBlocks.manaOre, new ItemStack(ManaCraftItems.mana, 4), 0.6f);
-        addSmelting(ManaCraftBlocks.manaIngotOre, new ItemStack(ManaCraftItems.manaIngot), 0.4f);
-        addSmelting(ManaCraftBlocks.manaBlock, new ItemStack(ManaCraftItems.manaBall), 0.2f);
 
         SausageUtils.getPath(ManaCraft.class, "/assets/mana_craft/machines/").ifPresent(root -> {
             instance().addRecipePath(ManaCraft.MODID, root.resolve("recipes"));

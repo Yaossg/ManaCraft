@@ -19,8 +19,8 @@ import static sausage_core.api.util.world.gen.WorldGenUtils.getBiome;
 import static sausage_core.api.util.world.gen.WorldGenUtils.randomPos;
 
 class WorldGenMana implements IWorldGenerator {
-    private static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.manaOre.getDefaultState(), sizeManaOre);
-    private static final WorldGenMinable MANA_INGOT = new WorldGenMinable(ManaCraftBlocks.manaIngotOre.getDefaultState(), sizeManaIngotOre);
+    private static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.mana_ore.getDefaultState(), sizeManaOre);
+    private static final WorldGenMinable MANA_INGOT = new WorldGenMinable(ManaCraftBlocks.mana_ingot_ore.getDefaultState(), sizeManaIngotOre);
     private void generate(Random random, int chunkX, int chunkZ, World world) {
         for (int i = 0; i < timesManaOre; ++i)
             MANA.generate(world, random, randomPos(random, chunkX, chunkZ, 0, heightManaOre));

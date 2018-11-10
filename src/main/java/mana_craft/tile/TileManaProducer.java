@@ -14,7 +14,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
-import sausage_core.api.util.item.*;
+import sausage_core.api.util.item.ItemStackMatches;
+import sausage_core.api.util.item.PortableItemStackHandler;
+import sausage_core.api.util.item.SingleItemStackHandler;
 import sausage_core.api.util.tile.ITileDropItems;
 import sausage_core.api.util.tile.TileBase;
 
@@ -70,24 +72,24 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
                 .aisle("  _  ", " _#_ ", " # # ", " *#* ")
                 .aisle("     ", "     ", "  _  ", "     ")
                 .where('_', hasState(forBlock(Blocks.AIR)))
-                .where('^', hasState(forBlock(manaLantern)))
-                .where('#', hasState(forBlock(manaBlock)))
-                .where('!', hasState(forBlock(manaGlass)))
-                .where('*', hasState(forBlock(manaIngotBlock)))
+                .where('^', hasState(forBlock(mana_lantern)))
+                .where('#', hasState(forBlock(mana_block)))
+                .where('!', hasState(forBlock(mana_glass)))
+                .where('*', hasState(forBlock(mana_ingot_block)))
                 .where('O', TileManaProducer::core)
                 .build();
     }
     public static boolean core(BlockWorldState bws) {
         IBlockState state = bws.getBlockState();
-        if(state.getBlock() != manaProducer)
+        if(state.getBlock() != mana_producer)
             return false;
         World world = bws.world;
         EnumFacing facing = state.getValue(BlockManaFoot.FACING);
         BlockPos pos = bws.getPos();
         return world.isAirBlock(pos.offset(facing))
-                && world.getBlockState(pos.offset(facing.rotateY())).getBlock() == manaGlass
-                && world.getBlockState(pos.offset(facing.rotateYCCW())).getBlock() == manaGlass
-                && world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == manaGlass;
+                && world.getBlockState(pos.offset(facing.rotateY())).getBlock() == mana_glass
+                && world.getBlockState(pos.offset(facing.rotateYCCW())).getBlock() == mana_glass
+                && world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == mana_glass;
     }
     public static boolean checkCharged(World world, BlockPos pos) {
         BlockPattern.PatternHelper helper = pattern.match(world, pos);

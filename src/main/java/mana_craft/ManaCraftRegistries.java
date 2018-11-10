@@ -12,8 +12,6 @@ import net.minecraft.item.ItemArmor;
 import javax.annotation.Nonnull;
 import java.nio.file.Path;
 
-import static com.google.common.base.Preconditions.checkArgument;
-
 public class ManaCraftRegistries implements IManaCraftRegistries {
     public static final ManaCraftRegistries INSTANCE = new ManaCraftRegistries();
     Multimap<String, Path> pathRecipe = ArrayListMultimap.create();

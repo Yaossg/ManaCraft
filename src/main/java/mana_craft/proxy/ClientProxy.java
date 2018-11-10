@@ -1,19 +1,20 @@
 package mana_craft.proxy;
 
-import mana_craft.block.ManaCraftBlocks;
-import mana_craft.entity.ManaCraftEntities;
-import mana_craft.item.ManaCraftItems;
+import mana_craft.entity.EntityManaBall;
+import mana_craft.entity.EntityManaShooter;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import static net.minecraftforge.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler;
 
 public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-        ManaCraftItems.manager.loadAllModel();
-        ManaCraftBlocks.manager.loadAllModel();
-        ManaCraftEntities.clientInit();
+        registerEntityRenderingHandler(EntityManaBall.class, EntityManaBall::render);
+        registerEntityRenderingHandler(EntityManaBall.Floating.class, EntityManaBall::render);
+        registerEntityRenderingHandler(EntityManaShooter.class, EntityManaShooter.Render::new);
     }
 
     @Override

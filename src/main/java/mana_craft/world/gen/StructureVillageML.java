@@ -37,7 +37,7 @@ public class StructureVillageML extends Village {
         setBlockState(worldIn, fence, 1, 0, 0, boundingBox);
         setBlockState(worldIn, fence, 1, 1, 0, boundingBox);
         setBlockState(worldIn, fence, 1, 2, 0, boundingBox);
-        setBlockState(worldIn, ManaCraftBlocks.manaLantern.getDefaultState(), 1, 3, 0, boundingBox);
+        setBlockState(worldIn, ManaCraftBlocks.mana_lantern.getDefaultState(), 1, 3, 0, boundingBox);
         return true;
     }
 

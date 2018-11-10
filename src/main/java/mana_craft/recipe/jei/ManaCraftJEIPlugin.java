@@ -22,12 +22,12 @@ public class ManaCraftJEIPlugin implements IModPlugin {
         registry.addRecipes(MP_RECIPES.view(), MPRecipeCategory.UID);
         registry.handleRecipes(MPRecipe.class, recipe -> new MPRecipeWrapper(guiHelper, recipe), MPRecipeCategory.UID);
         registry.addRecipeClickArea(GUIContainerManaProducer.class, 87, 36, 23, 18, MPRecipeCategory.UID);
-        registry.addRecipeCatalyst(new ItemStack(ManaCraftBlocks.manaProducer), MPRecipeCategory.UID);
+        registry.addRecipeCatalyst(new ItemStack(ManaCraftBlocks.mana_producer), MPRecipeCategory.UID);
 
         registry.addRecipes(MB_FUELS.view(), MBFuelCategory.UID);
         registry.handleRecipes(MBFuel.class, fuel -> new MBFuelWrapper(guiHelper, fuel), MBFuelCategory.UID);
         registry.addRecipeClickArea(GUIContainerManaBooster.class, 52, 25, 16, 15, MBFuelCategory.UID);
-        registry.addRecipeCatalyst(new ItemStack(ManaCraftBlocks.manaBooster), MBFuelCategory.UID);
+        registry.addRecipeCatalyst(new ItemStack(ManaCraftBlocks.mana_booster), MBFuelCategory.UID);
     }
 
     @Override

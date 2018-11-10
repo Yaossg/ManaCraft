@@ -101,7 +101,7 @@ public class EntityManaBall extends EntityThrowable {
     }
 
     public static <T extends Entity> RenderSnowball<T> render(RenderManager renderManager) {
-        return new RenderSnowball<>(renderManager, ManaCraftItems.manaBall, Minecraft.getMinecraft().getRenderItem());
+        return new RenderSnowball<>(renderManager, ManaCraftItems.mana_ball, Minecraft.getMinecraft().getRenderItem());
     }
     public static EntityManaBall get(World worldIn, EntityLivingBase throwerIn, boolean floating) {
         return floating ? new Floating(worldIn, throwerIn) : new EntityManaBall(worldIn, throwerIn);
