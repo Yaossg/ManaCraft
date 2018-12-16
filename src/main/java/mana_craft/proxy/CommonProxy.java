@@ -2,26 +2,32 @@ package mana_craft.proxy;
 
 import mana_craft.ManaCraft;
 import mana_craft.block.BlockManaHead;
-import mana_craft.block.ManaCraftBlocks;
+import mana_craft.config.ManaCraftConfig;
 import mana_craft.entity.ManaCraftVillagers;
 import mana_craft.inventory.ManaCraftGUIs;
 import mana_craft.item.ItemManaArmor;
 import mana_craft.item.ItemManaTools;
-import mana_craft.item.ManaCraftItems;
 import mana_craft.loot.ManaCraftLoots;
-import mana_craft.potion.ManaCraftPotionTypes;
+import mana_craft.potion.ManaCraftPotions;
 import mana_craft.recipe.ManaCraftRecipes;
 import mana_craft.subscriber.ManaCraftSubscribers;
 import mana_craft.tile.TileManaBooster;
 import mana_craft.tile.TileManaProducer;
 import mana_craft.world.gen.ManaCraftWorldGens;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockPortal;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.inventory.IEnumGUIHandler;
+
+import javax.annotation.Nonnull;
 
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
@@ -33,6 +39,9 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         IEnumGUIHandler.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftRecipes.init(event);
+        if(ManaCraftConfig.potion)
+            ManaCraftPotions.preInit();
+        ManaCraftVillagers.preInit();
     }
 
     static void addOre() {
@@ -62,10 +71,12 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         ManaCraftSubscribers.init();
-        ManaCraftLoots.init();
+        if(ManaCraftConfig.loot)
+            ManaCraftLoots.init();
         ManaCraftVillagers.init();
         ManaCraftWorldGens.init();
-        ManaCraftPotionTypes.init();
+        if(ManaCraftConfig.potion)
+            ManaCraftPotions.init();
         addOre();
         addSmelt();
         misc();

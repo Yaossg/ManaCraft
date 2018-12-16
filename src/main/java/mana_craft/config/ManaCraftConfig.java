@@ -10,20 +10,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME)
 public class ManaCraftConfig {
-    @Comment("Bomb Size (set this to 0 to disable)")
+    @Comment("ManaCraft's explosion size (set this to 0 to disable)")
     @RangeInt(min = 0, max = 100)
-    @LangKey("mana_craft.general.bombSize")
-    public static int bombSize = 20;
+    @LangKey("mana_craft.general.explosionSize")
+    public static int explosionSize = 20;
 
-    @Comment("whether Bombs damage terrain")
+    @Comment("can the explosion damage terrain")
     @LangKey("mana_craft.general.damageTerrain")
     public static boolean damageTerrain = false;
 
-    @Comment("whether Bombs cause Fire")
+    @Comment("can the explosion cause Fire")
     @LangKey("mana_craft.general.causeFire")
     public static boolean causeFire = false;
 
-    @Comment("Mana Boost boosting boostRadius")
+    @Comment("radius of Mana Booster can boost")
     @RangeInt(min = 0, max = 10)
     @LangKey("mana_craft.general.boostRadius")
     public static double boostRadius = 3;
@@ -33,12 +33,12 @@ public class ManaCraftConfig {
     @LangKey("mana_craft.general.boostLimit")
     public static int boostLimit = 3;
 
-    @Comment("drop chance of Mana from livings")
+    @Comment("rare drop chance of Mana from mobs")
     @RangeDouble(min = 0, max = 1)
     @LangKey("mana_craft.general.dropManaChance")
     public static float dropManaChance = 0.025f;
 
-    @Comment("whether Mana Apple is dropped by pigs (when dropMana is true)")
+    @Comment("is Mana Apple dropped by pigs (when dropMana is true)")
     @LangKey("mana_craft.general.dropManaApple")
     public static boolean dropManaApple = true;
 
@@ -54,11 +54,13 @@ public class ManaCraftConfig {
     @Comment("durability of Mana Tools/Weapons/Armors")
     @RangeInt(min = 4, max = 80)
     @LangKey("mana_craft.general.durability")
+    @RequiresMcRestart
     public static int durability = 20;
 
     @Comment("enchantability of Mana Tools/Weapons/Armors")
     @RangeInt(min = 20, max = 80)
     @LangKey("mana_craft.general.enchantability")
+    @RequiresMcRestart
     public static int enchantability = 36;
 
     @Comment({"armor reduction amounts",
@@ -69,6 +71,7 @@ public class ManaCraftConfig {
     @Comment("armor toughness")
     @LangKey("mana_craft.general.toughness")
     @RangeDouble(min = 0.5f, max = 2.5f)
+    @RequiresMcRestart
     public static float toughness = 0.8f;
 
     @Comment("min speed of floating mana ball")
@@ -76,7 +79,7 @@ public class ManaCraftConfig {
     @RangeDouble(min = 0.001, max = 0.025)
     public static double minSpeed = 0.005;
 
-    @Comment("whether Mana Produecer Generator can replace block")
+    @Comment("can Mana Produecer Generator replace block")
     @LangKey("mana_craft.general.replace")
     public static boolean replace = false;
 
@@ -94,11 +97,32 @@ public class ManaCraftConfig {
     @RangeDouble(min = 0, max = 1)
     public static float ratio = 0.1f;
 
+    @Comment("is there mana variant of village")
+    @LangKey("mana_craft.general.village")
+    @RequiresMcRestart
+    public static boolean village = true;
+
+    @Comment("is there ManaCraft village structure")
+    @LangKey("mana_craft.general.village_structure")
+    @RequiresMcRestart
+    public static boolean village_structure = true;
+
+    @Comment("is there special loot for ManaCraft")
+    @LangKey("mana_craft.general.loot")
+    @RequiresMcRestart
+    public static boolean loot = true;
+
+    @Comment("is there ManaCraft potions")
+    @LangKey("mana_craft.general.potion")
+    @RequiresMcRestart
+    public static boolean potion = true;
+
     @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME + " OreGens")
     public static class OreGens {
         @Comment("max size of a Mana Ore vein")
         @LangKey("mana_craft.ore_gens.general.sizeManaOre")
         @RangeInt(min = 0, max = 40)
+        @RequiresMcRestart
         public static int sizeManaOre = 11;
 
         @Comment("max height of Mana Ores veins")
@@ -114,6 +138,7 @@ public class ManaCraftConfig {
         @Comment("max size of a Mana Ingot Ore vein")
         @LangKey("mana_craft.ore_gens.general.sizeManaIngotOre")
         @RangeInt(min = 0, max = 40)
+        @RequiresMcRestart
         public static int sizeManaIngotOre = 10;
 
         @Comment("max height of Mana Ingot Ores veins")

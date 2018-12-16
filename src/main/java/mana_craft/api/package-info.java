@@ -1,4 +1,4 @@
-@API(apiVersion = "0.3.2", owner = "ManaCraft", provides = "ManaCraft API")
+@API(apiVersion = "0.3.3", owner = "ManaCraft", provides = "ManaCraft API")
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 package mana_craft.api;

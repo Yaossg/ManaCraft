@@ -3,6 +3,7 @@ package mana_craft.entity;
 import mana_craft.ManaCraft;
 import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
+import mana_craft.item.ManaCraftItems;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -14,6 +15,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityGolem;
+import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -84,6 +86,8 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
                         world.spawnEntity(ball);
                     }
                     world.createExplosion(this, posX, posY, posZ, 3, false);
+                    if(!world.isRemote && random.nextInt(64) == 0)
+                        dropItem(ManaCraftItems.mana_record, 1);
                 }
             }
         }

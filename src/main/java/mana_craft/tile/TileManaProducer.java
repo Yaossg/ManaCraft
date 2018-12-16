@@ -14,6 +14,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
+import sausage_core.api.util.common.IEqualityComparator;
+import sausage_core.api.util.item.ItemStackComparators;
 import sausage_core.api.util.item.ItemStackMatches;
 import sausage_core.api.util.item.PortableItemStackHandler;
 import sausage_core.api.util.item.SingleItemStackHandler;
@@ -33,6 +35,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     public int total_work_time;
     public PortableItemStackHandler input = new PortableItemStackHandler(4) {
         @Override
+        @Deprecated
         protected void onContentsChanged(int slot) {
             current = null;
             isCharged = false;
@@ -117,10 +120,11 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     void work() {
         if((++work_time) >= total_work_time) {
             work_time -= current.work_time;
-            ItemStack[] match = ItemStackMatches.match(current.input(), ItemStackMatches.merge(input.view()));
+            ItemStack[] match = ItemStackMatches.match(current.input(), ItemStackMatches.merge(input.copyStacks()));
             ItemStack copy = current.output();
-            ItemStackMatches.remove(input, match);
+            ItemStackMatches.remove(input, match, ItemStackComparators.STACKABLE);
             output.insertItem(copy, false);
+            current = null;
         }
     }
     @Override
@@ -130,7 +134,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
         work_time = Math.min(work_time, total_work_time);
         if(current == null)
             current = MP_RECIPES.find(recipe ->
-                    ItemStackMatches.match(recipe.input(), ItemStackMatches.merge(input.view())) != null).orElse(null);
+                    ItemStackMatches.match(recipe.input(), ItemStackMatches.merge(input.copyStacks())) != null).orElse(null);
         if(current != null && output.insertItem(current.output(), true).isEmpty()) {
             world.setBlockState(pos, state.withProperty(WORKING, Boolean.TRUE));
             if(total_work_time != current.work_time) {

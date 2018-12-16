@@ -1,6 +1,7 @@
 package mana_craft.world.biome;
 
 import mana_craft.ManaCraft;
+import mana_craft.config.ManaCraftConfig;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
@@ -25,7 +26,7 @@ public class ManaCraftBiomes {
         addTypes(mana_chaos, Type.MAGICAL, Type.RARE);
         addBiome(WARM, new BiomeEntry(mana_chaos_hills, 2));
         addTypes(mana_chaos_hills, Type.MAGICAL, Type.HILLS, Type.RARE);
-
-        addVillageBiome(mana, true);
+        if(ManaCraftConfig.village)
+            addVillageBiome(mana, true);
     }
 }

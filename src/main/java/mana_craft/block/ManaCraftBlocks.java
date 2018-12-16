@@ -4,6 +4,8 @@ import mana_craft.ManaCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import sausage_core.api.util.registry.IBRegistryManager;
 
@@ -24,6 +26,7 @@ public class ManaCraftBlocks {
     public static final Block mana_head = null;
     public static final Block mana_body = null;
     public static final Block mana_foot = null;
+    public static final Block mana_obsidian = null;
     public interface Manager {
         IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
         static Block addBlock(Material material, ToolMaterial tool, String name) {
@@ -35,8 +38,16 @@ public class ManaCraftBlocks {
         static void init() {
             addBlock(Material.ROCK, ToolMaterial.STONE, "mana_block")
                     .setHardness(5).setLightLevel(lightLevelOf(7));
-            addBlock(Material.ROCK, ToolMaterial.IRON, "mana_ingot_block")
-                    .setHardness(6).setLightLevel(lightLevelOf(10));
+            manager.addBlock(new Block(Material.ROCK) {
+                { setHarvestLevel("pickaxe", ToolMaterial.IRON.getHarvestLevel()); }
+
+                @Override
+                public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+                    return true;
+                }
+
+            }, "mana_ingot_block").setHardness(6).setLightLevel(lightLevelOf(10));
+
             addBlock(Material.ROCK, ToolMaterial.IRON, "mana_ingot_ore")
                     .setHardness(4).setLightLevel(lightLevelOf(5));
             addBlock(Material.IRON, ToolMaterial.IRON, "machine_frame")
@@ -51,6 +62,7 @@ public class ManaCraftBlocks {
             manager.addBlock(new BlockManaHead(), "mana_head");
             manager.addBlock(new BlockManaBody(), "mana_body");
             manager.addBlock(new BlockManaFoot(), "mana_foot");
+            manager.addBlock(new BlockManaObsidian(), "mana_obsidian");
         }
     }
 

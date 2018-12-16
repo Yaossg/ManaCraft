@@ -1,5 +1,7 @@
 package mana_craft.item;
 
+import mana_craft.block.ManaCraftBlocks;
+import mana_craft.config.ManaCraftConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
@@ -20,7 +22,7 @@ public class ItemMana extends Item {
                 && world.getBlockState(pos.down()).getBlock() == Blocks.LAVA) {
             world.setBlockToAir(pos.down());
             entity.setDead();
-            Block.spawnAsEntity(world, pos, new ItemStack(Blocks.OBSIDIAN));
+            Block.spawnAsEntity(world, pos, new ItemStack(random.nextInt(4) == 0 ? ManaCraftBlocks.mana_obsidian : Blocks.OBSIDIAN));
         }
         return false;
     }

@@ -19,6 +19,7 @@ import java.util.Optional;
 class BlockManaGlass extends BlockGlass {
     BlockManaGlass() {
         super(Material.GLASS, false);
+        setHardness(0.4f);
         setSoundType(SoundType.GLASS);
         setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
     }

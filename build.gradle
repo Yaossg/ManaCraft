@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "0.3.2"
+version = "0.3.3"
 group = "mana_craft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "mana_craft"
 
@@ -74,7 +74,7 @@ repositories {
     maven {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
-        url = "modmaven.k-4u.nl"
+        url = "https://modmaven.k-4u.nl/"
     }
 }
 

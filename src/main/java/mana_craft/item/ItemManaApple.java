@@ -59,12 +59,12 @@ public class ItemManaApple extends ItemFood {
             playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.mana_craft.pig"));
             ManaCraft.giveAdvancement(playerIn, "pig_bomb");
         }
-        if(ManaCraftConfig.bombSize > 0) {
+        if(ManaCraftConfig.explosionSize > 0) {
             pig.setDead();
-            Explosions.createToApply(pig.world, pig, pig.getPosition(), ManaCraftConfig.bombSize, ManaCraftConfig.causeFire, ManaCraftConfig.damageTerrain);
-            float step = (float) Math.PI / ManaCraftConfig.bombSize;
+            Explosions.createToApply(pig.world, pig, pig.getPosition(), ManaCraftConfig.explosionSize, ManaCraftConfig.causeFire, ManaCraftConfig.damageTerrain);
+            float step = (float) Math.PI / ManaCraftConfig.explosionSize;
             for (float f = 0; f <= 2 * Math.PI; f += step) {
-                pig.world.spawnEntity(new EntityLightningBolt(pig.world, pig.posX + ManaCraftConfig.bombSize * MathHelper.cos(f), pig.posY, pig.posZ + ManaCraftConfig.bombSize * MathHelper.sin(f), false));
+                pig.world.spawnEntity(new EntityLightningBolt(pig.world, pig.posX + ManaCraftConfig.explosionSize * MathHelper.cos(f), pig.posY, pig.posZ + ManaCraftConfig.explosionSize * MathHelper.sin(f), false));
             }
             if(!pig.world.isRemote)
                 InventoryHelper.spawnItemStack(pig.world, pig.posX, pig.posY, pig.posZ, new ItemStack(ManaCraftItems.mana_pork));

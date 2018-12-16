@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
+import sausage_core.api.util.potion.PotionTypeModID;
 import sausage_core.api.util.registry.SoundRegistryManager;
 
 import java.awt.*;
@@ -50,8 +51,7 @@ public class ManaCraftSubscribers {
 
     @SubscribeEvent
     public static void addItems(RegistryEvent.Register<Item> event) {
-        SoundRegistryManager manager = new SoundRegistryManager(ManaCraft.MODID);
-        ManaCraftItems.Manager.init(manager.addSound("record"));
+        ManaCraftItems.Manager.init();
         ManaCraftBlocks.Manager.manager.registerItems();
     }
 
@@ -69,51 +69,23 @@ public class ManaCraftSubscribers {
         event.getRegistry().registerAll(new EnchantmentFloating(), new EnchantmentManaEvoker(), new EnchantmentManaRecycler());
         ManaCraftEnchantments.init();
     }
-    //Entities have no holders
+
     private static int nextEntityID = 0;
     @SubscribeEvent
     public static void addEntities(RegistryEvent.Register<EntityEntry> event) {
         event.getRegistry().registerAll(
                 create().entity(EntityManaBall.class)
-                    .id(new ResourceLocation(ManaCraft.MODID, "mana_ball"), nextEntityID++)
-                    .name("ManaBall").tracker(64, 8, true).build(),
+                        .id("mana_ball", nextEntityID++).name("")
+                        .tracker(64, 8, true).build(),
                 create().entity(EntityManaBall.Floating.class)
-                        .id(new ResourceLocation(ManaCraft.MODID, "mana_floating_ball"), nextEntityID++)
-                        .name("FloatingManaBall").tracker(64, 10, true).build(),
+                        .id("mana_floating_ball", nextEntityID++).name("")
+                        .tracker(64, 10, true).build(),
                 create().entity(EntityManaShooter.class)
-                        .id(new ResourceLocation(ManaCraft.MODID, "mana_shooter"), nextEntityID++)
-                        .name("ManaShooter").tracker(64, 3, true)
+                        .id("mana_shooter", nextEntityID++)
+                        .name("mana_craft.ManaShooter")
+                        .tracker(64, 3, true)
                         .egg(Color.MAGENTA.getRGB(), Color.BLACK.brighter().getRGB()).build()
         );
-    }
-
-//    @ObjectHolder    note: this is the only instance of (Potion) mana_evoker kept
-    public static Potion mana_evoker;
-
-    @SubscribeEvent
-    public static void addPotions(RegistryEvent.Register<Potion> event) {
-        event.getRegistry().register(mana_evoker = new PotionManaEvoker().setRegistryName("mana_evoker"));
-    }
-
-    @SubscribeEvent
-    public static void addPotionTypes(RegistryEvent.Register<PotionType> event) {
-        event.getRegistry().registerAll(new PotionType(new PotionEffect(mana_evoker, 3000)).setRegistryName("mana_evoker"),
-                new PotionType("mana_evoker", new PotionEffect(mana_evoker, 8000)).setRegistryName("long_mana_evoker"),
-                new PotionType("mana_evoker", new PotionEffect(mana_evoker, 1200, 1)).setRegistryName("strong_mana_evoker"),
-                new PotionType("mana_evoker", new PotionEffect(mana_evoker, 12000, 2)).setRegistryName("mega_mana_evoker"));
-    }
-
-//    see above addItems(RegistryEvent.Register<Item>)
-//    @SubscribeEvent
-//    public static void addSoundEvents(RegistryEvent.Register<SoundEvent> event) {
-//    }
-
-    @SubscribeEvent
-    public static void addVillagerProfessions(RegistryEvent.Register<VillagerRegistry.VillagerProfession> event) {
-        event.getRegistry().register(new VillagerRegistry.VillagerProfession(
-                "mana_craft:mana_priest",
-                "mana_craft:textures/entity/mana_priest.png",
-                "mana_craft:textures/entity/zombie_mana_priest.png"));
     }
 
     @SubscribeEvent

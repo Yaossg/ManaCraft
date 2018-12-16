@@ -2,6 +2,7 @@ package mana_craft.world.gen;
 
 import mana_craft.ManaCraft;
 import mana_craft.block.ManaCraftBlocks;
+import mana_craft.config.ManaCraftConfig;
 import mana_craft.world.biome.BiomeMana;
 import net.minecraft.block.BlockBone;
 import net.minecraft.block.state.IBlockState;
@@ -19,13 +20,14 @@ import static net.minecraftforge.fml.common.registry.VillagerRegistry.instance;
 public class ManaCraftWorldGens {
     public static void init() {
         GameRegistry.registerWorldGenerator(new WorldGenMana(), ManaCraft.MODID.hashCode());
-
-        registerStructureComponent(StructureVillageMP.class, ManaCraft.MODID + ":ViMP");
-        instance().registerVillageCreationHandler(new StructureVillageMP.Handler());
-        registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
-        instance().registerVillageCreationHandler(new StructureVillageML.Handler());
-
-        MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
+        if(ManaCraftConfig.village)
+            MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
+        if(ManaCraftConfig.village_structure) {
+            registerStructureComponent(StructureVillageMP.class, ManaCraft.MODID + ":ViMP");
+            instance().registerVillageCreationHandler(new StructureVillageMP.Handler());
+            registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
+            instance().registerVillageCreationHandler(new StructureVillageML.Handler());
+        }
     }
 
     @SuppressWarnings("deprecation")

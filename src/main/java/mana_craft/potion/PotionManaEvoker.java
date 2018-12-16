@@ -4,6 +4,7 @@ import mana_craft.ManaCraft;
 import mana_craft.entity.EntityManaBall;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +15,7 @@ public class PotionManaEvoker extends Potion {
     public static final ResourceLocation texture = new ResourceLocation(ManaCraft.MODID, "textures/gui/potions.png");
     public PotionManaEvoker() {
         super(false, 0xEB7BEA);
-        setPotionName("effect.mana_evoker");
+        setPotionName("effect.mana_craft.mana_evoker");
     }
 
     @Override

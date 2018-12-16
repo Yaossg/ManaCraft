@@ -116,7 +116,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
         if(!world.canSeeSky(pos.up())) {
             world.setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
         } else if(burn_time <= 0) {
-            Optional<MBFuel> fuel = MB_FUELS.find(fuel0 -> fuel0.test(handler.getStack()));
+            Optional<MBFuel> fuel = MB_FUELS.find(fuel0 -> fuel0.test(handler.get()));
             if(!fuel.isPresent()) {
                 world.setBlockState(pos, state.withProperty(BURNING, Boolean.FALSE));
             } else {

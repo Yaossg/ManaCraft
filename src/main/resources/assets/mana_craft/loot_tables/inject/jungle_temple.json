@@ -30,7 +30,7 @@
               }
             }
           ],
-          "weight": 15
+          "weight": 20
         },
         {
           "type": "item",
@@ -44,7 +44,7 @@
               }
             }
           ],
-          "weight": 15
+          "weight": 12
         },
         {
           "type": "item",
@@ -58,7 +58,12 @@
               }
             }
           ],
-          "weight": 10
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "mana_craft:mana_record",
+          "weight": 5
         }
       ]
     }

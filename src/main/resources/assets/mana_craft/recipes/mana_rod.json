@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "OX ",
-    "XOX",
-    " XO"
+    "X  ",
+    " O ",
+    "  X"
   ],
   "key": {
     "X": {
-      "item": "mana_craft:mana"
+      "item": "mana_craft:mana_obsidian"
     },
     "O": {
       "item" : "minecraft:obsidian"

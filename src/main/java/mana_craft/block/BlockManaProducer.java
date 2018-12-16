@@ -79,7 +79,7 @@ public class BlockManaProducer extends BlockContainer {
 
     BlockManaProducer() {
         super(Material.IRON, MapColor.PURPLE);
-        setHardness(5f);
+        setHardness(5);
         setLightLevel(SausageUtils.lightLevelOf(11));
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(WORKING, Boolean.FALSE));
