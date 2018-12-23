@@ -1,5 +1,6 @@
 package mana_craft.item;
 
+import mana_craft.ManaCraft;
 import mana_craft.api.IItemManaDamagable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -10,12 +11,13 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import static mana_craft.config.ManaCraftConfig.durability;
 import static mana_craft.config.ManaCraftConfig.enchantability;
+import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 public class ItemManaTools {
 
-    public static final Item.ToolMaterial MANA_TOOL =
-            EnumHelper.addToolMaterial("MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
-                            durability * 20, 6, 3, enchantability);
+    public static final Item.ToolMaterial MANA_TOOL = nonnull(
+            EnumHelper.addToolMaterial(ManaCraft.MODID + "MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
+                            durability * 20, 6.5f, 3.5f, enchantability));
 
     public static class ItemManaSword extends ItemSword implements IItemManaDamagable {
         ItemManaSword() {

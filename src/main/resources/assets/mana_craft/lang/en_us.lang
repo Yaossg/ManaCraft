@@ -30,8 +30,6 @@ advancement.mana.tall_guy.description=summoned a mana shooter.
 advancement.mana.tall_guy.title=The Tall Guy
 container.mana_craft.mana_booster.idle=idle
 container.mana_craft.mana_booster.title=Mana Booster
-container.mana_craft.mana_producer.hover=producing...%d%%
-container.mana_craft.mana_producer.hoverIdle=idle
 container.mana_craft.mana_producer.title=Mana Producer
 effect.mana_craft.mana_evoker=Mana Evoker
 enchantment.mana_craft.floating=Floating
@@ -125,3 +123,5 @@ tile.mana_craft.mana_obsidian.name=Mana Obsidian
 tile.mana_craft.mana_ore.name=Mana Ore
 tile.mana_craft.mana_producer.name=Mana Producer
 tooltip.mana_craft.emerald=enjoy your friendship with villagers!
+
+info.mana_craft.mana_obsidian=Have a chance to get by throwing a mana into lava

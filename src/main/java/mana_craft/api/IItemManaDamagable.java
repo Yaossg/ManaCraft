@@ -13,11 +13,11 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 
 /**
- * implement it to be a mana tool, weapon or armor
+ * implement this to be a mana tool, weapon or armor
  * for a tool or weapon, mana will be dropped automatically by ManaCraft
  * for an armor, you should implement {@link IDefaultSpecialArmor}
  *      and then just invoke {@link IItemManaDamagable#onArmorBroken(EntityLivingBase, ItemStack)}
- *      in {@link IDefaultSpecialArmor#onArmorBroken(EntityLivingBase, ItemStack, DamageSource, int, int)}
+ *      when {@link IDefaultSpecialArmor#onArmorBroken(EntityLivingBase, ItemStack, DamageSource, int, int)} is on
  * */
 @FunctionalInterface
 public interface IItemManaDamagable {

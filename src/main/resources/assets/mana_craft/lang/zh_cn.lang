@@ -30,8 +30,6 @@ advancement.mana.tall_guy.description=召唤一个魔能射手
 advancement.mana.tall_guy.title=高个子
 container.mana_craft.mana_booster.idle=闲置
 container.mana_craft.mana_booster.title=魔能增益器
-container.mana_craft.mana_producer.hover=制造中...%d%%
-container.mana_craft.mana_producer.hoverIdle=闲置
 container.mana_craft.mana_producer.title=魔能制造器
 effect.mana_craft.mana_evoker=魔能召唤者
 enchantment.mana_craft.floating=漂浮
@@ -125,3 +123,5 @@ tile.mana_craft.mana_obsidian.name=魔能黑曜石
 tile.mana_craft.mana_ore.name=魔能矿
 tile.mana_craft.mana_producer.name=魔能制造器
 tooltip.mana_craft.emerald=享受你和村民的友谊！
+
+info.mana_craft.mana_obsidian=有几率通过将魔能扔进岩浆里来获得

@@ -56,9 +56,8 @@ public class BlockManaProducer extends BlockContainer {
         @Override
         public void readFromNBT(NBTTagCompound nbt) {
             list.clear();
-            for (NBTBase each : nbt.getTagList("producers", Constants.NBT.TAG_COMPOUND)) {
+            for (NBTBase each : nbt.getTagList("producers", Constants.NBT.TAG_COMPOUND))
                 list.add(DimensionalBlockPos.fromNBT((NBTTagCompound) each));
-            }
         }
 
         @Override

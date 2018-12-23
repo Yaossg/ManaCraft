@@ -17,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -27,12 +28,13 @@ import static mana_craft.api.registry.IManaCraftRegistries.*;
 
 public class ManaCraftRecipes {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-
+    private static final List<Path> recipePaths = new ArrayList<>();
+    private static final List<Path> fuelPaths = new ArrayList<>();
     public static void init(FMLPreInitializationEvent event) {
 
         SausageUtils.getPath(ManaCraft.class, "/assets/mana_craft/machines/").ifPresent(root -> {
-            instance().addRecipePath(ManaCraft.MODID, root.resolve("recipes"));
-            instance().addFuelPath(ManaCraft.MODID, root.resolve("fuels"));
+            recipePaths.add(root.resolve("recipes"));
+            fuelPaths.add(root.resolve("fuels"));
         });
         try {
             Path config = event.getModConfigurationDirectory().toPath().resolve("mana_craft_machines");
@@ -41,21 +43,27 @@ public class ManaCraftRecipes {
             Path recipes = config.resolve("recipes");
             if(!Files.exists(recipes))
                 Files.createDirectories(recipes);
-            instance().addRecipePath(ManaCraft.MODID, recipes);
+            recipePaths.add(recipes);
             Path fuels = config.resolve("fuels");
             if(!Files.exists(fuels))
                 Files.createDirectories(fuels);
-            instance().addFuelPath(ManaCraft.MODID, fuels);
+            fuelPaths.add(fuels);
         } catch (IOException e) {
-            ManaCraft.logger.info("Failed to find directories");
+            ManaCraft.logger.info("Failed to find directories, so no recipes or fuels load from any file", e);
+            recipePaths.clear();
+            fuelPaths.clear();
         }
     }
 
     public static void loadAll() {
-        instance().recipePathView().forEach((modid, path) -> loadEntries(modid, walk(path), MPRecipe::parse, MP_RECIPES::register));
-        ManaCraft.logger.info("loaded {} recipes", MP_RECIPES.view().size());
-        instance().fuelPathView().forEach((modid, path) -> loadEntries(modid, walk(path), MBFuel::parse, MB_FUELS::register));
-        ManaCraft.logger.info("loaded {} fuels", MB_FUELS.view().size());
+        int recipes = MP_RECIPES.view().size();
+        recipePaths.forEach(path -> loadEntries(walk(path), MPRecipe::parse, MP_RECIPES::register));
+        ManaCraft.logger.info("loaded {} recipes from files", MP_RECIPES.view().size() - recipes);
+        ManaCraft.logger.info("loaded {} recipes in total", MP_RECIPES.view().size());
+        int fuels = MB_FUELS.view().size();
+        fuelPaths.forEach(path -> loadEntries(walk(path), MBFuel::parse, MB_FUELS::register));
+        ManaCraft.logger.info("loaded {} fuels from files", MB_FUELS.view().size() - fuels);
+        ManaCraft.logger.info("loaded {} fuels in total", MB_FUELS.view().size());
     }
 
     private static List<Path> walk(Path value) {
@@ -69,9 +77,9 @@ public class ManaCraftRecipes {
         }
     }
 
-    private static <T> void loadEntries(String modid, List<Path> paths, BiFunction<JsonContext, JsonObject, T> parser, Consumer<T> consumer) {
+    private static <T> void loadEntries(List<Path> paths, BiFunction<JsonContext, JsonObject, T> parser, Consumer<T> consumer) {
         if(paths.isEmpty()) return;
-        JsonContext context = new JsonContext(modid);
+        JsonContext context = new JsonContext(ManaCraft.MODID);
         for (Path path : paths) {
             if("_constants.json".equals(path.getFileName().toString())) {
                 try (BufferedReader reader = Files.newBufferedReader(path)) {

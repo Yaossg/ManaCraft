@@ -10,8 +10,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.commons.lang3.ArrayUtils;
 
 public class ManaCraftLoots {
-
-    private static final String [] NAMES = {
+    static final String [] NAMES = {
             "abandoned_mineshaft",
             "desert_pyramid",
             "jungle_temple",
@@ -19,7 +18,9 @@ public class ManaCraftLoots {
             "spawn_bonus_chest",
             "village_blacksmith"
     };
-    private static final String INJECT = "inject/";
+
+    static final String INJECT = "inject/";
+
     public static void init() {
         MinecraftForge.EVENT_BUS.register(ManaCraftLoots.class);
         for(String name : NAMES) LootTableList.register(new ResourceLocation(ManaCraft.MODID, INJECT + name));
@@ -35,7 +36,7 @@ public class ManaCraftLoots {
         }
     }
 
-    private static LootPool getInjectPool(String name) {
+    static LootPool getInjectPool(String name) {
         return new LootPool(
                 new LootEntry[] {new LootEntryTable(
                         new ResourceLocation(ManaCraft.MODID, INJECT + name), 1, 0,

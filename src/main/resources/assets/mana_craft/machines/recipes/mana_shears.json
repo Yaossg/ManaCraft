@@ -1,0 +1,13 @@
+{
+  "input": [{
+    "item": "mana_craft:mana_rod",
+    "count": 2
+  },{
+    "item": "mana_craft:mana_ingot",
+    "count": 3
+  }],
+  "output": {
+    "item": "mana_craft:mana_shears"
+  },
+  "work_time": 1000
+}

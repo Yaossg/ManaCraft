@@ -19,16 +19,8 @@ public class GUIContainerManaProducer extends GUIContainerBase {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String translateKey = "container.mana_craft.mana_producer.";
-        int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
         String title = I18n.format(translateKey + "title");
         GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Color.DARK_GRAY.getRGB());
-        if(!Loader.isModLoaded("jei"))
-        if(mouseX >= 87 + offsetX && mouseX < 110 + offsetX && mouseY >= 36 + offsetY && mouseY < 54 + offsetY) {
-            ContainerManaProducer self = GUIHelper.getContainer(this);
-            String hover = self.work_time != 0 ? I18n.format(translateKey + "hover",
-                    (int) (100 * (float) self.work_time / self.total_work_time)) : I18n.format(translateKey + "hoverIdle");
-            drawHoveringText(hover, mouseX - offsetX, mouseY - offsetY);
-        }
     }
 
     public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_producer");
@@ -37,9 +29,8 @@ public class GUIContainerManaProducer extends GUIContainerBase {
        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
         int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
         ContainerManaProducer self = GUIHelper.getContainer(this);
-        int textureWidth = MathHelper.ceil(22.0 * self.work_time / self.total_work_time) % 24;
+        int textureWidth = MathHelper.ceil(22.0 * self.progress / self.work_time) % 24;
         drawTexturedModalRect(offsetX + 87, offsetY + 36, 176, 0, textureWidth, 17);
-
     }
 
 }

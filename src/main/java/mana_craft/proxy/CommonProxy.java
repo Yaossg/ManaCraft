@@ -13,6 +13,7 @@ import mana_craft.recipe.ManaCraftRecipes;
 import mana_craft.subscriber.ManaCraftSubscribers;
 import mana_craft.tile.TileManaBooster;
 import mana_craft.tile.TileManaProducer;
+import mana_craft.world.biome.ManaCraftBiomes;
 import mana_craft.world.gen.ManaCraftWorldGens;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPortal;
@@ -54,7 +55,7 @@ public class CommonProxy {
     }
 
     static void addSmelt() {
-        addSmelting(mana_ore, new ItemStack(mana, 4), 0.6f);
+        addSmelting(mana_ore, new ItemStack(mana, 4), 0.3f);
         addSmelting(mana_ingot_ore, new ItemStack(mana_ingot), 0.4f);
         addSmelting(mana_block, new ItemStack(mana_ball), 0.2f);
     }
@@ -65,7 +66,7 @@ public class CommonProxy {
         ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(mana_ingot));
         ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(mana_ingot));
 
-        SausageUtils.registerTileEntities(ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
+        SausageUtils.registerTileEntities(ManaCraft.logger, ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
         TileManaProducer.init();
     }
 
@@ -77,6 +78,7 @@ public class CommonProxy {
         ManaCraftWorldGens.init();
         if(ManaCraftConfig.potion)
             ManaCraftPotions.init();
+        ManaCraftBiomes.init();
         addOre();
         addSmelt();
         misc();

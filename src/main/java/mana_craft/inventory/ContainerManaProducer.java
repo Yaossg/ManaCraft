@@ -11,8 +11,8 @@ import net.minecraftforge.items.SlotItemHandler;
 import sausage_core.api.util.inventory.ContainerBase;
 
 public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
+    public int progress;
     public int work_time;
-    public int total_work_time;
 
     ContainerManaProducer(InventoryPlayer inventory, TileEntity tileEntity) {
         super(tileEntity);
@@ -38,11 +38,11 @@ public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
+        this.progress = tileEntity.progress;
         this.work_time = tileEntity.work_time;
-        this.total_work_time = tileEntity.total_work_time;
         listeners.forEach(listener -> {
-            listener.sendWindowProperty(this, 0, work_time);
-            listener.sendWindowProperty(this, 1, total_work_time);
+            listener.sendWindowProperty(this, 0, progress);
+            listener.sendWindowProperty(this, 1, work_time);
         });
     }
 
@@ -51,10 +51,10 @@ public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
     public void updateProgressBar(int id, int data) {
         switch (id) {
             case 0:
-                this.work_time = data;
+                this.progress = data;
                 break;
             case 1:
-                this.total_work_time = data;
+                this.work_time = data;
                 break;
         }
     }

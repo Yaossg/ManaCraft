@@ -55,7 +55,7 @@ public class ManaCraftConfig {
     @RangeInt(min = 4, max = 80)
     @LangKey("mana_craft.general.durability")
     @RequiresMcRestart
-    public static int durability = 20;
+    public static int durability = 24;
 
     @Comment("enchantability of Mana Tools/Weapons/Armors")
     @RangeInt(min = 20, max = 80)
@@ -76,8 +76,8 @@ public class ManaCraftConfig {
 
     @Comment("min speed of floating mana ball")
     @LangKey("mana_craft.general.min_speed")
-    @RangeDouble(min = 0.001, max = 0.025)
-    public static double minSpeed = 0.005;
+    @RangeDouble(min = 0.001, max = 0.036)
+    public static double minSpeed = 0.006;
 
     @Comment("can Mana Produecer Generator replace block")
     @LangKey("mana_craft.general.replace")

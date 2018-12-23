@@ -10,16 +10,11 @@ import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.entity.EntityManaBall;
 import mana_craft.entity.EntityManaShooter;
 import mana_craft.item.ManaCraftItems;
-import mana_craft.potion.PotionManaEvoker;
 import mana_craft.world.biome.BiomeMana;
 import mana_craft.world.biome.BiomeManaChaos;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,9 +22,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.VillagerRegistry;
-import sausage_core.api.util.potion.PotionTypeModID;
-import sausage_core.api.util.registry.SoundRegistryManager;
 
 import java.awt.*;
 
@@ -45,13 +37,13 @@ public class ManaCraftSubscribers {
 
     @SubscribeEvent
     public static void addBlock(RegistryEvent.Register<Block> event) {
-        ManaCraftBlocks.Manager.init();
+        ManaCraftBlocks.init();
         ManaCraftBlocks.Manager.manager.registerBlocks();
     }
 
     @SubscribeEvent
     public static void addItems(RegistryEvent.Register<Item> event) {
-        ManaCraftItems.Manager.init();
+        ManaCraftItems.init();
         ManaCraftBlocks.Manager.manager.registerItems();
     }
 

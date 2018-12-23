@@ -9,13 +9,14 @@ import static net.minecraftforge.common.BiomeDictionary.Type;
 import static net.minecraftforge.common.BiomeDictionary.addTypes;
 import static net.minecraftforge.common.BiomeManager.*;
 import static net.minecraftforge.common.BiomeManager.BiomeType.WARM;
+import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 @ObjectHolder(ManaCraft.MODID)
 public class ManaCraftBiomes {
-    public static final Biome mana = null;
-    public static final Biome mana_hills = null;
-    public static final Biome mana_chaos = null;
-    public static final Biome mana_chaos_hills = null;
+    public static final Biome mana = nonnull();
+    public static final Biome mana_hills = nonnull();
+    public static final Biome mana_chaos = nonnull();
+    public static final Biome mana_chaos_hills = nonnull();
     public static void init() {
         addBiome(WARM, new BiomeEntry(mana, 6));
         addTypes(mana, Type.MAGICAL);

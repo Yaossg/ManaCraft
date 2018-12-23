@@ -88,7 +88,7 @@ public class EntityManaBall extends EntityThrowable {
         }
         if(canAttack(result.entityHit)) {
             if(flame)
-                result.entityHit.setFire((int)damage);
+                result.entityHit.setFire((int) damage);
             result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), damage);
         }
     }
@@ -103,8 +103,13 @@ public class EntityManaBall extends EntityThrowable {
     public static <T extends Entity> RenderSnowball<T> render(RenderManager renderManager) {
         return new RenderSnowball<>(renderManager, ManaCraftItems.mana_ball, Minecraft.getMinecraft().getRenderItem());
     }
+
     public static EntityManaBall get(World worldIn, EntityLivingBase throwerIn, boolean floating) {
         return floating ? new Floating(worldIn, throwerIn) : new EntityManaBall(worldIn, throwerIn);
+    }
+
+    public static EntityManaBall get(World worldIn, double x, double y, double z, boolean floating) {
+        return floating ? new Floating(worldIn, x, y, z) : new EntityManaBall(worldIn, x, y, z);
     }
 
     public static class Floating extends EntityManaBall {

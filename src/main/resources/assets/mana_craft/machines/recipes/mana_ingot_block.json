@@ -3,10 +3,10 @@
     "item": "minecraft:gold_block"
   },{
     "item": "mana_craft:mana_ball",
-	"count": 44
+	"count": 40
   }],
   "output": {
     "item": "mana_craft:mana_ingot_block"
   },
-  "work_time": 32400
+  "work_time": 32800
 }
