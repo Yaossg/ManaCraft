@@ -16,7 +16,7 @@ import static sausage_core.api.util.common.SausageUtils.nonnull;
 public class ItemManaTools {
 
     public static final Item.ToolMaterial MANA_TOOL = nonnull(
-            EnumHelper.addToolMaterial(ManaCraft.MODID + "MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
+            EnumHelper.addToolMaterial(ManaCraft.MODID + ":MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
                             durability * 20, 6.5f, 3.5f, enchantability));
 
     public static class ItemManaSword extends ItemSword implements IItemManaDamagable {

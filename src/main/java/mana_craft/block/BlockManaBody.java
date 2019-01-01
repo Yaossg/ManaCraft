@@ -17,7 +17,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.math.BufferedRandom;
 
 import java.util.Random;
 

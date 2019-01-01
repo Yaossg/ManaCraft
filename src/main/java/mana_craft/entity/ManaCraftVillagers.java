@@ -1,12 +1,10 @@
 package mana_craft.entity;
 
-import mana_craft.ManaCraft;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.village.MerchantRecipe;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import static mana_craft.block.ManaCraftBlocks.*;

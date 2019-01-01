@@ -4,7 +4,6 @@ import mana_craft.ManaCraft;
 import mana_craft.entity.EntityManaBall;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemPotion;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;

@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import mana_craft.ManaCraft;
 import mana_craft.api.registry.MBFuel;
 import mana_craft.api.registry.MPRecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -24,7 +25,11 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static mana_craft.api.registry.IManaCraftRegistries.*;
+import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
+import static mana_craft.api.registry.IManaCraftRegistries.MP_RECIPES;
+import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.item.ManaCraftItems.*;
+import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 
 public class ManaCraftRecipes {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
@@ -99,5 +104,11 @@ public class ManaCraftRecipes {
                 ManaCraft.logger.error("Unexpected Exception: ", e);
             }
         });
+    }
+
+    public static void addSmelt() {
+        addSmelting(mana_ore, new ItemStack(mana, 4), 0.3f);
+        addSmelting(mana_ingot_ore, new ItemStack(mana_ingot), 0.4f);
+        addSmelting(mana_block, new ItemStack(mana_ball, 2), 0.2f);
     }
 }

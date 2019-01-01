@@ -1,6 +1,5 @@
 package mana_craft.potion;
 
-import mana_craft.ManaCraft;
 import mana_craft.block.ManaCraftBlocks;
 import mana_craft.item.ManaCraftItems;
 import net.minecraft.init.Items;
@@ -9,9 +8,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import sausage_core.api.util.potion.PotionTypeModID;
 
 import static sausage_core.api.util.common.Conversions.To.item;

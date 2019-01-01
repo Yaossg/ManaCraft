@@ -35,8 +35,9 @@ public final class MBFuel implements Predicate<ItemStack>, Supplier<Ingredient> 
 
     public MBFuel(@Nonnull Ingredient ingredient, int level, int time) {
         checkNotNull(this.ingredient = ingredient);
-        checkArgument((this.level = level) > 0);
         checkArgument((this.time = time) > 0);
+        checkArgument(0 < level && level < 100);
+        this.level = level;
     }
 
     public static MBFuel parse(JsonContext context, JsonObject json) {

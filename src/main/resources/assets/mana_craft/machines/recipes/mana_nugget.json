@@ -4,11 +4,11 @@
 	"count": 3
   },{
     "item": "mana_craft:mana_ball",
-	"count": 2
+	"count": 4
   }],
   "output": {
     "item": "mana_craft:mana_nugget",
     "count": 3
   },
-  "work_time": 1200
+  "work_time": 680
 }

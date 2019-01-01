@@ -1,17 +1,14 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
-import mana_craft.config.ManaCraftConfig;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
-import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.registry.IBRegistryManager;
 import sausage_core.api.util.registry.SoundRegistryManager;
 
@@ -20,7 +17,7 @@ import java.util.List;
 
 import static mana_craft.item.ItemManaTools.*;
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
-import static sausage_core.api.util.common.SausageUtils.*;
+import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 @ObjectHolder(ManaCraft.MODID)
 public class ManaCraftItems {

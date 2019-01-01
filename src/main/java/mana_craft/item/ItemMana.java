@@ -1,7 +1,6 @@
 package mana_craft.item;
 
 import mana_craft.block.ManaCraftBlocks;
-import mana_craft.config.ManaCraftConfig;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;

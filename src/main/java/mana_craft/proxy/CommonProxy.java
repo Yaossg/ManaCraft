@@ -15,12 +15,7 @@ import mana_craft.tile.TileManaBooster;
 import mana_craft.tile.TileManaProducer;
 import mana_craft.world.biome.ManaCraftBiomes;
 import mana_craft.world.gen.ManaCraftWorldGens;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPortal;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -28,11 +23,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.inventory.IEnumGUIHandler;
 
-import javax.annotation.Nonnull;
-
-import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.block.ManaCraftBlocks.mana_glass;
 import static mana_craft.item.ManaCraftItems.*;
-import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
 public class CommonProxy {
@@ -50,14 +42,7 @@ public class CommonProxy {
         registerOre("dyeLightBlue", blue_shit);
         registerOre("blockGlass", mana_glass);
         registerOre("blockGlassHardened", mana_glass);
-        registerOre("gemEmerald", mana_emerald);
         registerOre("record", mana_record);
-    }
-
-    static void addSmelt() {
-        addSmelting(mana_ore, new ItemStack(mana, 4), 0.3f);
-        addSmelting(mana_ingot_ore, new ItemStack(mana_ingot), 0.4f);
-        addSmelting(mana_block, new ItemStack(mana_ball), 0.2f);
     }
 
     static void misc() {
@@ -80,7 +65,7 @@ public class CommonProxy {
             ManaCraftPotions.init();
         ManaCraftBiomes.init();
         addOre();
-        addSmelt();
+        ManaCraftRecipes.addSmelt();
         misc();
     }
 

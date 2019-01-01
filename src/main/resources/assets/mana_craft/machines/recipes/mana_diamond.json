@@ -6,7 +6,8 @@
 	"count": 64
   }],
   "output": {
-    "item": "mana_craft:mana_diamond"
+    "item": "mana_craft:mana_diamond",
+    "count": 2
   },
-  "work_time": 16000
+  "work_time": 12000
 }

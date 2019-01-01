@@ -5,7 +5,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.fml.common.Loader;
 import sausage_core.api.util.inventory.GUIContainerBase;
 import sausage_core.api.util.inventory.GUIHelper;
 
