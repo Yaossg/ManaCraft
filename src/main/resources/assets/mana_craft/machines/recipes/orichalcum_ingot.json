@@ -6,7 +6,7 @@
 	"count": 10
   }],
   "output": {
-    "item": "mana_craft:mana_ingot"
+    "item": "mana_craft:orichalcum_ingot"
   },
   "work_time": 6000
 }

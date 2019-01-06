@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import sausage_core.api.util.common.IDefaultSpecialArmor;
+import sausage_core.api.core.common.IDefaultSpecialArmor;
 
 import javax.annotation.Nonnull;
 import java.util.Random;

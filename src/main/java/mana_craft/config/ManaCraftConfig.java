@@ -135,21 +135,21 @@ public class ManaCraftConfig {
         @RangeInt(min = 0, max = 16)
         public static int timesManaOre = 3;
 
-        @Comment("max size of a Mana Ingot Ore vein")
-        @LangKey("mana_craft.ore_gens.general.sizeManaIngotOre")
+        @Comment("max size of a Orichalcum Ore vein")
+        @LangKey("mana_craft.ore_gens.general.sizeOrichalcumOre")
         @RangeInt(min = 0, max = 40)
         @RequiresMcRestart
-        public static int sizeManaIngotOre = 10;
+        public static int sizeOrichalcumOre = 10;
 
-        @Comment("max height of Mana Ingot Ores veins")
-        @LangKey("mana_craft.ore_gens.general.heightManaIngotOre")
+        @Comment("max height of Mana Orichalcum veins")
+        @LangKey("mana_craft.ore_gens.general.heightOrichalcumOre")
         @RangeInt(min = 0, max = 256)
-        public static int heightManaIngotOre = 24;
+        public static int heightOrichalcumOre = 24;
 
-        @Comment("times of generation of Mana Ingot Ore veins per chunk")
-        @LangKey("mana_craft.ore_gens.general.timesManaIngotOre")
+        @Comment("times of generation of Orichalcum Ore veins per chunk")
+        @LangKey("mana_craft.ore_gens.general.timesOrichalcumOre")
         @RangeInt(min = 0, max = 16)
-        public static int timesManaIngotOre = 1;
+        public static int timesOrichalcumOre = 1;
 
         @Comment({"Change of generation of mixture veins",
                 "3.6 means 60% 4 times and 40% 3 times"})

@@ -20,10 +20,12 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import sausage_core.api.core.ienum.IEnumGUIHandler;
 import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.inventory.IEnumGUIHandler;
 
 import static mana_craft.block.ManaCraftBlocks.mana_glass;
+import static mana_craft.block.ManaCraftBlocks.orichalcum_block;
+import static mana_craft.block.ManaCraftBlocks.orichalcum_ore;
 import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
@@ -39,6 +41,10 @@ public class CommonProxy {
 
     static void addOre() {
         registerOre("dye", blue_shit);
+        registerOre("oreOrichalcum", orichalcum_ore);
+        registerOre("blockOrichalcum", orichalcum_block);
+        registerOre("ingotOrichalcum", orichalcum_ingot);
+        registerOre("nuggetOrichalcum", orichalcum_nugget);
         registerOre("dyeLightBlue", blue_shit);
         registerOre("blockGlass", mana_glass);
         registerOre("blockGlassHardened", mana_glass);
@@ -48,8 +54,8 @@ public class CommonProxy {
     static void misc() {
         BlockManaHead.init();
 
-        ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(mana_ingot));
-        ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(mana_ingot));
+        ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(orichalcum_ingot));
+        ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(orichalcum_ingot));
 
         SausageUtils.registerTileEntities(ManaCraft.logger, ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
         TileManaProducer.init();

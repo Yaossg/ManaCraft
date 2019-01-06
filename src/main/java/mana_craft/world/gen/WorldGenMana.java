@@ -20,19 +20,19 @@ import static sausage_core.api.util.world.gen.WorldGenUtils.randomPos;
 
 class WorldGenMana implements IWorldGenerator {
     private static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.mana_ore.getDefaultState(), sizeManaOre);
-    private static final WorldGenMinable MANA_INGOT = new WorldGenMinable(ManaCraftBlocks.mana_ingot_ore.getDefaultState(), sizeManaIngotOre);
+    private static final WorldGenMinable ORICHALCUM = new WorldGenMinable(ManaCraftBlocks.orichalcum_ore.getDefaultState(), sizeOrichalcumOre);
     private void generate(Random random, int chunkX, int chunkZ, World world) {
         for (int i = 0; i < timesManaOre; ++i)
             MANA.generate(world, random, randomPos(random, chunkX, chunkZ, 0, heightManaOre));
-        for (int i = 0; i < timesManaIngotOre; ++i)
-            MANA_INGOT.generate(world, random, randomPos(random, chunkX, chunkZ, 0, heightManaIngotOre));
+        for (int i = 0; i < timesOrichalcumOre; ++i)
+            ORICHALCUM.generate(world, random, randomPos(random, chunkX, chunkZ, 0, heightOrichalcumOre));
         float chance = mixtureChance;
         do
             if(random.nextFloat() < chance) {
                 BlockPos genPos = randomPos(random, chunkX, chunkZ, 0, heightMixture);
                 for (int i = 0; i < 4; ++i) {
                     MANA.generate(world, random, genPos);
-                    MANA_INGOT.generate(world, random, genPos);
+                    ORICHALCUM.generate(world, random, genPos);
                 }
             }
         while (--chance > 0);

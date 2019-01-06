@@ -34,7 +34,7 @@
         },
         {
           "type": "item",
-          "name": "mana_craft:mana_ingot",
+          "name": "mana_craft:orichalcum_ingot",
           "functions": [
             {
               "function": "set_count",

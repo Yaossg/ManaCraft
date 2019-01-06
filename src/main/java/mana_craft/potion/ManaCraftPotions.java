@@ -9,7 +9,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.potion.PotionType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import sausage_core.api.util.potion.PotionTypeModID;
+import sausage_core.api.core.common.PotionTypeModID;
 
 import static sausage_core.api.util.common.Conversions.To.item;
 

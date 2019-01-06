@@ -2,11 +2,12 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "mana_craft:mana_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotOrichalcum"
     }
   ],
   "result": {
-    "item": "mana_craft:mana_nugget",
+    "item": "mana_craft:orichalcum_nugget",
     "count": 9
   }
 }

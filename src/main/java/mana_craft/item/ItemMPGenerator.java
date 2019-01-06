@@ -22,10 +22,10 @@ public class ItemMPGenerator extends Item {
         worldIn.setBlockState(root.add(0, 0, 1), mana_block.getDefaultState());
         worldIn.setBlockState(root.add(-1, 0, 0), mana_block.getDefaultState());
         worldIn.setBlockState(root.add(0, 0, -1), mana_block.getDefaultState());
-        worldIn.setBlockState(root.add(1, 0, 1), mana_ingot_block.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 0, 1), mana_ingot_block.getDefaultState());
-        worldIn.setBlockState(root.add(1, 0, -1), mana_ingot_block.getDefaultState());
-        worldIn.setBlockState(root.add(-1, 0, -1), mana_ingot_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 0, 1), orichalcum_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 0, 1), orichalcum_block.getDefaultState());
+        worldIn.setBlockState(root.add(1, 0, -1), orichalcum_block.getDefaultState());
+        worldIn.setBlockState(root.add(-1, 0, -1), orichalcum_block.getDefaultState());
         worldIn.setBlockState(root.add(1, 1, 1), mana_block.getDefaultState());
         worldIn.setBlockState(root.add(-1, 1, 1), mana_block.getDefaultState());
         worldIn.setBlockState(root.add(1, 1, -1), mana_block.getDefaultState());

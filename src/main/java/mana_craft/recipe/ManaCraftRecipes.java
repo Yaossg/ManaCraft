@@ -108,7 +108,7 @@ public class ManaCraftRecipes {
 
     public static void addSmelt() {
         addSmelting(mana_ore, new ItemStack(mana, 4), 0.3f);
-        addSmelting(mana_ingot_ore, new ItemStack(mana_ingot), 0.4f);
+        addSmelting(orichalcum_ore, new ItemStack(orichalcum_ingot), 0.4f);
         addSmelting(mana_block, new ItemStack(mana_ball, 2), 0.2f);
     }
 }

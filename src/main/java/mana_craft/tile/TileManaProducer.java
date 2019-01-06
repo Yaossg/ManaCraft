@@ -13,14 +13,20 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import sausage_core.api.core.tile.IMachineLogic;
+import sausage_core.api.core.tile.ITileDropItems;
+import sausage_core.api.core.tile.TileBase;
+import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.item.ItemStackComparators;
 import sausage_core.api.util.item.ItemStackMatches;
 import sausage_core.api.util.item.PortableItemStackHandler;
 import sausage_core.api.util.item.SingleItemStackHandler;
-import sausage_core.api.util.tile.IMachineLogic;
-import sausage_core.api.util.tile.ITileDropItems;
-import sausage_core.api.util.tile.TileBase;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import static mana_craft.api.registry.IManaCraftRegistries.MP_RECIPES;
 import static mana_craft.block.BlockManaProducer.WORKING;
@@ -43,8 +49,8 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     public SingleItemStackHandler output = new SingleItemStackHandler();
 
     @Override
-    public ItemStackHandler[] getItemStackHandlers() {
-        return new ItemStackHandler[] {input, output};
+    public IItemHandler[] getItemStackHandlers() {
+        return new IItemHandler[] {input, output};
     }
 
     @Override
@@ -65,6 +71,71 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
         return super.writeToNBT(compound);
     }
 
+    /*
+    * Even if there are always blocks around
+    * Provide Capability to implement inter-IO
+    * */
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing side) {
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability && side != null
+                || super.hasCapability(capability, side);
+    }
+
+    /*
+    * Mapper for each slot of input
+    * Maps to each horizontal side
+    * */
+    class SlotMapper implements IItemHandler {
+        private int slot;
+
+        SlotMapper(int slot) {
+            this.slot = slot;
+        }
+
+        @Override
+        public int getSlots() {
+            return 1;
+        }
+
+        @Nonnull
+        @Override
+        public ItemStack getStackInSlot(int slot) {
+            return input.getStackInSlot(this.slot);
+        }
+
+        @Nonnull
+        @Override
+        public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+            return input.insertItem(this.slot, stack, simulate);
+        }
+
+        @Nonnull
+        @Override
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return input.extractItem(this.slot, amount, simulate);
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return input.getSlotLimit(this.slot);
+        }
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
+        if(side != null) switch(side) {
+            case DOWN:
+                return SausageUtils.rawtype(output);
+            case UP:
+                return SausageUtils.rawtype(input);
+            default:
+                return SausageUtils.rawtype(new SlotMapper(side.getHorizontalIndex()));
+        }
+        return super.getCapability(capability, side);
+    }
+
     private static BlockPattern pattern;
     public static void init() {
         pattern = FactoryBlockPattern.start()
@@ -77,7 +148,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
                 .where('^', hasState(forBlock(mana_lantern)))
                 .where('#', hasState(forBlock(mana_block)))
                 .where('!', hasState(forBlock(mana_glass)))
-                .where('*', hasState(forBlock(mana_ingot_block)))
+                .where('*', hasState(forBlock(orichalcum_block)))
                 .where('O', TileManaProducer::core)
                 .build();
     }

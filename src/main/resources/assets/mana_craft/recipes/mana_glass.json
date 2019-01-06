@@ -13,7 +13,8 @@
       "item": "minecraft:glass"
     },
     "X": {
-      "item": "mana_craft:mana_nugget"
+      "type": "forge:ore_dict",
+      "ore": "nuggetOrichalcum"
     }
   },
   "result": {

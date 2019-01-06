@@ -9,6 +9,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import sausage_core.api.util.item.IngredientStack;
 
+import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -31,7 +32,7 @@ public final class MPRecipe {
         return output.copy();
     }
 
-    public MPRecipe(int work_time, ItemStack output, IngredientStack... input) {
+    public MPRecipe(int work_time, @Nonnull ItemStack output, @Nonnull IngredientStack... input) {
         checkNotNull(this.output = output);
         checkNotNull(this.input = input);
         checkArgument(input.length > 0);

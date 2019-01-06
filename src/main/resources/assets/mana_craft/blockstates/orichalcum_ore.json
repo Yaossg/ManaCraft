@@ -1,7 +1,7 @@
 {
   "variants": {
     "normal": {
-      "model": "mana_craft:mana_ingot_ore"
+      "model": "mana_craft:orichalcum_ore"
     }
   }
 }

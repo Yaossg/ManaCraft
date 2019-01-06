@@ -3,7 +3,7 @@ package mana_craft.inventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import sausage_core.api.util.inventory.IEnumGUIHandler;
+import sausage_core.api.core.ienum.IEnumGUIHandler;
 
 import javax.annotation.Nonnull;
 

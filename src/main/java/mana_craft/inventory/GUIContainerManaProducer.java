@@ -5,8 +5,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
-import sausage_core.api.util.inventory.GUIContainerBase;
-import sausage_core.api.util.inventory.GUIHelper;
+import sausage_core.api.core.inventory.GUIContainerBase;
+import sausage_core.api.util.client.GUIHelper;
 
 import java.awt.*;
 

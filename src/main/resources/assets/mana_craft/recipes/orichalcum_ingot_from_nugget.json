@@ -7,10 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "mana_craft:mana_nugget"
+      "type": "forge:ore_dict",
+      "ore": "nuggetOrichalcum"
     }
   },
   "result": {
-    "item": "mana_craft:mana_ingot"
+    "item": "mana_craft:orichalcum_ingot"
   }
 }

@@ -5,7 +5,8 @@
     "item": "mana_craft:mana_ball",
 	"count": 3
   },{
-    "item": "mana_craft:mana_nugget",
+    "type": "forge:ore_dict",
+    "ore": "nuggetOrichalcum",
     "count": 3
   }],
   "output": {

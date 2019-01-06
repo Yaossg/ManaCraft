@@ -10,7 +10,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
-import sausage_core.api.util.common.IDefaultSpecialArmor;
+import sausage_core.api.core.common.IDefaultSpecialArmor;
 
 import javax.annotation.Nonnull;
 

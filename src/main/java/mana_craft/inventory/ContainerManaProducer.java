@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
-import sausage_core.api.util.inventory.ContainerBase;
+import sausage_core.api.core.inventory.ContainerBase;
 
 public class ContainerManaProducer extends ContainerBase<TileManaProducer> {
     public int progress;

@@ -7,10 +7,11 @@
   ],
   "key": {
     "X": {
-      "item": "mana_craft:mana_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotOrichalcum"
     }
   },
   "result": {
-    "item": "mana_craft:mana_ingot_block"
+    "item": "mana_craft:orichalcum_block"
   }
 }

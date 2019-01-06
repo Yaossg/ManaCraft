@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class ManaBoostable<TE extends TileEntity> {
+public final class ManaBoostable<TE extends TileEntity> {
     public final Class<TE> clazz;
     public final Predicate<TE> canBoost;
     public final Consumer<TE> boost;
@@ -17,5 +17,4 @@ public class ManaBoostable<TE extends TileEntity> {
         this.canBoost = canBoost;
         this.boost = boost;
     }
-
 }

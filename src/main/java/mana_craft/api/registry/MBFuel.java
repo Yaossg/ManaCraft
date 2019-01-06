@@ -17,7 +17,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Immutable
 public final class MBFuel implements Predicate<ItemStack>, Supplier<Ingredient> {
-    @Nonnull
     final Ingredient ingredient;
     public final int level;
     public final int time;

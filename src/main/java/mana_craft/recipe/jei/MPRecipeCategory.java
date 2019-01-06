@@ -22,7 +22,7 @@ public class MPRecipeCategory implements IRecipeCategory<MPRecipeWrapper> {
     private static final int outputID = -1;
     private final IDrawable background, icon;
     public MPRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createDrawable(texture, 46, 27, 85, 35);
+        background = guiHelper.createDrawable(texture, 46, 27, 86, 35);
         icon = guiHelper.createDrawableIngredient(new ItemStack(ManaCraftBlocks.mana_producer));
     }
 

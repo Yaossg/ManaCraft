@@ -1,0 +1,8 @@
+{
+  "fuel": {
+    "type": "forge:ore_dict",
+    "ore": "blockOrichalcum"
+  },
+  "level": 50,
+  "time": 150000
+}

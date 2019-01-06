@@ -3,7 +3,8 @@
     "item": "mana_craft:mana_rod",
     "count": 2
   },{
-    "item": "mana_craft:mana_ingot",
+    "type": "forge:ore_dict",
+    "ore": "ingotOrichalcum",
     "count": 3
   }],
   "output": {

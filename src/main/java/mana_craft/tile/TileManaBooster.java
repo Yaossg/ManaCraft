@@ -11,12 +11,12 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.IItemHandler;
+import sausage_core.api.core.tile.IMachineLogic;
+import sausage_core.api.core.tile.ITileDropItems;
+import sausage_core.api.core.tile.TileBase;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.item.SingleItemStackHandler;
-import sausage_core.api.util.tile.IMachineLogic;
-import sausage_core.api.util.tile.ITileDropItems;
-import sausage_core.api.util.tile.TileBase;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -37,8 +37,8 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     public SingleItemStackHandler handler = new SingleItemStackHandler();
 
     @Override
-    public ItemStackHandler[] getItemStackHandlers() {
-        return new ItemStackHandler[] {handler};
+    public IItemHandler[] getItemStackHandlers() {
+        return new IItemHandler[] {handler};
     }
 
     @Override
@@ -60,16 +60,16 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing side) {
         return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability
-                && facing != null && facing.getAxis().isHorizontal()
-                || super.hasCapability(capability, facing);
+                && side != null && side.getAxis().isHorizontal()
+                || super.hasCapability(capability, side);
     }
 
     @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if(hasCapability(capability, facing)) return SausageUtils.rawtype(handler);
-        return super.getCapability(capability, facing);
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
+        if(hasCapability(capability, side)) return SausageUtils.rawtype(handler);
+        return super.getCapability(capability, side);
     }
 
     static {

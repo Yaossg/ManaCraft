@@ -47,7 +47,7 @@ public class ManaCraftVillagers {
     }
 
     static final ITradeList tradeMana = item2gem(new ItemStack(mana), 13, 17);
-    static final ITradeList tradeIngot = item2gem(new ItemStack(mana_ingot), 4, 6);
+    static final ITradeList tradeIngot = item2gem(new ItemStack(orichalcum_ingot), 4, 6);
     static final ITradeList tradeDiamond = item2gem(new ItemStack(mana_diamond), -11, -4);
     static final ITradeList tradeShears = gem2item(new ItemStack(mana_shears), 4, 5);
 

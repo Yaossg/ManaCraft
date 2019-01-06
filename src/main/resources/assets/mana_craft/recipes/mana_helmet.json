@@ -6,7 +6,8 @@
   ],
   "key": {
     "X": {
-      "item": "mana_craft:mana_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotOrichalcum"
     },
     "S": {
       "item" : "mana_craft:mana_shears"

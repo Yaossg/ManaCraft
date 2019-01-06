@@ -61,10 +61,10 @@ public class StructureVillageMP extends Village {
         setBlockState(worldIn, manaBlock, 3, 1, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 4, 1, 3, boundingBox);
         setBlockState(worldIn, manaBlock, 3, 1, 4, boundingBox);
-        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 2, 1, 2, boundingBox);
-        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 4, 1, 2, boundingBox);
-        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 2, 1, 4, boundingBox);
-        setBlockState(worldIn, mana_ingot_block.getDefaultState(), 4, 1, 4, boundingBox);
+        setBlockState(worldIn, orichalcum_block.getDefaultState(), 2, 1, 2, boundingBox);
+        setBlockState(worldIn, orichalcum_block.getDefaultState(), 4, 1, 2, boundingBox);
+        setBlockState(worldIn, orichalcum_block.getDefaultState(), 2, 1, 4, boundingBox);
+        setBlockState(worldIn, orichalcum_block.getDefaultState(), 4, 1, 4, boundingBox);
         setBlockState(worldIn, manaBlock, 2, 2, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 4, 2, 2, boundingBox);
         setBlockState(worldIn, manaBlock, 2, 2, 4, boundingBox);
