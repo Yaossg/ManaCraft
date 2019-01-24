@@ -75,7 +75,6 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     * Even if there are always blocks around
     * Provide Capability to implement inter-IO
     * */
-
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing side) {
         return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability && side != null

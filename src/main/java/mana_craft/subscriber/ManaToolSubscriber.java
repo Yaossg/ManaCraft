@@ -19,7 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import sausage_core.api.util.common.Explosions;
+import sausage_core.api.util.explosion.ExExplosion;
 import sausage_core.api.util.nbt.NBTs;
 
 import java.util.Random;
@@ -52,8 +52,16 @@ public class ManaToolSubscriber {
                 item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
                 item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(I18n.format("message.mana_craft.hoe")));
                 world.setBlockToAir(event.getPos());
-                Explosions.createToApply(world, event.getEntity(), event.getPos(), 1.25f, true, false);
-                event.getEntityPlayer().addExperience(10);
+                ExExplosion.builder(world)
+                        .by(event.getEntity())
+                        .at(event.getPos())
+                        .sizeOf(1.5f)
+                        .causesFire()
+                        .hurtEntity()
+                        .spawnParticles()
+                        .build()
+                        .apply();
+                event.getEntityPlayer().addExperience(15);
                 ManaCraft.giveAdvancement(event.getEntityPlayer(), "final_hoe");
                 event.setResult(Event.Result.ALLOW);
             }

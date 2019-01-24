@@ -36,7 +36,7 @@ public class ManaCraftJEIPlugin implements IModPlugin {
         IRecipeTransferRegistry transfer = registry.getRecipeTransferRegistry();
         transfer.addRecipeTransferHandler(ContainerManaProducer.class, MPRecipeCategory.UID, 0, 4, 5, 36);
         transfer.addRecipeTransferHandler(ContainerManaBooster.class, MBFuelCategory.UID, 0, 1, 1, 36);
-
+        //TODO more info
         registry.addIngredientInfo(new ItemStack(ManaCraftBlocks.mana_obsidian), ItemStack.class, I18n.format("info.mana_craft.mana_obsidian"));
 
     }

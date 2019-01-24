@@ -33,7 +33,7 @@ public class ItemManaArmor extends ItemArmor implements IDefaultSpecialArmor, II
     }
 
     @Override
-    public void onArmorBroken(EntityLivingBase entity, @Nonnull ItemStack stack, DamageSource source, int damage, int slot) {
+    public void onArmorBroken(EntityLivingBase entity, @Nonnull ItemStack stack, DamageSource source, int damage, EnumArmorType type) {
         onArmorBroken(entity, stack);
         entity.renderBrokenItemStack(stack);
         stack.shrink(1);

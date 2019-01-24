@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static mana_craft.item.ItemManaTools.*;
-import static mana_craft.item.ManaCraftItems.Manager.*;
+import static mana_craft.item.ManaCraftItems.Manager.manager;
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
 import static sausage_core.api.util.common.SausageUtils.nonnull;
 
@@ -24,6 +24,9 @@ import static sausage_core.api.util.common.SausageUtils.nonnull;
 public class ManaCraftItems {
     public static final Item blue_shit = nonnull();
     public static final Item mana = nonnull();
+    public static final Item orichalcum_dust = nonnull();
+    public static final Item orichalcum_gear = nonnull();
+    public static final Item orichalcum_plate = nonnull();
     public static final Item orichalcum_ingot = nonnull();
     public static final Item orichalcum_nugget = nonnull();
     public static final Item mana_coal = nonnull();
@@ -98,6 +101,9 @@ public class ManaCraftItems {
         manager.addItem(new ItemRecord("mana",
                 new SoundRegistryManager(ManaCraft.MODID).addSound("record")) {}, "mana_record");
         manager.addItem("mana_rod");
+        manager.addItem("orichalcum_dust");
+        manager.addItem("orichalcum_plate");
+        manager.addItem("orichalcum_gear");
         manager.registerItems();
     }
 

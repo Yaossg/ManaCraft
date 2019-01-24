@@ -36,10 +36,10 @@ public class BlockManaProducer extends BlockContainer {
     public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
     public static final PropertyBool WORKING = PropertyBool.create("working");
 
-    public static class SavedData extends WorldSavedData {
+    public static class Cache extends WorldSavedData {
         public List<DimensionalBlockPos> list = NonNullList.create();
 
-        public SavedData(String name) {
+        public Cache(String name) {
             super(name);
         }
 
@@ -66,19 +66,19 @@ public class BlockManaProducer extends BlockContainer {
             return compound;
         }
 
-        public static SavedData get(World world) {
-            WorldSavedData data = world.getPerWorldStorage().getOrLoadData(SavedData.class, "ManaProducers");
+        public static Cache get(World world) {
+            WorldSavedData data = world.getPerWorldStorage().getOrLoadData(Cache.class, "ManaProducers");
             if(data == null) {
-                data = new SavedData("ManaProducers");
+                data = new Cache("ManaProducers");
                 world.getPerWorldStorage().setData("ManaProducers", data);
             }
-            return (SavedData) data;
+            return (Cache) data;
         }
     }
 
     BlockManaProducer() {
         super(Material.IRON, MapColor.PURPLE);
-        setHardness(5);
+        setHardness(11);
         setLightLevel(SausageUtils.lightLevelOf(11));
         setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(WORKING, Boolean.FALSE));
@@ -125,14 +125,14 @@ public class BlockManaProducer extends BlockContainer {
 
     @Override
     public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        SavedData.get(worldIn).add(new DimensionalBlockPos(worldIn, pos));
+        Cache.get(worldIn).add(new DimensionalBlockPos(worldIn, pos));
         if(TileManaProducer.checkCharged(worldIn, pos))
             ManaCraft.giveAdvancement(placer, "energize");
     }
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        SavedData.get(worldIn).remove(new DimensionalBlockPos(worldIn, pos));
+        Cache.get(worldIn).remove(new DimensionalBlockPos(worldIn, pos));
         ITileDropItems.dropAll(worldIn.getTileEntity(pos));
         super.breakBlock(worldIn, pos, state);
     }

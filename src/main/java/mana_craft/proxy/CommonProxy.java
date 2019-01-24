@@ -23,9 +23,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sausage_core.api.core.ienum.IEnumGUIHandler;
 import sausage_core.api.util.common.SausageUtils;
 
-import static mana_craft.block.ManaCraftBlocks.mana_glass;
-import static mana_craft.block.ManaCraftBlocks.orichalcum_block;
-import static mana_craft.block.ManaCraftBlocks.orichalcum_ore;
+import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
@@ -44,6 +42,9 @@ public class CommonProxy {
         registerOre("oreOrichalcum", orichalcum_ore);
         registerOre("blockOrichalcum", orichalcum_block);
         registerOre("ingotOrichalcum", orichalcum_ingot);
+        registerOre("dustOrichalcum", orichalcum_dust);
+        registerOre("plateOrichalcum", orichalcum_plate);
+        registerOre("gearOrichalcum", orichalcum_gear);
         registerOre("nuggetOrichalcum", orichalcum_nugget);
         registerOre("dyeLightBlue", blue_shit);
         registerOre("blockGlass", mana_glass);

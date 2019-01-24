@@ -4,12 +4,11 @@ import mana_craft.ManaCraft;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import sausage_core.api.util.registry.IBRegistryManager;
 
-import static mana_craft.block.ManaCraftBlocks.Manager.*;
+import static mana_craft.block.ManaCraftBlocks.Manager.addBlock;
+import static mana_craft.block.ManaCraftBlocks.Manager.manager;
 import static net.minecraft.item.Item.ToolMaterial;
 import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
 import static sausage_core.api.util.common.SausageUtils.nonnull;
@@ -32,29 +31,21 @@ public class ManaCraftBlocks {
 
     public interface Manager {
         IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
-        static Block addBlock(Material material, ToolMaterial tool, String name) {
-            return manager.addBlock(new Block(material) {{
+        static Block addBlock(Material material, MapColor mapColor, ToolMaterial tool, String name) {
+            return manager.addBlock(new Block(material, mapColor) {{
                 setHarvestLevel("pickaxe", tool.getHarvestLevel());
             }}, name);
         }
 
     }
     public static void init() {
-        addBlock(Material.ROCK, ToolMaterial.STONE, "mana_block")
+        addBlock(Material.ROCK, MapColor.PURPLE, ToolMaterial.STONE, "mana_block")
                 .setHardness(5).setLightLevel(lightLevelOf(7));
-        manager.addBlock(new Block(Material.ROCK) {
-            { setHarvestLevel("pickaxe", ToolMaterial.IRON.getHarvestLevel()); }
+        manager.addBlock(new BlockOrichalcum(), "orichalcum_block");
 
-            @Override
-            public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
-                return true;
-            }
-
-        }, "orichalcum_block").setHardness(6).setLightLevel(lightLevelOf(10));
-
-        addBlock(Material.ROCK, ToolMaterial.IRON, "orichalcum_ore")
+        addBlock(Material.ROCK, MapColor.STONE, ToolMaterial.IRON, "orichalcum_ore")
                 .setHardness(4).setLightLevel(lightLevelOf(5));
-        addBlock(Material.IRON, ToolMaterial.IRON, "machine_frame")
+        addBlock(Material.IRON, MapColor.PURPLE, ToolMaterial.IRON, "machine_frame")
                 .setHardness(5).setLightLevel(lightLevelOf(11));
         manager.addBlock(new BlockManaGlass(), "mana_glass")
                 .setHardness(1).setLightLevel(lightLevelOf(9));

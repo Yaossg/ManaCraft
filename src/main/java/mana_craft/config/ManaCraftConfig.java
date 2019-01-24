@@ -10,19 +10,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME)
 public class ManaCraftConfig {
-    @Comment("ManaCraft's explosion size (set this to 0 to disable)")
-    @RangeInt(min = 0, max = 100)
-    @LangKey("mana_craft.general.explosionSize")
-    public static int explosionSize = 20;
-
-    @Comment("can the explosion damage terrain")
-    @LangKey("mana_craft.general.damageTerrain")
-    public static boolean damageTerrain = false;
-
-    @Comment("can the explosion cause Fire")
-    @LangKey("mana_craft.general.causeFire")
-    public static boolean causeFire = false;
-
     @Comment("radius of Mana Booster can boost")
     @RangeInt(min = 0, max = 10)
     @LangKey("mana_craft.general.boostRadius")
@@ -169,7 +156,7 @@ public class ManaCraftConfig {
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
             if(event.getModID().equals(ManaCraft.MODID))
-                ConfigManager.sync(event.getModID(), Type.INSTANCE);
+                ConfigManager.sync(ManaCraft.MODID, Type.INSTANCE);
         }
 
     }

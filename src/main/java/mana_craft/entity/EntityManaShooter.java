@@ -158,7 +158,7 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
     public void setSwingingArms(boolean swingingArms) {}
 
     public static class Render extends RenderLiving<EntityManaShooter> {
-        //copy from ModelCreeper excluding creeper's armor
+
         static class Model extends ModelBase {
             public ModelRenderer head = new ModelRenderer(this, 0, 0);
             public ModelRenderer body = new ModelRenderer(this, 16, 16);

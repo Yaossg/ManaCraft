@@ -14,7 +14,7 @@ import java.util.Random;
 public class BlockManaOre extends Block {
     BlockManaOre() {
         super(Material.ROCK);
-        setHardness(3);
+        setHardness(2.5f);
         setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
         setLightLevel(SausageUtils.lightLevelOf(7));
     }

@@ -1,7 +1,6 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
-import mana_craft.config.ManaCraftConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -17,7 +16,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import sausage_core.api.util.common.Explosions;
+import sausage_core.api.util.explosion.ExExplosion;
 
 import javax.annotation.Nullable;
 
@@ -46,7 +45,7 @@ public class ItemManaApple extends ItemFood {
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
         if(target instanceof EntityPig) {
             EntityPig pig = (EntityPig) target;
-            playerIn.attackEntityFrom(new DamageSource("byPig").setDifficultyScaled().setExplosion().setMagicDamage().setFireDamage(), 32);
+            playerIn.attackEntityFrom(new DamageSource(ManaCraft.MODID + ".by_pig").setDifficultyScaled().setExplosion().setMagicDamage().setFireDamage(), 32);
             ItemManaApple.appleExplosion(playerIn, pig);
             stack.shrink(1);
             return true;
@@ -59,16 +58,21 @@ public class ItemManaApple extends ItemFood {
             playerIn.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.mana_craft.pig"));
             ManaCraft.giveAdvancement(playerIn, "pig_bomb");
         }
-        if(ManaCraftConfig.explosionSize > 0) {
-            pig.setDead();
-            Explosions.createToApply(pig.world, pig, pig.getPosition(), ManaCraftConfig.explosionSize, ManaCraftConfig.causeFire, ManaCraftConfig.damageTerrain);
-            float step = (float) Math.PI / ManaCraftConfig.explosionSize;
-            for (float f = 0; f <= 2 * Math.PI; f += step) {
-                pig.world.spawnEntity(new EntityLightningBolt(pig.world, pig.posX + ManaCraftConfig.explosionSize * MathHelper.cos(f), pig.posY, pig.posZ + ManaCraftConfig.explosionSize * MathHelper.sin(f), false));
-            }
-            if(!pig.world.isRemote)
-                InventoryHelper.spawnItemStack(pig.world, pig.posX, pig.posY, pig.posZ, new ItemStack(ManaCraftItems.mana_pork));
-        }
+        pig.setDead();
+        World world = pig.world;
+        ExExplosion.builder(world)
+                .by(pig)
+                .at(pig.getPosition())
+                .sizeOf(10)
+                .spawnParticles()
+                .build()
+                .apply();
+        float step = (float) Math.PI / 10;
+        for (float f = 0; f <= 2 * Math.PI; f += step)
+            world.spawnEntity(new EntityLightningBolt(world, pig.posX + 10 * MathHelper.cos(f), pig.posY, pig.posZ + 10 * MathHelper.sin(f), false));
+        if(!world.isRemote)
+            InventoryHelper.spawnItemStack(world, pig.posX, pig.posY, pig.posZ, new ItemStack(ManaCraftItems.mana_pork));
+
 
     }
 }

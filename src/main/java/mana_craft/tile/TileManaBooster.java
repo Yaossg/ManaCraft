@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 import static mana_craft.api.registry.IManaCraftRegistries.BOOSTABLES;
 import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
 import static mana_craft.block.BlockManaBooster.BURNING;
-import static mana_craft.block.BlockManaProducer.SavedData;
+import static mana_craft.block.BlockManaProducer.Cache;
 import static mana_craft.block.BlockManaProducer.WORKING;
 import static mana_craft.config.ManaCraftConfig.boostLimit;
 import static mana_craft.config.ManaCraftConfig.boostRadius;
@@ -101,7 +101,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     public boolean work() {
         times = 0;
         --burn_time;
-        for(TileManaProducer tile : SavedData.get(world).list.stream()
+        for(TileManaProducer tile : Cache.get(world).list.stream()
                 .filter(dp -> world.provider.getDimension() == dp.getDim())
                 .filter(dp -> pos.distanceSq(dp.getPos()) <= boostRadius * boostRadius)
                 .filter(dp -> dp.getPos().getY() > pos.getY())

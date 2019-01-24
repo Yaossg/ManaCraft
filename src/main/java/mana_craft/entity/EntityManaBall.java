@@ -16,7 +16,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import sausage_core.api.util.math.BufferedRandom;
 
-import static mana_craft.config.ManaCraftConfig.*;
+import static mana_craft.config.ManaCraftConfig.invokeChance;
+import static mana_craft.config.ManaCraftConfig.minSpeed;
 
 public class EntityManaBall extends EntityThrowable {
     public static final float lowVelocity = 0.45f;
@@ -80,7 +81,7 @@ public class EntityManaBall extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit instanceof EntityPig && explosionSize > 0 && invokeChance > random.nextFloat())
+        if(result.entityHit instanceof EntityPig && invokeChance > random.nextFloat())
             ItemManaApple.appleExplosion(thrower, (EntityPig) result.entityHit);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);

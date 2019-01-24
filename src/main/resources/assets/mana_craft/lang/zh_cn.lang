@@ -76,8 +76,6 @@ lingering_potion.effect.mana_craft.mana_evoker=滞留型魔能召唤者药水
 mana_craft.general.armor=盔甲防御值
 mana_craft.general.boostLimit=增益限制
 mana_craft.general.boostRadius=增益范围
-mana_craft.general.causeFire=燃起火焰
-mana_craft.general.damageTerrain=破坏地形
 mana_craft.general.delay=魔能制造器检查延时
 mana_craft.general.destroy=失活时自毁
 mana_craft.general.dropManaApple=掉落魔能苹果
@@ -85,7 +83,6 @@ mana_craft.general.dropManaChance=魔能掉落概率
 mana_craft.general.durability=魔能工具/武器/盔甲 耐久度
 mana_craft.general.enchantability=魔能工具/武器/盔甲 附魔能力
 mana_craft.general.enchanter=启用附魔师
-mana_craft.general.explosionSize=爆炸大小
 mana_craft.general.finalHoe=启用最终魔能锄头
 mana_craft.general.invokeChance=魔能调用概率
 mana_craft.general.loot=魔能战利品
@@ -125,3 +122,8 @@ tile.mana_craft.mana_producer.name=魔能制造器
 tooltip.mana_craft.emerald=享受你和村民的友谊！
 
 info.mana_craft.mana_obsidian=有几率通过将魔能扔进岩浆里来获得
+item.mana_craft.orichalcum_dust.name=山铜粉
+item.mana_craft.orichalcum_gear.name=山铜齿轮
+item.mana_craft.orichalcum_plate.name=山铜板
+
+death.attack.mana_craft.by_pig=%s被正被杀的猪杀了
