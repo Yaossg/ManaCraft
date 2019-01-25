@@ -10,7 +10,8 @@ import java.util.Random;
 class BlockManaGlass extends BlockGlass {
     BlockManaGlass() {
         super(Material.GLASS, false);
-        setHardness(0.4f);
+        setHardness(0.5f);
+        setResistance(1500);
         setSoundType(SoundType.GLASS);
         setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
     }

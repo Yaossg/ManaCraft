@@ -1,6 +1,7 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -12,7 +13,9 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
@@ -43,7 +46,7 @@ public class ItemManaApple extends ItemFood {
 
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-        if(target instanceof EntityPig) {
+        if(target instanceof EntityPig && atCorner(target)) {
             EntityPig pig = (EntityPig) target;
             playerIn.attackEntityFrom(new DamageSource(ManaCraft.MODID + ".by_pig").setDifficultyScaled().setExplosion().setMagicDamage().setFireDamage(), 32);
             ItemManaApple.appleExplosion(playerIn, pig);
@@ -51,6 +54,20 @@ public class ItemManaApple extends ItemFood {
             return true;
         }
         return false;
+    }
+
+    public static boolean atCorner(Entity entity) {
+        World world = entity.world;
+        BlockPos pos = entity.getPosition();
+        if(world.getBlockState(pos).getMaterial() != Material.AIR) return false;
+        int air4 = 0;
+        for(EnumFacing side : EnumFacing.HORIZONTALS)
+            if(world.getBlockState(pos.offset(side)).getMaterial() == Material.AIR) air4++;
+        if(air4 != 2) return false;
+        int air8 = 0;
+        for(EnumFacing side : EnumFacing.HORIZONTALS)
+            if(world.getBlockState(pos.offset(side).offset(side.rotateY())).getMaterial() == Material.AIR) air8++;
+        return air8 == 3;
     }
 
     public static void appleExplosion(@Nullable Entity playerIn, EntityPig pig) {
@@ -67,12 +84,10 @@ public class ItemManaApple extends ItemFood {
                 .spawnParticles()
                 .build()
                 .apply();
-        float step = (float) Math.PI / 10;
+        float step = (float) Math.PI / 8;
         for (float f = 0; f <= 2 * Math.PI; f += step)
             world.spawnEntity(new EntityLightningBolt(world, pig.posX + 10 * MathHelper.cos(f), pig.posY, pig.posZ + 10 * MathHelper.sin(f), false));
         if(!world.isRemote)
             InventoryHelper.spawnItemStack(world, pig.posX, pig.posY, pig.posZ, new ItemStack(ManaCraftItems.mana_pork));
-
-
     }
 }

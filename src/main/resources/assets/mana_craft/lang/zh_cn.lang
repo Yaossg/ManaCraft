@@ -103,7 +103,7 @@ mana_craft.ore_gens.general.timesOrichalcumOre=山铜矿生成次数
 mana_craft.ore_gens.general.timesManaOre=魔能矿生成次数
 message.mana_craft.failed=生成失败:魔能制造器被阻挡
 message.mana_craft.hoe=这是控制着火的力量的终极魔能锄头！
-message.mana_craft.pig=嘭！
+message.mana_craft.pig=某人或某物遇到转角的猪
 potion.effect.mana_craft.mana_evoker=魔能召唤者药水
 splash_potion.effect.mana_craft.mana_evoker=喷溅型魔能召唤者药水
 tile.mana_craft.machine_frame.name=机器外壳
@@ -127,3 +127,8 @@ item.mana_craft.orichalcum_gear.name=山铜齿轮
 item.mana_craft.orichalcum_plate.name=山铜板
 
 death.attack.mana_craft.by_pig=%s被正被杀的猪杀了
+
+info.mana_craft.mana_glass=可以用作硬化玻璃，同时在被破坏时掉落本体
+info.mana_craft.mana_apple=*不要*喂转角的猪，否则尽管撒腿就跑
+info.mana_craft.mana_hoe=右击某物来析构
+info.mana_craft.mana_record=由Au剪辑，感谢Eric Fullerton

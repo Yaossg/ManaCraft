@@ -81,7 +81,7 @@ public class EntityManaBall extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit instanceof EntityPig && invokeChance > random.nextFloat())
+        if(result.entityHit instanceof EntityPig && ItemManaApple.atCorner(result.entityHit) && invokeChance > random.nextFloat())
             ItemManaApple.appleExplosion(thrower, (EntityPig) result.entityHit);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);

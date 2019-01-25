@@ -4,22 +4,29 @@ import mana_craft.ManaCraft;
 import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
 import mana_craft.world.biome.BiomeMana;
+import mana_craft.world.biome.BiomeManaChaos;
 import net.minecraft.block.BlockBone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import sausage_core.api.util.world.gen.IWorldGenBuilder;
+import sausage_core.api.util.world.gen.IWorldGenWrapper;
+import sausage_core.api.util.world.gen.WorldGenUtils;
 
+import static mana_craft.config.ManaCraftConfig.OreGens.*;
 import static net.minecraft.world.gen.structure.MapGenStructureIO.registerStructureComponent;
+import static net.minecraftforge.fml.common.registry.GameRegistry.registerWorldGenerator;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.instance;
 
 public class ManaCraftWorldGens {
+    static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.mana_ore.getDefaultState(), sizeManaOre);
+    static final WorldGenMinable ORICHALCUM = new WorldGenMinable(ManaCraftBlocks.orichalcum_ore.getDefaultState(), sizeOrichalcumOre);
     public static void init() {
-        GameRegistry.registerWorldGenerator(new WorldGenMana(), ManaCraft.MODID.hashCode());
         if(ManaCraftConfig.village)
             MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
         if(ManaCraftConfig.village_structure) {
@@ -28,6 +35,31 @@ public class ManaCraftWorldGens {
             registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
             instance().registerVillageCreationHandler(new StructureVillageML.Handler());
         }
+        IWorldGenBuilder mana = IWorldGenBuilder.of(IWorldGenWrapper.of(MANA))
+                .loop(timesManaOre).offsetEach(WorldGenUtils::commonOffset)
+                .offsetEach((random, pos) -> pos.up(random.nextInt(heightManaOre)));
+        IWorldGenBuilder orichalcum = IWorldGenBuilder.of(IWorldGenWrapper.of(ORICHALCUM))
+                .loop(timesOrichalcumOre).offsetEach(WorldGenUtils::commonOffset)
+                .offsetEach((random, pos) -> pos.up(random.nextInt(heightOrichalcumOre)));
+        IWorldGenBuilder mixture = IWorldGenBuilder.of((random, world, pos) -> {
+            MANA.generate(world, random, pos);
+            ORICHALCUM.generate(world, random, pos);
+        }).times(mixtureChance).offsetEach(WorldGenUtils::commonOffset)
+                .offsetEach((random, pos) -> pos.up(random.nextInt(heightMixture)));
+        int weight = ManaCraft.MODID.hashCode();
+
+        registerWorldGenerator(mana.copy().build().toIWorldGenerator(), weight);
+        registerWorldGenerator(orichalcum.copy().build().toIWorldGenerator(), weight);
+        registerWorldGenerator(mixture.copy().build().toIWorldGenerator(), weight);
+
+        registerWorldGenerator(mana.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
+        registerWorldGenerator(orichalcum.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
+        registerWorldGenerator(mixture.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
+
+        registerWorldGenerator(mana.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+        registerWorldGenerator(orichalcum.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+        registerWorldGenerator(mixture.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+
     }
 
     @SuppressWarnings("deprecation")

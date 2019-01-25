@@ -7,6 +7,7 @@ import mana_craft.inventory.ContainerManaBooster;
 import mana_craft.inventory.ContainerManaProducer;
 import mana_craft.inventory.GUIContainerManaBooster;
 import mana_craft.inventory.GUIContainerManaProducer;
+import mana_craft.item.ManaCraftItems;
 import mezz.jei.api.*;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
@@ -36,8 +37,13 @@ public class ManaCraftJEIPlugin implements IModPlugin {
         IRecipeTransferRegistry transfer = registry.getRecipeTransferRegistry();
         transfer.addRecipeTransferHandler(ContainerManaProducer.class, MPRecipeCategory.UID, 0, 4, 5, 36);
         transfer.addRecipeTransferHandler(ContainerManaBooster.class, MBFuelCategory.UID, 0, 1, 1, 36);
-        //TODO more info
+
+        registry.addIngredientInfo(new ItemStack(ManaCraftBlocks.mana_glass), ItemStack.class, I18n.format("info.mana_craft.mana_glass"));
         registry.addIngredientInfo(new ItemStack(ManaCraftBlocks.mana_obsidian), ItemStack.class, I18n.format("info.mana_craft.mana_obsidian"));
+
+        registry.addIngredientInfo(new ItemStack(ManaCraftItems.mana_apple) , ItemStack.class, I18n.format("info.mana_craft.mana_apple"));
+        registry.addIngredientInfo(new ItemStack(ManaCraftItems.mana_hoe) , ItemStack.class, I18n.format("info.mana_craft.mana_hoe"));
+        registry.addIngredientInfo(new ItemStack(ManaCraftItems.mana_record) , ItemStack.class, I18n.format("info.mana_craft.mana_record"));
 
     }
 
