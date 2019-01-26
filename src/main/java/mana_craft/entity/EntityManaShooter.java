@@ -85,12 +85,16 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
                         world.spawnEntity(ball);
                     }
                     world.createExplosion(this, posX, posY, posZ, 3, false);
-                    if(!world.isRemote && random.nextInt(64) == 0)
-                        dropItem(ManaCraftItems.mana_record, 1);
                 }
             }
         }
         super.onUpdate();
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return new ResourceLocation(ManaCraft.MODID, "mana_shooter");
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {

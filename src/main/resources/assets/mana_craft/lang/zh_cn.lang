@@ -121,7 +121,7 @@ tile.mana_craft.mana_ore.name=魔能矿
 tile.mana_craft.mana_producer.name=魔能制造器
 tooltip.mana_craft.emerald=享受你和村民的友谊！
 
-info.mana_craft.mana_obsidian=有几率通过将魔能扔进岩浆里来获得
+info.mana_craft.mana_obsidian=有几率通过将魔能扔进岩浆里来获得，不能被任何诸如龙和凋灵的实体破坏
 item.mana_craft.orichalcum_dust.name=山铜粉
 item.mana_craft.orichalcum_gear.name=山铜齿轮
 item.mana_craft.orichalcum_plate.name=山铜板

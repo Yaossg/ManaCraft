@@ -16,20 +16,27 @@ public class ManaCraftLoots {
             "jungle_temple",
             "simple_dungeon",
             "spawn_bonus_chest",
-            "village_blacksmith"
+            "village_blacksmith",
+            "junk",
+            "treasure"
     };
 
     static final String INJECT = "inject/";
 
     public static void init() {
         MinecraftForge.EVENT_BUS.register(ManaCraftLoots.class);
+        LootTableList.register(new ResourceLocation(ManaCraft.MODID, "mana_shooter"));
         for(String name : NAMES) LootTableList.register(new ResourceLocation(ManaCraft.MODID, INJECT + name));
     }
 
     @SubscribeEvent
     public static void onLootLoad(LootTableLoadEvent event) {
         String name = event.getName().toString();
-        String prefix = "minecraft:chests/";
+        inject(event, name, "minecraft:chests/");
+        inject(event, name, "minecraft:gameplay/fishing/");
+    }
+
+    static void inject(LootTableLoadEvent event, String name, String prefix) {
         if(name.startsWith(prefix)) {
             String suffix = name.substring(prefix.length());
             if(ArrayUtils.contains(NAMES, suffix)) event.getTable().addPool(getInjectPool(suffix));
