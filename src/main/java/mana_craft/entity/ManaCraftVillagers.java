@@ -1,55 +1,18 @@
 package mana_craft.entity;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.village.MerchantRecipe;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
-import static net.minecraft.entity.passive.EntityVillager.*;
+import static net.minecraft.entity.passive.EntityVillager.ITradeList;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCareer;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
-import static sausage_core.api.util.common.Conversions.To.stack;
+import static sausage_core.api.util.common.VillagerTrades.*;
 
 public class ManaCraftVillagers {
     public static VillagerProfession mana_priest;
-
-    private static ITradeList item2gem(ItemStack item, int min, int max) {
-        return item2gem(item, new PriceInfo(min, max));
-    }
-
-    private static ITradeList item2gem(ItemStack item, PriceInfo buy) {
-        return (merchant, recipeList, random) -> {
-            int i = buy.getPrice(random);
-            recipeList.add(new MerchantRecipe(stack(item, i < 0 ? 1 : i), stack(Items.EMERALD, i < 0 ? -i : 1)));
-        };
-    }
-
-    private static ITradeList gem2item(ItemStack item, int min, int max) {
-        return gem2item(item, new PriceInfo(min, max));
-    }
-
-    private static ITradeList gem2item(ItemStack item, PriceInfo sell) {
-        return (merchant, recipeList, random) -> {
-            int i = sell.getPrice(random);
-            recipeList.add(new MerchantRecipe(stack(Items.EMERALD, i < 0 ? 1 : i), stack(item, i < 0 ? -i : 1)));
-        };
-    }
-
-    private static ITradeList enchanted(Item item, int min, int max) {
-        return enchanted(item, new PriceInfo(min, max));
-    }
-    private static ITradeList enchanted(Item item, PriceInfo buy) {
-        return new ListEnchantedItemForEmeralds(item, buy);
-    }
-
-    static final ITradeList tradeMana = item2gem(new ItemStack(mana), 13, 17);
-    static final ITradeList tradeIngot = item2gem(new ItemStack(orichalcum_ingot), 4, 6);
-    static final ITradeList tradeDiamond = item2gem(new ItemStack(mana_diamond), -11, -4);
-    static final ITradeList tradeShears = gem2item(new ItemStack(mana_shears), 4, 5);
 
     public static void preInit() {
         ForgeRegistries.VILLAGER_PROFESSIONS.register(mana_priest =
@@ -60,6 +23,10 @@ public class ManaCraftVillagers {
     }
 
     public static void init() {
+        ITradeList tradeMana = item2gem(new ItemStack(mana), 13, 17);
+        ITradeList tradeIngot = item2gem(new ItemStack(orichalcum_ingot), 4, 6);
+        ITradeList tradeDiamond = item2gem(new ItemStack(mana_diamond), -11, -4);
+        ITradeList tradeShears = gem2item(new ItemStack(mana_shears), 4, 5);
         new VillagerCareer(mana_priest, "mana_craft.mana")
                 .addTrade(1, tradeMana,
                         gem2item(new ItemStack(mana_glass), -4, -2),

@@ -3,7 +3,6 @@ package mana_craft.entity;
 import mana_craft.ManaCraft;
 import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
-import mana_craft.item.ManaCraftItems;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
