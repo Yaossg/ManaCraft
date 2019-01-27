@@ -15,6 +15,9 @@ import java.util.function.Supplier;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Fuel for Mana Boosters
+ * */
 @Immutable
 public final class MBFuel implements Predicate<ItemStack>, Supplier<Ingredient> {
     final Ingredient ingredient;
@@ -33,7 +36,7 @@ public final class MBFuel implements Predicate<ItemStack>, Supplier<Ingredient> 
     }
 
     public MBFuel(@Nonnull Ingredient ingredient, int level, int time) {
-        checkNotNull(this.ingredient = ingredient);
+        this.ingredient = checkNotNull(ingredient);
         checkArgument((this.time = time) > 0);
         checkArgument(0 < level && level < 100);
         this.level = level;

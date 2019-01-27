@@ -17,7 +17,7 @@ import java.util.Random;
  * for a tool or weapon, mana will be dropped automatically by ManaCraft
  * for an armor, you should implement {@link IDefaultSpecialArmor}
  *      and then just invoke {@link IItemManaDamagable#onArmorBroken(EntityLivingBase, ItemStack)}
- *      when {@link IDefaultSpecialArmor#onArmorBroken(EntityLivingBase, ItemStack, DamageSource, int, int)} is on
+ *      when {@link IDefaultSpecialArmor#onArmorBroken(EntityLivingBase, ItemStack, DamageSource, int, IDefaultSpecialArmor.EnumArmorType)} is on
  * */
 @FunctionalInterface
 public interface IItemManaDamagable {

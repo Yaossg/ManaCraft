@@ -15,6 +15,9 @@ import javax.annotation.concurrent.Immutable;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * Recipe for Mana Producers
+ * */
 @Immutable
 public final class MPRecipe {
     final IngredientStack[] input;
@@ -33,8 +36,8 @@ public final class MPRecipe {
     }
 
     public MPRecipe(int work_time, @Nonnull ItemStack output, @Nonnull IngredientStack... input) {
-        checkNotNull(this.output = output);
-        checkNotNull(this.input = input);
+        this.output = checkNotNull(output);
+        this.input = checkNotNull(input);
         checkArgument(input.length > 0);
         checkArgument((this.work_time = work_time) > 0);
     }
