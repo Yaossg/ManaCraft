@@ -2,7 +2,6 @@ package mana_craft.subscriber;
 
 import mana_craft.ManaCraft;
 import mana_craft.block.ManaCraftBlocks;
-import mana_craft.config.ManaCraftConfig;
 import mana_craft.enchantment.EnchantmentFloating;
 import mana_craft.enchantment.EnchantmentManaEvoker;
 import mana_craft.enchantment.EnchantmentManaRecycler;
@@ -19,6 +18,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -31,8 +31,6 @@ import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.create;
 public class ManaCraftSubscribers {
     public static void init() {
         MinecraftForge.EVENT_BUS.register(ManaToolSubscriber.class);
-        if(ManaCraftConfig.dropManaChance > 0)
-            MinecraftForge.EVENT_BUS.register(ManaDropSubscriber.class);
     }
 
     @SubscribeEvent

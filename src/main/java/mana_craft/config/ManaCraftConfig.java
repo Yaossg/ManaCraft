@@ -20,15 +20,6 @@ public class ManaCraftConfig {
     @LangKey("mana_craft.general.boostLimit")
     public static int boostLimit = 3;
 
-    @Comment("rare drop chance of Mana from mobs")
-    @RangeDouble(min = 0, max = 1)
-    @LangKey("mana_craft.general.dropManaChance")
-    public static float dropManaChance = 0.025f;
-
-    @Comment("is Mana Apple dropped by pigs (when dropMana is true)")
-    @LangKey("mana_craft.general.dropManaApple")
-    public static boolean dropManaApple = true;
-
     @Comment("invoke chance of pigs")
     @RangeDouble(min = 0, max = 1)
     @LangKey("mana_craft.general.invokeChance")
@@ -99,10 +90,10 @@ public class ManaCraftConfig {
     @RequiresMcRestart
     public static boolean loot = true;
 
-    @Comment("is there ManaCraft potions")
-    @LangKey("mana_craft.general.potion")
+    @Comment("does grass drop mana")
+    @LangKey("mana_craft.general.grassMana")
     @RequiresMcRestart
-    public static boolean potion = true;
+    public static boolean grassMana = true;
 
     @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME + " OreGens")
     public static class OreGens {

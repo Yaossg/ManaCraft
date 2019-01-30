@@ -32,8 +32,7 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         IEnumGUIHandler.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftRecipes.init(event);
-        if(ManaCraftConfig.potion)
-            ManaCraftPotions.preInit();
+        ManaCraftPotions.preInit();
         ManaCraftVillagers.preInit();
     }
 
@@ -68,8 +67,7 @@ public class CommonProxy {
             ManaCraftLoots.init();
         ManaCraftVillagers.init();
         ManaCraftWorldGens.init();
-        if(ManaCraftConfig.potion)
-            ManaCraftPotions.init();
+        ManaCraftPotions.init();
         ManaCraftBiomes.init();
         addOre();
         ManaCraftRecipes.addSmelt();
@@ -78,6 +76,7 @@ public class CommonProxy {
 
     public void postInit(FMLPostInitializationEvent event) {
         ManaCraftRecipes.loadAll();
-        MinecraftForge.addGrassSeed(new ItemStack(mana), 1);
+        if(ManaCraftConfig.grassMana)
+            MinecraftForge.addGrassSeed(new ItemStack(mana), 1);
     }
 }

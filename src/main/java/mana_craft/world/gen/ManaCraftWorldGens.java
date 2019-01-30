@@ -9,13 +9,14 @@ import net.minecraft.block.BlockBone;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.BiomeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import sausage_core.api.util.world.gen.IWorldGenBuilder;
 import sausage_core.api.util.world.gen.IWorldGenWrapper;
+import sausage_core.api.util.world.gen.WorldGenBuilder;
 import sausage_core.api.util.world.gen.WorldGenUtils;
 
 import static mana_craft.config.ManaCraftConfig.OreGens.*;
@@ -35,16 +36,23 @@ public class ManaCraftWorldGens {
             registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
             instance().registerVillageCreationHandler(new StructureVillageML.Handler());
         }
-        IWorldGenBuilder mana = IWorldGenBuilder.of(IWorldGenWrapper.of(MANA))
-                .loop(timesManaOre).offsetEach(WorldGenUtils::commonOffset)
+        WorldGenBuilder mana = new WorldGenBuilder(IWorldGenWrapper.of(MANA))
+                .atDimension(DimensionType.OVERWORLD)
+                .loop(timesManaOre)
+                .offsetEach(WorldGenUtils::commonOffset)
                 .offsetEach((random, pos) -> pos.up(random.nextInt(heightManaOre)));
-        IWorldGenBuilder orichalcum = IWorldGenBuilder.of(IWorldGenWrapper.of(ORICHALCUM))
-                .loop(timesOrichalcumOre).offsetEach(WorldGenUtils::commonOffset)
+        WorldGenBuilder orichalcum = new WorldGenBuilder(IWorldGenWrapper.of(ORICHALCUM))
+                .atDimension(DimensionType.OVERWORLD)
+                .loop(timesOrichalcumOre)
+                .offsetEach(WorldGenUtils::commonOffset)
                 .offsetEach((random, pos) -> pos.up(random.nextInt(heightOrichalcumOre)));
-        IWorldGenBuilder mixture = IWorldGenBuilder.of((random, world, pos) -> {
+        WorldGenBuilder mixture = new WorldGenBuilder((random, world, pos) -> {
             MANA.generate(world, random, pos);
             ORICHALCUM.generate(world, random, pos);
-        }).times(mixtureChance).offsetEach(WorldGenUtils::commonOffset)
+        })
+                .atDimension(DimensionType.OVERWORLD)
+                .times(mixtureChance)
+                .offsetEach(WorldGenUtils::commonOffset)
                 .offsetEach((random, pos) -> pos.up(random.nextInt(heightMixture)));
         int weight = ManaCraft.MODID.hashCode();
 

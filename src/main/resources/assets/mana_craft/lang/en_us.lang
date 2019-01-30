@@ -1,4 +1,5 @@
-﻿ManaCraft.tooltip=Define General Settings for ManaCraft
+﻿
+ManaCraft.tooltip=Define General Settings for ManaCraft
 ManaCraft OreGens.tooltip=Define Ore Generation Settings for ManaCraft
 advancement.mana.ballgame.description=There's no space or dash between ball and game.
 advancement.mana.ballgame.title=Ballgame
@@ -78,8 +79,6 @@ mana_craft.general.boostLimit=Boost Limit
 mana_craft.general.boostRadius=Boost Radius
 mana_craft.general.delay=Checking delay of Mana Producer
 mana_craft.general.destroy=Self Destroy Without energizing
-mana_craft.general.dropManaApple=Drop Mana Apple
-mana_craft.general.dropManaChance=Mana Drop Chance
 mana_craft.general.durability=Mana Tools/Weapons/Armors Durability
 mana_craft.general.enchantability=Mana Tools/Weapons/Armors Enchantability
 mana_craft.general.enchanter=Enable Enchanter
@@ -87,7 +86,7 @@ mana_craft.general.finalHoe=Enable Final Hoe
 mana_craft.general.invokeChance=Mana Invoke Chance
 mana_craft.general.loot=Mana Loot
 mana_craft.general.min_speed=Min Speed Of Floating Mana Ball
-mana_craft.general.potion=Mana Potions
+mana_craft.general.grassMana=Grass Mana
 mana_craft.general.ratio=Health ratio
 mana_craft.general.replace=Mana Producer Generator replaces blocks
 mana_craft.general.toughness=Mana Armor Toughness

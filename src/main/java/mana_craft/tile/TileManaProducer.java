@@ -41,7 +41,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     public int work_time;
     public PortableItemStackHandler input = new PortableItemStackHandler(4) {
         @Override
-        protected void onContentsChanged(int slot) {
+        public void onContentsChanged(int slot) {
             current = null;
             isCharged = false;
         }

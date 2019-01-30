@@ -1,4 +1,5 @@
-﻿ManaCraft.tooltip=定义ManaCraft基本的设置
+﻿
+ManaCraft.tooltip=定义ManaCraft基本的设置
 ManaCraft OreGens.tooltip=定义ManaCraft矿物生成的设置
 advancement.mana.ballgame.description=球类和游戏之间没有空格或者下划线.
 advancement.mana.ballgame.title=球类游戏
@@ -78,8 +79,6 @@ mana_craft.general.boostLimit=增益限制
 mana_craft.general.boostRadius=增益范围
 mana_craft.general.delay=魔能制造器检查延时
 mana_craft.general.destroy=失活时自毁
-mana_craft.general.dropManaApple=掉落魔能苹果
-mana_craft.general.dropManaChance=魔能掉落概率
 mana_craft.general.durability=魔能工具/武器/盔甲 耐久度
 mana_craft.general.enchantability=魔能工具/武器/盔甲 附魔能力
 mana_craft.general.enchanter=启用附魔师
@@ -87,7 +86,7 @@ mana_craft.general.finalHoe=启用最终魔能锄头
 mana_craft.general.invokeChance=魔能调用概率
 mana_craft.general.loot=魔能战利品
 mana_craft.general.min_speed=悬浮魔能球的最低速度
-mana_craft.general.potion=魔能药水
+mana_craft.general.grassMana=艹魔能
 mana_craft.general.ratio=血量分数
 mana_craft.general.replace=魔能制造器生成器替换方块
 mana_craft.general.toughness=魔能盔甲韧性

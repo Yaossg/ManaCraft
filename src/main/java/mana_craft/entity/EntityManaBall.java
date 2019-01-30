@@ -70,8 +70,6 @@ public class EntityManaBall extends EntityThrowable {
         return this;
     }
 
-    private static final BufferedRandom random = BufferedRandom.shared();
-
     private boolean canAttack(Entity entity) {
         return  !( entity == null
                 || entity == thrower
@@ -81,7 +79,8 @@ public class EntityManaBall extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult result) {
-        if(result.entityHit instanceof EntityPig && ItemManaApple.atCorner(result.entityHit) && invokeChance > random.nextFloat())
+        if(result.entityHit instanceof EntityPig && ItemManaApple.atCorner(result.entityHit)
+                && invokeChance > BufferedRandom.shared().nextFloat())
             ItemManaApple.appleExplosion(thrower, (EntityPig) result.entityHit);
         if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
             world.setEntityState(this, (byte) 3);

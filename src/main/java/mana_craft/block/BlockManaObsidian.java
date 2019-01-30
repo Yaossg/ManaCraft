@@ -2,9 +2,9 @@ package mana_craft.block;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockObsidian;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,10 +17,11 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class BlockManaObsidian extends BlockObsidian {
+public class BlockManaObsidian extends Block {
     BlockManaObsidian() {
+        super(Material.ROCK);
         setHardness(40);
-        setResistance(3000);
+        setResistance(1600);
         setSoundType(SoundType.STONE);
         setHarvestLevel("pickaxe", Item.ToolMaterial.DIAMOND.getHarvestLevel());
     }

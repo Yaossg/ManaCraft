@@ -11,7 +11,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -19,6 +18,7 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.items.ItemHandlerHelper;
 import sausage_core.api.util.explosion.ExExplosion;
 import sausage_core.api.util.nbt.NBTs;
 
@@ -35,8 +35,7 @@ public class ManaToolSubscriber {
             if(value <= 0) return;
             int i = value > 1 ? 1 + random.nextInt(value - 1) : 1;
             int l = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.mana_recycler, stack);
-            InventoryHelper.spawnItemStack(player.world, player.posX, player.posY, player.posZ,
-                    new ItemStack(ManaCraftItems.mana, l + i * (random.nextInt(l + 2) + 1)));
+            ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ManaCraftItems.mana, l + i * (random.nextInt(l + 2) + 1)));
         }
     }
 

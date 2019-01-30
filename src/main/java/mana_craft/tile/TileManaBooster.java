@@ -1,6 +1,6 @@
 package mana_craft.tile;
 
-import mana_craft.api.registry.ManaBoostable;
+import mana_craft.api.registry.ManaBoostItem;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static mana_craft.api.registry.IManaCraftRegistries.BOOSTABLES;
+import static mana_craft.api.registry.IManaCraftRegistries.BOOST_ITEM;
 import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
 import static mana_craft.block.BlockManaBooster.BURNING;
 import static mana_craft.block.BlockManaProducer.Cache;
@@ -73,8 +73,8 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     }
 
     static {
-        BOOSTABLES.register(new ManaBoostable<>(TileEntityFurnace.class, furnace -> furnace.isBurning(), ITickable::update));
-        BOOSTABLES.register(new ManaBoostable<>(TileEntityBrewingStand.class, brew -> brew.getField(0) > 0, ITickable::update));
+        BOOST_ITEM.register(new ManaBoostItem<>(TileEntityFurnace.class, furnace -> furnace.isBurning(), ITickable::update));
+        BOOST_ITEM.register(new ManaBoostItem<>(TileEntityBrewingStand.class, brew -> brew.getField(0) > 0, ITickable::update));
     }
 
     boolean detect0() {
@@ -117,10 +117,10 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
         for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
             BlockPos offset = pos.offset(facing);
             TileEntity tileEntity = world.getTileEntity(offset);
-            BOOSTABLES.find(boostable -> boostable.clazz.isInstance(tileEntity)).ifPresent(boostable -> {
+            BOOST_ITEM.find(boostItem -> boostItem.clazz.isInstance(tileEntity)).ifPresent(boostItem -> {
                 burn_time -= 5;
-                for (int i = 0; boostable.canBoost.test(tileEntity) && i < burn_level; ++i)
-                    boostable.boost.accept(tileEntity);
+                for (int i = 0; boostItem.canBoost.test(tileEntity) && i < burn_level; ++i)
+                    boostItem.boost.accept(tileEntity);
             });
         }
         if(burn_time < 0) burn_time = 0;
