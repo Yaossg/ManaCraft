@@ -1,7 +1,7 @@
 package mana_craft.enchantment;
 
 import mana_craft.ManaCraft;
-import mana_craft.api.IItemManaDamagable;
+import mana_craft.api.common.IItemManaDamagable;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;

@@ -1,4 +1,4 @@
-package mana_craft.api;
+package mana_craft.api.common;
 
 import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.item.ManaCraftItems;

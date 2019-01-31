@@ -1,7 +1,7 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
-import mana_craft.api.IItemManaDamagable;
+import mana_craft.api.common.IItemManaDamagable;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

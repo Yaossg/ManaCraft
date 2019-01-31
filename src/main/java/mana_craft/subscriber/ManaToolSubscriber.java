@@ -1,7 +1,7 @@
 package mana_craft.subscriber;
 
 import mana_craft.ManaCraft;
-import mana_craft.api.IItemManaDamagable;
+import mana_craft.api.common.IItemManaDamagable;
 import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
 import mana_craft.enchantment.ManaCraftEnchantments;

@@ -1,7 +1,7 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
-import mana_craft.api.IItemManaDamagable;
+import mana_craft.api.common.IItemManaDamagable;
 import mana_craft.config.ManaCraftConfig;
 import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.entity.EntityManaBall;

@@ -14,14 +14,17 @@ import mana_craft.world.biome.BiomeManaChaos;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
+import sausage_core.api.event.InfoCardEvent;
 
 import java.awt.*;
 
@@ -31,6 +34,7 @@ import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.create;
 public class ManaCraftSubscribers {
     public static void init() {
         MinecraftForge.EVENT_BUS.register(ManaToolSubscriber.class);
+        InfoCardEvent.INFO_CARD_BUS.register(ManaCraftSubscribers.class);
     }
 
     @SubscribeEvent
@@ -82,5 +86,16 @@ public class ManaCraftSubscribers {
     public static void loadModels(ModelRegistryEvent event) {
         ManaCraftItems.Manager.manager.loadAllModel();
         ManaCraftBlocks.Manager.manager.loadAllModel();
+    }
+
+    @SubscribeEvent
+    public static void onInfoCard(InfoCardEvent event) {
+        event.modInfo.addModTitle(ManaCraft.MODID, ManaCraft.NAME, ManaCraft.VERSION, "Yaossg")
+                .withStyle(style -> style.setColor(TextFormatting.GREEN))
+                .addText("Mana is the power of nature!");
+        if(!Loader.isModLoaded("sausages_factory"))
+            event.modInfo.newline()
+                    .withStyle(style -> style.setColor(TextFormatting.GOLD).setItalic(true))
+                    .addText("I know you're looking forward to Sausage's Factory. Me, too");
     }
 }

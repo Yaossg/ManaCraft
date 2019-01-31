@@ -22,7 +22,7 @@ import sausage_core.api.util.common.SausageUtils;
         name = ManaCraft.NAME,
         version = ManaCraft.VERSION,
         acceptedMinecraftVersions = "1.12.2",
-        dependencies = "required-after:sausage_core@[0.2.9,)")
+        dependencies = "required-after:sausage_core@[1.0,1.1)")
 public class ManaCraft {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
