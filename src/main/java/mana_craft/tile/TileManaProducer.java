@@ -28,7 +28,7 @@ import sausage_core.api.util.item.SingleItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static mana_craft.api.registry.IManaCraftRegistries.MP_RECIPES;
+import static mana_craft.api.registry.ManaCraftRegistries.MP_RECIPES;
 import static mana_craft.block.BlockManaProducer.WORKING;
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.config.ManaCraftConfig.delay;

@@ -25,8 +25,8 @@ import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
-import static mana_craft.api.registry.IManaCraftRegistries.MP_RECIPES;
+import static mana_craft.api.registry.ManaCraftRegistries.MB_FUELS;
+import static mana_craft.api.registry.ManaCraftRegistries.MP_RECIPES;
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;

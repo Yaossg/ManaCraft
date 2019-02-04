@@ -1,19 +1,13 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import sausage_core.api.util.registry.IBRegistryManager;
 import sausage_core.api.util.registry.SoundRegistryManager;
-
-import javax.annotation.Nullable;
-import java.util.List;
 
 import static mana_craft.item.ItemManaTools.*;
 import static mana_craft.item.ManaCraftItems.Manager.manager;
@@ -45,7 +39,6 @@ public class ManaCraftItems {
     public static final Item mana_chestplate = nonnull();
     public static final Item mana_leggings = nonnull();
     public static final Item mana_boots = nonnull();
-    public static final Item mana_emerald = nonnull();
     public static final Item mana_producer_generator = nonnull();
     public static final Item mana_dust = nonnull();
     public static final Item mana_record = nonnull();
@@ -90,12 +83,6 @@ public class ManaCraftItems {
         manager.addItem(new ItemManaArmor(CHEST), "mana_chestplate");
         manager.addItem(new ItemManaArmor(LEGS), "mana_leggings");
         manager.addItem(new ItemManaArmor(FEET), "mana_boots");
-        manager.addItem(new Item() {
-            @Override
-            public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-                tooltip.add(I18n.format("tooltip.mana_craft.emerald"));
-            }
-        }, "mana_emerald");
         manager.addItem(new ItemMPGenerator(), "mana_producer_generator");
         manager.addItem("mana_dust");
         manager.addItem(new ItemRecord("mana",

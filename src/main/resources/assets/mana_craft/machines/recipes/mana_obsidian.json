@@ -3,10 +3,10 @@
     "item": "minecraft:obsidian"
   },{
     "item": "mana_craft:mana",
-	"count": 16
+	"count": 5
   }],
   "output": {
     "item": "mana_craft:mana_obsidian"
   },
-  "work_time": 150
+  "work_time": 120
 }

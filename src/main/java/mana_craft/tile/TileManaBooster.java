@@ -22,8 +22,8 @@ import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static mana_craft.api.registry.IManaCraftRegistries.BOOST_ITEM;
-import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
+import static mana_craft.api.registry.ManaCraftRegistries.BOOST_ITEM;
+import static mana_craft.api.registry.ManaCraftRegistries.MB_FUELS;
 import static mana_craft.block.BlockManaBooster.BURNING;
 import static mana_craft.block.BlockManaProducer.Cache;
 import static mana_craft.block.BlockManaProducer.WORKING;

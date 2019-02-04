@@ -97,4 +97,10 @@ public class ManaCraftSubscribers {
                     .withStyle(style -> style.setColor(TextFormatting.GOLD).setItalic(true))
                     .addText("I know you're looking forward to Sausage's Factory. Me, too");
     }
+
+    @SubscribeEvent
+    public static void onMissingMappings(RegistryEvent.MissingMappings<Item> event) {
+        for (RegistryEvent.MissingMappings.Mapping<Item> entry : event.getAllMappings())
+            if(entry.key.toString().equals("mana_craft:mana_emerald")) entry.ignore();
+    }
 }

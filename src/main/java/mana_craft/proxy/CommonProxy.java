@@ -22,18 +22,21 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sausage_core.api.core.ienum.IEnumGUIHandler;
 import sausage_core.api.util.common.SausageUtils;
+import sausage_core.api.util.plugin.PluginPrimer;
 
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
 public class CommonProxy {
-
+    PluginPrimer pluginPrimer = new PluginPrimer();
     public void preInit(FMLPreInitializationEvent event) {
         IEnumGUIHandler.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftRecipes.init(event);
         ManaCraftPotions.preInit();
         ManaCraftVillagers.preInit();
+        if(ManaCraftConfig.ticPlugin)
+            pluginPrimer.register("tconstruct", "mana_craft.plugin.PluginTConstruct");
     }
 
     static void addOre() {
@@ -57,7 +60,7 @@ public class CommonProxy {
         ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(orichalcum_ingot));
         ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(orichalcum_ingot));
 
-        SausageUtils.registerTileEntities(ManaCraft.logger, ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
+        SausageUtils.registerTileEntities(ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
         TileManaProducer.init();
     }
 
@@ -72,6 +75,7 @@ public class CommonProxy {
         addOre();
         ManaCraftRecipes.addSmelt();
         misc();
+        pluginPrimer.execute();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

@@ -3,10 +3,6 @@ package mana_craft.config;
 import mana_craft.ManaCraft;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.*;
-import net.minecraftforge.common.config.ConfigManager;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME)
 public class ManaCraftConfig {
@@ -95,6 +91,11 @@ public class ManaCraftConfig {
     @RequiresMcRestart
     public static boolean grassMana = true;
 
+    @Comment("enable plugin for Tinkers' Construct")
+    @LangKey("mana_craft.general.ticPlugin")
+    @RequiresMcRestart
+    public static boolean ticPlugin = true;
+
     @Config(modid = ManaCraft.MODID, name = ManaCraft.NAME + " OreGens")
     public static class OreGens {
         @Comment("max size of a Mana Ore vein")
@@ -106,11 +107,13 @@ public class ManaCraftConfig {
         @Comment("max height of Mana Ores veins")
         @LangKey("mana_craft.ore_gens.general.heightManaOre")
         @RangeInt(min = 0, max = 256)
+        @RequiresMcRestart
         public static int heightManaOre = 40;
 
         @Comment("times of generation of Mana Ore veins per chunk")
         @LangKey("mana_craft.ore_gens.general.timesManaOre")
         @RangeInt(min = 0, max = 16)
+        @RequiresMcRestart
         public static int timesManaOre = 2;
 
         @Comment("max size of a Orichalcum Ore vein")
@@ -122,33 +125,26 @@ public class ManaCraftConfig {
         @Comment("max height of Mana Orichalcum veins")
         @LangKey("mana_craft.ore_gens.general.heightOrichalcumOre")
         @RangeInt(min = 0, max = 256)
+        @RequiresMcRestart
         public static int heightOrichalcumOre = 24;
 
         @Comment("times of generation of Orichalcum Ore veins per chunk")
         @LangKey("mana_craft.ore_gens.general.timesOrichalcumOre")
         @RangeInt(min = 0, max = 16)
+        @RequiresMcRestart
         public static int timesOrichalcumOre = 1;
 
         @Comment({"Change of generation of mixture veins",
                 "3.6 means 60% 4 times and 40% 3 times"})
         @LangKey("mana_craft.ore_gens.general.mixtureChance")
         @RangeDouble(min = 0, max = 16)
+        @RequiresMcRestart
         public static float mixtureChance = 0.35f;
 
         @Comment("max height of mixture veins")
         @LangKey("mana_craft.ore_gens.general.heightMixture")
         @RangeInt(min = 0, max = 256)
+        @RequiresMcRestart
         public static int heightMixture = 32;
-    }
-
-
-    @Mod.EventBusSubscriber(modid = ManaCraft.MODID)
-    public static class Sync {
-        @SubscribeEvent
-        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if(event.getModID().equals(ManaCraft.MODID))
-                ConfigManager.sync(ManaCraft.MODID, Type.INSTANCE);
-        }
-
     }
 }

@@ -14,8 +14,8 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-import static mana_craft.api.registry.IManaCraftRegistries.MB_FUELS;
-import static mana_craft.api.registry.IManaCraftRegistries.MP_RECIPES;
+import static mana_craft.api.registry.ManaCraftRegistries.MB_FUELS;
+import static mana_craft.api.registry.ManaCraftRegistries.MP_RECIPES;
 
 @JEIPlugin
 public class ManaCraftJEIPlugin implements IModPlugin {

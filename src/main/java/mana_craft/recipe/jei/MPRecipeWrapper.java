@@ -28,7 +28,7 @@ public class MPRecipeWrapper implements IRecipeWrapper {
                 .collect(Collectors.toList());
         output = recipe.output();
         arrow = guiHelper.drawableBuilder(texture, 176, 0, 24, 17)
-                .buildAnimated(recipe.work_time / 20, IDrawableAnimated.StartDirection.LEFT, false);
+                .buildAnimated((int) Math.sqrt(recipe.work_time), IDrawableAnimated.StartDirection.LEFT, false);
     }
 
     @Override

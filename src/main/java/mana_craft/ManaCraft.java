@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
+import sausage_core.api.registry.AutoSyncConfigs;
 import sausage_core.api.util.common.SausageUtils;
 
 /**
@@ -22,7 +23,7 @@ import sausage_core.api.util.common.SausageUtils;
         name = ManaCraft.NAME,
         version = ManaCraft.VERSION,
         acceptedMinecraftVersions = "1.12.2",
-        dependencies = "required-after:sausage_core@[1.0,1.1)")
+        dependencies = "required-after:sausage_core@[1.1,1.2);after:tconstruct")
 public class ManaCraft {
     public static final String MODID = "mana_craft";
     public static final String NAME = "ManaCraft";
@@ -43,7 +44,9 @@ public class ManaCraft {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        SausageUtils.unstableWarning(logger = event.getModLog(), NAME, VERSION, MODID);
+        logger = event.getModLog();
+        SausageUtils.unstableWarning(NAME, VERSION, MODID);
+        AutoSyncConfigs.AUTO_SYNC_CONFIG.register(MODID);
         proxy.preInit(event);
     }
 
