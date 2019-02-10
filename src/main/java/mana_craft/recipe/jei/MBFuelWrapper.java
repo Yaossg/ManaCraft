@@ -10,8 +10,8 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import sausage_core.api.util.client.Colors;
 
-import java.awt.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +39,7 @@ public class MBFuelWrapper implements IRecipeWrapper {
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         flame.draw(minecraft, 1, 0);
-        minecraft.fontRenderer.drawString(info[0], 24, 4, Color.DARK_GRAY.getRGB());
-        minecraft.fontRenderer.drawString(info[1], 24, 22, Color.DARK_GRAY.getRGB());
+        minecraft.fontRenderer.drawString(info[0], 24, 4, Colors.DIMGRAY);
+        minecraft.fontRenderer.drawString(info[1], 24, 22, Colors.DIMGRAY);
     }
 }

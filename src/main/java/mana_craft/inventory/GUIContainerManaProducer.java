@@ -6,9 +6,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import sausage_core.api.core.inventory.GUIContainerBase;
+import sausage_core.api.util.client.Colors;
 import sausage_core.api.util.client.GUIHelper;
-
-import java.awt.*;
 
 public class GUIContainerManaProducer extends GUIContainerBase {
     GUIContainerManaProducer(Container inventorySlotsIn) {
@@ -19,7 +18,7 @@ public class GUIContainerManaProducer extends GUIContainerBase {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String translateKey = "container.mana_craft.mana_producer.";
         String title = I18n.format(translateKey + "title");
-        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Color.DARK_GRAY.getRGB());
+        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIMGRAY);
     }
 
     public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_producer");

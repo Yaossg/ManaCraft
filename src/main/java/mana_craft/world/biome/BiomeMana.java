@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.feature.*;
+import sausage_core.api.util.client.Colors;
 
 import java.util.Arrays;
 import java.util.List;
@@ -64,17 +65,17 @@ public class BiomeMana extends Biome {
 
     @Override
     final public int getSkyColorByTemp(float currentTemperature) {
-        return 0xFF33CC;
+        return Colors.DEEPPINK;
     }
 
     @Override
     final public int getModdedBiomeGrassColor(int original) {
-        return 0xFF33CC;
+        return Colors.DEEPPINK;
     }
 
     @Override
     final public int getModdedBiomeFoliageColor(int original) {
-        return 0xFF33CC;
+        return Colors.DEEPPINK;
     }
 
     static final IBlockState LOG = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK);

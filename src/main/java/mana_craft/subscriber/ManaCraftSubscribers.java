@@ -24,8 +24,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import sausage_core.api.event.InfoCardEvent;
-
-import java.awt.*;
+import sausage_core.api.util.client.Colors;
 
 import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.create;
 
@@ -77,7 +76,7 @@ public class ManaCraftSubscribers {
                         .id("mana_shooter", nextEntityID++)
                         .name("mana_craft.ManaShooter")
                         .tracker(64, 3, true)
-                        .egg(Color.MAGENTA.getRGB(), Color.BLACK.brighter().getRGB()).build()
+                        .egg(Colors.MAGENTA, Colors.DIMGRAY).build()
         );
     }
 

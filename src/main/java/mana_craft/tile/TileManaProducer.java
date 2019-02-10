@@ -71,20 +71,15 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
         return super.writeToNBT(compound);
     }
 
-    /*
-    * Even if there are always blocks around
-    * Provide Capability to implement inter-IO
-    * */
-    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing side) {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability && side != null
-                || super.hasCapability(capability, side);
+    public boolean hasCapItem(Capability<?> capability, @Nullable EnumFacing side) {
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability && side != null;
     }
 
-    /*
-    * Mapper for each slot of input
-    * Maps to each horizontal side
-    * */
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing side) {
+        return hasCapItem(capability, side) || super.hasCapability(capability, side);
+    }
+
     class SlotMapper implements IItemHandler {
         private int slot;
 
@@ -124,7 +119,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
-        if(side != null) switch(side) {
+        if(hasCapItem(capability, side)) switch(side) {
             case DOWN:
                 return SausageUtils.rawtype(output);
             case UP:
@@ -222,10 +217,9 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
     @Override
     public void update() {
         if(world.isRemote || !check()) return;
-        IBlockState state = world.getBlockState(pos);
         progress = Math.min(progress, work_time);
         work = tick(work);
-        world.setBlockState(pos, state.withProperty(WORKING, work));
+        world.setBlockState(pos, world.getBlockState(pos).withProperty(WORKING, work));
         if(!work) {
             if(progress > 0) progress -= 3;
             if(progress < 0) progress = 0;

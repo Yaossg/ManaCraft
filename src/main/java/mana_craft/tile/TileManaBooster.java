@@ -1,7 +1,6 @@
 package mana_craft.tile;
 
 import mana_craft.api.registry.ManaBoostItem;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBrewingStand;
@@ -59,16 +58,19 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
         return super.writeToNBT(compound);
     }
 
+    public boolean hasCapItem(Capability<?> capability, @Nullable EnumFacing side) {
+        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability
+                && side != null && side.getAxis().isHorizontal();
+    }
+
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing side) {
-        return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY == capability
-                && side != null && side.getAxis().isHorizontal()
-                || super.hasCapability(capability, side);
+        return hasCapItem(capability, side) || super.hasCapability(capability, side);
     }
 
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
-        if(hasCapability(capability, side)) return SausageUtils.rawtype(handler);
+        if(hasCapItem(capability, side)) return SausageUtils.rawtype(handler);
         return super.getCapability(capability, side);
     }
 
@@ -132,8 +134,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     public void update() {
         if(world.isRemote)
             return;
-        IBlockState state = world.getBlockState(pos);
         work = tick(work);
-        world.setBlockState(pos, state.withProperty(BURNING, work));
+        world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, work));
     }
 }

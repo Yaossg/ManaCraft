@@ -9,16 +9,12 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import sausage_core.api.util.item.IngredientStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.concurrent.Immutable;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Recipe for Mana Producers
  * */
-@Immutable
 public final class MPRecipe {
     final IngredientStack[] input;
     final ItemStack output;
@@ -35,7 +31,7 @@ public final class MPRecipe {
         return output.copy();
     }
 
-    public MPRecipe(int work_time, @Nonnull ItemStack output, @Nonnull IngredientStack... input) {
+    public MPRecipe(int work_time, ItemStack output, IngredientStack... input) {
         this.output = checkNotNull(output);
         this.input = checkNotNull(input);
         checkArgument(input.length > 0);

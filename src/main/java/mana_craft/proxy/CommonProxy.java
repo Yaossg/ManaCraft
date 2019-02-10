@@ -29,7 +29,7 @@ import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
 public class CommonProxy {
-    PluginPrimer pluginPrimer = new PluginPrimer();
+    static PluginPrimer pluginPrimer = new PluginPrimer();
     public void preInit(FMLPreInitializationEvent event) {
         IEnumGUIHandler.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftRecipes.init(event);
@@ -55,6 +55,7 @@ public class CommonProxy {
     }
 
     static void misc() {
+        ManaCraftRecipes.addSmelt();
         BlockManaHead.init();
 
         ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(orichalcum_ingot));
@@ -62,6 +63,7 @@ public class CommonProxy {
 
         SausageUtils.registerTileEntities(ManaCraft.MODID, TileManaProducer.class, TileManaBooster.class);
         TileManaProducer.init();
+        pluginPrimer.execute();
     }
 
     public void init(FMLInitializationEvent event) {
@@ -73,9 +75,7 @@ public class CommonProxy {
         ManaCraftPotions.init();
         ManaCraftBiomes.init();
         addOre();
-        ManaCraftRecipes.addSmelt();
         misc();
-        pluginPrimer.execute();
     }
 
     public void postInit(FMLPostInitializationEvent event) {
