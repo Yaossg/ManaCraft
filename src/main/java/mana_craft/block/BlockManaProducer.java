@@ -37,7 +37,7 @@ public class BlockManaProducer extends BlockContainer {
     public static final PropertyBool WORKING = PropertyBool.create("working");
 
     public static class Cache extends WorldSavedData {
-        public List<DimensionalBlockPos> list = NonNullList.create();
+        public final List<DimensionalBlockPos> list = NonNullList.create();
 
         public Cache(String name) {
             super(name);

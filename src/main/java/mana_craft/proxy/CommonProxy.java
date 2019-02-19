@@ -29,7 +29,7 @@ import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
 public class CommonProxy {
-    static PluginPrimer pluginPrimer = new PluginPrimer();
+    static final PluginPrimer pluginPrimer = new PluginPrimer();
     public void preInit(FMLPreInitializationEvent event) {
         IEnumGUIHandler.register(ManaCraft.instance, ManaCraftGUIs.values());
         ManaCraftRecipes.init(event);

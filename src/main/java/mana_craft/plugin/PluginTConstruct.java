@@ -7,14 +7,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import sausage_core.api.core.plugin.PluginTConstructCore;
 import sausage_core.api.util.client.Colors;
-import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 
-import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.block.ManaCraftBlocks.mana_block;
+import static mana_craft.block.ManaCraftBlocks.mana_ore;
 import static mana_craft.item.ManaCraftItems.*;
 import static net.minecraftforge.fml.common.registry.GameRegistry.makeItemStack;
 import static slimeknights.mantle.util.RecipeMatch.of;
@@ -51,7 +50,7 @@ public class PluginTConstruct extends PluginTConstructCore {
         registerTableCasting(new ItemStack(mana_rod), stick_cast, mana_obsidian, 1000);
         registerTableCasting(new CastingRecipe(new ItemStack(mana_apple), of(Items.APPLE), mana, 1800, true, false));
         registerTableCasting(new CastingRecipe(new ItemStack(mana_coal), of(Items.COAL), mana, 3600, true, false));
-        registerTableCasting(new CastingRecipe(new ItemStack(mana_pork), of(Items.COOKED_PORKCHOP), mana, 0x10000, true, false));
+        registerTableCasting(new CastingRecipe(new ItemStack(mana_pork), of(Items.COOKED_PORKCHOP), mana, 0xFFFF, true, false));
         registerBasinCasting(new ItemStack(mana_block), ItemStack.EMPTY, mana, 900);
         registerBasinCasting(new ItemStack(ManaCraftBlocks.mana_obsidian), ItemStack.EMPTY, mana_obsidian, 1000);
         registerBasinCasting(new ItemStack(ManaCraftBlocks.mana_glass), ItemStack.EMPTY, mana_glass, 1000);

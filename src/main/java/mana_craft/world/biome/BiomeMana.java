@@ -11,7 +11,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.ChunkPrimer;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.WorldGenAbstractTree;
+import net.minecraft.world.gen.feature.WorldGenShrub;
+import net.minecraft.world.gen.feature.WorldGenTallGrass;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import sausage_core.api.util.client.Colors;
 
 import java.util.Arrays;
@@ -23,7 +26,7 @@ public class BiomeMana extends Biome {
         return new BiomeMana(new BiomeProperties("Mana").setBaseHeight(0).setHeightVariation(0.08f));
     }
     public static BiomeMana getHills() {
-        return new BiomeMana(new BiomeProperties("ManaHills").setBaseHeight(0.8f).setHeightVariation(0.12f));
+        return new BiomeMana(new BiomeProperties("ManaHills").setBaseHeight(0.7f).setHeightVariation(0.12f));
     }
 
     protected BiomeMana(BiomeProperties properties) {
@@ -35,7 +38,7 @@ public class BiomeMana extends Biome {
         decorator.flowersPerChunk = 8;
         decorator.sandPatchesPerChunk = 0;
         decorator.gravelPatchesPerChunk = 0;
-        decorator.reedsPerChunk = 100;
+        decorator.reedsPerChunk = 25;
         spawnableCreatureList.clear();
         spawnableCreatureList.add(new SpawnListEntry(EntityPig.class, 10, 1, 3));
         spawnableCreatureList.add(new SpawnListEntry(EntityManaShooter.class, 1, 1, 1));
@@ -134,8 +137,6 @@ public class BiomeMana extends Biome {
         DOUBLE_PLANT_GENERATOR.setPlantType(WeightedRandom.getRandomItem(rand, getDoubleFlowerList()).type);
         DOUBLE_PLANT_GENERATOR.generate(worldIn, rand, randomPos(worldIn, rand, pos));
     }
-
-    private static final WorldGenLakes LAKES = new WorldGenLakes(Blocks.WATER);
 
     @Override
     public void decorate(World worldIn, Random rand, BlockPos pos) {

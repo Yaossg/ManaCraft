@@ -53,7 +53,7 @@ public class ManaCraftConfig {
     @RangeDouble(min = 0.001, max = 0.036)
     public static double minSpeed = 0.006;
 
-    @Comment("can Mana Produecer Generator replace block")
+    @Comment("can Mana Producer Generator replace block")
     @LangKey("mana_craft.general.replace")
     public static boolean replace = false;
 

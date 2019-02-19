@@ -163,12 +163,12 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
     public static class Render extends RenderLiving<EntityManaShooter> {
 
         static class Model extends ModelBase {
-            public ModelRenderer head = new ModelRenderer(this, 0, 0);
-            public ModelRenderer body = new ModelRenderer(this, 16, 16);
-            public ModelRenderer leg1 = new ModelRenderer(this, 0, 16);
-            public ModelRenderer leg2 = new ModelRenderer(this, 0, 16);
-            public ModelRenderer leg3 = new ModelRenderer(this, 0, 16);
-            public ModelRenderer leg4 = new ModelRenderer(this, 0, 16);
+            public final ModelRenderer head = new ModelRenderer(this, 0, 0);
+            public final ModelRenderer body = new ModelRenderer(this, 16, 16);
+            public final ModelRenderer leg1 = new ModelRenderer(this, 0, 16);
+            public final ModelRenderer leg2 = new ModelRenderer(this, 0, 16);
+            public final ModelRenderer leg3 = new ModelRenderer(this, 0, 16);
+            public final ModelRenderer leg4 = new ModelRenderer(this, 0, 16);
 
             public Model() {
                 head.addBox(-4, -8, -4, 8, 8, 8, 0);

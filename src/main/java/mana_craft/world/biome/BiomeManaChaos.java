@@ -22,16 +22,17 @@ import static mana_craft.block.ManaCraftBlocks.*;
 
 public class BiomeManaChaos extends BiomeMana {
     public static BiomeManaChaos get() {
-        return new BiomeManaChaos(new BiomeProperties("ManaChaos").setBaseBiome("Mana").setHeightVariation(0.25f));
+        return new BiomeManaChaos(new BiomeProperties("ManaChaos").setBaseBiome("Mana").setBaseHeight(0.08f).setHeightVariation(0.3f));
     }
     public static BiomeManaChaos getHills() {
-        return new BiomeManaChaos(new BiomeProperties("ManaChaosHills").setBaseBiome("ManaHills").setBaseHeight(1.2f).setHeightVariation(0.32f));
+        return new BiomeManaChaos(new BiomeProperties("ManaChaosHills").setBaseBiome("ManaHills").setBaseHeight(1).setHeightVariation(0.5f));
     }
 
     protected BiomeManaChaos(BiomeProperties properties) {
         super(properties);
-        decorator.mushroomsPerChunk = 8;
-        spawnableCreatureList.add(new SpawnListEntry(EntityBat.class, 20, 2, 7));
+        decorator.mushroomsPerChunk = 15;
+        decorator.reedsPerChunk = 0;
+        spawnableCreatureList.add(new SpawnListEntry(EntityBat.class, 20, 3, 13));
     }
 
     @Override

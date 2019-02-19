@@ -31,7 +31,7 @@ public class ManaCraftItems {
     public static final Item mana_wand = nonnull();
     public static final Item mana_sword = nonnull();
     public static final Item mana_pickaxe = nonnull();
-    public static final Item mana_axe = nonnull();
+    public static final Item mana_axe = nonnull(); //TODO develop usage of this
     public static final Item mana_shovel = nonnull();
     public static final Item mana_hoe = nonnull();
     public static final Item mana_shears = nonnull();
@@ -39,7 +39,6 @@ public class ManaCraftItems {
     public static final Item mana_chestplate = nonnull();
     public static final Item mana_leggings = nonnull();
     public static final Item mana_boots = nonnull();
-    public static final Item mana_producer_generator = nonnull();
     public static final Item mana_dust = nonnull();
     public static final Item mana_record = nonnull();
     public static final Item mana_rod = nonnull();

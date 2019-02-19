@@ -21,7 +21,7 @@ import sausage_core.api.util.common.SausageUtils;
 import java.util.Random;
 
 public class BlockManaBody extends Block {
-    int value;
+    protected final int value;
     BlockManaBody() {
         this(1.2f, 9);
     }
