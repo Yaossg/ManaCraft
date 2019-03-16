@@ -32,32 +32,32 @@ public class ManaCraftBlocks {
     public interface Manager {
         IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
         static Block addBlock(Material material, MapColor mapColor, ToolMaterial tool, String name) {
-            return manager.addBlock(new Block(material, mapColor) {{
+            return manager.addBlock(name, new Block(material, mapColor) {{
                 setHarvestLevel("pickaxe", tool.getHarvestLevel());
-            }}, name);
+            }});
         }
 
     }
     public static void init() {
         addBlock(Material.ROCK, MapColor.PURPLE, ToolMaterial.STONE, "mana_block")
                 .setHardness(5).setLightLevel(lightLevelOf(7));
-        manager.addBlock(new BlockOrichalcum(), "orichalcum_block");
+        manager.addBlock("orichalcum_block", new BlockOrichalcum());
 
         addBlock(Material.ROCK, MapColor.STONE, ToolMaterial.IRON, "orichalcum_ore")
                 .setHardness(4).setLightLevel(lightLevelOf(5));
         addBlock(Material.IRON, MapColor.PURPLE, ToolMaterial.IRON, "machine_frame")
                 .setHardness(5).setLightLevel(lightLevelOf(11));
-        manager.addBlock(new BlockManaGlass(), "mana_glass")
+        manager.addBlock("mana_glass", new BlockManaGlass())
                 .setHardness(1).setLightLevel(lightLevelOf(9));
-        manager.addBlock(new Block(Material.GLASS, MapColor.PURPLE), "mana_lantern")
+        manager.addBlock("mana_lantern", new Block(Material.GLASS, MapColor.PURPLE))
                 .setHardness(1.2f).setLightLevel(lightLevelOf(16));
-        manager.addBlock(new BlockManaOre(), "mana_ore");
-        manager.addBlock(new BlockManaProducer(), "mana_producer");
-        manager.addBlock(new BlockManaBooster(), "mana_booster");
-        manager.addBlock(new BlockManaHead(), "mana_head");
-        manager.addBlock(new BlockManaBody(), "mana_body");
-        manager.addBlock(new BlockManaFoot(), "mana_foot");
-        manager.addBlock(new BlockManaObsidian(), "mana_obsidian");
+        manager.addBlock("mana_ore", new BlockManaOre());
+        manager.addBlock("mana_producer", new BlockManaProducer());
+        manager.addBlock("mana_booster", new BlockManaBooster());
+        manager.addBlock("mana_head", new BlockManaHead());
+        manager.addBlock("mana_body", new BlockManaBody());
+        manager.addBlock("mana_foot", new BlockManaFoot());
+        manager.addBlock("mana_obsidian", new BlockManaObsidian());
     }
 
 
