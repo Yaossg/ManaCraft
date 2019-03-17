@@ -23,7 +23,7 @@ public class PluginTConstruct extends PluginTConstructCore {
     @Override
     public void run() {
         Fluid mana = addMoltenFluid("mana", Colors.PURPLE, 450);
-        Fluid mana_obsidian = addMoltenFluid("mana_obsidian", Colors.fromRGB(0.25F, 0, 0.25F), 800);
+        Fluid mana_obsidian = addMoltenFluid("mana_obsidian", 0xFF400040, 800);
         Fluid mana_glass = addMoltenFluid("mana_glass", Colors.PLUM, 600);
         Fluid orichalcum = addMoltenFluid("orichalcum", Colors.MAGENTA, 550);
         integrate(orichalcum, "Orichalcum").toolforge();

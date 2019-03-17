@@ -11,6 +11,7 @@ import net.minecraft.potion.PotionType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import sausage_core.api.core.common.PotionTypeModID;
 
+import static net.minecraft.potion.PotionHelper.*;
 import static sausage_core.api.util.common.Conversions.To.item;
 
 public class ManaCraftPotions {
@@ -29,9 +30,9 @@ public class ManaCraftPotions {
     }
 
     public static void init() {
-        PotionHelper.addMix(PotionTypes.AWKWARD, ManaCraftItems.mana_ball, mana_evoker);
-        PotionHelper.addMix(mana_evoker, Items.REDSTONE, long_mana_evoker);
-        PotionHelper.addMix(mana_evoker, Items.GLOWSTONE_DUST, strong_mana_evoker);
-        PotionHelper.addMix(PotionTypes.AWKWARD, item(ManaCraftBlocks.mana_foot), mega_mana_evoker);
+        addMix(PotionTypes.AWKWARD, ManaCraftItems.mana_ball, mana_evoker);
+        addMix(mana_evoker, Items.REDSTONE, long_mana_evoker);
+        addMix(mana_evoker, Items.GLOWSTONE_DUST, strong_mana_evoker);
+        addMix(PotionTypes.AWKWARD, item(ManaCraftBlocks.mana_foot), mega_mana_evoker);
     }
 }

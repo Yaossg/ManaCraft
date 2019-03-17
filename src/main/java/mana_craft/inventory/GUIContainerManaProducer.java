@@ -18,7 +18,7 @@ public class GUIContainerManaProducer extends GUIContainerBase {
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String translateKey = "container.mana_craft.mana_producer.";
         String title = I18n.format(translateKey + "title");
-        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIMGRAY);
+        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIM_GRAY);
     }
 
     public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_producer");

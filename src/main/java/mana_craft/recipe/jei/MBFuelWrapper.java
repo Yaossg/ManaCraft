@@ -39,7 +39,7 @@ public class MBFuelWrapper implements IRecipeWrapper {
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
         flame.draw(minecraft, 1, 0);
-        minecraft.fontRenderer.drawString(info[0], 24, 4, Colors.DIMGRAY);
-        minecraft.fontRenderer.drawString(info[1], 24, 22, Colors.DIMGRAY);
+        minecraft.fontRenderer.drawString(info[0], 24, 4, Colors.DIM_GRAY);
+        minecraft.fontRenderer.drawString(info[1], 24, 22, Colors.DIM_GRAY);
     }
 }

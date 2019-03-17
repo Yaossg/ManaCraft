@@ -11,7 +11,6 @@ import mana_craft.item.ItemManaArmor;
 import mana_craft.item.ItemManaTools;
 import mana_craft.loot.ManaCraftLoots;
 import mana_craft.potion.ManaCraftPotions;
-import mana_craft.recipe.ManaCraftRecipes;
 import mana_craft.subscriber.ManaCraftSubscribers;
 import mana_craft.tile.TileManaBooster;
 import mana_craft.tile.TileManaProducer;
@@ -32,6 +31,7 @@ import static mana_craft.api.registry.ManaCraftRegistries.MB_FUELS;
 import static mana_craft.api.registry.ManaCraftRegistries.MP_RECIPES;
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
+import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
 public class CommonProxy {
@@ -68,7 +68,10 @@ public class CommonProxy {
     }
 
     static void misc() {
-        ManaCraftRecipes.addSmelt();
+        addSmelting(orichalcum_dust, new ItemStack(orichalcum_ingot), 0.05f);
+        addSmelting(mana_ore, new ItemStack(mana, 4), 0.3f);
+        addSmelting(orichalcum_ore, new ItemStack(orichalcum_ingot), 0.4f);
+        addSmelting(mana_block, new ItemStack(mana_ball, 2), 0.2f);
         BlockManaHead.init();
 
         ItemManaTools.MANA_TOOL.setRepairItem(new ItemStack(orichalcum_ingot));

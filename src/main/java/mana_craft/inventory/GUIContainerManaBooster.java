@@ -17,14 +17,14 @@ public class GUIContainerManaBooster extends GUIContainerBase {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String title = I18n.format("container.mana_craft.mana_booster.title");
-        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIMGRAY);
+        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIM_GRAY);
         ContainerManaBooster self = GUIHelper.getContainer(this);
         String translateKey = "gui.jei.category.mana_craft.mana_booster.";
         if(self.burn_time != 0) {
-            fontRenderer.drawString(I18n.format(translateKey + "level", self.burn_level), 75, 24, Colors.DIMGRAY);
-            fontRenderer.drawString(I18n.format(translateKey + "time", self.burn_time), 75, 42, Colors.DIMGRAY);
+            fontRenderer.drawString(I18n.format(translateKey + "level", self.burn_level), 75, 24, Colors.DIM_GRAY);
+            fontRenderer.drawString(I18n.format(translateKey + "time", self.burn_time), 75, 42, Colors.DIM_GRAY);
         } else {
-            fontRenderer.drawString(I18n.format("container.mana_craft.mana_booster.idle"), 75, 24, Colors.DIMGRAY);
+            fontRenderer.drawString(I18n.format("container.mana_craft.mana_booster.idle"), 75, 24, Colors.DIM_GRAY);
         }
     }
 

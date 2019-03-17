@@ -76,7 +76,7 @@ public class ManaCraftSubscribers {
                         .id("mana_shooter", nextEntityID++)
                         .name("mana_craft.ManaShooter")
                         .tracker(64, 3, true)
-                        .egg(Colors.MAGENTA, Colors.DIMGRAY).build()
+                        .egg(Colors.MAGENTA, Colors.DIM_GRAY).build()
         );
     }
 

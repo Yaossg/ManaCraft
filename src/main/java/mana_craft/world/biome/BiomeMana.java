@@ -68,17 +68,17 @@ public class BiomeMana extends Biome {
 
     @Override
     final public int getSkyColorByTemp(float currentTemperature) {
-        return Colors.DEEPPINK;
+        return Colors.DEEP_PINK;
     }
 
     @Override
     final public int getModdedBiomeGrassColor(int original) {
-        return Colors.DEEPPINK;
+        return Colors.DEEP_PINK;
     }
 
     @Override
     final public int getModdedBiomeFoliageColor(int original) {
-        return Colors.DEEPPINK;
+        return Colors.DEEP_PINK;
     }
 
     static final IBlockState LOG = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.OAK);
