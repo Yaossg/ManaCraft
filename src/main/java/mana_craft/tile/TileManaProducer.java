@@ -37,6 +37,7 @@ import static net.minecraft.block.state.BlockWorldState.hasState;
 import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 
 public class TileManaProducer extends TileBase implements ITickable, ITileDropItems, IMachineLogic {
+    // TODO use ATP
     public int progress;
     public int work_time;
     public PortableItemStackHandler input = new PortableItemStackHandler(4) {

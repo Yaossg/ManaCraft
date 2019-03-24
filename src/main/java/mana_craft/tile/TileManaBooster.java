@@ -30,6 +30,7 @@ import static mana_craft.config.ManaCraftConfig.boostLimit;
 import static mana_craft.config.ManaCraftConfig.boostRadius;
 
 public class TileManaBooster extends TileBase implements ITickable, ITileDropItems, IMachineLogic {
+    // TODO use ATP
     public int burn_time;
     public int burn_level;
     public int total_burn_time;
@@ -72,11 +73,6 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
         if(hasCapItem(capability, side)) return SausageUtils.rawtype(handler);
         return super.getCapability(capability, side);
-    }
-
-    static {
-        BOOST_ITEM.register(new ManaBoostItem<>(TileEntityFurnace.class, furnace -> furnace.isBurning(), ITickable::update));
-        BOOST_ITEM.register(new ManaBoostItem<>(TileEntityBrewingStand.class, brew -> brew.getField(0) > 0, ITickable::update));
     }
 
     boolean detect0() {
