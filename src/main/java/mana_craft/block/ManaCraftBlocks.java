@@ -32,7 +32,7 @@ public class ManaCraftBlocks {
 	public interface Manager {
 		IBRegistryManager manager = new IBRegistryManager(ManaCraft.MODID, ManaCraft.tabMana);
 
-		static Block addBlock(Material material, MapColor mapColor, ToolMaterial tool, String name) {
+		static Block addBlock(String name, Material material, MapColor mapColor, ToolMaterial tool) {
 			return manager.addBlock(name, new Block(material, mapColor) {{
 				setHarvestLevel("pickaxe", tool.getHarvestLevel());
 			}});
@@ -40,13 +40,12 @@ public class ManaCraftBlocks {
 	}
 
 	public static void init() {
-		addBlock(Material.ROCK, MapColor.PURPLE, ToolMaterial.STONE, "mana_block")
+		addBlock("mana_block", Material.ROCK, MapColor.PURPLE, ToolMaterial.STONE)
 				.setHardness(5).setLightLevel(lightLevelOf(7));
 		manager.addBlock("orichalcum_block", new BlockOrichalcum());
-
-		addBlock(Material.ROCK, MapColor.STONE, ToolMaterial.IRON, "orichalcum_ore")
+		addBlock("orichalcum_ore", Material.ROCK, MapColor.STONE, ToolMaterial.IRON)
 				.setHardness(4).setLightLevel(lightLevelOf(5));
-		addBlock(Material.IRON, MapColor.PURPLE, ToolMaterial.IRON, "machine_frame")
+		addBlock("machine_frame", Material.IRON, MapColor.PURPLE, ToolMaterial.IRON)
 				.setHardness(5).setLightLevel(lightLevelOf(11));
 		manager.addBlock("mana_glass", new BlockManaGlass())
 				.setHardness(1).setLightLevel(lightLevelOf(9));

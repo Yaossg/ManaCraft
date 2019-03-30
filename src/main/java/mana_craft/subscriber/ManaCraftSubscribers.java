@@ -91,7 +91,15 @@ public class ManaCraftSubscribers {
 	public static void onInfoCard(InfoCardEvent event) {
 		event.modInfo.addModTitle(ManaCraft.MODID, ManaCraft.NAME, ManaCraft.VERSION, "Yaossg")
 				.withStyle(style -> style.setColor(TextFormatting.GREEN))
-				.addText("Mana is the power of nature!");
+				.addText("Mana is the power of nature!")
+				.newline()
+				.addI18nText("Please visit")
+				.addText(" ")
+				.withStyle(style -> style.setColor(TextFormatting.BLUE))
+				.addURL("HERE", "https://github.com/Yaossg/tutorial/blob/master/mana_craft/declaration.md")
+				.withStyle()
+				.addText(" ")
+				.addI18nText("for the declaration about me");
 		if(!Loader.isModLoaded("sausages_factory"))
 			event.modInfo.newline()
 					.withStyle(style -> style.setColor(TextFormatting.GOLD).setItalic(true))

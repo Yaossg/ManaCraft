@@ -108,7 +108,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 				.limit(boostLimit)
 				.collect(Collectors.toList())) {
 			for(int i = 0; i < burn_level; ++i) tile.update();
-			burn_time -= 4;
+			burn_time -= 3;
 		}
 		for(EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
 			BlockPos offset = pos.offset(facing);
@@ -120,7 +120,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 			TileEntity tileEntity = world.getTileEntity(offset);
 			if(tileEntity instanceof ITickable) {
 				((ITickable) tileEntity).update();
-				burn_time -= 5;
+				burn_time -= 7;
 			}
 		}
 		if(burn_time < 0) burn_time = 0;

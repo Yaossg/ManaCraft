@@ -10,7 +10,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureBoundingBox;
 import net.minecraft.world.gen.structure.StructureComponent;
+import sausage_core.api.util.common.SausageUtils;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -83,7 +86,6 @@ public class StructureVillageMP extends Village {
 		setBlockState(worldIn, glass, 4, 2, 3, boundingBox);
 		setBlockState(worldIn, glass, 3, 2, 4, boundingBox);
 
-		//noinspection ConstantConditions <-look at constrcutor
 		setBlockState(worldIn, mana_producer.getDefaultState().withProperty(BlockManaProducer.FACING, getCoordBaseMode().getOpposite()), 3, 2, 3, boundingBox);
 
 		spawnVillagers(worldIn, boundingBox, 3, 1, 0, 2);
@@ -110,7 +112,6 @@ public class StructureVillageMP extends Village {
 		@Override
 		public Village buildComponent(PieceWeight villagePiece, Start startPiece, List<StructureComponent> pieces, Random random, int x, int y, int z, EnumFacing facing, int size) {
 			StructureBoundingBox box = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 7, 7, 7, facing);
-			//noinspection ConstantConditions <-stupid idea thinks it always false
 			return canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null ? new StructureVillageMP(startPiece, size, box, facing) : null;
 		}
 	}

@@ -31,12 +31,14 @@ public class ManaCraftWorldGens {
 	public static void init() {
 		if(ManaCraftConfig.village)
 			MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
+
 		if(ManaCraftConfig.village_structure) {
 			registerStructureComponent(StructureVillageMP.class, ManaCraft.MODID + ":ViMP");
 			instance().registerVillageCreationHandler(new StructureVillageMP.Handler());
 			registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
 			instance().registerVillageCreationHandler(new StructureVillageML.Handler());
 		}
+
 		WorldGenBuilder mana = new WorldGenBuilder(IWorldGenWrapper.of(MANA))
 				.atDimension(DimensionType.OVERWORLD)
 				.loop(timesManaOre)
@@ -55,6 +57,7 @@ public class ManaCraftWorldGens {
 				.times(mixtureChance)
 				.offsetEach(WorldGenUtils::commonOffset)
 				.offsetEach((random, pos) -> pos.up(random.nextInt(heightMixture)));
+
 		int weight = ManaCraft.MODID.hashCode();
 
 		registerWorldGenerator(mana.copy().build().toIWorldGenerator(), weight);

@@ -56,7 +56,6 @@ public class StructureVillageML extends Village {
 		@Override
 		public Village buildComponent(PieceWeight villagePiece, Start startPiece, List<StructureComponent> pieces, Random random, int x, int y, int z, EnumFacing facing, int size) {
 			StructureBoundingBox box = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 3, 4, 2, facing);
-			//noinspection ConstantConditions <-stupid idea thinks it always false
 			return canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null ? new StructureVillageML(startPiece, size, box, facing) : null;
 		}
 	}
