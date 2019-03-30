@@ -8,24 +8,25 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class EnchantmentManaRecycler extends Enchantment {
-    static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_damagable", IItemManaDamagable.class::isInstance);
-    public EnchantmentManaRecycler() {
-        super(Rarity.UNCOMMON, TYPE, EntityEquipmentSlot.values());
-        setName(ManaCraft.MODID + ".mana_recycler").setRegistryName("mana_recycler");
-    }
-    @Override
-    public int getMaxLevel() {
-        return 5;
-    }
+	static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_damagable", IItemManaDamagable.class::isInstance);
 
-    @Override
-    public int getMinEnchantability(int enchantmentLevel) {
-        return 5 + (enchantmentLevel - 1) * 10;
-    }
+	public EnchantmentManaRecycler() {
+		super(Rarity.UNCOMMON, TYPE, EntityEquipmentSlot.values());
+		setName(ManaCraft.MODID + ".mana_recycler").setRegistryName("mana_recycler");
+	}
 
-    @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
-        return getMinEnchantability(enchantmentLevel) + 20;
-    }
+	@Override
+	public int getMaxLevel() {
+		return 5;
+	}
 
+	@Override
+	public int getMinEnchantability(int enchantmentLevel) {
+		return 5 + (enchantmentLevel - 1) * 10;
+	}
+
+	@Override
+	public int getMaxEnchantability(int enchantmentLevel) {
+		return getMinEnchantability(enchantmentLevel) + 20;
+	}
 }

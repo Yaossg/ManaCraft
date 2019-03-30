@@ -18,31 +18,31 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class BlockManaObsidian extends Block {
-    BlockManaObsidian() {
-        super(Material.ROCK);
-        setHardness(40);
-        setResistance(1600);
-        setSoundType(SoundType.STONE);
-        setHarvestLevel("pickaxe", Item.ToolMaterial.DIAMOND.getHarvestLevel());
-    }
+	BlockManaObsidian() {
+		super(Material.ROCK);
+		setHardness(40);
+		setResistance(1600);
+		setSoundType(SoundType.STONE);
+		setHarvestLevel("pickaxe", Item.ToolMaterial.DIAMOND.getHarvestLevel());
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this) {
-            @Override
-            protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
-                return new StateImplementation(block, properties) {
-                    @Override
-                    public MapColor getMapColor(IBlockAccess p_185909_1_, BlockPos p_185909_2_) {
-                        return MapColor.PURPLE;
-                    }
-                };
-            }
-        };
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this) {
+			@Override
+			protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
+				return new StateImplementation(block, properties) {
+					@Override
+					public MapColor getMapColor(IBlockAccess p_185909_1_, BlockPos p_185909_2_) {
+						return MapColor.PURPLE;
+					}
+				};
+			}
+		};
+	}
 
-    @Override
-    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
-        return false;
-    }
+	@Override
+	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+		return false;
+	}
 }

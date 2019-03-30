@@ -13,21 +13,22 @@ import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 @ObjectHolder(ManaCraft.MODID)
 public class ManaCraftBiomes {
-    public static final Biome mana = nonnull();
-    public static final Biome mana_hills = nonnull();
-    public static final Biome mana_chaos = nonnull();
-    public static final Biome mana_chaos_hills = nonnull();
-    public static void init() {
-        addBiome(WARM, new BiomeEntry(mana, 6));
-        addTypes(mana, Type.MAGICAL);
-        addBiome(WARM, new BiomeEntry(mana_hills, 3));
-        addTypes(mana_hills, Type.MAGICAL, Type.HILLS);
+	public static final Biome mana = nonnull();
+	public static final Biome mana_hills = nonnull();
+	public static final Biome mana_chaos = nonnull();
+	public static final Biome mana_chaos_hills = nonnull();
 
-        addBiome(WARM, new BiomeEntry(mana_chaos, 4));
-        addTypes(mana_chaos, Type.MAGICAL, Type.RARE);
-        addBiome(WARM, new BiomeEntry(mana_chaos_hills, 2));
-        addTypes(mana_chaos_hills, Type.MAGICAL, Type.HILLS, Type.RARE);
-        if(ManaCraftConfig.village)
-            addVillageBiome(mana, true);
-    }
+	public static void init() {
+		addBiome(WARM, new BiomeEntry(mana, 6));
+		addTypes(mana, Type.MAGICAL);
+		addBiome(WARM, new BiomeEntry(mana_hills, 3));
+		addTypes(mana_hills, Type.MAGICAL, Type.HILLS);
+
+		addBiome(WARM, new BiomeEntry(mana_chaos, 4));
+		addTypes(mana_chaos, Type.MAGICAL, Type.RARE);
+		addBiome(WARM, new BiomeEntry(mana_chaos_hills, 2));
+		addTypes(mana_chaos_hills, Type.MAGICAL, Type.HILLS, Type.RARE);
+		if(ManaCraftConfig.village)
+			addVillageBiome(mana, true);
+	}
 }

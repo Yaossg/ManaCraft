@@ -25,78 +25,78 @@ import static net.minecraftforge.fml.common.registry.GameRegistry.registerWorldG
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.instance;
 
 public class ManaCraftWorldGens {
-    static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.mana_ore.getDefaultState(), sizeManaOre);
-    static final WorldGenMinable ORICHALCUM = new WorldGenMinable(ManaCraftBlocks.orichalcum_ore.getDefaultState(), sizeOrichalcumOre);
-    public static void init() {
-        if(ManaCraftConfig.village)
-            MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
-        if(ManaCraftConfig.village_structure) {
-            registerStructureComponent(StructureVillageMP.class, ManaCraft.MODID + ":ViMP");
-            instance().registerVillageCreationHandler(new StructureVillageMP.Handler());
-            registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
-            instance().registerVillageCreationHandler(new StructureVillageML.Handler());
-        }
-        WorldGenBuilder mana = new WorldGenBuilder(IWorldGenWrapper.of(MANA))
-                .atDimension(DimensionType.OVERWORLD)
-                .loop(timesManaOre)
-                .offsetEach(WorldGenUtils::commonOffset)
-                .offsetEach((random, pos) -> pos.up(random.nextInt(heightManaOre)));
-        WorldGenBuilder orichalcum = new WorldGenBuilder(IWorldGenWrapper.of(ORICHALCUM))
-                .atDimension(DimensionType.OVERWORLD)
-                .loop(timesOrichalcumOre)
-                .offsetEach(WorldGenUtils::commonOffset)
-                .offsetEach((random, pos) -> pos.up(random.nextInt(heightOrichalcumOre)));
-        WorldGenBuilder mixture = new WorldGenBuilder((random, world, pos) -> {
-            MANA.generate(world, random, pos);
-            ORICHALCUM.generate(world, random, pos);
-        })
-                .atDimension(DimensionType.OVERWORLD)
-                .times(mixtureChance)
-                .offsetEach(WorldGenUtils::commonOffset)
-                .offsetEach((random, pos) -> pos.up(random.nextInt(heightMixture)));
-        int weight = ManaCraft.MODID.hashCode();
+	static final WorldGenMinable MANA = new WorldGenMinable(ManaCraftBlocks.mana_ore.getDefaultState(), sizeManaOre);
+	static final WorldGenMinable ORICHALCUM = new WorldGenMinable(ManaCraftBlocks.orichalcum_ore.getDefaultState(), sizeOrichalcumOre);
 
-        registerWorldGenerator(mana.copy().build().toIWorldGenerator(), weight);
-        registerWorldGenerator(orichalcum.copy().build().toIWorldGenerator(), weight);
-        registerWorldGenerator(mixture.copy().build().toIWorldGenerator(), weight);
+	public static void init() {
+		if(ManaCraftConfig.village)
+			MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
+		if(ManaCraftConfig.village_structure) {
+			registerStructureComponent(StructureVillageMP.class, ManaCraft.MODID + ":ViMP");
+			instance().registerVillageCreationHandler(new StructureVillageMP.Handler());
+			registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
+			instance().registerVillageCreationHandler(new StructureVillageML.Handler());
+		}
+		WorldGenBuilder mana = new WorldGenBuilder(IWorldGenWrapper.of(MANA))
+				.atDimension(DimensionType.OVERWORLD)
+				.loop(timesManaOre)
+				.offsetEach(WorldGenUtils::commonOffset)
+				.offsetEach((random, pos) -> pos.up(random.nextInt(heightManaOre)));
+		WorldGenBuilder orichalcum = new WorldGenBuilder(IWorldGenWrapper.of(ORICHALCUM))
+				.atDimension(DimensionType.OVERWORLD)
+				.loop(timesOrichalcumOre)
+				.offsetEach(WorldGenUtils::commonOffset)
+				.offsetEach((random, pos) -> pos.up(random.nextInt(heightOrichalcumOre)));
+		WorldGenBuilder mixture = new WorldGenBuilder((random, world, pos) -> {
+			MANA.generate(world, random, pos);
+			ORICHALCUM.generate(world, random, pos);
+		})
+				.atDimension(DimensionType.OVERWORLD)
+				.times(mixtureChance)
+				.offsetEach(WorldGenUtils::commonOffset)
+				.offsetEach((random, pos) -> pos.up(random.nextInt(heightMixture)));
+		int weight = ManaCraft.MODID.hashCode();
 
-        registerWorldGenerator(mana.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
-        registerWorldGenerator(orichalcum.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
-        registerWorldGenerator(mixture.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
+		registerWorldGenerator(mana.copy().build().toIWorldGenerator(), weight);
+		registerWorldGenerator(orichalcum.copy().build().toIWorldGenerator(), weight);
+		registerWorldGenerator(mixture.copy().build().toIWorldGenerator(), weight);
 
-        registerWorldGenerator(mana.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
-        registerWorldGenerator(orichalcum.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
-        registerWorldGenerator(mixture.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+		registerWorldGenerator(mana.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
+		registerWorldGenerator(orichalcum.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
+		registerWorldGenerator(mixture.copy().atBiome(BiomeMana.class::isInstance).build().toIWorldGenerator(), weight);
 
-    }
+		registerWorldGenerator(mana.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+		registerWorldGenerator(orichalcum.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+		registerWorldGenerator(mixture.copy().atBiome(BiomeManaChaos.class::isInstance).build().toIWorldGenerator(), weight);
+	}
 
-    @SuppressWarnings("deprecation")
-    @SubscribeEvent
-    public static void onGetVillageBlock(BiomeEvent.GetVillageBlockID event) {
-        if(event.getBiome() instanceof BiomeMana) {
-            IBlockState original = event.getOriginal();
-            event.setReplacement(original);
-            event.setResult(Event.Result.DENY);
-            if(original.getBlock() == Blocks.LOG || original.getBlock() == Blocks.LOG2)
-                event.setReplacement(Blocks.BONE_BLOCK.getDefaultState().withProperty(BlockBone.AXIS, EnumFacing.Axis.Y));
+	@SuppressWarnings("deprecation")
+	@SubscribeEvent
+	public static void onGetVillageBlock(BiomeEvent.GetVillageBlockID event) {
+		if(event.getBiome() instanceof BiomeMana) {
+			IBlockState original = event.getOriginal();
+			event.setReplacement(original);
+			event.setResult(Event.Result.DENY);
+			if(original.getBlock() == Blocks.LOG || original.getBlock() == Blocks.LOG2)
+				event.setReplacement(Blocks.BONE_BLOCK.getDefaultState().withProperty(BlockBone.AXIS, EnumFacing.Axis.Y));
 
-            if(original.getBlock() == Blocks.GRASS_PATH)
-                event.setReplacement(ManaCraftBlocks.mana_block.getDefaultState());
+			if(original.getBlock() == Blocks.GRASS_PATH)
+				event.setReplacement(ManaCraftBlocks.mana_block.getDefaultState());
 
-            if(original.getBlock() == Blocks.COBBLESTONE)
-                event.setReplacement(Blocks.STONEBRICK.getDefaultState());
+			if(original.getBlock() == Blocks.COBBLESTONE)
+				event.setReplacement(Blocks.STONEBRICK.getDefaultState());
 
-            if(original.getBlock() == Blocks.STONE_STAIRS)
-                event.setReplacement(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(original.getBlock().getMetaFromState(original)));
+			if(original.getBlock() == Blocks.STONE_STAIRS)
+				event.setReplacement(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(original.getBlock().getMetaFromState(original)));
 
-            if(original.getBlock() == Blocks.PLANKS)
-                event.setReplacement(Blocks.BRICK_BLOCK.getDefaultState());
+			if(original.getBlock() == Blocks.PLANKS)
+				event.setReplacement(Blocks.BRICK_BLOCK.getDefaultState());
 
-            if(original.getBlock() == Blocks.OAK_STAIRS)
-                event.setReplacement(Blocks.BRICK_STAIRS.getStateFromMeta(original.getBlock().getMetaFromState(original)));
+			if(original.getBlock() == Blocks.OAK_STAIRS)
+				event.setReplacement(Blocks.BRICK_STAIRS.getStateFromMeta(original.getBlock().getMetaFromState(original)));
 
-            if(original.getBlock() == Blocks.OAK_FENCE)
-                event.setReplacement(Blocks.NETHER_BRICK_FENCE.getDefaultState());
-        }
-    }
+			if(original.getBlock() == Blocks.OAK_FENCE)
+				event.setReplacement(Blocks.NETHER_BRICK_FENCE.getDefaultState());
+		}
+	}
 }

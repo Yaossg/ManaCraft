@@ -16,47 +16,48 @@ import static net.minecraft.world.gen.structure.StructureVillagePieces.*;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 
 public class StructureVillageML extends Village {
-    @SuppressWarnings("unused")
-    public StructureVillageML() {}
-    public StructureVillageML(Start start, int type, StructureBoundingBox box, EnumFacing facing) {
-        super(start, type);
-        setCoordBaseMode(facing);
-        boundingBox = box;
-    }
+	@SuppressWarnings("unused")
+	public StructureVillageML() {}
 
-    @Override
-    public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox box) {
-        if (averageGroundLvl < 0) {
-            averageGroundLvl = getAverageGroundLevel(worldIn, box);
-            if(averageGroundLvl < 0)
-                return true;
-            boundingBox.offset(0, averageGroundLvl - boundingBox.maxY + 4 - 1, 0);
-        }
-        IBlockState fence = getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
-        fillWithAir(worldIn, box, 0, 0, 0, 2, 3, 1);
-        setBlockState(worldIn, fence, 1, 0, 0, boundingBox);
-        setBlockState(worldIn, fence, 1, 1, 0, boundingBox);
-        setBlockState(worldIn, fence, 1, 2, 0, boundingBox);
-        setBlockState(worldIn, ManaCraftBlocks.mana_lantern.getDefaultState(), 1, 3, 0, boundingBox);
-        return true;
-    }
+	public StructureVillageML(Start start, int type, StructureBoundingBox box, EnumFacing facing) {
+		super(start, type);
+		setCoordBaseMode(facing);
+		boundingBox = box;
+	}
 
-    public static class Handler implements IVillageCreationHandler {
-        @Override
-        public PieceWeight getVillagePieceWeight(Random random, int size) {
-            return new PieceWeight(StructureVillageML.class, 2, MathHelper.getInt(random, 1 + size, 3 + size * 2));
-        }
+	@Override
+	public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox box) {
+		if(averageGroundLvl < 0) {
+			averageGroundLvl = getAverageGroundLevel(worldIn, box);
+			if(averageGroundLvl < 0)
+				return true;
+			boundingBox.offset(0, averageGroundLvl - boundingBox.maxY + 4 - 1, 0);
+		}
+		IBlockState fence = getBiomeSpecificBlockState(Blocks.OAK_FENCE.getDefaultState());
+		fillWithAir(worldIn, box, 0, 0, 0, 2, 3, 1);
+		setBlockState(worldIn, fence, 1, 0, 0, boundingBox);
+		setBlockState(worldIn, fence, 1, 1, 0, boundingBox);
+		setBlockState(worldIn, fence, 1, 2, 0, boundingBox);
+		setBlockState(worldIn, ManaCraftBlocks.mana_lantern.getDefaultState(), 1, 3, 0, boundingBox);
+		return true;
+	}
 
-        @Override
-        public Class<?> getComponentClass() {
-            return StructureVillageML.class;
-        }
+	public static class Handler implements IVillageCreationHandler {
+		@Override
+		public PieceWeight getVillagePieceWeight(Random random, int size) {
+			return new PieceWeight(StructureVillageML.class, 2, MathHelper.getInt(random, 1 + size, 3 + size * 2));
+		}
 
-        @Override
-        public Village buildComponent(PieceWeight villagePiece, Start startPiece, List<StructureComponent> pieces, Random random, int x, int y, int z, EnumFacing facing, int size) {
-            StructureBoundingBox box = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 3, 4, 2, facing);
-            //noinspection ConstantConditions <-stupid idea thinks it always false
-            return canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null ? new StructureVillageML(startPiece, size,  box, facing) : null;
-        }
-    }
+		@Override
+		public Class<?> getComponentClass() {
+			return StructureVillageML.class;
+		}
+
+		@Override
+		public Village buildComponent(PieceWeight villagePiece, Start startPiece, List<StructureComponent> pieces, Random random, int x, int y, int z, EnumFacing facing, int size) {
+			StructureBoundingBox box = StructureBoundingBox.getComponentToAddBoundingBox(x, y, z, 0, 0, 0, 3, 4, 2, facing);
+			//noinspection ConstantConditions <-stupid idea thinks it always false
+			return canVillageGoDeeper(box) && StructureComponent.findIntersecting(pieces, box) == null ? new StructureVillageML(startPiece, size, box, facing) : null;
+		}
+	}
 }

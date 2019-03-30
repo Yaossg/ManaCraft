@@ -10,31 +10,32 @@ import sausage_core.api.util.client.Colors;
 import sausage_core.api.util.client.GUIHelper;
 
 public class GUIContainerManaBooster extends GUIContainerBase {
-    GUIContainerManaBooster(Container inventorySlotsIn) {
-        super(inventorySlotsIn, 176, 144, texture);
-    }
+	GUIContainerManaBooster(Container inventorySlotsIn) {
+		super(inventorySlotsIn, 176, 144, texture);
+	}
 
-    @Override
-    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String title = I18n.format("container.mana_craft.mana_booster.title");
-        GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIM_GRAY);
-        ContainerManaBooster self = GUIHelper.getContainer(this);
-        String translateKey = "gui.jei.category.mana_craft.mana_booster.";
-        if(self.burn_time != 0) {
-            fontRenderer.drawString(I18n.format(translateKey + "level", self.burn_level), 75, 24, Colors.DIM_GRAY);
-            fontRenderer.drawString(I18n.format(translateKey + "time", self.burn_time), 75, 42, Colors.DIM_GRAY);
-        } else {
-            fontRenderer.drawString(I18n.format("container.mana_craft.mana_booster.idle"), 75, 24, Colors.DIM_GRAY);
-        }
-    }
+	@Override
+	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+		String title = I18n.format("container.mana_craft.mana_booster.title");
+		GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIM_GRAY);
+		ContainerManaBooster self = GUIHelper.getContainer(this);
+		String translateKey = "gui.jei.category.mana_craft.mana_booster.";
+		if(self.burn_time != 0) {
+			fontRenderer.drawString(I18n.format(translateKey + "level", self.burn_level), 75, 24, Colors.DIM_GRAY);
+			fontRenderer.drawString(I18n.format(translateKey + "time", self.burn_time), 75, 42, Colors.DIM_GRAY);
+		} else {
+			fontRenderer.drawString(I18n.format("container.mana_craft.mana_booster.idle"), 75, 24, Colors.DIM_GRAY);
+		}
+	}
 
-    public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_booster");
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-        super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
-        int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
-        ContainerManaBooster self = GUIHelper.getContainer(this);
-        int textureHeight = MathHelper.ceil(14.0 * self.burn_time / self.total_burn_time);
-        drawTexturedModalRect(offsetX + 52, offsetY + 34 - textureHeight, 176, 14 - textureHeight, 14, textureHeight);
-    }
+	public static final ResourceLocation texture = GUIHelper.getTexture(ManaCraft.MODID, "mana_booster");
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+		int offsetX = (width - xSize) / 2, offsetY = (height - ySize) / 2;
+		ContainerManaBooster self = GUIHelper.getContainer(this);
+		int textureHeight = MathHelper.ceil(14.0 * self.burn_time / self.total_burn_time);
+		drawTexturedModalRect(offsetX + 52, offsetY + 34 - textureHeight, 176, 14 - textureHeight, 14, textureHeight);
+	}
 }

@@ -10,17 +10,15 @@ import net.minecraft.world.IBlockAccess;
 import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
 
 class BlockOrichalcum extends Block {
+	public BlockOrichalcum() {
+		super(Material.ROCK, MapColor.PURPLE);
+		setHardness(6);
+		setLightLevel(lightLevelOf(10));
+		setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
+	}
 
-    public BlockOrichalcum() {
-        super(Material.ROCK, MapColor.PURPLE);
-        setHardness(6);
-        setLightLevel(lightLevelOf(10));
-        setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
-    }
-
-    @Override
-    public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
-        return true;
-    }
-
+	@Override
+	public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+		return true;
+	}
 }

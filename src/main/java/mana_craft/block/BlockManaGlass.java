@@ -8,16 +8,16 @@ import net.minecraft.item.Item;
 import java.util.Random;
 
 class BlockManaGlass extends BlockGlass {
-    BlockManaGlass() {
-        super(Material.GLASS, false);
-        setHardness(0.5f);
-        setResistance(1500);
-        setSoundType(SoundType.GLASS);
-        setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
-    }
+	BlockManaGlass() {
+		super(Material.GLASS, false);
+		setHardness(0.5f);
+		setResistance(1500);
+		setSoundType(SoundType.GLASS);
+		setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
+	}
 
-    @Override
-    public int quantityDropped(Random random) {
-        return 1;
-    }
+	@Override
+	public int quantityDropped(Random random) {
+		return 1;
+	}
 }

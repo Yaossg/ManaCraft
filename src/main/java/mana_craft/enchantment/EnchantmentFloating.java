@@ -8,20 +8,21 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class EnchantmentFloating extends Enchantment {
-    static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_wand", ItemManaWand.class::isInstance);
-    public EnchantmentFloating() {
-        super(Rarity.VERY_RARE, TYPE,
-                new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
-        setName(ManaCraft.MODID + ".floating").setRegistryName("floating");
-    }
+	static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_wand", ItemManaWand.class::isInstance);
 
-    @Override
-    public int getMinEnchantability(int enchantmentLevel) {
-        return 20;
-    }
+	public EnchantmentFloating() {
+		super(Rarity.VERY_RARE, TYPE,
+				new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
+		setName(ManaCraft.MODID + ".floating").setRegistryName("floating");
+	}
 
-    @Override
-    public int getMaxEnchantability(int enchantmentLevel) {
-        return 50;
-    }
+	@Override
+	public int getMinEnchantability(int enchantmentLevel) {
+		return 20;
+	}
+
+	@Override
+	public int getMaxEnchantability(int enchantmentLevel) {
+		return 50;
+	}
 }

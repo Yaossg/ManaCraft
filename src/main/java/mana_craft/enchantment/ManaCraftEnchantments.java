@@ -10,17 +10,18 @@ import static net.minecraft.creativetab.CreativeTabs.TOOLS;
 
 @ObjectHolder(ManaCraft.MODID)
 public class ManaCraftEnchantments {
-    public static final Enchantment floating = null;
-    public static final Enchantment mana_evoker = null;
-    public static final Enchantment mana_recycler = null;
-    public static void init() {
-        TOOLS.setRelevantEnchantmentTypes(
-                ArrayUtils.add(TOOLS.getRelevantEnchantmentTypes(), EnchantmentManaRecycler.TYPE)
-        );
-        COMBAT.setRelevantEnchantmentTypes(
-                ArrayUtils.addAll(COMBAT.getRelevantEnchantmentTypes(), EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE));
+	public static final Enchantment floating = null;
+	public static final Enchantment mana_evoker = null;
+	public static final Enchantment mana_recycler = null;
 
-        ManaCraft.tabMana.setRelevantEnchantmentTypes(
-                EnchantmentManaRecycler.TYPE, EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE);
-    }
+	public static void init() {
+		TOOLS.setRelevantEnchantmentTypes(
+				ArrayUtils.add(TOOLS.getRelevantEnchantmentTypes(), EnchantmentManaRecycler.TYPE)
+		);
+		COMBAT.setRelevantEnchantmentTypes(
+				ArrayUtils.addAll(COMBAT.getRelevantEnchantmentTypes(), EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE));
+
+		ManaCraft.tabMana.setRelevantEnchantmentTypes(
+				EnchantmentManaRecycler.TYPE, EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE);
+	}
 }
