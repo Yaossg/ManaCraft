@@ -21,8 +21,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import sausage_core.api.core.ienum.IEnumGUIHandler;
+import sausage_core.api.core.plugin.PluginLoader;
 import sausage_core.api.util.common.SausageUtils;
-import sausage_core.api.util.plugin.PluginLoader;
 
 import static mana_craft.block.ManaCraftBlocks.*;
 import static mana_craft.item.ManaCraftItems.*;
