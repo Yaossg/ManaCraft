@@ -2,6 +2,7 @@ package mana_craft.enchantment;
 
 import mana_craft.ManaCraft;
 import mana_craft.entity.EntityManaBall;
+import mana_craft.init.ManaCraftEnchantments;
 import mana_craft.item.ItemManaArmor;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -20,7 +21,7 @@ import java.util.Random;
 import static net.minecraft.inventory.EntityEquipmentSlot.*;
 
 public class EnchantmentManaEvoker extends Enchantment {
-	static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_armor", ItemManaArmor.class::isInstance);
+	public static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_armor", ItemManaArmor.class::isInstance);
 
 	public EnchantmentManaEvoker() {
 		super(Rarity.RARE, TYPE, new EntityEquipmentSlot[]{HEAD, CHEST, LEGS, FEET});

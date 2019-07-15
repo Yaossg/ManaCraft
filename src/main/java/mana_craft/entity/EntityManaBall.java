@@ -1,7 +1,7 @@
 package mana_craft.entity;
 
+import mana_craft.init.ManaCraftItems;
 import mana_craft.item.ItemManaApple;
-import mana_craft.item.ManaCraftItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;

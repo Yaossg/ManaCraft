@@ -1,8 +1,8 @@
 package mana_craft.entity;
 
 import mana_craft.ManaCraft;
-import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
+import mana_craft.init.ManaCraftBlocks;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -74,13 +74,13 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
 				if(--since < 0 && !world.isRemote) {
 					setDead();
 					final Random random = getRNG();
-					int times = 36 + random.nextInt(24);
+					int times = 32 + random.nextInt(32);
 					for(int i = 0; i < times; ++i) {
 						EntityManaBall ball = EntityManaBall.get(world, this, false)
-								.setDamage(5).setPlayerFriendly(true).setFlame(isBurning());
+								.setDamage(7).setPlayerFriendly(true).setFlame(isBurning());
 						ball.shoot(this, random.nextFloat() * 360 - 180,
 								random.nextFloat() * 360 - 180, 0,
-								EntityManaBall.lowVelocity, EntityManaBall.defaultInaccuracy);
+								EntityManaBall.highVelocity, EntityManaBall.defaultInaccuracy);
 						world.spawnEntity(ball);
 					}
 					world.createExplosion(this, posX, posY, posZ, 3, false);
@@ -112,13 +112,13 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
 				return EntityManaShooter.this.dataManager.get(DYING) && super.shouldExecute();
 			}
 		});
-		tasks.addTask(2, new EntityAIAttackRanged(this, 0.35, 35, 10) {
+		tasks.addTask(2, new EntityAIAttackRanged(this, 0.32, 32, 10) {
 			@Override
 			public boolean shouldContinueExecuting() {
 				return !EntityManaShooter.this.dataManager.get(DYING) && super.shouldContinueExecuting();
 			}
 		});
-		tasks.addTask(3, new EntityAIMoveToBlock(this, 0.45, 64) {
+		tasks.addTask(3, new EntityAIMoveToBlock(this, 0.48, 64) {
 			@Override
 			protected boolean shouldMoveTo(World worldIn, BlockPos pos) {
 				return worldIn.getBlockState(pos).getBlock() == ManaCraftBlocks.mana_lantern;
@@ -139,7 +139,7 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(MAX_HEALTH).setBaseValue(120);
+		getEntityAttribute(MAX_HEALTH).setBaseValue(127);
 		getEntityAttribute(ARMOR).setBaseValue(armor[0] + armor[1] + armor[2] + armor[3]);
 		getEntityAttribute(ARMOR_TOUGHNESS).setBaseValue(toughness);
 		getEntityAttribute(MOVEMENT_SPEED).setBaseValue(0.4);

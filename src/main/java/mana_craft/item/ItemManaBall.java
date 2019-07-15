@@ -14,7 +14,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemManaBall extends Item {
-	ItemManaBall() {
+	public ItemManaBall() {
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BehaviorProjectileDispense() {
 			protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn) {
 				return new EntityManaBall(worldIn, position.getX(), position.getY(), position.getZ()).setDamage(6.4f);

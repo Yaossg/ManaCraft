@@ -10,7 +10,7 @@
       "translate": "advancement.mana.shiny_mana.description"
     }
   },
-  "parent": "mana_craft:mana/root",
+  "parent": "mana_craft:mana/mana",
   "criteria": {
     "shiny_mana": {
       "trigger": "minecraft:inventory_changed",

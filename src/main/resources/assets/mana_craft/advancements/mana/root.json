@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "item": "mana_craft:mana"
+      "item": "guideapi:mana_craft-guide"
     },
     "title": {
       "translate": "advancement.mana.root.title"
@@ -12,11 +12,11 @@
     "background": "mana_craft:textures/gui/advancements/backgrounds/mana.png"
   },
   "criteria": {
-    "get_mana": {
+    "mana_craft": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [{
-            "item": "mana_craft:mana"
+            "item": "guideapi:mana_craft-guide"
         }]
       }
     }

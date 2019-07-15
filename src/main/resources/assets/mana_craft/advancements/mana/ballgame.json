@@ -11,7 +11,7 @@
     },
     "frame": "goal"
   },
-  "parent": "mana_craft:mana/root",
+  "parent": "mana_craft:mana/mana",
   "criteria": {
     "ballgame": {
       "trigger": "minecraft:player_killed_entity",

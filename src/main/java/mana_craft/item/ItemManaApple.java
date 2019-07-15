@@ -1,6 +1,7 @@
 package mana_craft.item;
 
 import mana_craft.ManaCraft;
+import mana_craft.init.ManaCraftItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -24,7 +25,7 @@ import sausage_core.api.util.explosion.ExExplosion;
 import javax.annotation.Nullable;
 
 public class ItemManaApple extends ItemFood {
-	ItemManaApple() {
+	public ItemManaApple() {
 		super(6, 1.0f, false);
 		setAlwaysEdible();
 	}

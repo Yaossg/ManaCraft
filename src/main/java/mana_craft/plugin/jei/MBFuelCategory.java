@@ -1,7 +1,7 @@
 package mana_craft.plugin.jei;
 
 import mana_craft.ManaCraft;
-import mana_craft.block.ManaCraftBlocks;
+import mana_craft.init.ManaCraftBlocks;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiItemStackGroup;

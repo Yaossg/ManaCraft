@@ -34,7 +34,7 @@ import java.util.Random;
 public class BlockManaBooster extends BlockContainer {
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
 
-	BlockManaBooster() {
+	public BlockManaBooster() {
 		super(Material.IRON, MapColor.PURPLE);
 		setHardness(5);
 		setLightLevel(SausageUtils.lightLevelOf(11));
@@ -87,6 +87,14 @@ public class BlockManaBooster extends BlockContainer {
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if(!worldIn.isRemote)
 			playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
+		return true;
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		for(EnumFacing side : EnumFacing.values())
+			if(worldIn.getBlockState(pos.offset(side)).getBlock() == this)
+				return false;
 		return true;
 	}
 

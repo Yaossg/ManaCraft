@@ -8,7 +8,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class EnchantmentManaRecycler extends Enchantment {
-	static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_damagable", IItemManaDamagable.class::isInstance);
+	public static final EnumEnchantmentType TYPE = EnumHelper.addEnchantmentType("mana_damagable", IItemManaDamagable.class::isInstance);
 
 	public EnchantmentManaRecycler() {
 		super(Rarity.UNCOMMON, TYPE, EntityEquipmentSlot.values());

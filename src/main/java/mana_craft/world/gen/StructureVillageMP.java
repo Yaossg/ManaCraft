@@ -1,8 +1,8 @@
 package mana_craft.world.gen;
 
 import mana_craft.block.BlockManaProducer;
-import mana_craft.block.ManaCraftBlocks;
 import mana_craft.entity.ManaCraftVillagers;
+import mana_craft.init.ManaCraftBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -14,7 +14,7 @@ import net.minecraft.world.gen.structure.StructureComponent;
 import java.util.List;
 import java.util.Random;
 
-import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.init.ManaCraftBlocks.*;
 import static net.minecraft.world.gen.structure.StructureVillagePieces.*;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;

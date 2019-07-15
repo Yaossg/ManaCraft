@@ -1,11 +1,13 @@
 ﻿
 ManaCraft.tooltip=定义ManaCraft基本的设置
 ManaCraft OreGens.tooltip=定义ManaCraft矿物生成的设置
-advancement.mana.ballgame.description=球类和游戏之间没有空格或者下划线.
+advancement.mana.mana.description=从别的什么地方获得魔能
+advancement.mana.mana.title=获得魔能！
+advancement.mana.ballgame.description=球类和游戏之间没有空格或者下划线
 advancement.mana.ballgame.title=球类游戏
-advancement.mana.boost.description=这里不是指一个C++库, 好吧, 反正也无所谓.
+advancement.mana.boost.description=这里不是指一个C++库, 好吧, 反正也无所谓
 advancement.mana.boost.title=Boost
-advancement.mana.cool_wand.description=用魔能魔杖发射一个魔能球.
+advancement.mana.cool_wand.description=用魔能魔杖发射一个魔能球
 advancement.mana.cool_wand.title=炫酷魔杖
 advancement.mana.energize.description=建造一个充能的魔能制造器
 advancement.mana.energize.title=充能！
@@ -134,5 +136,26 @@ fluid.orichalcum=山铜
 fluid.mana_obsidian=魔能黑曜石
 fluid.mana_glass=魔能玻璃
 
-mana_craft.info_card.Please visit=请访问
-mana_craft.info_card.for the declaration about me=查看关于我的《宣言》
+guide.mana_craft.title=魔能之书
+
+guide.mana_craft.CATEGORY.origin=原点
+guide.mana_craft.CATEGORY.vector=向量
+guide.mana_craft.CATEGORY.misc=杂项
+
+guide.mana_craft.origin.power_of_nature=自然的力量
+guide.mana_craft.origin.hardly_hardened=几乎没有硬化
+guide.mana_craft.origin.deep_in_the_dark=黑暗深处
+guide.mana_craft.origin.get_in_gear=全副武装
+guide.mana_craft.origin.wonderful_wand=炫酷法杖
+
+guide.mana_craft.vector.ancient_magician=远古魔法师
+guide.mana_craft.vector.around_world=世界周围
+guide.mana_craft.vector.like_a_reactor=就像反应堆
+guide.mana_craft.vector.let_it_swifter=让他快些
+guide.mana_craft.vector.mouthful=满嘴都是
+
+guide.mana_craft.misc.blue_or_blur=蓝色或是污渍
+guide.mana_craft.misc.tinkers_support=匠魂支持
+guide.mana_craft.misc.piggy_mana=魔能小猪
+guide.mana_craft.misc.declaration=宣言
+guide.mana_craft.misc.known_issue=已知问题

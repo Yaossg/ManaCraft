@@ -1,0 +1,24 @@
+{
+  "display": {
+    "icon": {
+      "item": "mana_craft:mana"
+    },
+    "title": {
+      "translate": "advancement.mana.mana.title"
+    },
+    "description": {
+      "translate": "advancement.mana.mana.description"
+    }
+  },
+  "parent": "mana_craft:mana/root",
+  "criteria": {
+    "mana": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [{
+          "item": "mana_craft:mana"
+        }]
+      }
+    }
+  }
+}

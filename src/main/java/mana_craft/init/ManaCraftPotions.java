@@ -1,7 +1,6 @@
-package mana_craft.potion;
+package mana_craft.init;
 
-import mana_craft.block.ManaCraftBlocks;
-import mana_craft.item.ManaCraftItems;
+import mana_craft.potion.PotionManaEvoker;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.potion.Potion;

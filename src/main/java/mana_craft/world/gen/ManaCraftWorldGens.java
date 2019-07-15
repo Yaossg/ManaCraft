@@ -1,8 +1,8 @@
 package mana_craft.world.gen;
 
 import mana_craft.ManaCraft;
-import mana_craft.block.ManaCraftBlocks;
 import mana_craft.config.ManaCraftConfig;
+import mana_craft.init.ManaCraftBlocks;
 import mana_craft.world.biome.BiomeMana;
 import mana_craft.world.biome.BiomeManaChaos;
 import net.minecraft.block.BlockBone;

@@ -1,6 +1,6 @@
 package mana_craft.world.gen;
 
-import mana_craft.block.ManaCraftBlocks;
+import mana_craft.init.ManaCraftBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;

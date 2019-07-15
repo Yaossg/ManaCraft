@@ -4,8 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
-import static mana_craft.block.ManaCraftBlocks.*;
-import static mana_craft.item.ManaCraftItems.*;
+import static mana_craft.init.ManaCraftBlocks.*;
+import static mana_craft.init.ManaCraftItems.*;
 import static net.minecraft.entity.passive.EntityVillager.ITradeList;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCareer;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;

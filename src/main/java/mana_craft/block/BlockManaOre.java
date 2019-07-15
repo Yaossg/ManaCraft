@@ -1,6 +1,6 @@
 package mana_craft.block;
 
-import mana_craft.item.ManaCraftItems;
+import mana_craft.init.ManaCraftItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +12,7 @@ import sausage_core.api.util.common.SausageUtils;
 import java.util.Random;
 
 public class BlockManaOre extends Block {
-	BlockManaOre() {
+	public BlockManaOre() {
 		super(Material.ROCK);
 		setHardness(2.5f);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());

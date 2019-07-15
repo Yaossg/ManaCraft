@@ -1,11 +1,6 @@
 package mana_craft.tile;
 
 import mana_craft.api.registry.MPRecipe;
-import mana_craft.block.BlockManaFoot;
-import net.minecraft.block.state.BlockWorldState;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.state.pattern.BlockPattern;
-import net.minecraft.block.state.pattern.FactoryBlockPattern;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,6 +11,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import sausage_core.api.core.multiblock.IBlockStatePredicate;
+import sausage_core.api.core.multiblock.SimpleFixedDetector;
 import sausage_core.api.core.tile.IMachineLogic;
 import sausage_core.api.core.tile.ITileDropItems;
 import sausage_core.api.core.tile.TileBase;
@@ -29,12 +26,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static mana_craft.api.registry.ManaCraftRegistries.MP_RECIPES;
+import static mana_craft.block.BlockManaProducer.FACING;
 import static mana_craft.block.BlockManaProducer.WORKING;
-import static mana_craft.block.ManaCraftBlocks.*;
-import static mana_craft.config.ManaCraftConfig.delay;
-import static mana_craft.config.ManaCraftConfig.destroy;
-import static net.minecraft.block.state.BlockWorldState.hasState;
-import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
+import static mana_craft.init.ManaCraftBlocks.*;
 
 public class TileManaProducer extends TileBase implements ITickable, ITileDropItems, IMachineLogic {
 	public int progress;
@@ -43,7 +37,6 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 		@Override
 		public void onContentsChanged(int slot) {
 			current = null;
-			isCharged = false;
 		}
 	};
 	public SingleItemStackHandler output = new SingleItemStackHandler();
@@ -80,7 +73,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 		return hasCapItem(capability, side) || super.hasCapability(capability, side);
 	}
 
-	class SlotMapper implements IItemHandler {
+	private class SlotMapper implements IItemHandler {
 		private int slot;
 
 		SlotMapper(int slot) {
@@ -130,58 +123,47 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 		return super.getCapability(capability, side);
 	}
 
-	private static BlockPattern pattern;
-
+	private static SimpleFixedDetector detector;
 	public static void init() {
-		pattern = FactoryBlockPattern.start()
-				.aisle("     ", "     ", "  _  ", "     ")
-				.aisle("  _  ", " _#_ ", " # # ", " *#* ")
-				.aisle(" _^_ ", "_#!#_", "_ O _", " ### ")
-				.aisle("  _  ", " _#_ ", " # # ", " *#* ")
-				.aisle("     ", "     ", "  _  ", "     ")
-				.where('_', hasState(forBlock(Blocks.AIR)))
-				.where('^', hasState(forBlock(mana_lantern)))
-				.where('#', hasState(forBlock(mana_block)))
-				.where('!', hasState(forBlock(mana_glass)))
-				.where('*', hasState(forBlock(orichalcum_block)))
-				.where('O', TileManaProducer::core)
+		detector = SimpleFixedDetector.patternBuilder($ -> true)
+				.layer(0,
+						"  _  ",
+						" #_# ",
+						"_!M!_",
+						" #!# ",
+						"  _  ")
+				.layer(-1,
+						"     ",
+						" *#* ",
+						" ### ",
+						" *#* ",
+						"     ")
+				.layer(1,
+						"     ",
+						" _#_ ",
+						"_#!#_",
+						" _#_ ",
+						"     ")
+				.layer(2,
+						"     ",
+						"  _  ",
+						" _^_ ",
+						"  _  ",
+						"     ")
+				.mapping('_', IBlockStatePredicate.of(Blocks.AIR))
+				.mapping('^', IBlockStatePredicate.of(mana_lantern))
+				.mapping('#', IBlockStatePredicate.of(mana_block))
+				.mapping('!', IBlockStatePredicate.of(mana_glass))
+				.mapping('*', IBlockStatePredicate.of(orichalcum_block))
 				.build();
 	}
 
-	public static boolean core(BlockWorldState bws) {
-		IBlockState state = bws.getBlockState();
-		if(state.getBlock() != mana_producer)
-			return false;
-		World world = bws.world;
-		EnumFacing facing = state.getValue(BlockManaFoot.FACING);
-		BlockPos pos = bws.getPos();
-		return world.isAirBlock(pos.offset(facing))
-				&& world.getBlockState(pos.offset(facing.rotateY())).getBlock() == mana_glass
-				&& world.getBlockState(pos.offset(facing.rotateYCCW())).getBlock() == mana_glass
-				&& world.getBlockState(pos.offset(facing.getOpposite())).getBlock() == mana_glass;
+	public static boolean checkFrame(World world, BlockPos pos) {
+		return detector.detect(world, pos).isPresent();
 	}
 
-	public static boolean checkCharged(World world, BlockPos pos) {
-		BlockPattern.PatternHelper helper = pattern.match(world, pos);
-		if(helper != null)
-			return helper.translateOffset(2, 2, 2).getPos().equals(pos);
-		return false;
-	}
-
-	public boolean isCharged = false;
-	private int checkDelay = delay;
-
-	boolean check() {
-		if(--checkDelay < 0) isCharged = false;
-		if(!isCharged) {
-			if(!(isCharged = checkCharged(world, pos))) {
-				if(destroy)
-					world.destroyBlock(pos, true);
-				return false;
-			}
-			checkDelay = delay;
-		}
-		return true;
+	public static boolean checkMachine(World world, BlockPos pos) {
+		return checkFrame(world, pos) && world.isAirBlock(pos.offset(world.getBlockState(pos).getValue(FACING)));
 	}
 
 	MPRecipe current = null;
@@ -221,13 +203,17 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 
 	@Override
 	public void update() {
-		if(world.isRemote || !check()) return;
-		progress = Math.min(progress, work_time);
-		work = tick(work);
-		world.setBlockState(pos, world.getBlockState(pos).withProperty(WORKING, work));
-		if(!work) {
-			if(progress > 0) progress -= 3;
-			if(progress < 0) progress = 0;
+		if(world.isRemote) return;
+		if(checkMachine(world, pos)) {
+			progress = Math.min(progress, work_time);
+			work = tick(work);
+			world.setBlockState(pos, world.getBlockState(pos).withProperty(WORKING, work));
+			if(!work) {
+				if(progress > 0) progress -= 3;
+				if(progress < 0) progress = 0;
+			}
+		} else {
+			world.destroyBlock(pos, true);
 		}
 	}
 }

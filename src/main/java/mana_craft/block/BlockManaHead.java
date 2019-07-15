@@ -2,7 +2,7 @@ package mana_craft.block;
 
 import mana_craft.ManaCraft;
 import mana_craft.entity.EntityManaShooter;
-import mana_craft.item.ManaCraftItems;
+import mana_craft.init.ManaCraftItems;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.init.ManaCraftBlocks.*;
 import static net.minecraft.block.state.BlockWorldState.hasState;
 import static net.minecraft.block.state.pattern.BlockStateMatcher.forBlock;
 import static net.minecraft.init.Blocks.AIR;
@@ -32,7 +32,7 @@ public class BlockManaHead extends BlockManaBody {
 	private static BlockPattern patternBase;
 	private static BlockPattern pattern;
 
-	BlockManaHead() {
+	public BlockManaHead() {
 		super(1.5f, 8);
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}

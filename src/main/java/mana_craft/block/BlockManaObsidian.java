@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class BlockManaObsidian extends Block {
-	BlockManaObsidian() {
+	public BlockManaObsidian() {
 		super(Material.ROCK);
 		setHardness(40);
 		setResistance(1600);

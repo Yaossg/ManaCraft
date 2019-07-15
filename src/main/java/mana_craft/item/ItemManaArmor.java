@@ -29,7 +29,7 @@ public class ItemManaArmor extends ItemArmor implements IDefaultSpecialArmor, II
 
 	@Override
 	public int getManaValue() {
-		return getArmorMaterial().getDamageReductionAmount(armorType);
+		return getArmorMaterial().getDamageReductionAmount(armorType) * 2;
 	}
 
 	@Override

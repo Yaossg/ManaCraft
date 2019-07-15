@@ -1,11 +1,14 @@
 package mana_craft.block;
 
+import com.google.common.collect.ImmutableMap;
 import mana_craft.ManaCraft;
 import mana_craft.inventory.ManaCraftGUIs;
 import mana_craft.tile.TileManaProducer;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,13 +25,16 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
+import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.util.Constants;
 import sausage_core.api.core.tile.ITileDropItems;
 import sausage_core.api.util.common.DimensionalBlockPos;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.nbt.NBTs;
 
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -76,7 +82,7 @@ public class BlockManaProducer extends BlockContainer {
 		}
 	}
 
-	BlockManaProducer() {
+	public BlockManaProducer() {
 		super(Material.IRON, MapColor.PURPLE);
 		setHardness(11);
 		setLightLevel(SausageUtils.lightLevelOf(11));
@@ -86,7 +92,22 @@ public class BlockManaProducer extends BlockContainer {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, WORKING);
+		return new BlockStateContainer(this, FACING, WORKING) {
+			@Override
+			protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
+				return new StateImplementation(block, properties) {
+					@Override
+					public IBlockState withRotation(Rotation rot) {
+						return withProperty(FACING, rot.rotate(getValue(FACING)));
+					}
+
+					@Override
+					public IBlockState withMirror(Mirror mirrorIn) {
+						return withRotation(mirrorIn.toRotation(getValue(FACING)));
+					}
+				};
+			}
+		};
 	}
 
 	@Override
@@ -126,8 +147,13 @@ public class BlockManaProducer extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		Cache.get(worldIn).add(new DimensionalBlockPos(worldIn, pos));
-		if(TileManaProducer.checkCharged(worldIn, pos))
+		if(TileManaProducer.checkMachine(worldIn, pos))
 			ManaCraft.giveAdvancement(placer, "energize");
+	}
+
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		return TileManaProducer.checkFrame(worldIn, pos);
 	}
 
 	@Override

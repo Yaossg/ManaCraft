@@ -10,7 +10,7 @@
       "translate": "advancement.mana.tall_guy.description"
     }
   },
-  "parent": "mana_craft:mana/root",
+  "parent": "mana_craft:mana/shiny_diamond",
   "criteria": {
     "tall_guy": {
       "trigger": "minecraft:summoned_entity",

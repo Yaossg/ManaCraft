@@ -18,7 +18,7 @@ import net.minecraft.world.gen.feature.*;
 import java.util.List;
 import java.util.Random;
 
-import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.init.ManaCraftBlocks.*;
 
 public class BiomeManaChaos extends BiomeMana {
 	public static BiomeManaChaos get() {

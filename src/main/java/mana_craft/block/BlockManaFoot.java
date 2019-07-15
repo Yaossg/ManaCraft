@@ -27,9 +27,10 @@ public class BlockManaFoot extends BlockManaBody {
 			new AxisAlignedBB(0.0, 0.0, 0.0, 0.5, 0.75, 1.0),
 	};
 
-	BlockManaFoot() {
+	public BlockManaFoot() {
 		super(0.8f, 4);
 		setLightOpacity(2);
+		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
 	@Override

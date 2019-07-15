@@ -1,12 +1,14 @@
 package mana_craft.api.common;
 
-import mana_craft.enchantment.ManaCraftEnchantments;
-import mana_craft.item.ManaCraftItems;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import sausage_core.api.core.common.IDefaultSpecialArmor;
 
 import javax.annotation.Nonnull;
@@ -35,8 +37,10 @@ public interface IItemManaDamagable {
 	default void onArmorBroken(EntityLivingBase entity, @Nonnull ItemStack stack) {
 		Random random = entity.getRNG();
 		int base = getManaValue();
-		int level = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.mana_recycler, stack);
+		Enchantment mana_recycler = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation("mana_craft", "mana_recycler"));
+		Item mana = ForgeRegistries.ITEMS.getValue(new ResourceLocation("mana_craft", "mana"));
+		int level = EnchantmentHelper.getEnchantmentLevel(mana_recycler, stack);
 		InventoryHelper.spawnItemStack(entity.world, entity.posX, entity.posY, entity.posZ,
-				new ItemStack(ManaCraftItems.mana, base + level + random.nextInt(base * (level + 2))));
+				new ItemStack(mana, base + level + random.nextInt(base * (level + 2))));
 	}
 }

@@ -3,8 +3,9 @@ package mana_craft.item;
 import mana_craft.ManaCraft;
 import mana_craft.api.common.IItemManaDamagable;
 import mana_craft.config.ManaCraftConfig;
-import mana_craft.enchantment.ManaCraftEnchantments;
 import mana_craft.entity.EntityManaBall;
+import mana_craft.init.ManaCraftEnchantments;
+import mana_craft.init.ManaCraftItems;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 
 public class ItemManaWand extends Item implements IItemManaDamagable {
-	ItemManaWand() {
+	public ItemManaWand() {
 		setMaxDamage(ManaCraftConfig.durability * 10);
 		setMaxStackSize(1);
 	}

@@ -7,8 +7,8 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-class BlockManaGlass extends BlockGlass {
-	BlockManaGlass() {
+public class BlockManaGlass extends BlockGlass {
+	public BlockManaGlass() {
 		super(Material.GLASS, false);
 		setHardness(0.5f);
 		setResistance(1500);

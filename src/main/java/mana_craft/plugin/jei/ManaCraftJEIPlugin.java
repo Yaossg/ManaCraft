@@ -2,12 +2,12 @@ package mana_craft.plugin.jei;
 
 import mana_craft.api.registry.MBFuel;
 import mana_craft.api.registry.MPRecipe;
-import mana_craft.block.ManaCraftBlocks;
+import mana_craft.init.ManaCraftBlocks;
+import mana_craft.init.ManaCraftItems;
 import mana_craft.inventory.ContainerManaBooster;
 import mana_craft.inventory.ContainerManaProducer;
 import mana_craft.inventory.GUIContainerManaBooster;
 import mana_craft.inventory.GUIContainerManaProducer;
-import mana_craft.item.ManaCraftItems;
 import mezz.jei.api.*;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;

@@ -1,7 +1,7 @@
 package mana_craft.block;
 
 import mana_craft.entity.EntityManaBall;
-import mana_craft.item.ManaCraftItems;
+import mana_craft.init.ManaCraftItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -23,7 +23,7 @@ import java.util.Random;
 public class BlockManaBody extends Block {
 	protected final int value;
 
-	BlockManaBody() {
+	public BlockManaBody() {
 		this(1.2f, 9);
 	}
 

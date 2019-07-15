@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockAccess;
 
 import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
 
-class BlockOrichalcum extends Block {
+public class BlockOrichalcum extends Block {
 	public BlockOrichalcum() {
 		super(Material.ROCK, MapColor.PURPLE);
 		setHardness(6);

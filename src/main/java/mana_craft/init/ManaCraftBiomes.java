@@ -1,4 +1,4 @@
-package mana_craft.world.biome;
+package mana_craft.init;
 
 import mana_craft.ManaCraft;
 import mana_craft.config.ManaCraftConfig;

@@ -1,21 +1,23 @@
 ﻿
 ManaCraft.tooltip=Define General Settings for ManaCraft
 ManaCraft OreGens.tooltip=Define Ore Generation Settings for ManaCraft
-advancement.mana.ballgame.description=There's no space or dash between ball and game.
+advancement.mana.mana.description=Get mana from somewhere else
+advancement.mana.mana.title=Mana Get！
+advancement.mana.ballgame.description=There's no space or dash between ball and game
 advancement.mana.ballgame.title=Ballgame
-advancement.mana.boost.description=Do not refer to a C++ library here, well, not important, either.
+advancement.mana.boost.description=Do not refer to a C++ library here, well, not important, either
 advancement.mana.boost.title=Boost
-advancement.mana.cool_wand.description=shoot a mana ball with a mana wand.
+advancement.mana.cool_wand.description=shoot a mana ball with a mana wand
 advancement.mana.cool_wand.title=Cool Wand!
-advancement.mana.energize.description=build a charged Mana Producer.
+advancement.mana.energize.description=build a charged Mana Producer
 advancement.mana.energize.title=Energize!
 advancement.mana.final_hoe.description=Sorry, No information provided here, Why not have a look at its lore?
 advancement.mana.final_hoe.title=Final Hoe!
-advancement.mana.fly_so_high.description=launch a floating mana ball without a floating enchantment.
+advancement.mana.fly_so_high.description=launch a floating mana ball without a floating enchantment
 advancement.mana.fly_so_high.title=Fly soooo high
 advancement.mana.pig_bomb.description=Worse than pig!
 advancement.mana.pig_bomb.title=BOOM!
-advancement.mana.protect_around.description=Balls protect me around.
+advancement.mana.protect_around.description=Balls protect me around
 advancement.mana.protect_around.title=Protect Around
 advancement.mana.root.description=Feel the power of Mana!
 advancement.mana.root.title=ManaCraft
@@ -25,7 +27,7 @@ advancement.mana.shiny_mana.description=Shiny!
 advancement.mana.shiny_mana.title=Shiny Orichalcum
 advancement.mana.strange_shears.description=Strange to say... Do you know why there is a pair of shears colored so dark?
 advancement.mana.strange_shears.title=Strange Shears?
-advancement.mana.tall_guy.description=summoned a mana shooter.
+advancement.mana.tall_guy.description=summoned a mana shooter
 advancement.mana.tall_guy.title=The Tall Guy
 container.mana_craft.mana_booster.idle=idle
 container.mana_craft.mana_booster.title=Mana Booster
@@ -131,5 +133,26 @@ fluid.orichalcum=Orichalcum
 fluid.mana_obsidian=Mana Obsidian
 fluid.mana_glass=Mana Glass
 
-mana_craft.info_card.Please visit=Please visit
-mana_craft.info_card.for the declaration about me=for the §odeclaration§r about me
+guide.mana_craft.title=Mana Book
+
+guide.mana_craft.CATEGORY.origin=Origin
+guide.mana_craft.CATEGORY.vector=Vector
+guide.mana_craft.CATEGORY.misc=Misc
+
+guide.mana_craft.origin.power_of_nature=Power of Nature
+guide.mana_craft.origin.hardly_hardened=Hardly Hardened
+guide.mana_craft.origin.deep_in_the_dark=Deep in the Dark
+guide.mana_craft.origin.get_in_gear=Get in Gear
+guide.mana_craft.origin.wonderful_wand=Wonderful Wand
+
+guide.mana_craft.vector.ancient_magician=Ancient Magician
+guide.mana_craft.vector.around_world=Around World
+guide.mana_craft.vector.like_a_reactor=Like a Reactor
+guide.mana_craft.vector.let_it_swifter=Let it Swifter
+guide.mana_craft.vector.mouthful=Mouthful
+
+guide.mana_craft.misc.blue_or_blur=Blue or Blur
+guide.mana_craft.misc.tinkers_support=Tinker's Support
+guide.mana_craft.misc.piggy_mana=Piggy Mana
+guide.mana_craft.misc.declaration=Declaration
+guide.mana_craft.misc.known_issue=Known Issue

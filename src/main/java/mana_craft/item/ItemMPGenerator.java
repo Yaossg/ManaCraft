@@ -13,32 +13,32 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import static mana_craft.block.ManaCraftBlocks.*;
+import static mana_craft.init.ManaCraftBlocks.*;
 
 public class ItemMPGenerator extends Item {
-	public static void buildFrame(World worldIn, BlockPos root, EnumFacing facing) {
-		worldIn.setBlockState(root, mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(1, 0, 0), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(0, 0, 1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(-1, 0, 0), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(0, 0, -1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(1, 0, 1), orichalcum_block.getDefaultState());
-		worldIn.setBlockState(root.add(-1, 0, 1), orichalcum_block.getDefaultState());
-		worldIn.setBlockState(root.add(1, 0, -1), orichalcum_block.getDefaultState());
-		worldIn.setBlockState(root.add(-1, 0, -1), orichalcum_block.getDefaultState());
-		worldIn.setBlockState(root.add(1, 1, 1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(-1, 1, 1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(1, 1, -1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(-1, 1, -1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(1, 2, 0), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(0, 2, 1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(-1, 2, 0), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(0, 2, -1), mana_block.getDefaultState());
-		worldIn.setBlockState(root.add(0, 3, 0), mana_lantern.getDefaultState());
-		worldIn.setBlockState(root.add(0, 2, 0), mana_glass.getDefaultState());
-		worldIn.setBlockState(root.up().offset(facing), mana_glass.getDefaultState());
-		worldIn.setBlockState(root.up().offset(facing.rotateY()), mana_glass.getDefaultState());
-		worldIn.setBlockState(root.up().offset(facing.rotateYCCW()), mana_glass.getDefaultState());
+	public static void buildFrame(World world, BlockPos root, EnumFacing facing) {
+		world.setBlockState(root, mana_block.getDefaultState());
+		world.setBlockState(root.add(1, 0, 0), mana_block.getDefaultState());
+		world.setBlockState(root.add(0, 0, 1), mana_block.getDefaultState());
+		world.setBlockState(root.add(-1, 0, 0), mana_block.getDefaultState());
+		world.setBlockState(root.add(0, 0, -1), mana_block.getDefaultState());
+		world.setBlockState(root.add(1, 0, 1), orichalcum_block.getDefaultState());
+		world.setBlockState(root.add(-1, 0, 1), orichalcum_block.getDefaultState());
+		world.setBlockState(root.add(1, 0, -1), orichalcum_block.getDefaultState());
+		world.setBlockState(root.add(-1, 0, -1), orichalcum_block.getDefaultState());
+		world.setBlockState(root.add(1, 1, 1), mana_block.getDefaultState());
+		world.setBlockState(root.add(-1, 1, 1), mana_block.getDefaultState());
+		world.setBlockState(root.add(1, 1, -1), mana_block.getDefaultState());
+		world.setBlockState(root.add(-1, 1, -1), mana_block.getDefaultState());
+		world.setBlockState(root.add(1, 2, 0), mana_block.getDefaultState());
+		world.setBlockState(root.add(0, 2, 1), mana_block.getDefaultState());
+		world.setBlockState(root.add(-1, 2, 0), mana_block.getDefaultState());
+		world.setBlockState(root.add(0, 2, -1), mana_block.getDefaultState());
+		world.setBlockState(root.add(0, 3, 0), mana_lantern.getDefaultState());
+		world.setBlockState(root.add(0, 2, 0), mana_glass.getDefaultState());
+		world.setBlockState(root.up().offset(facing), mana_glass.getDefaultState());
+		world.setBlockState(root.up().offset(facing.rotateY()), mana_glass.getDefaultState());
+		world.setBlockState(root.up().offset(facing.rotateYCCW()), mana_glass.getDefaultState());
 	}
 
 	@Override

@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.4.1"
+version = "1.5-pre"
 group = "mana_craft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "ManaCraft"
 
@@ -65,6 +65,8 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.k-4u.nl/"
     }
+    
+    maven { url 'http://tehnut.info/maven/' }
 }
 
 dependencies {
@@ -72,6 +74,8 @@ dependencies {
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
     // at runtime, use the full JEI jar
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+
+    deobfCompile "info.amerifrance.guideapi:Guide-API:1.12-2.1.8-63"
 }
 
 task apiJar(type: Jar) {
