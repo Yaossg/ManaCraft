@@ -3,9 +3,11 @@
   "ingredients": [
     {
       "item": "minecraft:sugar"
-    }, {
+    },
+    {
       "item": "minecraft:redstone"
-    }, {
+    },
+    {
       "item": "minecraft:glowstone_dust"
     }
   ],

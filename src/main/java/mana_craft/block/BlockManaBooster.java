@@ -85,15 +85,15 @@ public class BlockManaBooster extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if(!worldIn.isRemote)
+		if (!worldIn.isRemote)
 			playerIn.openGui(ManaCraft.instance, ManaCraftGUIs.ManaBooster.ID(), worldIn, pos.getX(), pos.getY(), pos.getZ());
 		return true;
 	}
 
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		for(EnumFacing side : EnumFacing.values())
-			if(worldIn.getBlockState(pos.offset(side)).getBlock() == this)
+		for (EnumFacing side : EnumFacing.values())
+			if (worldIn.getBlockState(pos.offset(side)).getBlock() == this)
 				return false;
 		return true;
 	}
@@ -106,7 +106,7 @@ public class BlockManaBooster extends BlockContainer {
 
 	@Override
 	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-		if(rand.nextFloat() < 0.1f && stateIn.getValue(BURNING))
+		if (rand.nextFloat() < 0.1f && stateIn.getValue(BURNING))
 			worldIn.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_FURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1, 1, false);
 	}
 }

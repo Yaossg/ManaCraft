@@ -1,5 +1,6 @@
 package mana_craft.tile;
 
+import mana_craft.world.MPCache;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -22,7 +23,6 @@ import java.util.stream.Collectors;
 
 import static mana_craft.api.registry.ManaCraftRegistries.MB_FUELS;
 import static mana_craft.block.BlockManaBooster.BURNING;
-import static mana_craft.block.BlockManaProducer.Cache;
 import static mana_craft.block.BlockManaProducer.WORKING;
 import static mana_craft.config.ManaCraftConfig.boostLimit;
 import static mana_craft.config.ManaCraftConfig.boostRadius;
@@ -68,7 +68,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
-		if(hasCapItem(capability, side)) return SausageUtils.rawtype(handler);
+		if (hasCapItem(capability, side)) return SausageUtils.rawtype(handler);
 		return super.getCapability(capability, side);
 	}
 
@@ -78,7 +78,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 
 	@Override
 	public boolean detect() {
-		if(detect0())
+		if (detect0())
 			return true;
 		MB_FUELS.find(fuel -> fuel.test(handler.get()))
 				.ifPresent(fuel -> {
@@ -97,33 +97,32 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 	public boolean work() {
 		times = 0;
 		--burn_time;
-		for(TileManaProducer tile : Cache.get(world).list.stream()
-				.filter(dp -> world.provider.getDimension() == dp.getDim())
-				.filter(dp -> pos.distanceSq(dp.getPos()) <= boostRadius * boostRadius)
-				.filter(dp -> dp.getPos().getY() > pos.getY())
-				.filter(dp -> world.getBlockState(dp.getPos()).getValue(WORKING))
-				.map(dp -> world.getTileEntity(dp.getPos()))
+		for (TileManaProducer tile : MPCache.get(world).list.stream()
+				.filter(pos -> this.pos.distanceSq(pos) <= boostRadius * boostRadius)
+				.filter(pos -> pos.getY() > this.pos.getY())
+				.filter(pos -> world.getBlockState(pos).getValue(WORKING))
+				.map(pos -> world.getTileEntity(pos))
 				.map(TileManaProducer.class::cast)
 				.filter(Objects::nonNull)
 				.limit(boostLimit)
 				.collect(Collectors.toList())) {
-			for(int i = 0; i < burn_level; ++i) tile.update();
+			for (int i = 0; i < burn_level; ++i) tile.update();
 			burn_time -= 3;
 		}
-		for(EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
+		for (EnumFacing facing : EnumFacing.Plane.HORIZONTAL.facings()) {
 			BlockPos offset = pos.offset(facing);
 			IBlockState state = world.getBlockState(offset);
-			if(state.getBlock().getTickRandomly()) {
+			if (state.getBlock().getTickRandomly()) {
 				state.getBlock().randomTick(world, offset, state, BufferedRandom.shared());
 				burn_time -= 5;
 			}
 			TileEntity tileEntity = world.getTileEntity(offset);
-			if(tileEntity instanceof ITickable) {
+			if (tileEntity instanceof ITickable) {
 				((ITickable) tileEntity).update();
 				burn_time -= 7;
 			}
 		}
-		if(burn_time < 0) burn_time = 0;
+		if (burn_time < 0) burn_time = 0;
 		return burn_time == 0;
 	}
 
@@ -131,7 +130,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 
 	@Override
 	public void update() {
-		if(world.isRemote)
+		if (world.isRemote)
 			return;
 		work = tick(work);
 		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, work));

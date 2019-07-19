@@ -15,9 +15,11 @@
     "shiny_diamond": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [{
+        "items": [
+          {
             "item": "mana_craft:mana_diamond"
-        }]
+          }
+        ]
       }
     }
   }

@@ -1,7 +1,9 @@
 {
-  "input": [{
-    "item": "mana_craft:mana_obsidian"
-  }],
+  "input": [
+    {
+      "item": "mana_craft:mana_obsidian"
+    }
+  ],
   "output": {
     "item": "mana_craft:mana_rod"
   },

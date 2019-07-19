@@ -15,9 +15,11 @@
     "mana": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [{
-          "item": "mana_craft:mana"
-        }]
+        "items": [
+          {
+            "item": "mana_craft:mana"
+          }
+        ]
       }
     }
   }

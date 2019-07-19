@@ -17,8 +17,7 @@
             }
           ],
           "weight": 5
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:mana_coal",
           "functions": [
@@ -31,8 +30,7 @@
             }
           ],
           "weight": 20
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:orichalcum_ingot",
           "functions": [
@@ -45,8 +43,7 @@
             }
           ],
           "weight": 10
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:mana_ball",
           "functions": [
@@ -59,13 +56,11 @@
             }
           ],
           "weight": 25
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:mana_shears",
           "weight": 5
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:mana_obsidian",
           "functions": [

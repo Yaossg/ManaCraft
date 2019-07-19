@@ -15,9 +15,11 @@
     "mana_craft": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "items": [{
+        "items": [
+          {
             "item": "guideapi:mana_craft-guide"
-        }]
+          }
+        ]
       }
     }
   }

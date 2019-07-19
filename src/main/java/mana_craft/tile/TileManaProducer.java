@@ -109,21 +109,24 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 		}
 	}
 
+	private SlotMapper[] mappers = {new SlotMapper(0), new SlotMapper(1), new SlotMapper(2), new SlotMapper(3)};
+
 	@Nullable
 	@Override
 	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing side) {
-		if(hasCapItem(capability, side)) switch(side) {
+		if (hasCapItem(capability, side)) switch (side) {
 			case UP:
 				return SausageUtils.rawtype(input);
 			case DOWN:
 				return SausageUtils.rawtype(output);
 			default:
-				return SausageUtils.rawtype(new SlotMapper(side.getHorizontalIndex()));
+				return SausageUtils.rawtype(mappers[side.getHorizontalIndex()]);
 		}
 		return super.getCapability(capability, side);
 	}
 
 	private static SimpleFixedDetector detector;
+
 	public static void init() {
 		detector = SimpleFixedDetector.patternBuilder($ -> true)
 				.layer(0,
@@ -174,7 +177,7 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 
 	@Override
 	public boolean detect() {
-		if(detect0())
+		if (detect0())
 			return true;
 		current = MP_RECIPES.find(recipe ->
 				ItemStackMatches.match(recipe.input(), ItemStackMatches.merge(input.copyStacks())) != null).orElse(null);
@@ -183,11 +186,11 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 
 	@Override
 	public boolean work() {
-		if(work_time != current.work_time) {
+		if (work_time != current.work_time) {
 			work_time = current.work_time;
 			progress = Math.min(progress, work_time - 1);
 		}
-		if((++progress) >= work_time) {
+		if ((++progress) >= work_time) {
 			progress -= current.work_time;
 			ItemStack[] match = ItemStackMatches.match(current.input(), ItemStackMatches.merge(input.copyStacks()));
 			ItemStack copy = current.output();
@@ -203,14 +206,14 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 
 	@Override
 	public void update() {
-		if(world.isRemote) return;
-		if(checkMachine(world, pos)) {
+		if (world.isRemote) return;
+		if (checkMachine(world, pos)) {
 			progress = Math.min(progress, work_time);
 			work = tick(work);
 			world.setBlockState(pos, world.getBlockState(pos).withProperty(WORKING, work));
-			if(!work) {
-				if(progress > 0) progress -= 3;
-				if(progress < 0) progress = 0;
+			if (!work) {
+				if (progress > 0) progress -= 3;
+				if (progress < 0) progress = 0;
 			}
 		} else {
 			world.destroyBlock(pos, true);

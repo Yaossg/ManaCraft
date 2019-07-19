@@ -69,8 +69,8 @@ public class ManaCraftGuide implements IGuideBook {
 		add(misc, "misc", "blue_or_blur", new ItemStack(ManaCraftItems.blue_shit), empty);
 		add(misc, "misc", "tinkers_support", new ItemStack(Blocks.FURNACE), empty);
 		add(misc, "misc", "piggy_mana", new ItemStack(ManaCraftItems.mana_pork), empty);
-		add(misc, "misc", "declaration", new ItemStack(Items.PAPER));
-		add(misc, "misc", "known_issue", new ItemStack(Blocks.BARRIER));
+		add(misc, "misc", "declaration", new ItemStack(Items.PAPER), empty);
+		add(misc, "misc", "known_issue", new ItemStack(Blocks.BARRIER), empty);
 
 		categories.add(new CategoryItemStack(misc, "guide.mana_craft.CATEGORY.misc", new ItemStack(ManaCraftItems.mana_dust)));
 
@@ -78,7 +78,7 @@ public class ManaCraftGuide implements IGuideBook {
 		binder.setColor(Colors.MAGENTA);
 		binder.setGuideTitle("guide.mana_craft.title");
 		binder.setItemName("guide.mana_craft.title");
-		binder.setCreativeTab(ManaCraft.TAB);
+		binder.setCreativeTab(ManaCraft.IB.tab);
 		binder.setSpawnWithBook();
 		categories.forEach(binder::addCategory);
 		return book = binder.build();

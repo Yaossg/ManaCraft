@@ -18,9 +18,9 @@
       "conditions": {
         "killing_blow": {
           "direct_entity": {
-		    "type": "mana_craft:mana_ball"
-		  }
-		}
+            "type": "mana_craft:mana_ball"
+          }
+        }
       }
     }
   }

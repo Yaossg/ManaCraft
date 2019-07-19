@@ -34,7 +34,6 @@ public class ManaCraftBlocks {
 		}});
 	}
 
-
 	public static void init() {
 		addBlock("mana_block", Material.ROCK, MapColor.PURPLE, ToolMaterial.STONE)
 				.setHardness(5).setLightLevel(lightLevelOf(7));

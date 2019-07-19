@@ -16,7 +16,7 @@ public class ItemMana extends Item {
 		World world = entity.getEntityWorld();
 		BlockPos pos = entity.getPosition();
 		BufferedRandom random = BufferedRandom.shared();
-		if(!world.isRemote && random.nextInt(4) == 0
+		if (!world.isRemote && random.nextInt(4) == 0
 				&& world.getBlockState(pos.down()).getBlock() == Blocks.LAVA) {
 			world.setBlockToAir(pos.down());
 			entity.setDead();

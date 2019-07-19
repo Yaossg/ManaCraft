@@ -20,7 +20,7 @@ public class GUIContainerManaBooster extends GUIContainerBase {
 		GUIHelper.drawCenteredString(this, fontRenderer, title, 6, Colors.DIM_GRAY);
 		ContainerManaBooster self = GUIHelper.getContainer(this);
 		String translateKey = "gui.jei.category.mana_craft.mana_booster.";
-		if(self.burn_time != 0) {
+		if (self.burn_time != 0) {
 			fontRenderer.drawString(I18n.format(translateKey + "level", self.burn_level), 75, 24, Colors.DIM_GRAY);
 			fontRenderer.drawString(I18n.format(translateKey + "time", self.burn_time), 75, 42, Colors.DIM_GRAY);
 		} else {

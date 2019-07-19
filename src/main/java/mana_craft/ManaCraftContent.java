@@ -1,6 +1,5 @@
-package mana_craft.proxy;
+package mana_craft;
 
-import mana_craft.ManaCraft;
 import mana_craft.api.registry.ManaCraftRegistries;
 import mana_craft.block.BlockManaHead;
 import mana_craft.config.ManaCraftConfig;
@@ -19,10 +18,6 @@ import mana_craft.world.biome.BiomeManaChaos;
 import mana_craft.world.gen.ManaCraftWorldGens;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import sausage_core.api.core.ienum.IEnumGUIHandler;
 import sausage_core.api.core.plugin.PluginLoader;
@@ -37,10 +32,10 @@ import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.create;
 import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 
-public class CommonProxy {
+public class ManaCraftContent {
 	static final PluginLoader pluginPrimer = new PluginLoader(MODID);
-
 	private static int nextEntityID = 0;
+
 	static void addEntities() {
 		ForgeRegistries.ENTITIES.registerAll(
 				create().entity(EntityManaBall.class)
@@ -65,7 +60,7 @@ public class CommonProxy {
 		});
 	}
 
-	public void preInit(FMLPreInitializationEvent event) {
+	public static void preInit() {
 
 		ManaCraftBlocks.init();
 		ManaCraftItems.init();
@@ -84,7 +79,7 @@ public class CommonProxy {
 		ManaCraftPotions.preInit();
 		ManaCraftVillagers.preInit();
 
-		if(ManaCraftConfig.ticPlugin)
+		if (ManaCraftConfig.ticPlugin)
 			pluginPrimer.register("tconstruct", "mana_craft.plugin.PluginTConstruct");
 	}
 
@@ -116,8 +111,8 @@ public class CommonProxy {
 		pluginPrimer.execute();
 	}
 
-	public void init(FMLInitializationEvent event) {
-		if(ManaCraftConfig.loot)
+	public static void init() {
+		if (ManaCraftConfig.loot)
 			ManaCraftLoots.init();
 		ManaCraftVillagers.init();
 		ManaCraftWorldGens.init();
@@ -125,10 +120,5 @@ public class CommonProxy {
 		ManaCraftBiomes.init();
 		addOre();
 		misc();
-	}
-
-	public void postInit(FMLPostInitializationEvent event) {
-		if(ManaCraftConfig.grassMana)
-			MinecraftForge.addGrassSeed(new ItemStack(mana), 1);
 	}
 }

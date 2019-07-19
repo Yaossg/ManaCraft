@@ -60,8 +60,8 @@ public class BlockManaHead extends BlockManaBody {
 			protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
 				World world = source.getWorld();
 				BlockPos pos = source.getBlockPos().offset(source.getBlockState().getValue(BlockDispenser.FACING));
-				if(successful = patternBase.match(world, pos) != null) {
-					if(!world.isRemote)
+				if (successful = patternBase.match(world, pos) != null) {
+					if (!world.isRemote)
 						world.setBlockState(pos, mana_head.getDefaultState(), 3);
 					stack.shrink(1);
 				}
@@ -94,7 +94,7 @@ public class BlockManaHead extends BlockManaBody {
 
 	private static boolean foot(BlockWorldState bws) {
 		IBlockState state = bws.getBlockState();
-		if(state.getBlock() != mana_foot)
+		if (state.getBlock() != mana_foot)
 			return false;
 		EnumFacing facing = state.getValue(BlockManaFoot.FACING).getOpposite();
 		IBlockState other = bws.world.getBlockState(bws.getPos().offset(facing, 2));
@@ -103,13 +103,13 @@ public class BlockManaHead extends BlockManaBody {
 
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		if(worldIn.isRemote)
+		if (worldIn.isRemote)
 			return;
 		BlockPattern.PatternHelper helper = pattern.match(worldIn, pos);
-		if(helper != null) {
-			for(int i = 0; i < pattern.getPalmLength(); ++i)
-				for(int j = 0; j < pattern.getThumbLength(); ++j)
-					for(int k = 0; k < pattern.getFingerLength(); ++k)
+		if (helper != null) {
+			for (int i = 0; i < pattern.getPalmLength(); ++i)
+				for (int j = 0; j < pattern.getThumbLength(); ++j)
+					for (int k = 0; k < pattern.getFingerLength(); ++k)
 						worldIn.setBlockState(helper.translateOffset(i, j, k).getPos(), AIR.getDefaultState());
 			BlockPos pos0 = helper.translateOffset(1, 2, 0).getPos();
 			EntityManaShooter shooter = new EntityManaShooter(worldIn);

@@ -96,10 +96,10 @@ public class ItemManaTools {
 		@SubscribeEvent
 		public void onUseHoe(UseHoeEvent event) {
 			ItemStack item = event.getCurrent();
-			if(ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.mana_hoe))) {
+			if (ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.mana_hoe))) {
 				World world = event.getWorld();
 				Block block = world.getBlockState(event.getPos()).getBlock();
-				if(block == ManaCraftBlocks.mana_body) {
+				if (block == ManaCraftBlocks.mana_body) {
 					item.setStackDisplayName("Final Hoe of Mana");
 					item.addEnchantment(Enchantments.SHARPNESS, 7);
 					item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
@@ -131,7 +131,7 @@ public class ItemManaTools {
 		@Override
 		public float getDestroySpeed(ItemStack stack, IBlockState state) {
 			Block block = state.getBlock();
-			if(block != Blocks.WEB && state.getMaterial() != Material.LEAVES) {
+			if (block != Blocks.WEB && state.getMaterial() != Material.LEAVES) {
 				return block == Blocks.WOOL ? 30f : super.getDestroySpeed(stack, state);
 			} else {
 				return 90f;
@@ -148,10 +148,10 @@ public class ItemManaTools {
 	public static void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
 		Random random = event.getEntityPlayer().getRNG();
 		ItemStack stack = event.getOriginal();
-		if(stack.getItem() instanceof IItemManaDamagable && !(stack.getItem() instanceof ItemArmor)) {
+		if (stack.getItem() instanceof IItemManaDamagable && !(stack.getItem() instanceof ItemArmor)) {
 			EntityPlayer player = event.getEntityPlayer();
 			int value = ((IItemManaDamagable) stack.getItem()).getManaValue();
-			if(value <= 0) return;
+			if (value <= 0) return;
 			int i = value > 1 ? 1 + random.nextInt(value - 1) : 1;
 			int l = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.mana_recycler, stack);
 			ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ManaCraftItems.mana, l + i * (random.nextInt(l + 2) + 1)));

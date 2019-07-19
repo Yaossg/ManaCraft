@@ -11,6 +11,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import static net.minecraft.creativetab.CreativeTabs.COMBAT;
 import static net.minecraft.creativetab.CreativeTabs.TOOLS;
+import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 @ObjectHolder(ManaCraft.MODID)
 public class ManaCraftEnchantments {
@@ -26,7 +27,7 @@ public class ManaCraftEnchantments {
 		COMBAT.setRelevantEnchantmentTypes(
 				ArrayUtils.addAll(COMBAT.getRelevantEnchantmentTypes(), EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE));
 
-		ManaCraft.TAB.setRelevantEnchantmentTypes(
+		nonnull(ManaCraft.IB.tab).setRelevantEnchantmentTypes(
 				EnchantmentManaRecycler.TYPE, EnchantmentFloating.TYPE, EnchantmentManaEvoker.TYPE);
 	}
 }

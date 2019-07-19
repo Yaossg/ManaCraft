@@ -19,7 +19,7 @@ public class ItemManaPork extends ItemFood {
 
 	@Override
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
-		if(!worldIn.isRemote) {
+		if (!worldIn.isRemote) {
 			player.addExperience(200);
 			player.addPotionEffect(new PotionEffect(MobEffects.LEVITATION, 15, 15));
 			player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 400, 1));

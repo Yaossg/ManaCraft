@@ -39,18 +39,18 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
-		if(entityLiving instanceof EntityPlayer) {
+		if (entityLiving instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityLiving;
 			ItemStack ammo = findAmmo(player);
-			if(player.isCreative()) ammo = new ItemStack(ManaCraftItems.mana_ball);
-			if(ammo.isEmpty()) return;
+			if (player.isCreative()) ammo = new ItemStack(ManaCraftItems.mana_ball);
+			if (ammo.isEmpty()) return;
 			int progress = getMaxItemUseDuration(stack) - timeLeft;
 			float speed = progress / 20f;
-			if(speed < 0.16f) return;
-			if(!worldIn.isRemote) {
+			if (speed < 0.16f) return;
+			if (!worldIn.isRemote) {
 				int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 				boolean floating = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.floating, stack) > 0;
-				if(!floating && (floating = progress > 200))
+				if (!floating && (floating = progress > 200))
 					ManaCraft.giveAdvancement(player, "fly_so_high");
 				EntityManaBall entity = EntityManaBall.get(worldIn, player, floating)
 						.setDamage(6.4f + power + speed * (power + 1))
@@ -59,7 +59,7 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
 						(EntityManaBall.highVelocity + speed * 0.8f), EntityManaBall.defaultInaccuracy);
 				player.playSound(SoundEvents.ENTITY_SNOWMAN_SHOOT, 1, 1 / (player.getRNG().nextFloat() * 0.4f + 0.8f));
 				worldIn.spawnEntity(entity);
-				if(!player.isCreative() && stack.attemptDamageItem(1, player.getRNG(),
+				if (!player.isCreative() && stack.attemptDamageItem(1, player.getRNG(),
 						player instanceof EntityPlayerMP ? (EntityPlayerMP) player : null)) {
 					player.renderBrokenItemStack(stack);
 					ItemStack copy = stack.copy();
@@ -68,7 +68,7 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
 				}
 				ManaCraft.giveAdvancement(player, "cool_wand");
 			}
-			if(!player.isCreative())
+			if (!player.isCreative())
 				ammo.shrink(1);
 		}
 	}
@@ -86,7 +86,7 @@ public class ItemManaWand extends Item implements IItemManaDamagable {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		ItemStack item = playerIn.getHeldItem(handIn);
-		if(!playerIn.isCreative() && findAmmo(playerIn).isEmpty()) {
+		if (!playerIn.isCreative() && findAmmo(playerIn).isEmpty()) {
 			return ActionResult.newResult(EnumActionResult.FAIL, item);
 		} else {
 			playerIn.setActiveHand(handIn);

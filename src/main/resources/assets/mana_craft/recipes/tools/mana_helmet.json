@@ -10,7 +10,7 @@
       "ore": "ingotOrichalcum"
     },
     "S": {
-      "item" : "mana_craft:mana_shears"
+      "item": "mana_craft:mana_shears"
     }
   },
   "result": {

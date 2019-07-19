@@ -58,7 +58,7 @@ public class MBFuelCategory implements IRecipeCategory<MBFuelWrapper> {
 		group.set(ingredients);
 
 		group.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
-			if(mbFuelWrapper.location != null)
+			if (mbFuelWrapper.location != null)
 				tooltip.add(TextFormatting.GRAY + I18n.format("jei.tooltip.recipe.by", mbFuelWrapper.location.toString()));
 		});
 	}

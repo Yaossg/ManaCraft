@@ -29,7 +29,7 @@ public class PotionManaEvoker extends Potion {
 				EntityManaBall.lowVelocity, EntityManaBall.defaultInaccuracy);
 		ball.motionX -= user.motionX;
 		ball.motionZ -= user.motionZ;
-		if(!user.onGround)
+		if (!user.onGround)
 			ball.motionY -= user.motionY;
 		user.world.spawnEntity(ball);
 	}

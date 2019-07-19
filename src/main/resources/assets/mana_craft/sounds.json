@@ -1,9 +1,11 @@
 {
   "record": {
     "category": "record",
-    "sounds": [{
-      "name": "mana_craft:record",
-      "stream": true
-    }]
+    "sounds": [
+      {
+        "name": "mana_craft:record",
+        "stream": true
+      }
+    ]
   }
 }

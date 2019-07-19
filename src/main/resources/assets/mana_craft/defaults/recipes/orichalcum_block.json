@@ -1,13 +1,17 @@
 {
-  "input": [{
-    "item": "minecraft:gold_block"
-  },{
-    "item": "mana_craft:mana_ball",
-	"count": 64
-  }, {
-    "item": "mana_craft:mana_ball",
-    "count": 16
-  }],
+  "input": [
+    {
+      "item": "minecraft:gold_block"
+    },
+    {
+      "item": "mana_craft:mana_ball",
+      "count": 64
+    },
+    {
+      "item": "mana_craft:mana_ball",
+      "count": 16
+    }
+  ],
   "output": {
     "item": "mana_craft:orichalcum_block"
   },

@@ -11,10 +11,10 @@
       "ore": "ingotOrichalcum"
     },
     "O": {
-      "item" : "mana_craft:mana_rod"
+      "item": "mana_craft:mana_rod"
     },
     "S": {
-      "item" : "mana_craft:mana_shears"
+      "item": "mana_craft:mana_shears"
     }
   },
   "result": {

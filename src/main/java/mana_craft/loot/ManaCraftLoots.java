@@ -25,7 +25,7 @@ public class ManaCraftLoots {
 	public static void init() {
 		MinecraftForge.EVENT_BUS.register(ManaCraftLoots.class);
 		LootTableList.register(new ResourceLocation(ManaCraft.MODID, "mana_shooter"));
-		for(String name : NAMES) LootTableList.register(new ResourceLocation(ManaCraft.MODID, INJECT + name));
+		for (String name : NAMES) LootTableList.register(new ResourceLocation(ManaCraft.MODID, INJECT + name));
 	}
 
 	@SubscribeEvent
@@ -36,9 +36,9 @@ public class ManaCraftLoots {
 	}
 
 	static void inject(LootTableLoadEvent event, String name, String prefix) {
-		if(name.startsWith(prefix)) {
+		if (name.startsWith(prefix)) {
 			String suffix = name.substring(prefix.length());
-			if(ArrayUtils.contains(NAMES, suffix)) event.getTable().addPool(getInjectPool(suffix));
+			if (ArrayUtils.contains(NAMES, suffix)) event.getTable().addPool(getInjectPool(suffix));
 		}
 	}
 

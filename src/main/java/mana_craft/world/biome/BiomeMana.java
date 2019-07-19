@@ -48,15 +48,15 @@ public class BiomeMana extends Biome {
 	@Override
 	public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noiseVal) {
 		double d0 = GRASS_COLOR_NOISE.getValue((double) x * 0.25D, (double) z * 0.25D);
-		if(d0 > 0.0D) {
+		if (d0 > 0.0D) {
 			int i = x & 15;
 			int j = z & 15;
 
-			for(int k = 255; k >= 0; --k)
-				if(chunkPrimerIn.getBlockState(j, k, i).getMaterial() != Material.AIR) {
-					if(k == 62 && chunkPrimerIn.getBlockState(j, k, i).getBlock() != Blocks.WATER) {
+			for (int k = 255; k >= 0; --k)
+				if (chunkPrimerIn.getBlockState(j, k, i).getMaterial() != Material.AIR) {
+					if (k == 62 && chunkPrimerIn.getBlockState(j, k, i).getBlock() != Blocks.WATER) {
 						chunkPrimerIn.setBlockState(j, k, i, WATER);
-						if(d0 < 0.12D) chunkPrimerIn.setBlockState(j, k + 1, i, Blocks.WATERLILY.getDefaultState());
+						if (d0 < 0.12D) chunkPrimerIn.setBlockState(j, k + 1, i, Blocks.WATERLILY.getDefaultState());
 					}
 					break;
 				}
@@ -85,7 +85,7 @@ public class BiomeMana extends Biome {
 
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
-		switch(rand.nextInt(4)) {
+		switch (rand.nextInt(4)) {
 			case 0:
 			case 1:
 			default:

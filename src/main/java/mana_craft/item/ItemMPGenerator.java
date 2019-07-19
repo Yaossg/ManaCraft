@@ -45,17 +45,17 @@ public class ItemMPGenerator extends Item {
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		BlockPos root = pos.offset(facing);
 
-		if(!ManaCraftConfig.replace &&
+		if (!ManaCraftConfig.replace &&
 				!Streams.stream(BlockPos.getAllInBox(root.add(2, 0, 2), pos.add(-2, 3, -2))).allMatch(worldIn::isAirBlock)) {
-			if(player.getServer() != null) {
+			if (player.getServer() != null) {
 				player.getServer().getPlayerList().sendMessage(new TextComponentTranslation("message.mana_craft.failed"));
 			}
 			return EnumActionResult.PASS;
 		}
-		if(ManaCraftConfig.replace) {
+		if (ManaCraftConfig.replace) {
 			BlockPos.getAllInBox(root.add(2, 0, 2), root.add(-2, 4, -2)).forEach(worldIn::setBlockToAir);
 		}
-		if(!player.isCreative())
+		if (!player.isCreative())
 			player.getHeldItem(hand).shrink(1);
 		buildFrame(worldIn, root, player.getHorizontalFacing());
 		ForgeHooks.onPlaceItemIntoWorld(new ItemStack(mana_producer), player, worldIn, root, facing, hitX, hitY, hitZ, hand);

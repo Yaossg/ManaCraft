@@ -29,10 +29,10 @@ public class ManaCraftWorldGens {
 	static final WorldGenMinable ORICHALCUM = new WorldGenMinable(ManaCraftBlocks.orichalcum_ore.getDefaultState(), sizeOrichalcumOre);
 
 	public static void init() {
-		if(ManaCraftConfig.village)
+		if (ManaCraftConfig.village)
 			MinecraftForge.TERRAIN_GEN_BUS.register(ManaCraftWorldGens.class);
 
-		if(ManaCraftConfig.village_structure) {
+		if (ManaCraftConfig.village_structure) {
 			registerStructureComponent(StructureVillageMP.class, ManaCraft.MODID + ":ViMP");
 			instance().registerVillageCreationHandler(new StructureVillageMP.Handler());
 			registerStructureComponent(StructureVillageML.class, ManaCraft.MODID + ":ViML");
@@ -76,29 +76,29 @@ public class ManaCraftWorldGens {
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onGetVillageBlock(BiomeEvent.GetVillageBlockID event) {
-		if(event.getBiome() instanceof BiomeMana) {
+		if (event.getBiome() instanceof BiomeMana) {
 			IBlockState original = event.getOriginal();
 			event.setReplacement(original);
 			event.setResult(Event.Result.DENY);
-			if(original.getBlock() == Blocks.LOG || original.getBlock() == Blocks.LOG2)
+			if (original.getBlock() == Blocks.LOG || original.getBlock() == Blocks.LOG2)
 				event.setReplacement(Blocks.BONE_BLOCK.getDefaultState().withProperty(BlockBone.AXIS, EnumFacing.Axis.Y));
 
-			if(original.getBlock() == Blocks.GRASS_PATH)
+			if (original.getBlock() == Blocks.GRASS_PATH)
 				event.setReplacement(ManaCraftBlocks.mana_block.getDefaultState());
 
-			if(original.getBlock() == Blocks.COBBLESTONE)
+			if (original.getBlock() == Blocks.COBBLESTONE)
 				event.setReplacement(Blocks.STONEBRICK.getDefaultState());
 
-			if(original.getBlock() == Blocks.STONE_STAIRS)
+			if (original.getBlock() == Blocks.STONE_STAIRS)
 				event.setReplacement(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(original.getBlock().getMetaFromState(original)));
 
-			if(original.getBlock() == Blocks.PLANKS)
+			if (original.getBlock() == Blocks.PLANKS)
 				event.setReplacement(Blocks.BRICK_BLOCK.getDefaultState());
 
-			if(original.getBlock() == Blocks.OAK_STAIRS)
+			if (original.getBlock() == Blocks.OAK_STAIRS)
 				event.setReplacement(Blocks.BRICK_STAIRS.getStateFromMeta(original.getBlock().getMetaFromState(original)));
 
-			if(original.getBlock() == Blocks.OAK_FENCE)
+			if (original.getBlock() == Blocks.OAK_FENCE)
 				event.setReplacement(Blocks.NETHER_BRICK_FENCE.getDefaultState());
 		}
 	}

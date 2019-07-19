@@ -60,22 +60,22 @@ public class EntityManaShooter extends EntityGolem implements IRangedAttackMob {
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
-		if(compound.getBoolean("dying"))
+		if (compound.getBoolean("dying"))
 			dataManager.register(DYING, Boolean.TRUE);
 	}
 
 	@Override
 	public void onUpdate() {
-		if(isEntityAlive()) {
-			if(getHealth() < getEntityAttribute(MAX_HEALTH).getBaseValue() * ManaCraftConfig.ratio)
+		if (isEntityAlive()) {
+			if (getHealth() < getEntityAttribute(MAX_HEALTH).getBaseValue() * ManaCraftConfig.ratio)
 				dataManager.set(DYING, Boolean.TRUE);
-			if(dataManager.get(DYING)) {
-				if(since == total) playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1, 0.8f);
-				if(--since < 0 && !world.isRemote) {
+			if (dataManager.get(DYING)) {
+				if (since == total) playSound(SoundEvents.ENTITY_CREEPER_PRIMED, 1, 0.8f);
+				if (--since < 0 && !world.isRemote) {
 					setDead();
 					final Random random = getRNG();
 					int times = 32 + random.nextInt(32);
-					for(int i = 0; i < times; ++i) {
+					for (int i = 0; i < times; ++i) {
 						EntityManaBall ball = EntityManaBall.get(world, this, false)
 								.setDamage(7).setPlayerFriendly(true).setFlame(isBurning());
 						ball.shoot(this, random.nextFloat() * 360 - 180,

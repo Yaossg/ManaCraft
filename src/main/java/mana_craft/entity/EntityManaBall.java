@@ -79,15 +79,15 @@ public class EntityManaBall extends EntityThrowable {
 
 	@Override
 	protected void onImpact(RayTraceResult result) {
-		if(result.entityHit instanceof EntityPig && ItemManaApple.atCorner(result.entityHit)
+		if (result.entityHit instanceof EntityPig && ItemManaApple.atCorner(result.entityHit)
 				&& invokeChance > BufferedRandom.shared().nextFloat())
 			ItemManaApple.appleExplosion(thrower, (EntityPig) result.entityHit);
-		if(!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
+		if (!world.isRemote && result.typeOfHit == RayTraceResult.Type.BLOCK) {
 			world.setEntityState(this, (byte) 3);
 			setDead();
 		}
-		if(canAttack(result.entityHit)) {
-			if(flame)
+		if (canAttack(result.entityHit)) {
+			if (flame)
 				result.entityHit.setFire((int) damage);
 			result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, thrower), damage);
 		}
@@ -96,7 +96,7 @@ public class EntityManaBall extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(flame)
+		if (flame)
 			setFire(1);
 	}
 
@@ -143,7 +143,7 @@ public class EntityManaBall extends EntityThrowable {
 		@Override
 		public void onUpdate() {
 			super.onUpdate();
-			if(motionX < minSpeed && motionY < minSpeed && motionZ < minSpeed)
+			if (motionX < minSpeed && motionY < minSpeed && motionZ < minSpeed)
 				setDead();
 		}
 	}

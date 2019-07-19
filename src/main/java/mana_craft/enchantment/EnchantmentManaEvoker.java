@@ -47,10 +47,10 @@ public class EnchantmentManaEvoker extends Enchantment {
 	public void onUserHurt(EntityLivingBase user, Entity attacker, int level) {
 		Random random = user.getRNG();
 		ItemStack stack = EnchantmentHelper.getEnchantedItem(ManaCraftEnchantments.mana_evoker, user);
-		if(stack.getItem() instanceof ItemManaArmor) {
+		if (stack.getItem() instanceof ItemManaArmor) {
 			ManaCraft.giveAdvancement(user, "protect_around");
 			int times = level + 2 + random.nextInt(2 * level + 2);
-			for(int i = 0; i < times; ++i) {
+			for (int i = 0; i < times; ++i) {
 				EntityManaBall ball = EntityManaBall.get(user.world, user, true)
 						.setDamage(4);
 				ball.posY = ball.posY - 0.48f;
@@ -59,7 +59,7 @@ public class EnchantmentManaEvoker extends Enchantment {
 						EntityManaBall.lowVelocity, EntityManaBall.defaultInaccuracy);
 				ball.motionX -= user.motionX;
 				ball.motionZ -= user.motionZ;
-				if(!user.onGround)
+				if (!user.onGround)
 					ball.motionY -= user.motionY;
 				user.world.spawnEntity(ball);
 			}

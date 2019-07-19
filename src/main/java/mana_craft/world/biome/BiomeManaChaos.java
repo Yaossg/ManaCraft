@@ -52,7 +52,7 @@ public class BiomeManaChaos extends BiomeMana {
 
 	@Override
 	public WorldGenAbstractTree getRandomTreeFeature(Random rand) {
-		switch(rand.nextInt(4)) {
+		switch (rand.nextInt(4)) {
 			case 0:
 			case 1:
 			default:
@@ -73,7 +73,7 @@ public class BiomeManaChaos extends BiomeMana {
 
 	@Override
 	public BlockFlower.EnumFlowerType pickRandomFlower(Random rand, BlockPos pos) {
-		switch(rand.nextInt(4)) {
+		switch (rand.nextInt(4)) {
 			case 0:
 			default:
 				return BlockFlower.EnumFlowerType.ORANGE_TULIP;
@@ -113,7 +113,7 @@ public class BiomeManaChaos extends BiomeMana {
 
 	@Override
 	public void generateDoubleFlower(World worldIn, Random rand, BlockPos pos) {
-		if(rand.nextInt(16) == 0)
+		if (rand.nextInt(16) == 0)
 			super.generateDoubleFlower(worldIn, rand, pos);
 	}
 
@@ -121,7 +121,7 @@ public class BiomeManaChaos extends BiomeMana {
 
 	@Override
 	public void decorate(World worldIn, Random rand, BlockPos pos) {
-		for(int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++)
 			sky.generate(worldIn, rand, randomPos(worldIn, rand, pos).up(rand.nextInt(48) - rand.nextInt(36)));
 		LAVA_LAKES.generate(worldIn, rand, pos.add(rand.nextInt(16) + 8, 256, rand.nextInt(16) + 8));
 		super.decorate(worldIn, rand, pos);

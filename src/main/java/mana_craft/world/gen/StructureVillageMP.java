@@ -31,9 +31,9 @@ public class StructureVillageMP extends Village {
 
 	@Override
 	public boolean addComponentParts(World worldIn, Random randomIn, StructureBoundingBox box) {
-		if(averageGroundLvl < 0) {
+		if (averageGroundLvl < 0) {
 			averageGroundLvl = getAverageGroundLevel(worldIn, box);
-			if(averageGroundLvl < 0)
+			if (averageGroundLvl < 0)
 				return true;
 			boundingBox.offset(0, averageGroundLvl - boundingBox.maxY + 7 - 1, 0);
 		}

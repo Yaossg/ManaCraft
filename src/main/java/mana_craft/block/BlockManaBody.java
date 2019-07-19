@@ -64,10 +64,10 @@ public class BlockManaBody extends Block {
 
 	@Override
 	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random) {
-		for(EnumFacing facing : EnumFacing.values()) {
+		for (EnumFacing facing : EnumFacing.values()) {
 			BlockPos offset = pos.offset(facing);
 			int times = random.nextInt(3);
-			for(int i = 0; i < times; i++) {
+			for (int i = 0; i < times; i++) {
 				EntityManaBall ball = EntityManaBall.get(worldIn,
 						offset.getX() + 0.5, offset.getY() + 0.5, offset.getZ() + 0.5, true)
 						.setDamage(4);

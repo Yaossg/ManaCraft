@@ -29,7 +29,7 @@ public class ManaCraftBiomes {
 		addBiome(WARM, new BiomeEntry(mana_chaos_hills, 2));
 		addTypes(mana_chaos_hills, Type.MAGICAL, Type.HILLS, Type.RARE);
 
-		if(ManaCraftConfig.village)
+		if (ManaCraftConfig.village)
 			addVillageBiome(mana, true);
 	}
 }

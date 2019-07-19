@@ -57,19 +57,19 @@ public class MPRecipeCategory implements IRecipeCategory<MPRecipeWrapper> {
 	public void setRecipe(IRecipeLayout recipeLayout, MPRecipeWrapper mpRecipeWrappers, IIngredients ingredients) {
 		IGuiItemStackGroup group = recipeLayout.getItemStacks();
 		group.init(outputID, false, 68, 8);
-		for(int i = 0; i < 2; i++)
-			for(int j = 0; j < 2; j++)
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
 				group.init(j + i * 2, true, j * 18, i * 18);
 		List<List<ItemStack>> inputs = ingredients.getInputs(ItemStack.class);
 		List<List<ItemStack>> outputs = ingredients.getOutputs(ItemStack.class);
 		group.set(outputID, outputs.get(0));
-		for(int i = 0; i < 2; i++)
-			for(int j = 0; j < 2; j++)
-				if(j + i * 2 < inputs.size())
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
+				if (j + i * 2 < inputs.size())
 					group.set(j + i * 2, inputs.get(j + i * 2));
 
 		group.addTooltipCallback((slotIndex, input, ingredient, tooltip) -> {
-			if(slotIndex == outputID && mpRecipeWrappers.location != null)
+			if (slotIndex == outputID && mpRecipeWrappers.location != null)
 				tooltip.add(TextFormatting.GRAY + I18n.format("jei.tooltip.recipe.by", mpRecipeWrappers.location.toString()));
 		});
 	}

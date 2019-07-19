@@ -17,8 +17,7 @@
             }
           ],
           "weight": 10
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:orichalcum_ingot",
           "functions": [
@@ -31,8 +30,7 @@
             }
           ],
           "weight": 20
-        },
-        {
+        }, {
           "type": "item",
           "name": "mana_craft:mana_record",
           "weight": 5

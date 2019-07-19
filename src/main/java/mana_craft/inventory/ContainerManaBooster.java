@@ -17,10 +17,10 @@ public class ContainerManaBooster extends ContainerBase<TileManaBooster> {
 	ContainerManaBooster(InventoryPlayer inventory, TileEntity tileEntity) {
 		super(tileEntity);
 		addSlotToContainer(new SlotItemHandler(this.tileEntity.handler, 0, 52, 37));
-		for(int i = 0; i < 3; ++i)
-			for(int j = 0; j < 9; ++j)
+		for (int i = 0; i < 3; ++i)
+			for (int j = 0; j < 9; ++j)
 				addSlotToContainer(new Slot(inventory, 9 + j + i * 9, 8 + j * 18, 62 + i * 18));
-		for(int i = 0; i < 9; ++i)
+		for (int i = 0; i < 9; ++i)
 			addSlotToContainer(new Slot(inventory, i, 8 + i * 18, 120));
 	}
 
@@ -40,7 +40,7 @@ public class ContainerManaBooster extends ContainerBase<TileManaBooster> {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int id, int data) {
-		switch(id) {
+		switch (id) {
 			case 0:
 				this.burn_time = data;
 				break;
