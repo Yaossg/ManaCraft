@@ -1,7 +1,13 @@
 {
-  "variants": {
-    "normal": {
-      "model": "mana_craft:machine_frame"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "mana_craft:blocks/machine_frame"
     }
+  },
+  "variants": {
+    "inventory": [{}],
+    "normal": [{}]
   }
 }

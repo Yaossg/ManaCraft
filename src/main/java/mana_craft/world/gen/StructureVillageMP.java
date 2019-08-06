@@ -1,7 +1,7 @@
 package mana_craft.world.gen;
 
 import mana_craft.block.BlockManaProducer;
-import mana_craft.entity.ManaCraftVillagers;
+import mana_craft.init.ManaCraftVillagers;
 import mana_craft.init.ManaCraftBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

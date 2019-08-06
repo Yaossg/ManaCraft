@@ -7,13 +7,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
-
 public class BlockOrichalcum extends Block {
 	public BlockOrichalcum() {
 		super(Material.ROCK, MapColor.PURPLE);
 		setHardness(6);
-		setLightLevel(lightLevelOf(10));
+		setLightLevel(10 / 15F);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
 	}
 

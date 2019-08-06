@@ -2,7 +2,10 @@ package mana_craft.init;
 
 import mana_craft.ManaCraft;
 import mana_craft.config.ManaCraftConfig;
+import mana_craft.world.biome.BiomeMana;
+import mana_craft.world.biome.BiomeManaChaos;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 import static net.minecraftforge.common.BiomeDictionary.Type;
@@ -17,6 +20,14 @@ public class ManaCraftBiomes {
 	public static final Biome mana_hills = nonnull();
 	public static final Biome mana_chaos = nonnull();
 	public static final Biome mana_chaos_hills = nonnull();
+
+	public static void preInit() {
+		ForgeRegistries.BIOMES.registerAll(
+				BiomeMana.get().setRegistryName("mana"),
+				BiomeMana.getHills().setRegistryName("mana_hills"),
+				BiomeManaChaos.get().setRegistryName("mana_chaos"),
+				BiomeManaChaos.getHills().setRegistryName("mana_chaos_hills"));
+	}
 
 	public static void init() {
 		addBiome(WARM, new BiomeEntry(mana, 6));

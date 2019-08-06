@@ -1,7 +1,9 @@
-package mana_craft.entity;
+package mana_craft.init;
 
+import mana_craft.ManaCraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.common.registry.VillagerRegistry;
 
 import static mana_craft.init.ManaCraftBlocks.*;
@@ -9,13 +11,15 @@ import static mana_craft.init.ManaCraftItems.*;
 import static net.minecraft.entity.passive.EntityVillager.ITradeList;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCareer;
 import static net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerProfession;
+import static sausage_core.api.util.common.SausageUtils.nonnull;
 import static sausage_core.api.util.common.VillagerTrades.*;
 
+@ObjectHolder(ManaCraft.MODID)
 public class ManaCraftVillagers {
-	public static VillagerProfession mana_priest;
+	public static final VillagerProfession mana_priest = nonnull();
 
 	public static void preInit() {
-		ForgeRegistries.VILLAGER_PROFESSIONS.register(mana_priest =
+		ForgeRegistries.VILLAGER_PROFESSIONS.register(
 				new VillagerRegistry.VillagerProfession(
 						"mana_craft:mana_priest",
 						"mana_craft:textures/entity/mana_priest.png",

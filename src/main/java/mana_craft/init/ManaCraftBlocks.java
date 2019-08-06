@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 import static mana_craft.ManaCraft.IB;
 import static net.minecraft.item.Item.ToolMaterial;
-import static sausage_core.api.util.common.SausageUtils.lightLevelOf;
 import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 @ObjectHolder(ManaCraft.MODID)
@@ -36,16 +35,15 @@ public class ManaCraftBlocks {
 
 	public static void init() {
 		addBlock("mana_block", Material.ROCK, MapColor.PURPLE, ToolMaterial.STONE)
-				.setHardness(5).setLightLevel(lightLevelOf(7));
+				.setHardness(5).setLightLevel(4 / 15F);
 		IB.addBlock("orichalcum_block", new BlockOrichalcum());
 		addBlock("orichalcum_ore", Material.ROCK, MapColor.STONE, ToolMaterial.IRON)
-				.setHardness(4).setLightLevel(lightLevelOf(5));
+				.setHardness(4).setLightLevel(5 / 15F);
 		addBlock("machine_frame", Material.IRON, MapColor.PURPLE, ToolMaterial.IRON)
-				.setHardness(5).setLightLevel(lightLevelOf(11));
-		IB.addBlock("mana_glass", new BlockManaGlass())
-				.setHardness(1).setLightLevel(lightLevelOf(9));
+				.setHardness(5).setLightLevel(7 / 15F);
+		IB.addBlock("mana_glass", new BlockManaGlass());
 		IB.addBlock("mana_lantern", new Block(Material.GLASS, MapColor.PURPLE))
-				.setHardness(1.2f).setLightLevel(lightLevelOf(16));
+				.setHardness(1).setLightLevel(15 / 15F);
 		IB.addBlock("mana_ore", new BlockManaOre());
 		IB.addBlock("mana_producer", new BlockManaProducer());
 		IB.addBlock("mana_booster", new BlockManaBooster());

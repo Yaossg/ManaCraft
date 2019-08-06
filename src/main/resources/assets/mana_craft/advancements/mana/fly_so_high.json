@@ -12,6 +12,9 @@
     "frame": "challenge",
     "hidden": true
   },
+  "rewards": {
+    "experience": 100
+  },
   "parent": "mana_craft:mana/cool_wand",
   "criteria": {
     "fly_so_high": {

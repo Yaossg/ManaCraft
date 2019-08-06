@@ -16,7 +16,7 @@ public class BlockManaOre extends Block {
 		super(Material.ROCK);
 		setHardness(2.5f);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
-		setLightLevel(SausageUtils.lightLevelOf(7));
+		setLightLevel(7 / 15F);
 	}
 
 	@Override

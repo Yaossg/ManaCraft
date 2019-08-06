@@ -13,6 +13,8 @@ public class BlockManaGlass extends BlockGlass {
 		setHardness(0.5f);
 		setResistance(1500);
 		setSoundType(SoundType.GLASS);
+		setHardness(1);
+		setLightLevel(9 / 15F);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.STONE.getHarvestLevel());
 	}
 

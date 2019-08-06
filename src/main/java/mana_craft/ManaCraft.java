@@ -20,9 +20,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Logger;
+import sausage_core.api.annotation.InjectLogger;
+import sausage_core.api.core.common.ItemGroup;
 import sausage_core.api.registry.AutoSyncConfig;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.registry.IBRegistryManager;
+import sausage_core.api.util.registry.PotionRegistryManager;
 
 import static mana_craft.init.ManaCraftItems.mana;
 import static net.minecraftforge.fml.client.registry.RenderingRegistry.registerEntityRenderingHandler;
@@ -34,7 +37,7 @@ import static net.minecraftforge.fml.client.registry.RenderingRegistry.registerE
 		name = ManaCraft.NAME,
 		version = ManaCraft.VERSION,
 		acceptedMinecraftVersions = "1.12.2",
-		dependencies = "required-after:sausage_core@[1.5,);after:tconstruct")
+		dependencies = "required-after:sausage_core@[1.6,);after:tconstruct")
 @Mod.EventBusSubscriber
 public class ManaCraft {
 	public static final String MODID = "mana_craft";
@@ -42,6 +45,7 @@ public class ManaCraft {
 	public static final String VERSION = "@version@";
 	@Instance(MODID)
 	public static ManaCraft instance;
+	@InjectLogger
 	public static Logger logger;
 
 	public static void giveAdvancement(Entity player, String advance) {
@@ -50,8 +54,6 @@ public class ManaCraft {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		logger = event.getModLog();
-		SausageUtils.loadingInformation(NAME, VERSION, MODID);
 		AutoSyncConfig.AUTO_SYNC_CONFIG.register(MODID);
 		ManaCraftContent.preInit();
 	}
@@ -67,15 +69,13 @@ public class ManaCraft {
 			MinecraftForge.addGrassSeed(new ItemStack(mana), 1);
 	}
 
-	public static final IBRegistryManager IB = new IBRegistryManager(MODID, new CreativeTabs(MODID + ".mana") {
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ManaCraftItems.mana);
-		}
-	});
+	public static final IBRegistryManager IB = new IBRegistryManager(MODID,
+			new ItemGroup(MODID, () -> new ItemStack(ManaCraftItems.mana)));
+
+	public static final PotionRegistryManager P = new PotionRegistryManager(ManaCraft.MODID);
 
 	@SubscribeEvent
 	public static void loadModels(ModelRegistryEvent event) {
-		IB.loadAllModel();
 		registerEntityRenderingHandler(EntityManaBall.class, EntityManaBall::render);
 		registerEntityRenderingHandler(EntityManaBall.Floating.class, EntityManaBall::render);
 		registerEntityRenderingHandler(EntityManaShooter.class, EntityManaShooter.Render::new);

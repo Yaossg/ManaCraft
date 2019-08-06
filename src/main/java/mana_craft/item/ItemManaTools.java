@@ -33,9 +33,14 @@ import static mana_craft.config.ManaCraftConfig.enchantability;
 import static sausage_core.api.util.common.SausageUtils.nonnull;
 
 public class ItemManaTools {
-	public static final Item.ToolMaterial MANA_TOOL = nonnull(
-			EnumHelper.addToolMaterial(ManaCraft.MODID + ":MANA", Item.ToolMaterial.DIAMOND.getHarvestLevel(),
-					durability * 20, 6.5f, 3.5f, enchantability));
+	public static final Item.ToolMaterial MANA_TOOL;
+
+	static {
+		MANA_TOOL = nonnull(EnumHelper.addToolMaterial(ManaCraft.MODID + ":MANA",
+				Item.ToolMaterial.DIAMOND.getHarvestLevel(),
+				durability * 20, 6.5f, 3.5f, enchantability));
+		MinecraftForge.EVENT_BUS.register(ItemManaTools.class);
+	}
 
 	public static class ItemManaSword extends ItemSword implements IItemManaDamagable {
 		public ItemManaSword() {
@@ -84,8 +89,6 @@ public class ItemManaTools {
 	public static class ItemManaHoe extends ItemHoe implements IItemManaDamagable {
 		public ItemManaHoe() {
 			super(MANA_TOOL);
-			MinecraftForge.EVENT_BUS.register(this);
-			MinecraftForge.EVENT_BUS.register(ItemManaTools.class);
 		}
 
 		@Override
@@ -93,33 +96,6 @@ public class ItemManaTools {
 			return 13;
 		}
 
-		@SubscribeEvent
-		public void onUseHoe(UseHoeEvent event) {
-			ItemStack item = event.getCurrent();
-			if (ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.mana_hoe))) {
-				World world = event.getWorld();
-				Block block = world.getBlockState(event.getPos()).getBlock();
-				if (block == ManaCraftBlocks.mana_body) {
-					item.setStackDisplayName("Final Hoe of Mana");
-					item.addEnchantment(Enchantments.SHARPNESS, 7);
-					item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
-					item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(I18n.format("message.mana_craft.hoe")));
-					world.setBlockToAir(event.getPos());
-					ExExplosion.builder(world)
-							.by(event.getEntity())
-							.at(event.getPos())
-							.sizeOf(1.5f)
-							.causesFire()
-							.hurtEntity()
-							.spawnParticles()
-							.build()
-							.apply();
-					event.getEntityPlayer().addExperience(15);
-					ManaCraft.giveAdvancement(event.getEntityPlayer(), "final_hoe");
-					event.setResult(Event.Result.ALLOW);
-				}
-			}
-		}
 	}
 
 	public static class ItemManaShears extends ItemShears implements IItemManaDamagable {
@@ -131,11 +107,11 @@ public class ItemManaTools {
 		@Override
 		public float getDestroySpeed(ItemStack stack, IBlockState state) {
 			Block block = state.getBlock();
-			if (block != Blocks.WEB && state.getMaterial() != Material.LEAVES) {
-				return block == Blocks.WOOL ? 30f : super.getDestroySpeed(stack, state);
-			} else {
-				return 90f;
-			}
+			Material material = state.getMaterial();
+			return    block    == Blocks.WEB 	  ? 90F
+					: material == Material.LEAVES ? 90F
+					: block    == Blocks.WOOL 	  ? 30F
+					: super.getDestroySpeed(stack, state);
 		}
 
 		@Override
@@ -146,6 +122,7 @@ public class ItemManaTools {
 
 	@SubscribeEvent
 	public static void onPlayerDestroyItem(PlayerDestroyItemEvent event) {
+		if (event.getEntityPlayer() == null) return;
 		Random random = event.getEntityPlayer().getRNG();
 		ItemStack stack = event.getOriginal();
 		if (stack.getItem() instanceof IItemManaDamagable && !(stack.getItem() instanceof ItemArmor)) {
@@ -155,6 +132,34 @@ public class ItemManaTools {
 			int i = value > 1 ? 1 + random.nextInt(value - 1) : 1;
 			int l = EnchantmentHelper.getEnchantmentLevel(ManaCraftEnchantments.mana_recycler, stack);
 			ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(ManaCraftItems.mana, l + i * (random.nextInt(l + 2) + 1)));
+		}
+	}
+
+
+	@SubscribeEvent
+	public static void onUseHoe(UseHoeEvent event) {
+		ItemStack item = event.getCurrent();
+		if (ManaCraftConfig.finalHoe && ItemStack.areItemStacksEqual(item, new ItemStack(ManaCraftItems.mana_hoe))) {
+			World world = event.getWorld();
+			Block block = world.getBlockState(event.getPos()).getBlock();
+			if (block == ManaCraftBlocks.mana_body) {
+				item.setStackDisplayName("Final Hoe of Mana");
+				item.addEnchantment(Enchantments.SHARPNESS, 7);
+				item.addEnchantment(Enchantments.FIRE_ASPECT, 3);
+				item.getOrCreateSubCompound("display").setTag("Lore", NBTs.asList(I18n.format("message.mana_craft.hoe")));
+				world.setBlockToAir(event.getPos());
+				ExExplosion.builder()
+						.by(event.getEntity())
+						.sizeOf(1.5f)
+						.causesFire()
+						.hurtEntity()
+						.spawnParticles()
+						.build(world, event.getPos())
+						.apply();
+				event.getEntityPlayer().addExperience(15);
+				ManaCraft.giveAdvancement(event.getEntityPlayer(), "final_hoe");
+				event.setResult(Event.Result.ALLOW);
+			}
 		}
 	}
 }

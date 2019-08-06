@@ -21,6 +21,7 @@ public class BlockManaObsidian extends Block {
 	public BlockManaObsidian() {
 		super(Material.ROCK);
 		setHardness(40);
+		setLightLevel(2 / 15F);
 		setResistance(1600);
 		setSoundType(SoundType.STONE);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.DIAMOND.getHarvestLevel());

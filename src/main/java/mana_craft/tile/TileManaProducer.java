@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import sausage_core.api.core.multiblock.IBlockStatePredicate;
 import sausage_core.api.core.multiblock.SimpleFixedDetector;
 import sausage_core.api.core.tile.IMachineLogic;
 import sausage_core.api.core.tile.ITileDropItems;
@@ -29,6 +28,7 @@ import static mana_craft.api.registry.ManaCraftRegistries.MP_RECIPES;
 import static mana_craft.block.BlockManaProducer.FACING;
 import static mana_craft.block.BlockManaProducer.WORKING;
 import static mana_craft.init.ManaCraftBlocks.*;
+import static sausage_core.api.util.function.IRotatableBSPredicate.of;
 
 public class TileManaProducer extends TileBase implements ITickable, ITileDropItems, IMachineLogic {
 	public int progress;
@@ -153,11 +153,11 @@ public class TileManaProducer extends TileBase implements ITickable, ITileDropIt
 						" _^_ ",
 						"  _  ",
 						"     ")
-				.mapping('_', IBlockStatePredicate.of(Blocks.AIR))
-				.mapping('^', IBlockStatePredicate.of(mana_lantern))
-				.mapping('#', IBlockStatePredicate.of(mana_block))
-				.mapping('!', IBlockStatePredicate.of(mana_glass))
-				.mapping('*', IBlockStatePredicate.of(orichalcum_block))
+				.mapping('_', of(Blocks.AIR))
+				.mapping('^', of(mana_lantern))
+				.mapping('#', of(mana_block))
+				.mapping('!', of(mana_glass))
+				.mapping('*', of(orichalcum_block))
 				.build();
 	}
 

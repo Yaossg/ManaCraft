@@ -78,12 +78,11 @@ public class ItemManaApple extends ItemFood {
 		}
 		pig.setDead();
 		World world = pig.world;
-		ExExplosion.builder(world)
+		ExExplosion.builder()
 				.by(pig)
-				.at(pig.getPosition())
 				.sizeOf(10)
 				.spawnParticles()
-				.build()
+				.build(world, pig.posX, pig.posY, pig.posZ)
 				.apply();
 		float step = (float) Math.PI / 8;
 		for (float f = 0; f <= 2 * Math.PI; f += step)

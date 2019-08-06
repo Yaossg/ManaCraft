@@ -80,7 +80,7 @@ public class ManaCraftItems {
 		IB.addItem("mana_producer_generator", new ItemMPGenerator());
 		IB.addItem("mana_dust");
 		IB.addItem("mana_record", new ItemRecord("mana",
-				new SoundRegistryManager(ManaCraft.MODID).addSound("record")) {});
+				new SoundRegistryManager(ManaCraft.MODID).register("record")) {});
 		IB.addItem("mana_rod");
 	}
 }

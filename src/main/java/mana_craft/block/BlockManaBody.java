@@ -30,7 +30,7 @@ public class BlockManaBody extends Block {
 	BlockManaBody(float hardness, int value) {
 		super(Material.SAND, MapColor.PURPLE);
 		setSoundType(SoundType.SAND);
-		setLightLevel(SausageUtils.lightLevelOf(5));
+		setLightLevel(5 / 15F);
 		setHardness(hardness);
 		setTickRandomly(true);
 		this.value = value;

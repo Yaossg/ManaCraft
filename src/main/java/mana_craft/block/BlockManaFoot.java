@@ -9,6 +9,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -40,10 +42,6 @@ public class BlockManaFoot extends BlockManaBody {
 			protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>,
 					Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
 				return new StateImplementation(block, properties) {
-					@Override
-					public boolean isFullBlock() {
-						return false;
-					}
 
 					@Override
 					public boolean isFullCube() {
@@ -58,6 +56,16 @@ public class BlockManaFoot extends BlockManaBody {
 					@Override
 					public AxisAlignedBB getBoundingBox(IBlockAccess blockAccess, BlockPos pos) {
 						return AABBs[((EnumFacing) properties.get(FACING)).getHorizontalIndex()];
+					}
+
+					@Override
+					public IBlockState withRotation(Rotation rot) {
+						return withProperty(FACING, rot.rotate(getValue(FACING)));
+					}
+
+					@Override
+					public IBlockState withMirror(Mirror mirrorIn) {
+						return withRotation(mirrorIn.toRotation(getValue(FACING)));
 					}
 				};
 			}

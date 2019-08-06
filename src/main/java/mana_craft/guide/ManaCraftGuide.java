@@ -39,7 +39,7 @@ public class ManaCraftGuide implements IGuideBook {
 	@Nullable
 	@Override
 	public Book buildBook() {
-		PageText empty = new PageText("Right here in the darkness there's nothing left for you to do");
+		PageText empty = new PageText("Right here in the darkness there's nothing left for you to do (Not yet finished, coming soon)");
 
 		ResourceLocation guide = new ResourceLocation(ManaCraft.MODID, "guide");
 		List<CategoryAbstract> categories = new ArrayList<>();

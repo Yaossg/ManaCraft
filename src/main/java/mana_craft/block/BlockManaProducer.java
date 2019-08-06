@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import sausage_core.api.core.tile.ITileDropItems;
@@ -38,7 +39,7 @@ public class BlockManaProducer extends BlockContainer {
 	public BlockManaProducer() {
 		super(Material.IRON, MapColor.PURPLE);
 		setHardness(11);
-		setLightLevel(SausageUtils.lightLevelOf(11));
+		setLightLevel(11 / 15F);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
 		setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(WORKING, Boolean.FALSE));
 	}

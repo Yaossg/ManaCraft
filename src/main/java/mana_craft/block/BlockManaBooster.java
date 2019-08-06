@@ -21,6 +21,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -37,7 +38,7 @@ public class BlockManaBooster extends BlockContainer {
 	public BlockManaBooster() {
 		super(Material.IRON, MapColor.PURPLE);
 		setHardness(5);
-		setLightLevel(SausageUtils.lightLevelOf(11));
+		setLightLevel(11 / 15F);
 		setHarvestLevel("pickaxe", Item.ToolMaterial.IRON.getHarvestLevel());
 		setDefaultState(blockState.getBaseState().withProperty(BURNING, Boolean.FALSE));
 	}

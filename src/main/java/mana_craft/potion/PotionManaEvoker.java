@@ -7,6 +7,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import sausage_core.api.util.client.Colors;
 
 import java.util.Random;
 
@@ -14,8 +15,7 @@ public class PotionManaEvoker extends Potion {
 	public static final ResourceLocation texture = new ResourceLocation(ManaCraft.MODID, "textures/gui/potions.png");
 
 	public PotionManaEvoker() {
-		super(false, 0xEB7BEA);
-		setPotionName("effect.mana_craft.mana_evoker");
+		super(false, Colors.VIOLET);
 	}
 
 	@Override

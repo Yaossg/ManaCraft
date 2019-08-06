@@ -10,14 +10,14 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.util.EnumHelper;
-import sausage_core.api.core.common.IDefaultSpecialArmor;
+import sausage_core.api.core.common.ISpecialArmorPlus;
 
 import javax.annotation.Nonnull;
 
 import static mana_craft.config.ManaCraftConfig.*;
 import static sausage_core.api.util.common.SausageUtils.nonnull;
 
-public class ItemManaArmor extends ItemArmor implements IDefaultSpecialArmor, IItemManaDamagable {
+public class ItemManaArmor extends ItemArmor implements ISpecialArmorPlus, IItemManaDamagable {
 	public static final ItemArmor.ArmorMaterial MANA_ARMOR = nonnull(
 			EnumHelper.addArmorMaterial(ManaCraft.MODID + ":MANA", ManaCraft.MODID + ":mana",
 					durability, armor, enchantability,

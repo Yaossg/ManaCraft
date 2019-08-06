@@ -1,7 +1,13 @@
 {
-  "variants": {
-    "normal": {
-      "model": "mana_craft:mana_obsidian"
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "mana_craft:blocks/mana_obsidian"
     }
+  },
+  "variants": {
+    "inventory": [{}],
+    "normal": [{}]
   }
 }

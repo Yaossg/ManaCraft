@@ -130,8 +130,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 
 	@Override
 	public void update() {
-		if (world.isRemote)
-			return;
+		if (world.isRemote) return;
 		work = tick(work);
 		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, work));
 	}

@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import sausage_core.api.core.common.IDefaultSpecialArmor;
+import sausage_core.api.core.common.ISpecialArmorPlus;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -26,9 +26,9 @@ public interface IItemManaDamagable {
 	int getManaValue();
 
 	/**
-	 * for a mana armor, you should implement {@link IDefaultSpecialArmor},
+	 * for a mana armor, you should implement {@link ISpecialArmorPlus},
 	 * then just call this method when
-	 * {@link IDefaultSpecialArmor#onArmorBroken(EntityLivingBase, ItemStack, DamageSource, int, IDefaultSpecialArmor.EnumArmorType)}
+	 * {@link ISpecialArmorPlus#onArmorBroken(EntityLivingBase, ItemStack, DamageSource, int, ISpecialArmorPlus.EnumArmorType)}
 	 * is on
 	 *
 	 * @param entity whose armor is broken
