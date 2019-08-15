@@ -5,7 +5,6 @@ import mana_craft.block.BlockManaHead;
 import mana_craft.config.ManaCraftConfig;
 import mana_craft.entity.EntityManaBall;
 import mana_craft.entity.EntityManaShooter;
-import mana_craft.init.ManaCraftVillagers;
 import mana_craft.init.*;
 import mana_craft.inventory.ManaCraftGUIs;
 import mana_craft.item.ItemManaArmor;
@@ -23,13 +22,11 @@ import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import sausage_core.api.core.ienum.IEnumGUIHandler;
-import sausage_core.api.core.plugin.PluginLoader;
 import sausage_core.api.registry.SCFRecipeManager;
 import sausage_core.api.util.client.Colors;
 import sausage_core.api.util.common.SausageUtils;
 
 import static mana_craft.ManaCraft.*;
-import static mana_craft.ManaCraft.MODID;
 import static mana_craft.init.ManaCraftBlocks.*;
 import static mana_craft.init.ManaCraftItems.*;
 import static net.minecraftforge.fml.common.registry.EntityEntryBuilder.create;
@@ -37,10 +34,8 @@ import static net.minecraftforge.fml.common.registry.GameRegistry.addSmelting;
 import static net.minecraftforge.oredict.OreDictionary.registerOre;
 import static sausage_core.api.util.common.Conversions.To.item;
 import static sausage_core.api.util.registry.IPotionTypeLoader.*;
-import static sausage_core.api.util.registry.IPotionTypeLoader.simpleVanilla;
 
 public class ManaCraftContent {
-	static final PluginLoader pluginPrimer = new PluginLoader(MODID);
 	private static int nextEntityID = 0;
 
 	static void initEntities() {
@@ -60,7 +55,6 @@ public class ManaCraftContent {
 	}
 
 	public static void initRecipes() {
-		new ManaCraftRegistries();
 		SausageUtils.getPath(ManaCraftRegistries.class, "/assets/mana_craft/defaults/").ifPresent(root -> {
 			SCFRecipeManager.where(new ResourceLocation(MODID, "mp_recipe")).addDefaults(MODID, root.resolve("recipes"));
 			SCFRecipeManager.where(new ResourceLocation(MODID, "mb_fuel")).addDefaults(MODID, root.resolve("fuels"));
@@ -81,8 +75,6 @@ public class ManaCraftContent {
 		ManaCraftVillagers.preInit();
 		initRecipes();
 		IEnumGUIHandler.register(instance, ManaCraftGUIs.values());
-		if (ManaCraftConfig.ticPlugin)
-			pluginPrimer.register("tconstruct", "mana_craft.plugin.PluginTConstruct");
 	}
 
 	public static void initOre() {
@@ -118,6 +110,5 @@ public class ManaCraftContent {
 		ItemManaArmor.MANA_ARMOR.setRepairItem(new ItemStack(orichalcum_ingot));
 		SausageUtils.registerTileEntities(MODID, TileManaProducer.class, TileManaBooster.class);
 		TileManaProducer.init();
-		pluginPrimer.execute();
 	}
 }

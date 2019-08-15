@@ -4,7 +4,6 @@ import mana_craft.config.ManaCraftConfig;
 import mana_craft.entity.EntityManaBall;
 import mana_craft.entity.EntityManaShooter;
 import mana_craft.init.ManaCraftItems;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,7 +36,7 @@ import static net.minecraftforge.fml.client.registry.RenderingRegistry.registerE
 		name = ManaCraft.NAME,
 		version = ManaCraft.VERSION,
 		acceptedMinecraftVersions = "1.12.2",
-		dependencies = "required-after:sausage_core@[1.6,);after:tconstruct")
+		dependencies = "required-after:sausage_core@[1.7-alpha,);after:tconstruct")
 @Mod.EventBusSubscriber
 public class ManaCraft {
 	public static final String MODID = "mana_craft";
@@ -85,8 +84,8 @@ public class ManaCraft {
 	public static void onMissingMappings(RegistryEvent.MissingMappings<Item> event) {
 		for (RegistryEvent.MissingMappings.Mapping<Item> entry : event.getAllMappings()) {
 			ResourceLocation name = entry.key;
-			if (name.getResourceDomain().equals("mana_craft"))
-				switch (name.getResourcePath()) {
+			if (name.getNamespace().equals("mana_craft"))
+				switch (name.getPath()) {
 					case "mana_emerald":
 					case "orichalcum_gear":
 					case "orichalcum_plate":

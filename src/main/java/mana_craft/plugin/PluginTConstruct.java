@@ -8,7 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import sausage_core.api.core.plugin.PluginTConstructCore;
+import sausage_core.api.annotation.LoadClass;
 import sausage_core.api.util.client.Colors;
 import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 
@@ -16,17 +16,18 @@ import static mana_craft.init.ManaCraftBlocks.mana_block;
 import static mana_craft.init.ManaCraftBlocks.mana_ore;
 import static mana_craft.init.ManaCraftItems.*;
 import static net.minecraftforge.fml.common.registry.GameRegistry.makeItemStack;
+import static sausage_core.api.util.common.TConstructSupport.addMolten;
+import static sausage_core.api.util.common.TConstructSupport.get;
 import static slimeknights.mantle.util.RecipeMatch.of;
 import static slimeknights.tconstruct.library.TinkerRegistry.*;
 
-public class PluginTConstruct extends PluginTConstructCore {
-	@Override
-	public void run() {
-		// TODO ADJUST NEEDED
-		Fluid mana = addMoltenFluid("mana", Colors.PURPLE, 450);
-		Fluid mana_obsidian = addMoltenFluid("mana_obsidian", 0xFF400040, 800);
-		Fluid mana_glass = addMoltenFluid("mana_glass", Colors.PLUM, 600);
-		Fluid orichalcum = addMoltenFluid("orichalcum", Colors.MAGENTA, 550);
+@LoadClass(construct = true, modRequired = "tconstruct", when = LoadClass.When.INIT)
+public class PluginTConstruct {
+	public PluginTConstruct() {
+		Fluid mana = addMolten("mana", Colors.PURPLE, 450);
+		Fluid mana_obsidian = addMolten("mana_obsidian", 0xFF400040, 800);
+		Fluid mana_glass = addMolten("mana_glass", Colors.PLUM, 600);
+		Fluid orichalcum = addMolten("orichalcum", Colors.MAGENTA, 550);
 		integrate(orichalcum, "Orichalcum").toolforge();
 		registerAlloy(new FluidStack(orichalcum, 16),
 				new FluidStack(mana, 60),

@@ -1,14 +1,11 @@
 package mana_craft.block;
 
-import com.google.common.collect.ImmutableMap;
 import mana_craft.ManaCraft;
 import mana_craft.inventory.ManaCraftGUIs;
 import mana_craft.tile.TileManaBooster;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,15 +18,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.items.ItemHandlerHelper;
 import sausage_core.api.core.tile.ITileDropItems;
-import sausage_core.api.util.common.SausageUtils;
 
-import javax.annotation.Nullable;
-import java.util.Optional;
 import java.util.Random;
 
 public class BlockManaBooster extends BlockContainer {
@@ -45,22 +37,25 @@ public class BlockManaBooster extends BlockContainer {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, BURNING) {
-			@Override
-			protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
-				return new StateImplementation(block, properties) {
-					@Override
-					public boolean hasComparatorInputOverride() {
-						return true;
-					}
+		return new BlockStateContainer(this, BURNING);
+	}
 
-					@Override
-					public int getComparatorInputOverride(World worldIn, BlockPos pos) {
-						return ItemHandlerHelper.calcRedstoneFromInventory(((TileManaBooster) worldIn.getTileEntity(pos)).handler);
-					}
-				};
-			}
-		};
+	@Override
+	@Deprecated
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	@Deprecated
+	public boolean hasComparatorInputOverride(IBlockState state) {
+		return true;
+	}
+
+	@Override
+	@Deprecated
+	public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+		return ItemHandlerHelper.calcRedstoneFromInventory(((TileManaBooster) worldIn.getTileEntity(pos)).handler);
 	}
 
 	@Override
@@ -77,11 +72,6 @@ public class BlockManaBooster extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileManaBooster();
-	}
-
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override

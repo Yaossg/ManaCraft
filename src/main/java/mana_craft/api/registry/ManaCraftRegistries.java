@@ -1,9 +1,11 @@
 package mana_craft.api.registry;
 
 import net.minecraft.util.ResourceLocation;
-import sausage_core.api.registry.SCFRecipeManager;
+import sausage_core.api.annotation.LoadClass;
 import sausage_core.api.core.registry.IModdedRegistry;
+import sausage_core.api.registry.SCFRecipeManager;
 
+@LoadClass(when = LoadClass.When.PRE_INIT)
 public class ManaCraftRegistries {
 	public static final IModdedRegistry<MPRecipe> MP_RECIPES =
 			SCFRecipeManager.newType(

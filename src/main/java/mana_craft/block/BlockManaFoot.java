@@ -1,8 +1,5 @@
 package mana_craft.block;
 
-import com.google.common.collect.ImmutableMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -15,10 +12,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.IUnlistedProperty;
-
-import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class BlockManaFoot extends BlockManaBody {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -37,45 +30,43 @@ public class BlockManaFoot extends BlockManaBody {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING) {
-			@Override
-			protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>,
-					Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
-				return new StateImplementation(block, properties) {
+		return new BlockStateContainer(this, FACING);
+	}
 
-					@Override
-					public boolean isFullCube() {
-						return false;
-					}
+	@Override
+	@Deprecated
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-					@Override
-					public boolean isOpaqueCube() {
-						return false;
-					}
+	@Override
+	@Deprecated
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-					@Override
-					public AxisAlignedBB getBoundingBox(IBlockAccess blockAccess, BlockPos pos) {
-						return AABBs[((EnumFacing) properties.get(FACING)).getHorizontalIndex()];
-					}
+	@Override
+	@Deprecated
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return AABBs[state.getValue(FACING).getHorizontalIndex()];
+	}
 
-					@Override
-					public IBlockState withRotation(Rotation rot) {
-						return withProperty(FACING, rot.rotate(getValue(FACING)));
-					}
+	@Override
+	@Deprecated
+	public IBlockState withRotation(IBlockState state, Rotation rot) {
+		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+	}
 
-					@Override
-					public IBlockState withMirror(Mirror mirrorIn) {
-						return withRotation(mirrorIn.toRotation(getValue(FACING)));
-					}
-				};
-			}
-		};
+	@Override
+	@Deprecated
+	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 
 	@Override
 	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3));
+		return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3));
 	}
 
 	@Override

@@ -16,7 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import sausage_core.api.util.common.SausageUtils;
 
 import java.util.Random;
 
@@ -77,7 +76,7 @@ public class BlockManaBody extends Block {
 		}
 	}
 
-	static void shoot(EntityManaBall ball, float rotationPitchIn, float rotationYawIn) {
+	private static void shoot(EntityManaBall ball, float rotationPitchIn, float rotationYawIn) {
 		float x = -MathHelper.sin(rotationYawIn * 0.017453292f) * MathHelper.cos(rotationPitchIn * 0.017453292f);
 		float y = -MathHelper.sin(rotationPitchIn * 0.017453292f);
 		float z = MathHelper.cos(rotationYawIn * 0.017453292f) * MathHelper.cos(rotationPitchIn * 0.017453292f);

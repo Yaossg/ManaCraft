@@ -14,9 +14,7 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Bootstrap;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -78,7 +76,7 @@ public class BlockManaHead extends BlockManaBody {
 	@Override
 	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3));
+		return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3));
 	}
 
 	@Override
@@ -117,5 +115,17 @@ public class BlockManaHead extends BlockManaBody {
 			worldIn.spawnEntity(shooter);
 			ManaCraft.giveAdvancement(placer, "tall_guy");
 		}
+	}
+
+	@Override
+	@Deprecated
+	public IBlockState withRotation(IBlockState state, Rotation rot) {
+		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	@Deprecated
+	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 }

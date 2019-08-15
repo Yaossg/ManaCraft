@@ -1,15 +1,12 @@
 package mana_craft.block;
 
-import com.google.common.collect.ImmutableMap;
 import mana_craft.ManaCraft;
 import mana_craft.inventory.ManaCraftGUIs;
 import mana_craft.tile.TileManaProducer;
 import mana_craft.world.MPCache;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -22,14 +19,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.IUnlistedProperty;
 import sausage_core.api.core.tile.ITileDropItems;
-import sausage_core.api.util.common.SausageUtils;
 
-import javax.annotation.Nullable;
-import java.util.Optional;
 import java.util.Random;
 
 public class BlockManaProducer extends BlockContainer {
@@ -46,28 +38,31 @@ public class BlockManaProducer extends BlockContainer {
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING, WORKING) {
-			@Override
-			protected StateImplementation createState(Block block, ImmutableMap<IProperty<?>, Comparable<?>> properties, @Nullable ImmutableMap<IUnlistedProperty<?>, Optional<?>> unlistedProperties) {
-				return new StateImplementation(block, properties) {
-					@Override
-					public IBlockState withRotation(Rotation rot) {
-						return withProperty(FACING, rot.rotate(getValue(FACING)));
-					}
+		return new BlockStateContainer(this, FACING, WORKING);
+	}
 
-					@Override
-					public IBlockState withMirror(Mirror mirrorIn) {
-						return withRotation(mirrorIn.toRotation(getValue(FACING)));
-					}
-				};
-			}
-		};
+	@Override
+	@Deprecated
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.MODEL;
+	}
+
+	@Override
+	@Deprecated
+	public IBlockState withRotation(IBlockState state, Rotation rot) {
+		return state.withProperty(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	@Override
+	@Deprecated
+	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+		return state.withRotation(mirrorIn.toRotation(state.getValue(FACING)));
 	}
 
 	@Override
 	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta & 3)).withProperty(WORKING, (meta & 4) != 0);
+		return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3)).withProperty(WORKING, (meta & 4) != 0);
 	}
 
 	@Override
@@ -84,11 +79,6 @@ public class BlockManaProducer extends BlockContainer {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new TileManaProducer();
-	}
-
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override

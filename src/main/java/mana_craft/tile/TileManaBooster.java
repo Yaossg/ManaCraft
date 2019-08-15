@@ -15,7 +15,6 @@ import sausage_core.api.core.tile.ITileDropItems;
 import sausage_core.api.core.tile.TileBase;
 import sausage_core.api.util.common.SausageUtils;
 import sausage_core.api.util.item.SingleItemStackHandler;
-import sausage_core.api.util.math.BufferedRandom;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -113,7 +112,7 @@ public class TileManaBooster extends TileBase implements ITickable, ITileDropIte
 			BlockPos offset = pos.offset(facing);
 			IBlockState state = world.getBlockState(offset);
 			if (state.getBlock().getTickRandomly()) {
-				state.getBlock().randomTick(world, offset, state, BufferedRandom.shared());
+				state.getBlock().randomTick(world, offset, state, world.rand);
 				burn_time -= 5;
 			}
 			TileEntity tileEntity = world.getTileEntity(offset);

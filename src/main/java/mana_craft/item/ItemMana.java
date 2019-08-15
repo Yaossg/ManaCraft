@@ -8,14 +8,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import sausage_core.api.util.math.BufferedRandom;
+
+import java.util.Random;
 
 public class ItemMana extends Item {
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entity) {
 		World world = entity.getEntityWorld();
 		BlockPos pos = entity.getPosition();
-		BufferedRandom random = BufferedRandom.shared();
+		Random random = entity.world.rand;
 		if (!world.isRemote && random.nextInt(4) == 0
 				&& world.getBlockState(pos.down()).getBlock() == Blocks.LAVA) {
 			world.setBlockToAir(pos.down());
